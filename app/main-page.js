@@ -59,6 +59,7 @@ function onNavigatingTo(args) {
         }
 
         tab.id = "tab_" + i;
+        
         tab.on("tap", function (args) {
             return onTabSelected(args, currentItem);
         })
