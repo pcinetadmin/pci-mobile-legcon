@@ -19,7 +19,7 @@
                             </GridLayout>
                             <GridLayout columns="auto, *" rows="*">
                                 <Label row="0" col="0" text="Follow Up Required? " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ followUpRequired }}" class="list-view-item-sub" />
+                                <Label row="0" col="1" text="{{ followUpRequired | boolConverter() }}" class="list-view-item-sub" />
                             </GridLayout>
                             <GridLayout columns="auto, *" rows="*">
                                 <Label row="0" col="0" text="Comments/Observations: " class="list-view-item-sub-title" />

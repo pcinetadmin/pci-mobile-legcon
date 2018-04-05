@@ -29,6 +29,18 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
 
+        const boolConverter = (value) => {
+            var result = "No";
+
+            if (value === "true") {
+                result = "Yes";
+            }
+
+            return result;
+        };
+
+        appModule.getResources().boolConverter = boolConverter;
+
         surveyList.empty();
         
         if (surveyList.length === 0) {
@@ -48,4 +60,24 @@ function onNavigatingTo(args) {
     }
 }
 
+function onItemTap(args) {
+    try
+    {
+        var view = args.object;
+
+        const navigationEntry = {
+            moduleName: "legislators/surveyquestion-page",
+            context: view.bindingContext,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
+exports.onItemTap = onItemTap;

@@ -34,7 +34,7 @@ function SurveyViewModel(items) {
                     initiatives: surveyQuestion.Initiatives,
                     responseId: surveyQuestion.ResponseId,
                     response: surveyQuestion.Response,
-                    followUpRequired: followUpRequired,
+                    followUpRequired: surveyQuestion.FollowUpRequired,
                     comments: surveyQuestion.Comments,
                     editorId: surveyQuestion.EditorId,
                     editor: surveyQuestion.Editor,

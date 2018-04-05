@@ -100,30 +100,30 @@ function onClear(args)
 }
 
 function onItemTap(args) {
-    var index = args.index;
-    var committee = committeesList.getItem(index);
-    var committeeId;
-    var committeeName;
-
-    if (committee.isSubcommittee === "True") {
-        committeeId = committee.subcommitteeId;
-        committeeName = committee.subcommitteeName;
-    } else {
-        committeeId = committee.committeeId;
-        committeeName = committee.committeeName;
-    }
-
-    const navigationEntry = {
-        moduleName: "committees/committee-page",
-        context: { 
-            committeeId: committeeId,
-            committeeName: committeeName
-        },
-        clearHistory: false
-    };
-
     try
     {
+        var index = args.index;
+        var committee = committeesList.getItem(index);
+        var committeeId;
+        var committeeName;
+
+        if (committee.isSubcommittee === "True") {
+            committeeId = committee.subcommitteeId;
+            committeeName = committee.subcommitteeName;
+        } else {
+            committeeId = committee.committeeId;
+            committeeName = committee.committeeName;
+        }
+
+        const navigationEntry = {
+            moduleName: "committees/committee-page",
+            context: { 
+                committeeId: committeeId,
+                committeeName: committeeName
+            },
+            clearHistory: false
+        };
+
         frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
