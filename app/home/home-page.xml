@@ -1,0 +1,27 @@
+<Page class="page" navigatingTo="onNavigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar class="action-bar" />
+    <TabView id="mainTabs" loaded="onTabViewLoaded" selectedIndexChanged="onTabViewSelectedIndexChanged">
+        <TabView.items>
+            <TabViewItem title="Legislators" iconSource="res://legislator-icon" xmlns:Legislators="home/legislators">
+                <TabViewItem.view>
+                    <Legislators:legislators-page />
+                </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Committees" iconSource="res://committee-icon" xmlns:Committees="home/committees">
+                <TabViewItem.view>
+                    <Committees:committees-page />
+                </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="My Meetings" iconSource="res://meeting-icon">
+                <TabViewItem.view>
+                    <Label text="My Meetings" />
+                </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Assignments" iconSource="res://assignment-icon" xmlns:Assignments="home/assignments">
+                <TabViewItem.view>
+                    <Assignments:assignments-page />
+                </TabViewItem.view>
+            </TabViewItem>
+        </TabView.items>
+    </TabView>
+</Page>

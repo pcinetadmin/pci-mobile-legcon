@@ -1,0 +1,20 @@
+<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar" />
+
+    <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+            <Label id="assignmentId" text="" visibility="collapsed" />
+            <Label id="legislatorName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0" width="100%">
+            <ListView items="{{ assignmentList }}" height="100%">
+                <ListView.itemTemplate>
+                    <GridLayout columns="auto, *" rows="*" class="list-view-item">
+                        <Label row="0" col="0" text="{{ label }}" class="list-view-item-left" />
+                        <Label row="0" col="1" text="{{ value }}" class="list-view-item-right" horizontalAlignment="right" textWrap="true" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </GridLayout>
+</Page>

@@ -1,0 +1,28 @@
+<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar" />
+
+    <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+            <Label id="legislatorId" text="" visibility="collapsed" />
+            <Label id="legislatorName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0">
+            <GridLayout columns="*, auto" rows="*" class="list-view-item">
+                <Label row="0" col="0" text="Initiative" class="list-view-item-main-top" />
+                <Label row="0" col="1" text="Tier" class="list-view-item-main-top" />
+            </GridLayout>
+            <Border borderWidth="0.25" borderColor="#000000" />
+        </StackLayout>
+        <StackLayout row="2" col="0" verticalAlignment="top" width="100%">
+            <ListView items="{{ initiativeTiersList }}" height="100%">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, auto" rows="*" class="list-view-item">
+                        <Label row="0" col="0" text="{{ initiative }}" class="list-view-item-main-top" />
+                        <Label row="0" col="1" text="{{ tier }}" class="list-view-item-main-top" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+        <ActivityIndicator busy="{{ isLoading }}" rowSpan="3" colSpan="1" />
+    </GridLayout>
+</Page>

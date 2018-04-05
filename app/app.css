@@ -1,0 +1,156 @@
+﻿/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+For example, the following CSS rule changes the font size of all UI
+components that have the btn class name.
+*/
+Page {
+    /* background-color: #34495e; */
+    margin-top: -20; /* fix nested frame spacing */
+}
+
+.navigation-frame Page {
+    margin-top: 20; /* fix nested frame spacing */
+    background-color: #ffffff;
+}
+
+.tab {
+    /* padding: 10; */
+    border-top-color: #ddd;
+    border-top-width: 1;
+    background-color: #eeeeee;
+    color: #999;
+}
+
+.tab-selected {
+    color: #0a6fb0;
+}
+
+.tab-icon {
+    text-align: center;
+    font-size: 22;
+    font-family: "FontAwesome";
+    margin-bottom: 5;
+    margin-top: 5;
+}
+
+.tab-label {
+    text-align: center;
+    font-size: 10;
+    margin-bottom: 1;
+}
+
+.action-bar-title {
+    font-weight: bold;
+}
+
+.button {
+    background: #eee;
+    border-color: #ccc;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: black;
+    font-size: 18;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 5;
+}
+
+.hr-light {
+    height: 1;
+    background-color: #e0e0e0;
+    width: 100%;
+}
+
+.hr-dark {
+    height: 1;
+    background-color: #303030;
+    width: 100%;
+}
+
+.list-view-item {
+    min-height: 44;
+    font-size: 16;
+    color: #212121;
+    padding-top: 8;
+    padding-bottom: 8;
+    margin-left: 20;
+    margin-right: 20;
+}
+
+.list-view-item-main-top {
+    font-size: 16;
+}
+
+.list-view-item-main {
+    font-size: 16;
+    margin-top: 3;
+}
+
+.list-view-item-left {
+    font-size: 16;
+}
+
+.list-view-item-right {
+    color: #666;
+    font-size: 16;
+}
+
+.list-view-item-sub-title {
+    color: #666;
+    font-size: 14;
+    font-weight: bold;
+    margin-top: 3;
+}
+
+.list-view-item-sub {
+    color: #666;
+    font-size: 14;
+    margin-top: 3;
+}
+
+.fn-list-view-item {
+    color: #ccc;
+    font-family: 'FontAwesome';
+    font-size: 26;
+}
+
+.login-background {
+    background-color: #0a6fb0;
+}
+
+.scroll-view-item {
+    color: #666;
+    font-size: 16;
+    padding-left: 16;
+    padding-right: 16;
+}
+
+.segmented-bar {
+    /* background-color: #ccc; */
+    color: #0a6fb0;
+    font-size: 14;
+    margin-bottom: 10;
+    margin-top: 10;
+    selected-background-color: #0a6fb0; /* NEEDED */
+}
+
+.view-title {
+    background-color: #0a6fb0;
+    color: white;
+    font-size: 20;
+    height: 44;
+    width: 100%;
+}
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+/*@import '~nativescript-theme-core/css/core.light.css';*/
