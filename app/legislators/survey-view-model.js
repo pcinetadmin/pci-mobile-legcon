@@ -16,13 +16,6 @@ function SurveyViewModel(items) {
             var data = JSON.parse(result);
 
             data.forEach(function(surveyQuestion) {
-                var followUpRequired = "No";
-
-                if (surveyQuestion.FollowUpRequired === "true")
-                {
-                    followUpRequired = "Yes";
-                }
-
                 viewModel.push({
                     legislatorId: surveyQuestion.LegislatorId,
                     fullName: surveyQuestion.FullName,

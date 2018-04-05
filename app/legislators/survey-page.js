@@ -52,7 +52,6 @@ function onNavigatingTo(args) {
         }
     
         page.bindingContext = pageData;
-
     }
     catch(e)
     {
@@ -63,11 +62,19 @@ function onNavigatingTo(args) {
 function onItemTap(args) {
     try
     {
-        var view = args.object;
+        var legislatorId = page.getViewById("legislatorId");
+        var legislatorName = page.getViewById("legislatorName");
+        var view = args.view;
+
+        //dialogs.alert(view.bindingContext.surveyQuestion);
 
         const navigationEntry = {
             moduleName: "legislators/surveyquestion-page",
-            context: view.bindingContext,
+            context: { 
+                legislatorId: legislatorId.text,
+                fullName: legislatorName.text,
+                boundData: view.bindingContext
+            },
             clearHistory: false
         };
 

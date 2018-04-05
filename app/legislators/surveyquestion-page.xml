@@ -1,6 +1,21 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
 
-    <StackLayout>
-    </StackLayout>
+    <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+            <Label id="legislatorId" text="" visibility="collapsed" />
+            <Label id="legislatorName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0" verticalAlignment="top">
+            <GridLayout columns="*, auto" rows="auto, auto, auto, auto" class="list-view-item">
+                <Label row="0" colSpan="2" text="{{ surveyQuestion }}" textWrap="true" class="list-view-item-left" />
+                <Label row="1" col="0" text="Response" class="list-view-item-left" />
+                <Label row="1" col="1" text="{{ response }}" class="list-view-item-right" />
+                <Label row="2" col="0" text="Follow Up Required?" class="list-view-item-left" />
+                <Label row="2" col="1" text="{{ followUpRequired | boolConverter() }}" class="list-view-item-right" />
+                <Label row="3" col="0" text="Comments/Observations" class="list-view-item-left" />
+                <Label row="3" col="1" text="{{ comments }}" class="list-view-item-right" />
+            </GridLayout>
+        </StackLayout>
+    </GridLayout>
 </Page>
