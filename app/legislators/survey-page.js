@@ -13,9 +13,6 @@ var pageData = new observableModule.fromObject({
     isLoading: false
 });
 
-/* ***********************************************************
-* Use the "onNavigatingTo" handler to initialize the page binding context.
-*************************************************************/
 function onNavigatingTo(args) {
     try {
         page = args.object;
@@ -29,17 +26,17 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
 
-        const boolConverter = (value) => {
+        const boolTextConverter = (value) => {
             var result = "No";
 
-            if (value === "true") {
+            if (value) {
                 result = "Yes";
             }
 
             return result;
         };
 
-        appModule.getResources().boolConverter = boolConverter;
+        appModule.getResources().boolTextConverter = boolTextConverter;
 
         surveyList.empty();
         

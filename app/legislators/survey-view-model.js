@@ -16,6 +16,12 @@ function SurveyViewModel(items) {
             var data = JSON.parse(result);
 
             data.forEach(function(surveyQuestion) {
+                var followUpRequired = false;
+
+                if (surveyQuestion.FollowUpRequired === "true") {
+                    followUpRequired = true;
+                }
+
                 viewModel.push({
                     legislatorId: surveyQuestion.LegislatorId,
                     fullName: surveyQuestion.FullName,
@@ -27,7 +33,7 @@ function SurveyViewModel(items) {
                     initiatives: surveyQuestion.Initiatives,
                     responseId: surveyQuestion.ResponseId,
                     response: surveyQuestion.Response,
-                    followUpRequired: surveyQuestion.FollowUpRequired,
+                    followUpRequired: followUpRequired,
                     comments: surveyQuestion.Comments,
                     editorId: surveyQuestion.EditorId,
                     editor: surveyQuestion.Editor,

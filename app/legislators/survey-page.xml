@@ -19,12 +19,12 @@
                             </GridLayout>
                             <GridLayout columns="auto, *" rows="*">
                                 <Label row="0" col="0" text="Follow Up Required? " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ followUpRequired | boolConverter() }}" class="list-view-item-sub" />
+                                <Label row="0" col="1" text="{{ followUpRequired | boolTextConverter() }}" class="list-view-item-sub" />
                             </GridLayout>
-                            <GridLayout columns="auto, *" rows="*">
+                            <StackLayout direction="horizontal">
                                 <Label row="0" col="0" text="Comments/Observations: " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ comments }}" class="list-view-item-sub" />
-                            </GridLayout>
+                                <Label row="0" col="1" text="{{ comments }}" textWrap="true" class="list-view-item-sub" />
+                            </StackLayout>
                         </StackLayout>
                         <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>

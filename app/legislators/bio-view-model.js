@@ -86,6 +86,8 @@ function BioViewModel(items) {
     viewModel.empty = function() {
         while (viewModel.Items.length) {
             viewModel.Items.pop();
+
+            viewModel.Bio = "";
         }
     };
 

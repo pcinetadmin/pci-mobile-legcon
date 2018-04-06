@@ -30,7 +30,7 @@
                         <Label text="Remember Me" horizontalAlignment="left" />
                     </StackLayout>
                     <StackLayout width="60%" verticalAlignment="center">
-                        <Switch id="rememberMe" checked="{{ rememberMe }}" horizontalAlignment="right" />
+                        <Switch id="rememberMe" checked="{{ rememberMe }}" horizontalAlignment="right" class="switch" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout class="hr-light"></StackLayout>
