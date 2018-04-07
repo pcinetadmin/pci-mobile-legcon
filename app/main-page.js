@@ -16,7 +16,7 @@ function onNavigatingTo(args) {
     page.tabItems = [
         { path: "legislators/legislators-page", iconCode: "\uf19c", label: "Legislators" },
         { path: "committees/committees-page", iconCode: "\uf0c0", label: "Committees" },
-        { path: "tabs/tab1", iconCode: "\uf2b5", label: "My Meetings" },
+        { path: "legislators/meetings-page", iconCode: "\uf2b5", label: "My Meetings" },
         { path: "assignments/assignments-page", iconCode: "\uf03a", label: "Assignments" }
     ];
 
@@ -38,6 +38,7 @@ function onNavigatingTo(args) {
     
     page.navFrame = new frame.Frame();
 
+    page.navFrame.id = "navigation-frame";
     page.navFrame.className = "navigation-frame";
 
     newGrid.addChild(page.navFrame);
@@ -95,7 +96,11 @@ function onTabSelected(args) {
     var index = selectedTab.id.substring(selectedTab.id.indexOf("tab_") + 4);
 
     if (selectedTab.className.indexOf("tab-selected") > -1) {
-        return;
+        var currentFrame = page.getViewById("navigation-frame");
+        //dialogs.alert(currentFrame.currentPage.actionBar.title);
+        if (page.tabItems[index].label === currentFrame.currentPage.actionBar.title) {
+            return;
+        }
     }
 
     page._tabs.forEach(function(tab) {
@@ -110,6 +115,9 @@ function onTabSelected(args) {
 function showTab(tabItem) {
     var navigationEntry = {
         moduleName: tabItem.path,
+        context: {
+            reference: "tab"
+        },
         clearHistory: true
     }
 

@@ -5,6 +5,7 @@ var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
+var reference;
 var initialLoad = true;
 
 var meetingsList = new MeetingsViewModel([]);
@@ -25,6 +26,12 @@ function onNavigatingTo(args) {
         
         navigationContext = page.navigationContext;
 
+        if (navigationContext.reference === "tab") {
+            reference = "tab";
+        } else {
+            reference = "nav";
+        }
+
         const dateConverter = (value, format) => {
             let result = format;
             const day = value.getDate();
@@ -42,7 +49,7 @@ function onNavigatingTo(args) {
         if (meetingsList.length === 0) {
             pageData.set("isLoading", true);
 
-            meetingsList.load(navigationContext.legislatorId, "Y").then(function () {
+            meetingsList.load(reference, navigationContext.legislatorId, "Y").then(function () {
                 pageData.set("isLoading", false);
             });
 
@@ -75,7 +82,7 @@ function onSelectedIndexChanged(args) {
 
             pageData.set("isLoading", true);
 
-            meetingsList.load(navigationContext.legislatorId, recentMeetings).then(function () {
+            meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
                 pageData.set("isLoading", false);
             });
 

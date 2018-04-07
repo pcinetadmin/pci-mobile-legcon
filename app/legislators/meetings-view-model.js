@@ -6,9 +6,21 @@ var dialogs = require("ui/dialogs");
 function MeetingsViewModel(items) {
     const viewModel = new ObservableArray(items);
 
-    viewModel.load = function(legislatorId, recentMeetings) {
+    viewModel.load = function(reference, legislatorId, recentMeetings) {
+        var requestUrl;
+
+        if (reference === "tab") {
+            requestUrl = global.apiBaseServiceUrl + "meetings?personId=" + global.personId + "&recentMeetings=" + recentMeetings;
+        } else {
+            if (global.isPci) {
+                requestUrl = global.apiBaseServiceUrl + "meetings?legislatorId=" + legislatorId + "&recentMeetings=" + recentMeetings;
+            } else {
+                requestUrl = global.apiBaseServiceUrl + "meetings?personId=" + global.personId + "&legislatorId=" + legislatorId + "&recentMeetings=" + recentMeetings;
+            }
+        }
+
         return http.request({
-            url: global.apiBaseServiceUrl + "meetings?legislatorId=" + legislatorId + "&recentMeetings=" + recentMeetings,
+            url: requestUrl,
             method: "GET",
             headers: { "Content-Type": "application/json", "Authorization": global.token } //,
             //content: JSON.stringify({ filter: "", page: "1", pageSize: "20" })
