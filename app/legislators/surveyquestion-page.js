@@ -3,9 +3,11 @@ const ResponseViewModel = require("./response-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
 var page;
+var navigationContext;
 
 var responseList = new ResponseViewModel([]);
 var responseIndex = 0;
@@ -21,7 +23,7 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
 
-        var navigationContext = page.navigationContext;
+        navigationContext = page.navigationContext;
         var legislatorId = page.getViewById("legislatorId");
         var legislatorName = page.getViewById("legislatorName");
 
@@ -46,6 +48,7 @@ function onNavigatingTo(args) {
         page.actionBar.title = surveyTitle;
 
         pageData.boundData = navigationContext.boundData;
+        pageData.boundData.result = "";
 
         responseList.empty();
 
@@ -53,13 +56,17 @@ function onNavigatingTo(args) {
             pageData.set("isLoading", true);
     
             responseList.load(pageData.boundData.surveyQuestionId).then(function () {
-                pageData.responseList = responseList;
+                responseIndex = 0;
 
-                var i;
+                if (pageData.boundData.responseId.toString().length > 0) {
+                    pageData.responseList = responseList;
 
-                for (i = 0; i < responseList.List.length; i++) {
-                    if (pageData.responseList.List.getItem(i).responseId === pageData.boundData.responseId) {
-                        responseIndex = i;
+                    var i;
+
+                    for (i = 0; i < responseList.List.length; i++) {
+                        if (pageData.responseList.List.getItem(i).responseId === pageData.boundData.responseId) {
+                            responseIndex = i;
+                        }
                     }
                 }
 
@@ -85,7 +92,6 @@ function onLoaded(args) {
             var responseLabel = page.getViewById("responseLabel");
 
             responseLabel.text = pageData.responseList.Items.getItem(args.object.selectedIndex);
-            //dialogs.alert(pageData.responseList.Items.getItem(args.object.selectedIndex));
         });
     }
     catch(e)
@@ -103,7 +109,7 @@ function onStackLayoutTap(args) {
         if (responseListPickerGridLayout.visibility === "collapse") {
             responseListPickerGridLayout.visibility = "visible";
 
-            page.addCss("#responseLabel {color: red;}");
+            page.addCss("#responseLabel {color: #cc2d30;}");
         } else {
             responseListPickerGridLayout.visibility = "collapse";
 
@@ -116,6 +122,33 @@ function onStackLayoutTap(args) {
     }
 }
 
+function onSave(args) {
+    var responseListPicker = page.getViewById("responseListPicker");
+
+    pageData.boundData.responseId = pageData.responseList.List.getItem(responseListPicker.selectedIndex).responseId;
+    pageData.boundData.response = pageData.responseList.List.getItem(responseListPicker.selectedIndex).response;
+    
+    var result;
+
+    http.request({
+        url: global.apiBaseServiceUrl + "updatelegislatorsurvey",
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": global.token },
+        content: JSON.stringify(pageData.boundData)
+    }).then(function (response) {
+        // result = response.content.toJSON();
+        // dialogs.alert(result);
+        // dialogs.alert(pageData.boundData.responseId + ": " + pageData.boundData.response);
+
+        pageData.boundData.result = "Update";
+
+        frameModule.topmost().goBack();
+    }, function (e) {
+        dialogs.alert(e);
+    });
+}
+
 exports.onNavigatingTo = onNavigatingTo;
-exports.onStackLayoutTap = onStackLayoutTap;
 exports.onLoaded = onLoaded;
+exports.onStackLayoutTap = onStackLayoutTap;
+exports.onSave = onSave;
