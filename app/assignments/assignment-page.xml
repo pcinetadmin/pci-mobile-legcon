@@ -3,18 +3,30 @@
 
     <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
         <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
-            <Label id="assignmentId" text="" visibility="collapsed" />
-            <Label id="legislatorName" text="" horizontalAlignment="center" />
+            <Label id="assignmentId" text="{{ assignmentId }}" visibility="collapsed" />
+            <Label id="legislatorName" text="{{ legislator }}" horizontalAlignment="center" />
         </StackLayout>
         <StackLayout row="1" col="0" width="100%">
-            <ListView items="{{ assignmentList }}" height="100%">
-                <ListView.itemTemplate>
-                    <GridLayout columns="auto, *" rows="*" class="list-view-item">
-                        <Label row="0" col="0" text="{{ label }}" class="list-view-item-left" />
-                        <Label row="0" col="1" text="{{ value }}" class="list-view-item-right" horizontalAlignment="right" textWrap="true" />
-                    </GridLayout>
-                </ListView.itemTemplate>
-            </ListView>
+            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
+                <Label row="0" col="0" text="Company" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ company }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+            </GridLayout>
+            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
+                <Label row="0" col="0" text="Initiative" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ initiative }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+            </GridLayout>
+            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
+                <Label row="0" col="0" text="Survey" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ survey }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+            </GridLayout>
+            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
+                <Label row="0" col="0" text="Meeting Created?" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ meetingCreated === 'Y' ? 'Yes' : 'No' }}" horizontalAlignment="right" class="list-view-item-right" />
+            </GridLayout>
+            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form" visibility="{{ meetingCreated === 'Y' ? 'visible' : 'collapse' }}">
+                <Label row="0" col="0" text="Lobbyist" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ lobbyist }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+            </GridLayout>
         </StackLayout>
     </GridLayout>
 </Page>

@@ -104,20 +104,14 @@ function onClear(args)
 }
 
 function onItemTap(args) {
-    var index = args.index;
-    var assignment = assignmentsList.getItem(index);
+    // var index = args.index;
+    // var assignment = assignmentsList.getItem(index);
+    var view = args.view;
+    var model = view.bindingContext;
 
     const navigationEntry = {
         moduleName: "assignments/assignment-page",
-        context: { 
-            assignmentId: assignment.assignmentId,
-            legislator: assignment.legislator,
-            company: assignment.company,
-            initiative: assignment.initiative,
-            survey: assignment.survey,
-            meetingCreated: assignment.meetingCreated,
-            lobbyist: assignment.lobbyist
-        },
+        context: model,
         clearHistory: false
     };
 

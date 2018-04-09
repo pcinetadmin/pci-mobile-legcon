@@ -14,20 +14,11 @@ var pageData = new observableModule.fromObject({
 function onNavigatingTo(args) {
     try {
         const page = args.object;
+        var navigationContext = page.navigationContext;
 
         page.actionBar.title = "Assignment";
 
-        var navigationContext = page.navigationContext;
-        var assignmentId = page.getViewById("assignmentId");
-        var legislatorName = page.getViewById("legislatorName");
-
-        assignmentId.text = navigationContext.assignmentId;
-        legislatorName.text = navigationContext.legislator;
-
-        assignmentList.empty();
-        assignmentList.load(navigationContext);
-
-        page.bindingContext = pageData;
+        page.bindingContext = navigationContext;
     } catch(e) {
         dialogs.alert(e);
     }
