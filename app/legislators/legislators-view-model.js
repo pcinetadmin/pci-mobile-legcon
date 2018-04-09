@@ -46,7 +46,7 @@ function LegislatorsViewModel(items) {
                     twitterId: legislator.TwitterId,
                     website: legislator.Website,
                     youTubeUrl: legislator.YouTubeUrl,
-                    bio: legislator.Bio,
+                    bio: legislator.BioPlainText,
                     imageUrl: legislator.PictureUrl,
                     description: legislator.Description
                 });

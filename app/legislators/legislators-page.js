@@ -122,25 +122,12 @@ function onButtonTap(args) {
 }
 
 function onItemTap(args) {
-    var index = args.index;
-    var legislator = legislatorsList.getItem(index);
-
-    // try {
-    //     var tabView = page.getViewById("mainTabs");
-    //     //dialogs.alert(tabView.items[0].view);
-    //     tabView.items[0].view = "legislator-tab/legislator/legislator-page";
-    // }
-    // catch(e)
-    // {
-    //     dialogs.alert(e);
-    // }
+    var view = args.view;
+    var model = view.bindingContext;
 
     const navigationEntry = {
         moduleName: "legislators/legislator-page",
-        context: { 
-            legislatorId: legislator.legislatorId,
-            fullName: legislator.fullName
-        },
+        context: model,
         clearHistory: false
     };
 
