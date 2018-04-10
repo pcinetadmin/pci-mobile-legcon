@@ -10,9 +10,9 @@ function LegislatorViewModel(items) {
             {"title": "Meetings", "navigateTo": "meetings-page"},
             {"title": "PCI Initiative Tiers", "navigateTo": "initiativetiers-page"},
             {"title": "Surveys", "navigateTo": "surveys-page"},
-            {"title": "PCI Relationships", "navigateTo": "relationships-page"},
+            {"title": "PCI Relationships", "navigateTo": "profiles-page"},
             {"title": "Bio", "navigateTo": "bio-page"},
-            {"title": "Committees", "navigateTo": "committees-page"}
+            {"title": "Committees", "navigateTo": "legislatorcommittees-page"}
         ];
 
         data.forEach(function(dataItem) {

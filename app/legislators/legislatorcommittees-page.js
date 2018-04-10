@@ -1,12 +1,13 @@
-const InitiativetiersViewModel = require("./initiativetiers-view-model");
+const LegislatorCommitteesViewModel = require("./legislatorcommittees-view-model");
 const observableModule = require("data/observable");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 
-var initiativeTiersList = new InitiativetiersViewModel([]);
+var legislatorCommitteesList = new LegislatorCommitteesViewModel([]);
 
 var pageData = new observableModule.fromObject({
-    initiativeTiersList: initiativeTiersList,
+    legislatorCommitteesList: legislatorCommitteesList,
     isLoading: false
 });
 
@@ -14,7 +15,7 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
         
-        page.actionBar.title = "Initiative Tiers";
+        page.actionBar.title = "Committees";
 
         var navigationContext = page.navigationContext;
         var legislatorId = page.getViewById("legislatorId");
@@ -23,11 +24,11 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
     
-        initiativeTiersList.empty();
+        legislatorCommitteesList.empty();
     
         pageData.set("isLoading", true);
     
-        initiativeTiersList.load(navigationContext.legislatorId).then(function () {
+        legislatorCommitteesList.load(navigationContext.legislatorId).then(function () {
             pageData.set("isLoading", false);
         });
     

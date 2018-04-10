@@ -30,8 +30,6 @@ function CommitteesViewModel(items) {
                     }
                 }
 
-
-
                 viewModel.push({
                     committeeId: committee.CommitteeId,
                     committeeName: committee.CommitteeName,

@@ -1,12 +1,12 @@
-const InitiativetiersViewModel = require("./initiativetiers-view-model");
+const ProfilesViewModel = require("./profiles-view-model");
 const observableModule = require("data/observable");
 var dialogs = require("ui/dialogs");
 var page;
 
-var initiativeTiersList = new InitiativetiersViewModel([]);
+var profilesList = new ProfilesViewModel([]);
 
 var pageData = new observableModule.fromObject({
-    initiativeTiersList: initiativeTiersList,
+    profilesList: profilesList,
     isLoading: false
 });
 
@@ -14,8 +14,6 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
         
-        page.actionBar.title = "Initiative Tiers";
-
         var navigationContext = page.navigationContext;
         var legislatorId = page.getViewById("legislatorId");
         var legislatorName = page.getViewById("legislatorName");
@@ -23,11 +21,17 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
     
-        initiativeTiersList.empty();
+        if (navigationContext.relationalType === "legislator") {
+            page.actionBar.title = "PCI Relationships";
+        } else {
+            page.actionBar.title = "PCI Attendees";
+        }
+        
+        profilesList.empty();
     
         pageData.set("isLoading", true);
     
-        initiativeTiersList.load(navigationContext.legislatorId).then(function () {
+        profilesList.load(navigationContext.relationalType, navigationContext.legislatorId).then(function () {
             pageData.set("isLoading", false);
         });
     

@@ -21,7 +21,7 @@
                 <ListView.itemTemplate>
                     <GridLayout columns="*, auto" rows="*" class="list-view-item">
                         <StackLayout row="0" col="0" verticalAlignment="middle">
-                            <Label text="{{ isSubcommittee === 'True' ? subcommitteeName : committeeName }}" style="{{ isSubcommittee === 'True' ? 'margin-left: 15;' : 'margin-left: 0;' }}" class="list-view-item-main-top" />
+                            <Label text="{{ isSubcommittee === 'True' ? subcommitteeName : committeeName }}" textWrap="true" style="{{ isSubcommittee === 'True' ? 'margin-left: 15;' : 'margin-left: 0;' }}" class="list-view-item-main-top" />
                             <GridLayout columns="auto, *" rows="*" visibility="{{ fullName.length > 0 ? 'visible' : 'collapse' }}">
                                 <Label row="0" col="0" text="{{ title }}" style="{{ isSubcommittee === 'True' ? 'margin-left: 15;' : 'margin-left: 0;' }}" class="list-view-item-sub-title" />
                                 <Label row="0" col="1" text="{{ fullName }}" class="list-view-item-sub" />

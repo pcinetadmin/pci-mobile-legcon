@@ -46,15 +46,12 @@ function onNavigatingTo(args) {
 }
 
 function onItemTap(args) {
-    var index = args.index;
-    var legislator = committeeList.getItem(index);
+    var view = args.view;
+    var model = view.bindingContext;
 
     const navigationEntry = {
         moduleName: "legislators/legislator-page",
-        context: { 
-            legislatorId: legislator.legislatorId,
-            fullName: legislator.fullName
-        },
+        context: model,
         clearHistory: false
     };
 

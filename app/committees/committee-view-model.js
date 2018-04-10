@@ -31,7 +31,17 @@ function CommitteeViewModel(items) {
                     bioGuideId: legislator.BioGuideId,
                     legislatorId: legislator.LegislatorId,
                     fullName: legislator.FullName,
-                    title: legislator.Title
+                    title: legislator.Title,
+                    office: legislator.Office,
+                    state: legislator.State,
+                    stateName: legislator.StateName,
+                    phone: legislator.Phone,
+                    termStart: legislator.TermStart,
+                    termEnd: legislator.TermEnd,
+                    chamber: legislator.Chamber,
+                    party: legislator.Party,
+                    partyName: legislator.PartyName,
+                    bio: legislator.BioPlainText
                 });
             });
         }, function (e) {
