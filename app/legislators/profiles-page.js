@@ -19,13 +19,13 @@ function onNavigatingTo(args) {
         page = args.object;
         
         if (args.isBackNavigation) {
-            if (model.result === "Update") {
+            if (model === null || model.result === "Update") {
                 profilesList.empty();
             
                 if (profilesList.length === 0) {
                     pageData.set("isLoading", true);
             
-                    profilesList.load(navigationContext.relationalType, navigationContext.legislatorId).then(function () {
+                    profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
                         pageData.set("isLoading", false);
                     });
                 }
@@ -37,7 +37,7 @@ function onNavigatingTo(args) {
             var legislatorId = page.getViewById("legislatorId");
             var legislatorName = page.getViewById("legislatorName");
         
-            legislatorId.text = navigationContext.legislatorId;
+            legislatorId.text = navigationContext.relationalId;
             legislatorName.text = navigationContext.fullName;
         
             if (navigationContext.relationalType === "legislator") {
@@ -50,7 +50,7 @@ function onNavigatingTo(args) {
         
             pageData.set("isLoading", true);
         
-            profilesList.load(navigationContext.relationalType, navigationContext.legislatorId).then(function () {
+            profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
                 pageData.set("isLoading", false);
             });
         
@@ -88,5 +88,28 @@ function onItemTap(args) {
     }
 }
 
+function onAddTap(args) {
+    try
+    {
+        model = null;
+
+        const navigationEntry = {
+            moduleName: "legislators/profilesearch-page",
+            context: { 
+                relationalType: navigationContext.relationalType,
+                relationalId: navigationContext.relationalId
+            },
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onItemTap = onItemTap;
+exports.onAddTap = onAddTap;

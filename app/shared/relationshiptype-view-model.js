@@ -3,28 +3,28 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
 var dialogs = require("ui/dialogs");
 
-function FamiliarityLevelViewModel() {
+function RelationshipTypeViewModel() {
     const viewModel = new ObservableModule();
     viewModel.Items = new ObservableArray();
     viewModel.List = new ObservableArray();
 
-    viewModel.load = function(surveyQuestionId) {
+    viewModel.load = function() {
         return http.request({
-            url: global.apiBaseServiceUrl + "familiaritylevels",
+            url: global.apiBaseServiceUrl + "relationshiptypes",
             method: "GET",
             headers: { "Content-Type": "application/json", "Authorization": global.token }
         }).then(function (response) {
             var result = response.content.toString();
             var data = JSON.parse(result);
 
-            data.forEach(function(familiarityLevel) {
+            data.forEach(function(relationshipType) {
                 viewModel.Items.push(
-                    familiarityLevel.Level
+                    relationshipType.Type
                 );
 
                 viewModel.List.push({
-                    familiarityLevelId: familiarityLevel.familiarityLevelId,
-                    familiarityLevel: familiarityLevel.Level
+                    relationshipTypeId: relationshipType.RelationshipTypeId,
+                    relationshipType: relationshipType.Type
                 });
             });
         }, function (e) {
@@ -45,4 +45,4 @@ function FamiliarityLevelViewModel() {
     return viewModel;
 }
 
-module.exports = FamiliarityLevelViewModel;
+module.exports = RelationshipTypeViewModel;

@@ -1,5 +1,4 @@
-const RelationshipTypeViewModel = require("./relationshiptype-view-model");
-const FamiliarityLevelViewModel = require("./familiaritylevel-view-model");
+//const FamiliarityLevelViewModel = require("../shared/familiaritylevel-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
@@ -9,18 +8,15 @@ var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
 
-var relationshipList = new RelationshipTypeViewModel([]);
 var relationshipIndex = 0;
-
-var familiarityList = new FamiliarityLevelViewModel([]);
 var familiarityIndex = 0;
 
 var pageData = new ObservableModule.fromObject({
     boundData: null,
     relationshipIndex: relationshipIndex,
-    relationshipList: relationshipList,
+    relationshipList: null,
     familiarityIndex: familiarityIndex,
-    familiarityList: familiarityList,
+    familiarityList: null,
     isLoading: false
 });
 
@@ -35,93 +31,41 @@ function onNavigatingTo(args) {
         pageData.boundData = navigationContext.boundData;
         pageData.boundData.result = "";
 
-        if (relationshipList.Items.length === 0) {
-            pageData.set("isLoading", true);
-    
-            relationshipList.load().then(function () {
-                relationshipIndex = 0;
+        pageData.relationshipList = global.relationshipList;
 
-                if (pageData.boundData.relationshipTypeId.toString().length > 0) {
-                    pageData.relationshipList = relationshipList;
+        relationshipIndex = 0;
 
-                    var i;
+        if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
+            pageData.relationshipList = relationshipList;
 
-                    for (i = 0; i < relationshipList.List.length; i++) {
-                        if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
-                            relationshipIndex = i;
-                        }
-                    }
-                }
+            var i;
 
-                pageData.relationshipIndex = relationshipIndex;
-
-                // page.bindingContext = pageData;
-
-                pageData.set("isLoading", false);
-            });
-        } else {
-            relationshipIndex = 0;
-
-            if (pageData.boundData.relationshipTypeId.toString().length > 0) {
-                pageData.relationshipList = relationshipList;
-
-                var i;
-
-                for (i = 0; i < relationshipList.List.length; i++) {
-                    if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
-                        relationshipIndex = i;
-                    }
+            for (i = 0; i < relationshipList.List.length; i++) {
+                if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
+                    relationshipIndex = i;
                 }
             }
-
-            pageData.relationshipIndex = relationshipIndex;
-
-            // page.bindingContext = pageData;
         }
 
-        if (familiarityList.Items.length === 0) {
-            pageData.set("isLoading", true);
-    
-            familiarityList.load().then(function () {
-                familiarityIndex = 0;
+        pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
 
-                if (pageData.boundData.familiarityLevelId.toString().length > 0) {
-                    pageData.familiarityList = familiarityList;
+        pageData.familiarityList = global.familiarityList;
 
-                    var i;
+        familiarityIndex = 0;
 
-                    for (i = 0; i < familiarityList.List.length; i++) {
-                        if (pageData.familiarityList.List.getItem(i).familiarityLevelId === pageData.boundData.familiarityLevelId) {
-                            familiarityIndex = i;
-                        }
-                    }
-                }
+        if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
+            pageData.familiarityList = familiarityList;
 
-                pageData.familiarityIndex = familiarityIndex;
+            var i;
 
-                // page.bindingContext = pageData;
-
-                pageData.set("isLoading", false);
-            });
-        } else {
-            familiarityIndex = 0;
-
-            if (pageData.boundData.familiarityLevelId.toString().length > 0) {
-                pageData.familiarityList = familiarityList;
-
-                var i;
-
-                for (i = 0; i < familiarityList.List.length; i++) {
-                    if (pageData.familiarityList.List.getItem(i).familiarityLevelId === pageData.boundData.familiarityLevelId) {
-                        familiarityIndex = i;
-                    }
+            for (i = 0; i < familiarityList.List.length; i++) {
+                if (pageData.familiarityList.List.getItem(i).familiarityLevelId === pageData.boundData.familiarityLevelId) {
+                    familiarityIndex = i;
                 }
             }
-
-            pageData.familiarityIndex = familiarityIndex;
-
-            // page.bindingContext = pageData;
         }
+
+        pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
 
         page.bindingContext = pageData;
     }
@@ -164,11 +108,11 @@ function onStackLayoutRelationshipTap(args) {
         if (relationshipListPickerGridLayout.visibility === "collapse") {
             relationshipListPickerGridLayout.visibility = "visible";
 
-            page.addCss("#responseLabel {color: #cc2d30;}");
+            page.addCss("#relationshipLabel {color: #cc2d30;}");
         } else {
             relationshipListPickerGridLayout.visibility = "collapse";
 
-            page.addCss("#responseLabel {color: #666;}");
+            page.addCss("#relationshipLabel {color: #666;}");
         }
     }
     catch(e)
@@ -186,11 +130,11 @@ function onStackLayoutFamiliarityTap(args) {
         if (familiarityListPickerGridLayout.visibility === "collapse") {
             familiarityListPickerGridLayout.visibility = "visible";
 
-            page.addCss("#responseLabel {color: #cc2d30;}");
+            page.addCss("#familiarityLabel {color: #cc2d30;}");
         } else {
             familiarityListPickerGridLayout.visibility = "collapse";
 
-            page.addCss("#responseLabel {color: #666;}");
+            page.addCss("#familiarityLabel {color: #666;}");
         }
     }
     catch(e)
@@ -212,6 +156,8 @@ function onSave(args) {
     
     var result;
 
+    pageData.set("isLoading", true);
+
     http.request({
         url: global.apiBaseServiceUrl + "updateprofilerelationship",
         method: "POST",
@@ -224,6 +170,8 @@ function onSave(args) {
 
         pageData.boundData.result = "Update";
 
+        pageData.set("isLoading", false);
+
         frameModule.topmost().goBack();
     }, function (e) {
         dialogs.alert(e);
@@ -234,3 +182,4 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onStackLayoutRelationshipTap = onStackLayoutRelationshipTap;
 exports.onStackLayoutFamiliarityTap = onStackLayoutFamiliarityTap;
+exports.onSave = onSave;

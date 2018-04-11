@@ -59,7 +59,8 @@ function onItemTap(args)
     var index = args.index;
     var item = legislatorList.getItem(index);
 
-    navigationContext.relationalType = "legislators";
+    navigationContext.relationalType = "legislator";
+    navigationContext.relationalId = navigationContext.legislatorId;
 
     const navigationEntry = {
         moduleName: "legislators/" + item.navigateTo,

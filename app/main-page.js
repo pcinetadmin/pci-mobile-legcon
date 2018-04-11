@@ -1,3 +1,5 @@
+const RelationshipTypeViewModel = require("./shared/relationshiptype-view-model");
+const FamiliarityLevelViewModel = require("./shared/familiaritylevel-view-model");
 var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
 var stackLayout = require("ui/layouts/stack-layout")
@@ -5,10 +7,9 @@ var Label = require("ui/label").Label;
 var dialogs = require("ui/dialogs");
 
 var page;
+var relationshipList = new RelationshipTypeViewModel([]);
+var familiarityList = new FamiliarityLevelViewModel([]);
 
-/* ***********************************************************
-* Use the "onNavigatingTo" handler to initialize the page binding context.
-*************************************************************/
 function onNavigatingTo(args) {
     page = args.object;
     page._tabs = [];
@@ -89,9 +90,18 @@ function onNavigatingTo(args) {
     page.content = newGrid;
 
     page.navFrame.navigate(page.tabItems[0].path);
+
+    relationshipList.load().then(function () {
+        global.relationshipList = relationshipList;
+    });
+
+    familiarityList.load().then(function () {
+        global.familiarityList = familiarityList;
+    });
 }
 
 function onTabSelected(args) {
+    //dialogs.alert(global.familiarityList.Items.length);
     var selectedTab = args.object;
     var index = selectedTab.id.substring(selectedTab.id.indexOf("tab_") + 4);
 
