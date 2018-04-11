@@ -56,13 +56,11 @@ function onNavigatingTo(args) {
 
             surveyList.empty();
             
-            if (surveyList.length === 0) {
-                pageData.set("isLoading", true);
-        
-                surveyList.load(navigationContext.legislatorId, navigationContext.surveyId).then(function () {
-                    pageData.set("isLoading", false);
-                });
-            }
+            pageData.set("isLoading", true);
+    
+            surveyList.load(navigationContext.legislatorId, navigationContext.surveyId).then(function () {
+                pageData.set("isLoading", false);
+            });
         
             page.bindingContext = pageData;
         }

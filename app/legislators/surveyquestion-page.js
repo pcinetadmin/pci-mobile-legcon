@@ -1,4 +1,3 @@
-const SurveyquestionViewModel = require("./surveyquestion-view-model");
 const ResponseViewModel = require("./response-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
