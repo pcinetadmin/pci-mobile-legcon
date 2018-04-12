@@ -1,0 +1,84 @@
+<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar">
+        <ActionItem tap="onSave" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
+    </ActionBar>
+
+    <ScrollView orientation="vertical" isEnabled="true" width="100%" height="100%">
+        <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
+            <StackLayout row="0" col="0" verticalAlignment="top">
+                <StackLayout tap="onStackLayoutMeetingDateTap">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                        <Label row="0" col="0" text="Meeting Date" class="list-view-item-left" />
+                        <Label id="meetingDateLabel" row="0" col="1" text="{{ boundData.meetingDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
+                    </GridLayout>
+                </StackLayout>
+                <GridLayout id="meetingDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <DatePicker id="meetingDateDatePicker" row="0" col="0" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
+                </GridLayout>
+                <StackLayout tap="onStackLayoutVenueTypeTap">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                        <Label row="0" col="0" text="VenueType" class="list-view-item-left" />
+                        <Label id="venueTypeLabel" row="0" col="1" text="{{ boundData.venueType }}" class="list-view-item-right" />
+                    </GridLayout>
+                </StackLayout>
+                <GridLayout id="venueTypeListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <ListPicker id="venueTypeListPicker" row="0" col="0" items="{{ venueTypeList.Items }}" selectedIndex="{{ venueTypeIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
+                </GridLayout>
+                <GridLayout columns="*" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Notes" class="list-view-item-left" />
+                </GridLayout>
+                <GridLayout columns="*" rows="*" class="list-view-item-form">
+                    <TextView row="0" col="0" text="{{ boundData.notes }}" class="list-view-item-right" />
+                </GridLayout>
+                <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Follow Up Needed?" class="list-view-item-left" />
+                    <Switch row="0" col="1" checked="{{ boundData.followUpNeeded }}" horizontalAlignment="right" class="switch" />
+                </GridLayout>
+                <StackLayout tap="onStackLayoutFollowUpDateTap">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                        <Label row="0" col="0" text="Follow Up Date" class="list-view-item-left" />
+                        <Label id="followUpDateLabel" row="0" col="1" text="{{ boundData.followUpDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
+                    </GridLayout>
+                </StackLayout>
+                <GridLayout id="followUpDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <DatePicker id="followUpDateDatePicker" row="0" col="0" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
+                </GridLayout>
+                <GridLayout columns="*" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Follow Up Notes" class="list-view-item-left" />
+                </GridLayout>
+                <GridLayout columns="*" rows="*" class="list-view-item-form">
+                    <TextView row="0" col="0" text="{{ boundData.followUpNotes }}" class="list-view-item-right" />
+                </GridLayout>
+                <StackLayout class="list-view-item-form">
+                    <GridLayout columns="*, auto" rows="*">
+                        <StackLayout row="0" col="0">
+                            <Label text="Initiatives" class="list-view-item-main-top" />
+                        </StackLayout>
+                        <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout class="list-view-item-form-bottom">
+                    <GridLayout columns="*, auto" rows="*">
+                        <StackLayout row="0" col="0">
+                            <Label text="Surveys" class="list-view-item-main-top" />
+                        </StackLayout>
+                        <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout verticalAlignment="bottom" class="list-view-section-header">
+                    <Label text="MEETING INFORMATION" verticalAlignment="bottom" />
+                </StackLayout>
+                <StackLayout tap="onStackLayoutLegislatorTap">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                        <Label row="0" col="0" text="Legislator" class="list-view-item-left" />
+                        <Label id="LegislatorLabel" row="0" col="1" text="{{ boundData.fullName }}" class="list-view-item-right" />
+                    </GridLayout>
+                </StackLayout>
+                <GridLayout id="legislatorListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <ListPicker id="legislatorListPicker" row="0" col="0" items="{{ legislatorList.Items }}" selectedIndex="{{ legislatorIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
+                </GridLayout>
+            </StackLayout>
+            <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
+        </GridLayout>
+    </ScrollView>
+</Page>

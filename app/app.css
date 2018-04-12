@@ -95,6 +95,33 @@ Page {
     padding-top: 8;
 }
 
+.list-view-item-form-bottom {
+    /* border-bottom-color: #ddd;
+    border-bottom-width: 0.5; */
+    font-size: 16;
+    margin-left: 20;
+    /* margin-right: 20; */
+    min-height: 44;
+    padding-bottom: 8;
+    padding-right: 20;
+    padding-top: 8;
+}
+
+.list-view-section-header {
+    background-color: #eee;
+    border-bottom-color: #ddd;
+    border-bottom-width: 0.5;
+    border-top-color: #ddd;
+    border-top-width: 0.5;
+    color: #666;
+    font-size: 14;
+    height: 44;
+    padding-bottom: 2;
+    padding-left: 20;
+    padding-right: 20;
+    padding-top: 0;
+}
+
 .list-view-item-main-top {
     font-size: 16;
 }

@@ -1,4 +1,3 @@
-//const FamiliarityLevelViewModel = require("../shared/familiaritylevel-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
@@ -36,7 +35,7 @@ function onNavigatingTo(args) {
         relationshipIndex = 0;
 
         if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
-            pageData.relationshipList = relationshipList;
+            //pageData.relationshipList = relationshipList;
 
             var i;
 
@@ -54,7 +53,7 @@ function onNavigatingTo(args) {
         familiarityIndex = 0;
 
         if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
-            pageData.familiarityList = familiarityList;
+            //pageData.familiarityList = familiarityList;
 
             var i;
 

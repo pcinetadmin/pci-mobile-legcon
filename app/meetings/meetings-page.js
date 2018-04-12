@@ -1,5 +1,5 @@
 const MeetingsViewModel = require("./meetings-view-model");
-const observableModule = require("data/observable");
+const ObservableModule = require("data/observable");
 const appModule = require("application");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
@@ -10,14 +10,11 @@ var initialLoad = true;
 
 var meetingsList = new MeetingsViewModel([]);
 
-var pageData = new observableModule.fromObject({
+var pageData = new ObservableModule.fromObject({
     meetingsList: meetingsList,
     isLoading: false
 });
 
-/* ***********************************************************
-* Use the "onNavigatingTo" handler to initialize the page binding context.
-*************************************************************/
 function onNavigatingTo(args) {
     try {
         page = args.object;
@@ -34,11 +31,16 @@ function onNavigatingTo(args) {
 
         const dateConverter = (value, format) => {
             let result = format;
-            const day = value.getDate();
-            result = result.replace("DD", day < 10 ? `0${day}` : day);
-            const month = value.getMonth() + 1;
-            result = result.replace("MM", month < 10 ? `0${month}` : month);
-            result = result.replace("YYYY", value.getFullYear());
+
+            if (value === null) {
+                //result = "";
+            } else {
+                const day = value.getDate();
+                result = result.replace("DD", day < 10 ? `0${day}` : day);
+                const month = value.getMonth() + 1;
+                result = result.replace("MM", month < 10 ? `0${month}` : month);
+                result = result.replace("YYYY", value.getFullYear());
+            }
 
             return result;
         };
@@ -96,7 +98,24 @@ function onSelectedIndexChanged(args) {
 }
 
 function onItemTap(args) {
+    try
+    {
+        var view = args.view;
 
+        model = view.bindingContext;
+
+        const navigationEntry = {
+            moduleName: "meetings/meeting/meeting-page",
+            context: model,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
 }
 
 exports.onNavigatingTo = onNavigatingTo;

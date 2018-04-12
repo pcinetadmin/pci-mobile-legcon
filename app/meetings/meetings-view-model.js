@@ -32,8 +32,9 @@ function MeetingsViewModel(items) {
                 var meetingDate;
                 var legislatorStaffAttendees = meeting.LegislatorStaffAttendees;
                 var pciInitiatives = meeting.PciInitiatives;
+                var followUpDate;
                 
-                meetingDate = meeting.MeetingDate.substring(meeting.MeetingDate.indexOf("/Date(") + 6, meeting.MeetingDate.indexOf(")/"));
+                meetingDate = new Date(parseInt(meeting.MeetingDate.substring(meeting.MeetingDate.indexOf("/Date(") + 6, meeting.MeetingDate.indexOf(")/"))));
 
                 if (legislatorStaffAttendees.length > 0)
                 {
@@ -45,9 +46,15 @@ function MeetingsViewModel(items) {
                     pciInitiatives = "on " + pciInitiatives
                 }
 
+                if (meeting.FollowUpDate.length > 0) {
+                    followUpDate = new Date(parseInt(meeting.FollowUpDate.substring(meeting.FollowUpDate.indexOf("/Date(") + 6, meeting.FollowUpDate.indexOf(")/"))));
+                } else {
+                    followUpDate = null;
+                }
+
                 viewModel.push({
                     meetingId: meeting.MeetingId,
-                    meetingDate: new Date(parseInt(meetingDate)),
+                    meetingDate: meetingDate,
                     venueTypeId: meeting.VenueTypeId,
                     venueType: meeting.VenueType,
                     attendeeTypeId: meeting.AttendeeTypeId,
@@ -63,7 +70,7 @@ function MeetingsViewModel(items) {
                     location: meeting.Location,
                     legislatorStaffAttendees: legislatorStaffAttendees,
                     followUpNeeded: meeting.FollowUpNeeded,
-                    followUpDate: meeting.FollowUpDate,
+                    followUpDate: followUpDate,
                     followUpNotes: meeting.FollowUpNotes,
                     creatorId: meeting.CreatorId,
                     notes: meeting.Notes,

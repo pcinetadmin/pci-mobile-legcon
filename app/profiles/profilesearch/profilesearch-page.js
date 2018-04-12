@@ -122,7 +122,6 @@ function onSwitchLoaded(args) {
 
                 // dialogs.alert(result);
 
-                // Don't need to do anything here, the save was successful.
                 switchTap = false;
             }, function (e) {
                 dialogs.alert(e);
