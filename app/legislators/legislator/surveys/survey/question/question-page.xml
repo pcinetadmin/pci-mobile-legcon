@@ -3,8 +3,12 @@
         <ActionItem tap="onSave" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
     </ActionBar>
 
-    <GridLayout columns="*" rows="*" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="top">
+    <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+            <Label id="legislatorId" text="" visibility="collapsed" />
+            <Label id="legislatorName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0" verticalAlignment="top">
             <GridLayout columns="*" rows="auto" class="list-view-item-form">
                 <Label row="0" col="0" text="{{ boundData.surveyQuestion }}" textWrap="true" class="list-view-item-left" />
             </GridLayout>

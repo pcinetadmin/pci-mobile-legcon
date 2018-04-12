@@ -63,7 +63,7 @@ function onItemTap(args)
     navigationContext.relationalId = navigationContext.legislatorId;
 
     const navigationEntry = {
-        moduleName: "legislators/" + item.navigateTo,
+        moduleName: item.navigateTo,
         context: navigationContext,
         clearHistory: false
     };

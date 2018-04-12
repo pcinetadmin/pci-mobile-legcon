@@ -7,7 +7,7 @@
             <Label id="legislatorName" text="" verticalAlignment="center" horizontalAlignment="center" />
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">
-            <ListView items="{{ legislatorCommitteesList }}" height="100%">
+            <ListView items="{{ committeesList }}" height="100%">
                 <ListView.itemTemplate>
                     <GridLayout columns="*" rows="*" class="list-view-item">
                         <StackLayout row="0" col="0" verticalAlignment="middle">

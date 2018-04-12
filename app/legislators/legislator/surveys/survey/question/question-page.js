@@ -23,6 +23,7 @@ function onNavigatingTo(args) {
         page = args.object;
 
         navigationContext = page.navigationContext;
+
         var legislatorId = page.getViewById("legislatorId");
         var legislatorName = page.getViewById("legislatorName");
 

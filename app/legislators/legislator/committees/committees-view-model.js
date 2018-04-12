@@ -1,9 +1,9 @@
-const observableModule = require("data/observable");
+const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
 var dialogs = require("ui/dialogs");
 
-function LegislatorCommitteesViewModel(items) {
+function CommitteesViewModel(items) {
     const viewModel = new ObservableArray(items);
     
     viewModel.load = function(legislatorId) {
@@ -42,4 +42,4 @@ function LegislatorCommitteesViewModel(items) {
     return viewModel;
 }
 
-module.exports = LegislatorCommitteesViewModel;
+module.exports = CommitteesViewModel;

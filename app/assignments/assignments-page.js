@@ -110,7 +110,7 @@ function onItemTap(args) {
     var model = view.bindingContext;
 
     const navigationEntry = {
-        moduleName: "assignments/assignment-page",
+        moduleName: "assignments/assignment/assignment-page",
         context: model,
         clearHistory: false
     };

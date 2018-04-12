@@ -17,7 +17,7 @@ function onNavigatingTo(args) {
     page.tabItems = [
         { path: "legislators/legislators-page", iconCode: "\uf19c", label: "Legislators" },
         { path: "committees/committees-page", iconCode: "\uf0c0", label: "Committees" },
-        { path: "legislators/meetings-page", iconCode: "\uf2b5", label: "My Meetings" },
+        { path: "meetings/meetings-page", iconCode: "\uf2b5", label: "My Meetings" },
         { path: "assignments/assignments-page", iconCode: "\uf03a", label: "Assignments" }
     ];
 

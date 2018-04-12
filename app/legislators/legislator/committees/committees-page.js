@@ -1,13 +1,13 @@
-const LegislatorCommitteesViewModel = require("./legislatorcommittees-view-model");
+const CommitteesViewModel = require("./committees-view-model");
 const observableModule = require("data/observable");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 
-var legislatorCommitteesList = new LegislatorCommitteesViewModel([]);
+var committeesList = new CommitteesViewModel([]);
 
 var pageData = new observableModule.fromObject({
-    legislatorCommitteesList: legislatorCommitteesList,
+    committeesList: committeesList,
     isLoading: false
 });
 
@@ -24,11 +24,11 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
     
-        legislatorCommitteesList.empty();
+        committeesList.empty();
     
         pageData.set("isLoading", true);
     
-        legislatorCommitteesList.load(navigationContext.legislatorId).then(function () {
+        committeesList.load(navigationContext.legislatorId).then(function () {
             pageData.set("isLoading", false);
         });
     

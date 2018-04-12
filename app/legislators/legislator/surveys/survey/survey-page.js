@@ -82,7 +82,7 @@ function onItemTap(args) {
         //dialogs.alert(view.bindingContext.surveyQuestion);
 
         const navigationEntry = {
-            moduleName: "legislators/surveyquestion-page",
+            moduleName: "legislators/legislator/surveys/survey/question/question-page",
             context: { 
                 legislatorId: legislatorId.text,
                 fullName: legislatorName.text,

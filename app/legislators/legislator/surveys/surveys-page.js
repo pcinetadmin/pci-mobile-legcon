@@ -74,7 +74,7 @@ function onItemTap(args) {
     var item = surveysList.getItem(index);
 
     const navigationEntry = {
-        moduleName: "legislators/survey-page",
+        moduleName: "legislators/legislator/surveys/survey/survey-page",
         context: { 
             surveyId: item.surveyId,
             legislatorId: legislatorId.text,

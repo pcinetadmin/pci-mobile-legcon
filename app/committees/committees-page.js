@@ -116,7 +116,7 @@ function onItemTap(args) {
         }
 
         const navigationEntry = {
-            moduleName: "committees/committee-page",
+            moduleName: "committees/committee/committee-page",
             context: { 
                 committeeId: committeeId,
                 committeeName: committeeName

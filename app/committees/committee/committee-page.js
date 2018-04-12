@@ -50,7 +50,7 @@ function onItemTap(args) {
     var model = view.bindingContext;
 
     const navigationEntry = {
-        moduleName: "legislators/legislator-page",
+        moduleName: "legislators/legislator/legislator-page",
         context: model,
         clearHistory: false
     };

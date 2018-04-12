@@ -72,7 +72,7 @@ function onItemTap(args) {
         // dialogs.alert(view.bindingContext.fullName);
 
         const navigationEntry = {
-            moduleName: "legislators/profile-page",
+            moduleName: "profiles/profile/profile-page",
             context: { 
                 relationalType: navigationContext.relationalType,
                 boundData: model
@@ -94,7 +94,7 @@ function onAddTap(args) {
         model = null;
 
         const navigationEntry = {
-            moduleName: "legislators/profilesearch-page",
+            moduleName: "profiles/profilesearch/profilesearch-page",
             context: { 
                 relationalType: navigationContext.relationalType,
                 relationalId: navigationContext.relationalId
