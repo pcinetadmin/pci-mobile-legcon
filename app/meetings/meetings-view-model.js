@@ -46,10 +46,10 @@ function MeetingsViewModel(items) {
                     pciInitiatives = "on " + pciInitiatives
                 }
 
-                if (meeting.FollowUpDate.length > 0) {
-                    followUpDate = new Date(parseInt(meeting.FollowUpDate.substring(meeting.FollowUpDate.indexOf("/Date(") + 6, meeting.FollowUpDate.indexOf(")/"))));
-                } else {
+                if (meeting.FollowUpDate === null || meeting.FollowUpDate.length === 0) {
                     followUpDate = null;
+                } else {
+                    followUpDate = new Date(parseInt(meeting.FollowUpDate.substring(meeting.FollowUpDate.indexOf("/Date(") + 6, meeting.FollowUpDate.indexOf(")/"))));
                 }
 
                 viewModel.push({
@@ -66,7 +66,7 @@ function MeetingsViewModel(items) {
                     name: meeting.Name,
                     pciInitiatives: pciInitiatives,
                     primaryOfficeContact: meeting.PrimaryOfficeContact,
-                    meetingLocationId: meeting.LocationId,
+                    meetingLocationId: meeting.MeetingLocationId,
                     location: meeting.Location,
                     legislatorStaffAttendees: legislatorStaffAttendees,
                     followUpNeeded: meeting.FollowUpNeeded,

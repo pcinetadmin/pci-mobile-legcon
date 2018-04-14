@@ -47,16 +47,9 @@ function onNavigatingTo(args) {
 
         appModule.getResources().dateConverter = dateConverter;
         appModule.getResources().dateFormat = "MM/DD/YYYY";
-
-        if (meetingsList.length === 0) {
-            pageData.set("isLoading", true);
-
-            meetingsList.load(reference, navigationContext.legislatorId, "Y").then(function () {
-                pageData.set("isLoading", false);
-            });
-
-            page.bindingContext = pageData;
-        }
+    
+        // Since the Page contains a SegmentedBar,
+        // the selectedIndexChanged event will perform the initial load of the ListView.
     }
     catch(e)
     {
@@ -65,35 +58,29 @@ function onNavigatingTo(args) {
 }
 
 function onSelectedIndexChanged(args) {
-    if (initialLoad) {
-        initialLoad = false;
-    }
-    else
-    {
-        try {
-            var recentMeetings;
+    try {
+        var recentMeetings;
 
-            if (args.newIndex === 0) {
-                recentMeetings = "Y";
-            }
-            else {
-                recentMeetings = "N";
-            }
+        if (args.newIndex === 0) {
+            recentMeetings = "Y";
+        }
+        else {
+            recentMeetings = "N";
+        }
 
-            meetingsList.empty();
+        meetingsList.empty();
 
-            pageData.set("isLoading", true);
+        pageData.set("isLoading", true);
 
-            meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
-                pageData.set("isLoading", false);
-            });
+        meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
+            pageData.set("isLoading", false);
 
             page.bindingContext = pageData;
-        }
-        catch(e)
-        {
-            dialogs.alert(e);
-        }
+        });
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
     }
 }
 

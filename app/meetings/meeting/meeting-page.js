@@ -1,21 +1,17 @@
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
-var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
 var page;
 var navigationContext;
 
-var venueTypeIndex = 0;
 var legislatorIndex = 0;
 var attendeeTypeIndex = 0;
 var meetingLocationIndex = 0;
 
 var pageData = new ObservableModule.fromObject({
     boundData: null,
-    venueTypeIndex: venueTypeIndex,
-    venueTypeList: null,
     legislatorIndex: legislatorIndex,
     legislatorList: null,
     attendeeTypeIndex: attendeeTypeIndex,
@@ -29,63 +25,108 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
 
-        navigationContext = page.navigationContext;
-        
-        pageData.boundData = navigationContext;
-        pageData.boundData.result = "";
+        var followUpTitle = page.getViewById("followUpTitle");
+        var followUpLabel = page.getViewById("followUpLabel");
 
-        var meetingDateDatePicker = page.getViewById("meetingDateDatePicker");
-        var followUpDateDatePicker = page.getViewById("followUpDateDatePicker");
+        if (args.isBackNavigation) {
+            var meetingDateLabel = page.getViewById("meetingDateLabel");
+            var venueTypeLabel = page.getViewById("venueTypeLabel");
 
-        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
-            page.actionBar.title = "Add Meeting";
+            meetingDateLabel.text = dateConverter(pageData.boundData.meetingDate, "MM/DD/YYYY");
+            venueTypeLabel.text = pageData.boundData.venueType;
 
-            var today = new Date();
+            if (pageData.boundData.followUpNeeded === true) {
+                if (pageData.boundData.followUpDate === null) {
+                    followUpTitle.text = "Follow Up Needed?";
+                    followUpLabel.text = "Yes";
+                } else {
+                    followUpTitle.text = "Follow Up Date";
+                    followUpLabel.text = dateConverter(pageData.boundData.followUpDate, "MM/DD/YYYY");
+                }
+            } else {
+                followUpTitle.text = "Follow Up Needed?";
+                followUpLabel.text = "No";
+            }
 
-            meetingDateDatePicker.date = today;
         } else {
-            page.actionBar.title = "Edit Meeting";
+            navigationContext = page.navigationContext;
+            
+            pageData.boundData = navigationContext;
+            pageData.boundData.result = "";
 
-            // meetingDateDatePicker.year = pageData.boundData.meetingDate.getFullYear();
-            // meetingDateDatePicker.month = pageData.boundData.meetingDate.getMonth() + 1;
-            // meetingDateDatePicker.day = pageData.boundData.meetingDate.getDate();
-            meetingDateDatePicker.date = pageData.boundData.meetingDate;
-            followUpDateDatePicker.date = pageData.boundData.followUpDate;
-        }
+            if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+                page.actionBar.title = "Add Meeting";
 
-        pageData.venueTypeList = global.venueTypeList;
+                var today = new Date();
 
-        venueTypeIndex = 0;
+                //meetingDateDatePicker.date = today;
+            } else {
+                page.actionBar.title = "Edit Meeting";
+            }
 
-        if (pageData.boundData.venueTypeId !== null && pageData.boundData.venueTypeId.toString().length > 0) {
-            var i;
+            if (pageData.boundData.followUpNeeded === true) {
+                if (pageData.boundData.followUpDate === null) {
+                    followUpTitle.text = "Follow Up Needed?";
+                    followUpLabel.text = "Yes";
+                } else {
+                    followUpTitle.text = "Follow Up Date";
+                    followUpLabel.text = dateConverter(pageData.boundData.followUpDate, "MM/DD/YYYY");
+                }
+            } else {
+                followUpTitle.text = "Follow Up Needed?";
+                followUpLabel.text = "No";
+            }
 
-            for (i = 0; i < pageData.venueTypeList.List.length; i++) {
-                if (pageData.venueTypeList.List.getItem(i).venueTypeId === pageData.boundData.venueTypeId) {
-                    venueTypeIndex = i;
+            pageData.legislatorList = global.legislatorList;
+
+            legislatorIndex = 0;
+
+            if (pageData.boundData.legislatorId !== null && pageData.boundData.legislatorId.toString().length > 0) {
+                var i;
+
+                for (i = 0; i < pageData.legislatorList.List.length; i++) {
+                    if (pageData.legislatorList.List.getItem(i).legislatorId === pageData.boundData.legislatorId) {
+                        legislatorIndex = i;
+                    }
                 }
             }
-        }
 
-        pageData.boundData.venueType = pageData.venueTypeList.List.getItem(venueTypeIndex).venueType;
+            // pageData.boundData.fullName = pageData.legislatorList.List.getItem(legislatorIndex).legislator;
 
-        pageData.legislatorList = global.legislatorList;
+            pageData.attendeeTypeList = global.attendeeTypeList;
 
-        legislatorIndex = 0;
+            attendeeTypeIndex = 0;
 
-        if (pageData.boundData.legislatorId !== null && pageData.boundData.legislatorId.toString().length > 0) {
-            var i;
+            if (pageData.boundData.attendeeTypeId !== null && pageData.boundData.attendeeTypeId.toString().length > 0) {
+                var i;
 
-            for (i = 0; i < pageData.legislatorList.List.length; i++) {
-                if (pageData.legislatorList.List.getItem(i).legislatorId === pageData.boundData.legislatorId) {
-                    legislatorIndex = i;
+                for (i = 0; i < pageData.attendeeTypeList.List.length; i++) {
+                    if (pageData.attendeeTypeList.List.getItem(i).attendeeTypeId === pageData.boundData.attendeeTypeId) {
+                        attendeeTypeIndex = i;
+                    }
                 }
             }
+
+            //pageData.boundData.attendeeType = pageData.attendeeTypeList.List.getItem(attendeeTypeIndex).attendeeType;
+
+            pageData.meetingLocationList = global.meetingLocationList;
+
+            meetingLocationIndex = 0;
+
+            if (pageData.boundData.meetingLocationId !== null && pageData.boundData.meetingLocationId.toString().length > 0) {
+                var i;
+
+                for (i = 0; i < pageData.meetingLocationList.List.length; i++) {
+                    if (pageData.meetingLocationList.List.getItem(i).meetingLocationId === pageData.boundData.meetingLocationId) {
+                        meetingLocationIndex = i;
+                    }
+                }
+            }
+
+            //pageData.boundData.location = pageData.meetingLocationList.List.getItem(meetingLocationIndex).meetingLocation;
+
+            page.bindingContext = pageData;
         }
-
-        pageData.boundData.legislator = pageData.legislatorList.List.getItem(legislatorIndex).legislator;
-
-        page.bindingContext = pageData;
     }
     catch(e)
     {
@@ -94,41 +135,30 @@ function onNavigatingTo(args) {
 }
 
 function onLoaded(args) {
+    //dialogs.alert(pageData.boundData.followUpNeeded);
     try {
-        var meetingDateDatePicker = page.getViewById("meetingDateDatePicker");
-
-        meetingDateDatePicker.on("dateChange", function(args) {
-            var meetingDateLabel = page.getViewById("meetingDateLabel");
-
-            pageData.boundData.meetingDate = args.value;
-
-            meetingDateLabel.text = dateConverter(args.value, "MM/DD/YYYY");
-        });
-
-        var venueTypeListPicker = page.getViewById("venueTypeListPicker");
-        
-        venueTypeListPicker.on("selectedIndexChange", function(args) {
-            var venueTypeLabel = page.getViewById("venueTypeLabel");
-
-            venueTypeLabel.text = pageData.venueTypeList.Items.getItem(args.object.selectedIndex);
-        });
-
-        var followUpDateDatePicker = page.getViewById("followUpDateDatePicker");
-
-        followUpDateDatePicker.on("dateChange", function(args) {
-            var followUpDateLabel = page.getViewById("followUpDateLabel");
-
-            pageData.boundData.followUpDate = args.value;
-
-            followUpDateLabel.text = dateConverter(args.value, "MM/DD/YYYY");
-        });
-
         var legislatorListPicker = page.getViewById("legislatorListPicker");
         
         legislatorListPicker.on("selectedIndexChange", function(args) {
             var legislatorLabel = page.getViewById("legislatorLabel");
 
             legislatorLabel.text = pageData.legislatorList.Items.getItem(args.object.selectedIndex);
+        });
+
+        var attendeeTypeListPicker = page.getViewById("attendeeTypeListPicker");
+        
+        attendeeTypeListPicker.on("selectedIndexChange", function(args) {
+            var attendeeTypeLabel = page.getViewById("attendeeTypeLabel");
+
+            attendeeTypeLabel.text = pageData.attendeeTypeList.Items.getItem(args.object.selectedIndex);
+        });
+
+        var meetingLocationListPicker = page.getViewById("meetingLocationListPicker");
+        
+        meetingLocationListPicker.on("selectedIndexChange", function(args) {
+            var meetingLocationLabel = page.getViewById("meetingLocationLabel");
+
+            meetingLocationLabel.text = pageData.meetingLocationList.Items.getItem(args.object.selectedIndex);
         });
     }
     catch(e)
@@ -139,26 +169,13 @@ function onLoaded(args) {
 
 function onStackLayoutMeetingDateTap(args) {
     try {
-        var meetingDateDatePickerGridLayout = page.getViewById("meetingDateDatePickerGridLayout");
-        var venueTypeListPickerGridLayout = page.getViewById("venueTypeListPickerGridLayout");
-        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
-        var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
-        
-        if (meetingDateDatePickerGridLayout.visibility === "collapse") {
-            meetingDateDatePickerGridLayout.visibility = "visible";
-            venueTypeListPickerGridLayout.visibility = "collapse";
-            followUpDateDatePickerGridLayout.visibility = "collapse";
-            legislatorListPickerGridLayout.visibility = "collapse";
+        const navigationEntry = {
+            moduleName: "meetings/meeting/meetingdate/meetingdate-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
 
-            page.addCss("#meetingDateLabel {color: #cc2d30;}");
-            page.addCss("#venueTypeLabel {color: #666;}");
-            page.addCss("#followUpDateLabel {color: #666;}");
-            page.addCss("#legislatorLabel {color: #666;}");
-        } else {
-            meetingDateDatePickerGridLayout.visibility = "collapse";
-
-            page.addCss("#meetingDateLabel {color: #666;}");
-        }
+        frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
@@ -168,26 +185,13 @@ function onStackLayoutMeetingDateTap(args) {
 
 function onStackLayoutVenueTypeTap(args) {
     try {
-        var meetingDateDatePickerGridLayout = page.getViewById("meetingDateDatePickerGridLayout");
-        var venueTypeListPickerGridLayout = page.getViewById("venueTypeListPickerGridLayout");
-        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
-        var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
-        
-        if (venueTypeListPickerGridLayout.visibility === "collapse") {
-            meetingDateDatePickerGridLayout.visibility = "collapse";
-            venueTypeListPickerGridLayout.visibility = "visible";
-            followUpDateDatePickerGridLayout.visibility = "collapse";
-            legislatorListPickerGridLayout.visibility = "collapse";
+        const navigationEntry = {
+            moduleName: "meetings/meeting/venuetype/venuetype-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
 
-            page.addCss("#meetingDateLabel {color: #666;}");
-            page.addCss("#venueTypeLabel {color: #cc2d30;}");
-            page.addCss("#followUpDateLabel {color: #666;}");
-            page.addCss("#legislatorLabel {color: #666;}");
-        } else {
-            venueTypeListPickerGridLayout.visibility = "collapse";
-
-            page.addCss("#venueTypeLabel {color: #666;}");
-        }
+        frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
@@ -195,28 +199,15 @@ function onStackLayoutVenueTypeTap(args) {
     }
 }
 
-function onStackLayoutFollowUpDateTap(args) {
+function onStackLayoutFollowUpTap(args) {
     try {
-        var meetingDateDatePickerGridLayout = page.getViewById("meetingDateDatePickerGridLayout");
-        var venueTypeListPickerGridLayout = page.getViewById("venueTypeListPickerGridLayout");
-        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
-        var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
-        
-        if (followUpDateDatePickerGridLayout.visibility === "collapse") {
-            meetingDateDatePickerGridLayout.visibility = "collapse";
-            venueTypeListPickerGridLayout.visibility = "collapse";
-            followUpDateDatePickerGridLayout.visibility = "visible";
-            legislatorListPickerGridLayout.visibility = "collapse";
+        const navigationEntry = {
+            moduleName: "meetings/meeting/followup/followup-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
 
-            page.addCss("#meetingDateLabel {color: #666;}");
-            page.addCss("#venueTypeLabel {color: #666;}");
-            page.addCss("#followUpDateLabel {color: #cc2d30;}");
-            page.addCss("#legislatorLabel {color: #666;}");
-        } else {
-            followUpDateDatePickerGridLayout.visibility = "collapse";
-
-            page.addCss("#followUpDateLabel {color: #666;}");
-        }
+        frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
@@ -226,26 +217,74 @@ function onStackLayoutFollowUpDateTap(args) {
 
 function onStackLayoutLegislatorTap(args) {
     try {
-        var meetingDateDatePickerGridLayout = page.getViewById("meetingDateDatePickerGridLayout");
-        var venueTypeListPickerGridLayout = page.getViewById("venueTypeListPickerGridLayout");
-        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
         var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
+        var attendeeTypeListPickerGridLayout = page.getViewById("attendeeTypeListPickerGridLayout");
+        var meetingLocationListPickerGridLayout = page.getViewById("meetingLocationListPickerGridLayout");
         
         if (legislatorListPickerGridLayout.visibility === "collapse") {
-            meetingDateDatePickerGridLayout.visibility = "collapse";
-            venueTypeListPickerGridLayout.visibility = "collapse";
-            followUpDateDatePickerGridLayout.visibility = "collapse";
             legislatorListPickerGridLayout.visibility = "visible";
+            attendeeTypeListPickerGridLayout.visibility = "collapse";
+            meetingLocationListPickerGridLayout.visibility = "collapse";
 
-            page.addCss("#meetingDateLabel {color: #666;}");
-            page.addCss("#venueTypeLabel {color: #666;}");
-            page.addCss("#followUpDateLabel {color: #666;}");
             page.addCss("#legislatorLabel {color: #cc2d30;}");
-            dialogs.alert("you're cool now!");
+            page.addCss("#attendeeTypeLabel {color: #666;}");
+            page.addCss("#meetingLocationTypeLabel {color: #666;}");
         } else {
             legislatorListPickerGridLayout.visibility = "collapse";
 
             page.addCss("#legislatorLabel {color: #666;}");
+        }
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
+function onStackLayoutAttendeeTypeTap(args) {
+    try {
+        var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
+        var attendeeTypeListPickerGridLayout = page.getViewById("attendeeTypeListPickerGridLayout");
+        var meetingLocationListPickerGridLayout = page.getViewById("meetingLocationListPickerGridLayout");
+        
+        if (attendeeTypeListPickerGridLayout.visibility === "collapse") {
+            legislatorListPickerGridLayout.visibility = "collapse";
+            attendeeTypeListPickerGridLayout.visibility = "visible";
+            meetingLocationListPickerGridLayout.visibility = "collapse";
+
+            page.addCss("#legislatorLabel {color: #666;}");
+            page.addCss("#attendeeTypeLabel {color: #cc2d30;}");
+            page.addCss("#meetingLocationTypeLabel {color: #666;}");
+        } else {
+            attendeeTypeListPickerGridLayout.visibility = "collapse";
+
+            page.addCss("#attendeeTypeLabel {color: #666;}");
+        }
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
+function onStackLayoutMeetingLocationTap(args) {
+    try {
+        var legislatorListPickerGridLayout = page.getViewById("legislatorListPickerGridLayout");
+        var attendeeTypeListPickerGridLayout = page.getViewById("attendeeTypeListPickerGridLayout");
+        var meetingLocationListPickerGridLayout = page.getViewById("meetingLocationListPickerGridLayout");
+        
+        if (attendeeTypeListPickerGridLayout.visibility === "collapse") {
+            legislatorListPickerGridLayout.visibility = "collapse";
+            attendeeTypeListPickerGridLayout.visibility = "collapse";
+            meetingLocationListPickerGridLayout.visibility = "visible";
+
+            page.addCss("#legislatorLabel {color: #666;}");
+            page.addCss("#attendeeTypeLabel {color: #666;}");
+            page.addCss("#meetingLocationTypeLabel {color: #cc2d30;}");
+        } else {
+            meetingLocationListPickerGridLayout.visibility = "collapse";
+
+            page.addCss("#meetingLocationTypeLabel {color: #666;}");
         }
     }
     catch(e)
@@ -277,6 +316,7 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onStackLayoutMeetingDateTap = onStackLayoutMeetingDateTap;
 exports.onStackLayoutVenueTypeTap = onStackLayoutVenueTypeTap;
-exports.onStackLayoutFollowUpDateTap = onStackLayoutFollowUpDateTap;
+exports.onStackLayoutFollowUpTap = onStackLayoutFollowUpTap;
 exports.onStackLayoutLegislatorTap = onStackLayoutLegislatorTap;
+exports.onStackLayoutAttendeeTypeTap = onStackLayoutAttendeeTypeTap;
 exports.onSave = onSave;

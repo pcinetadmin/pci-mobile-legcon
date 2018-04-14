@@ -23,8 +23,8 @@ function LegislatorViewModel() {
                 );
 
                 viewModel.List.push({
-                    LegislatorId: legislator.LegislatorId,
-                    fullName: legislator.FullName
+                    legislatorId: legislator.LegislatorId,
+                    legislator: legislator.FullName
                 });
             });
         }, function (e) {

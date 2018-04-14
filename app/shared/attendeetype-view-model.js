@@ -24,7 +24,7 @@ function AttendeeTypeViewModel() {
 
                 viewModel.List.push({
                     attendeeTypeId: attendeeType.AttendeeTypeId,
-                    Type: attendeeType.Type
+                    attendeeType: attendeeType.Type
                 });
             });
         }, function (e) {

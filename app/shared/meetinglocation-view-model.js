@@ -24,7 +24,7 @@ function MeetingLocationViewModel() {
 
                 viewModel.List.push({
                     meetingLocationId: meetingLocation.MeetingLocationId,
-                    location: meetingLocation.Location
+                    meetingLocation: meetingLocation.Location
                 });
             });
         }, function (e) {
