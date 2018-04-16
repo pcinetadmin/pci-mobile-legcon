@@ -1,8 +1,5 @@
 const RelationshipTypeViewModel = require("./shared/relationshiptype-view-model");
 const FamiliarityLevelViewModel = require("./shared/familiaritylevel-view-model");
-const LegislatorViewModel = require("./shared/legislator-view-model");
-const AttendeeTypeViewModel = require("./shared/attendeetype-view-model");
-const MeetingLocationViewModel = require("./shared/meetinglocation-view-model");
 var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
 var stackLayout = require("ui/layouts/stack-layout")
@@ -12,9 +9,6 @@ var dialogs = require("ui/dialogs");
 var page;
 var relationshipList = new RelationshipTypeViewModel([]);
 var familiarityList = new FamiliarityLevelViewModel([]);
-var legislatorList = new LegislatorViewModel([]);
-var attendeeTypeList = new AttendeeTypeViewModel([]);
-var meetingLocationList = new MeetingLocationViewModel([]);
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -103,19 +97,7 @@ function onNavigatingTo(args) {
         familiarityList.load().then(function () {
             global.familiarityList = familiarityList;
 
-                legislatorList.load().then(function () {
-                    global.legislatorList = legislatorList;
-
-                    attendeeTypeList.load().then(function () {
-                        global.attendeeTypeList = attendeeTypeList;
-
-                        meetingLocationList.load().then(function () {
-                            global.meetingLocationList = meetingLocationList;
-
-                            page.navFrame.navigate(page.tabItems[0].path);
-                        });
-                    });
-                });
+            page.navFrame.navigate(page.tabItems[0].path);
         });
     });
 

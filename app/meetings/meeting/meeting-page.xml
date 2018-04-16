@@ -5,14 +5,18 @@
 
         <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
             <StackLayout row="0" col="0" verticalAlignment="top">
-                <StackLayout class="list-view-section-header"></StackLayout>
+                <StackLayout verticalAlignment="bottom" class="list-view-section-header">
+                    <Label text="MEETING INFORMATION" verticalAlignment="bottom" />
+                </StackLayout>
                 <StackLayout tap="onStackLayoutMeetingDateTap">
-                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                         <Label row="0" col="0" text="Meeting Date" class="list-view-item-left" />
                         <Label id="meetingDateLabel" row="0" col="1" text="{{ boundData.meetingDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
-                        <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
                 </StackLayout>
+                <GridLayout id="meetingDateGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <DatePicker id="meetingDateDatePicker" row="0" col="0" date="{{ boundData.meetingDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
+                </GridLayout>
                 <StackLayout tap="onStackLayoutVenueTypeTap">
                     <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
                         <Label row="0" col="0" text="Venue" class="list-view-item-left" />
@@ -27,11 +31,14 @@
                     <Label text="FOLLOW UP" verticalAlignment="bottom" />
                 </StackLayout>
                 <StackLayout tap="onStackLayoutFollowUpTap">
-                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
+                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form-bottom">
                         <Label id="followUpTitle" row="0" col="0" text="" class="list-view-item-left" />
                         <Label id="followUpLabel" row="0" col="1" text="" class="list-view-item-right" />
                         <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
+                </StackLayout>
+                <StackLayout verticalAlignment="bottom" class="list-view-section-header">
+                    <Label text="RELATED INFORMATION" verticalAlignment="bottom" />
                 </StackLayout>
                 <StackLayout class="list-view-item-form">
                     <GridLayout columns="*, auto" rows="*">
@@ -50,35 +57,29 @@
                     </GridLayout>
                 </StackLayout>
                 <StackLayout verticalAlignment="bottom" class="list-view-section-header">
-                    <Label text="MEETING INFORMATION" verticalAlignment="bottom" />
+                    <Label text="ATTENDEE INFORMATION" verticalAlignment="bottom" />
                 </StackLayout>
                 <StackLayout tap="onStackLayoutLegislatorTap">
-                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
                         <Label row="0" col="0" text="Legislator" class="list-view-item-left" />
-                        <Label id="LegislatorLabel" row="0" col="1" text="{{ boundData.fullName }}" class="list-view-item-right" />
+                        <Label id="legislatorLabel" row="0" col="1" text="{{ boundData.fullName }}" class="list-view-item-right" />
+                        <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
                 </StackLayout>
-                <GridLayout id="legislatorListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                    <ListPicker id="legislatorListPicker" row="0" col="0" items="{{ legislatorList.Items }}" selectedIndex="{{ legislatorIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
-                </GridLayout>
                 <StackLayout tap="onStackLayoutAttendeeTypeTap">
-                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
                         <Label row="0" col="0" text="Cong. Office Attendees" class="list-view-item-left" />
-                        <Label id="AttendeeTypeLabel" row="0" col="1" text="{{ boundData.attendeeType }}" class="list-view-item-right" />
+                        <Label id="attendeeTypeLabel" row="0" col="1" text="{{ boundData.attendeeType }}" class="list-view-item-right" />
+                        <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
                 </StackLayout>
-                <GridLayout id="attendeeTypeListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                    <ListPicker id="attendeeTypeListPicker" row="0" col="0" items="{{ attendeeTypeList.Items }}" selectedIndex="{{ attendeeTypeIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
-                </GridLayout>
                 <StackLayout tap="onStackLayoutMeetingLocationTap">
-                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                    <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
                         <Label row="0" col="0" text="Type" class="list-view-item-left" />
-                        <Label id="MeetingLocationLabel" row="0" col="1" text="{{ boundData.location }}" class="list-view-item-right" />
+                        <Label id="meetingLocationLabel" row="0" col="1" text="{{ boundData.location }}" class="list-view-item-right" />
+                        <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
                 </StackLayout>
-                <GridLayout id="meetingLocationListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                    <ListPicker id="meetingLocationListPicker" row="0" col="0" items="{{ meetingLocationList.Items }}" selectedIndex="{{ meetingLocationIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
-                </GridLayout>
                 <StackLayout class="list-view-item-form">
                     <GridLayout columns="*, auto" rows="*">
                         <StackLayout row="0" col="0">

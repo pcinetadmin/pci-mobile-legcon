@@ -1,10 +1,10 @@
-<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns:lv="nativescript-ui-listview" xmlns="http://schemas.nativescript.org/tns.xsd" >
+<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
 
     <GridLayout columns="*" rows="auto, auto, *">
         <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
         <GridLayout row="1" col="0" columns="*" rows="auto" class="list-view-item-form">
-            <ListPicker id="venueTypeListPicker" row="0" col="0" items="{{ venueTypeList.Items }}" selectedIndex="{{ venueTypeIndex }}" 
+            <ListPicker id="meetingLocationListPicker" row="0" col="0" items="{{ meetingLocationList.Items }}" selectedIndex="{{ meetingLocationIndex }}" 
                 horizontalAlignment="center" class="list-view-item-right"></ListPicker>
         </GridLayout>
         <StackLayout row="2" col="0" height="100%" class="list-view-section-header"></StackLayout>

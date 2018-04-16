@@ -1,4 +1,5 @@
 const MeetingsViewModel = require("./meetings-view-model");
+const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
 const ObservableModule = require("data/observable");
 const appModule = require("application");
 var frameModule = require("ui/frame");
@@ -6,9 +7,9 @@ var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
 var reference;
-var initialLoad = true;
 
 var meetingsList = new MeetingsViewModel([]);
+var legislatorList = new LegislatorViewModel([]);
 
 var pageData = new ObservableModule.fromObject({
     meetingsList: meetingsList,
@@ -50,6 +51,8 @@ function onNavigatingTo(args) {
     
         // Since the Page contains a SegmentedBar,
         // the selectedIndexChanged event will perform the initial load of the ListView.
+
+        page.bindingContext = pageData;
     }
     catch(e)
     {
@@ -73,9 +76,19 @@ function onSelectedIndexChanged(args) {
         pageData.set("isLoading", true);
 
         meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
-            pageData.set("isLoading", false);
+            if (global.legislatorList === undefined) {
+                legislatorList.load().then(function () {
+                    global.legislatorList = legislatorList;
 
-            page.bindingContext = pageData;
+                    pageData.set("isLoading", false);
+
+                    page.bindingContext = pageData;
+                });
+            } else {
+                pageData.set("isLoading", false);
+
+                page.bindingContext = pageData;
+            }
         });
     }
     catch(e)
