@@ -1,5 +1,5 @@
 const MeetingsViewModel = require("./meetings-view-model");
-const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
+// const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
 const ObservableModule = require("data/observable");
 const appModule = require("application");
 var frameModule = require("ui/frame");
@@ -9,7 +9,7 @@ var navigationContext;
 var reference;
 
 var meetingsList = new MeetingsViewModel([]);
-var legislatorList = new LegislatorViewModel([]);
+// var legislatorList = new LegislatorViewModel([]);
 
 var pageData = new ObservableModule.fromObject({
     meetingsList: meetingsList,
@@ -119,6 +119,51 @@ function onItemTap(args) {
     }
 }
 
+function onAddTap(args) {
+    try
+    {
+        var model = {
+            meetingId: 0,
+            meetingDate: new Date(),
+            venueTypeId: 1,
+            venueType: "In Person",
+            attendeeTypeId: 1,
+            attendeeType: "Staff Only",
+            lobbyistId: global.personId,
+            lobbyist: null,
+            legislatorId: navigationContext.legislatorId,
+            fullName: navigationContext.fullName,
+            name: null,
+            pciInitiatives: null,
+            primaryOfficeContact: null,
+            meetingLocationId: 1,
+            location: "Meeting in District",
+            legislatorStaffAttendees: null,
+            followUpNeeded: false,
+            followUpDate: null,
+            followUpNotes: null,
+            creatorId: global.personId,
+            notes: null,
+            initiativeId: null,
+            surveyId: null,
+            assignmentId: null
+        }
+
+        const navigationEntry = {
+            moduleName: "meetings/meeting/meeting-page",
+            context: model,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
 exports.onItemTap = onItemTap;
+exports.onAddTap = onAddTap;

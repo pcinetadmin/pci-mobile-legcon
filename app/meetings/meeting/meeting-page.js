@@ -1,5 +1,6 @@
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
+var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
@@ -246,6 +247,24 @@ function onStackLayoutPciAttendeesTap(args) {
 }
 
 function onSave(args) {
+    // dialogs.alert(pageData.boundData.meetingId + ": " + pageData.boundData.fullName);
+    var result;
+
+    http.request({
+        url: global.apiBaseServiceUrl + "insertupdatemeeting",
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": global.token },
+        content: JSON.stringify(pageData.boundData)
+    }).then(function (response) {
+        // result = response.content.toJSON();
+        // dialogs.alert(result);
+        
+        // pageData.boundData.result = "Update";
+
+        frameModule.topmost().goBack();
+    }, function (e) {
+        dialogs.alert(e);
+    });
 
 }
 
