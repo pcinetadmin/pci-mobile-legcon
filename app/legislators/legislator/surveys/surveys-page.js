@@ -55,7 +55,7 @@ function onSelectedIndexChanged(args) {
 
         pageData.set("isLoading", true);
 
-        surveysList.load(navigationContext.legislatorId, surveysActive).then(function () {
+        surveysList.load(navigationContext.legislatorId, navigationContext.meetingId, surveysActive).then(function () {
             pageData.set("isLoading", false);
         });
 

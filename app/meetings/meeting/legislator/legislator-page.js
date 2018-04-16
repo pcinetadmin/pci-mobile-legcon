@@ -150,15 +150,8 @@ function onItemDeselected(args) {
     }  
 }
 
-function groupingFunction(item) {
-    return (item) => {
-        return item.group;
-    };
-}
-
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onNavigatedTo = onNavigatedTo;
 exports.onItemSelected = onItemSelected;
 exports.onItemDeselected = onItemDeselected;
-exports.groupingFunction = groupingFunction;

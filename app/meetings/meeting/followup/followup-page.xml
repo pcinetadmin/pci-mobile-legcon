@@ -1,13 +1,18 @@
 <Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
 
-    <GridLayout columns="*" rows="auto, auto, *">
+    <GridLayout columns="*" rows="auto, auto, auto, auto, *">
         <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
         <StackLayout row="1" col="0">
-            <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+            <GridLayout columns="*, auto" rows="auto" class="list-view-item-form-bottom">
                 <Label row="0" col="0" text="Follow Up Needed?" class="list-view-item-left" />
-                <Switch row="0" col="1" checked="{{ followUpNeeded }}" horizontalAlignment="right" class="switch" />
+                <Switch row="0" col="1" checked="{{ followUpNeeded }}" loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
             </GridLayout>
+        </StackLayout>
+        <StackLayout id="detailsLabelStackLayout" row="2" col="0" verticalAlignment="bottom" class="list-view-section-header" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
+            <Label text="DETAILS" verticalAlignment="bottom" />
+        </StackLayout>
+        <StackLayout id="detailsStackLayout" row="3" col="0" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
             <StackLayout tap="onStackLayoutFollowUpDateTap">
                 <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                     <Label row="0" col="0" text="Follow Up Date" class="list-view-item-left" />
@@ -17,10 +22,10 @@
             <GridLayout id="followUpDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
                 <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
             </GridLayout>
-            <GridLayout columns="*" rows="*" class="list-view-item-form">
+            <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
                 <TextView row="0" col="0" text="{{ followUpNotes }}" hint="Follow up notes" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
-        <StackLayout row="2" col="0" height="100%" class="list-view-section-header"></StackLayout>
+        <StackLayout row="4" col="0" height="100%" class="list-view-section-header"></StackLayout>
     </GridLayout>
 </Page>

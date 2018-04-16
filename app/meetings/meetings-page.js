@@ -76,19 +76,20 @@ function onSelectedIndexChanged(args) {
         pageData.set("isLoading", true);
 
         meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
-            if (global.legislatorList === undefined) {
-                legislatorList.load().then(function () {
-                    global.legislatorList = legislatorList;
+            // NEED THE FOLLOWING COMMENTED CODE ONCE WE ALLOW THE LEGISLATOR FIELD TO BE EDITABLE.
+            // if (global.legislatorList === undefined) {
+            //     legislatorList.load().then(function () {
+            //         global.legislatorList = legislatorList;
 
-                    pageData.set("isLoading", false);
+            //         pageData.set("isLoading", false);
 
-                    page.bindingContext = pageData;
-                });
-            } else {
+            //         page.bindingContext = pageData;
+            //     });
+            // } else {
                 pageData.set("isLoading", false);
 
                 page.bindingContext = pageData;
-            }
+            // }
         });
     }
     catch(e)

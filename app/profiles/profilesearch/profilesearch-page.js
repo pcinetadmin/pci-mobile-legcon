@@ -130,22 +130,6 @@ function onSwitchLoaded(args) {
     });
 }
 
-function onItemLoading(args) {
-    // try {
-    //     var view = args.view;
-
-    //     var checkedSwitch = view.getViewById("checkedSwitch");
-        
-    //     checkedSwitch.on("checkedChange", function(args) {
-    //         dialogs.alert(args.value + " : " + args.object.checked);
-    //     });
-    // }
-    // catch(e)
-    // {
-    //     dialogs.alert(e);
-    // }
-}
-
 function onLoadMoreItems(args) {
     var profileSearchListCount = profileSearchList.length;
     var profileSearchPageNumber = Math.ceil(profileSearchListCount / profileSearchPageSize) + 1;

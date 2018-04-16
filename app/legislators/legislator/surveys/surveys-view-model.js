@@ -6,9 +6,17 @@ var dialogs = require("ui/dialogs");
 function SurveysViewModel(items) {
     const viewModel = new ObservableArray(items);
 
-    viewModel.load = function(legislatorId, surveysActive) {
+    viewModel.load = function(legislatorId, meetingId, surveysActive) {
+        var url = global.apiBaseServiceUrl + "legislatorsurveys?legislatorId=" + legislatorId;
+
+        if (meetingId !== null) {
+            url += "&meetingId=" + meetingId;
+        }
+
+        url += "&active=" + surveysActive;
+
         return http.request({
-            url: global.apiBaseServiceUrl + "legislatorsurveys?legislatorId=" + legislatorId + "&active=" + surveysActive,
+            url: url, //global.apiBaseServiceUrl + "legislatorsurveys?legislatorId=" + legislatorId + "&active=" + surveysActive,
             method: "GET",
             headers: { "Content-Type": "application/json", "Authorization": global.token }
         }).then(function (response) {

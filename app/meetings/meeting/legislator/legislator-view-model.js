@@ -4,9 +4,6 @@ var http = require("http");
 var dialogs = require("ui/dialogs");
 
 function LegislatorViewModel(items) {
-    // const viewModel = new ObservableModule();
-    // viewModel.Items = new ObservableArray();
-    // viewModel.List = new ObservableArray();
     const viewModel = new ObservableArray(items)
 
     viewModel.load = function() {
@@ -19,15 +16,6 @@ function LegislatorViewModel(items) {
             var data = JSON.parse(result);
 
             data.forEach(function(legislator) {
-                // viewModel.Items.push(
-                //     legislator.FullName
-                // );
-
-                // viewModel.List.push({
-                //     legislatorId: legislator.LegislatorId,
-                //     legislator: legislator.FullName
-                // });
-
                 var group = legislator.FullName.substring(legislator.FullName.lastIndexOf(" ") + 1, legislator.FullName.lastIndexOf(" ") + 2);
 
                 viewModel.push({
@@ -41,15 +29,19 @@ function LegislatorViewModel(items) {
         });
     };
 
+    viewModel.groupingFunction = function(item) {
+        return (item) => {
+            return item.group;
+        };
+    }
+
+    viewModel.filteringFunction = function(item, filter) {
+        return (item) => {
+            return item.fullName.includes(filter);
+        };
+    }
+
     viewModel.empty = function() {
-        // while (viewModel.Items.length) {
-        //     viewModel.Items.pop();
-        // }
-
-        // while (viewModel.List.length) {
-        //     viewModel.List.pop();
-        // }
-
         while (viewModel.length) {
             viewModel.pop();
         }

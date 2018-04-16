@@ -1,18 +1,13 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
 
-    <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" direction="horizontal">
-            <SearchBar row="0" col="0" id="searchBar" hint="Search" text="" loaded="onSearchBarLoaded" submit="onSubmit" clear="onClear" />
-        </StackLayout>
+    <GridLayout columns="*" rows="*" height="100%" width="100%">
         <StackLayout row="1" col="0" verticalAlignment="top">
-            <ListView items="{{ profileSearchList }}" loadMoreItems="onLoadMoreItems" itemTemplateSelector="$index" height="100%">
+            <ListView items="{{ initiativesList }}" itemTemplateSelector="$index" height="100%">
                 <ListView.itemTemplate>
                     <GridLayout columns="*, auto" rows="*" class="list-view-item">
                         <StackLayout row="0" col="0" verticalAlignment="middle">
-                            <Label text="{{ fullName }}" class="list-view-item-main-top" />
-                            <Label text="{{ company }}" textWrap="true" class="list-view-item-sub" />
-                            <Label text="{{ title }}" textWrap="true" class="list-view-item-sub" />
+                            <Label text="{{ initiative }}" class="list-view-item-main-top" />
                         </StackLayout>
                         <StackLayout row="0" col="1" verticalAlignment="middle">
                             <Switch id="checkedSwitch" row="0" col="1" checked="{{ checked }}" 
@@ -23,6 +18,6 @@
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
     </GridLayout>
 </Page>

@@ -3,27 +3,14 @@
 
 <GridLayout columns="*" rows="*">
     <lv:RadListView id="legislatorListView" row="0" col="0" items="{{ legislatorList }}" multipleSelection="true"
-        selectionBehavior="Press" itemSelected="onItemSelected" itemDeselected="onItemDeselected" groupingFunction="{{ groupingFunction }}">
+        selectionBehavior="Press" itemSelected="onItemSelected" itemDeselected="onItemDeselected" 
+        filteringFunction="{{ filteringFunction }}" groupingFunction="{{ groupingFunction }}">
         <lv:RadListView.itemTemplate>
-                <GridLayout columns="*, auto" rows="*" class="rad-list-view-item">
-                    <StackLayout row="0" col="0">
-                        <Label text="{{ legislator }}" class="list-view-item-main-top" />
-                    </StackLayout>
-                    <!-- <Label row="0" col="1" text="&#xf00c;" class="fn-list-view-item-small" visibility="{{ selected ? 'visible' : 'collapse' }}" /> -->
-                </GridLayout>
+                <StackLayout class="rad-list-view-item">
+                    <Label text="{{ legislator }}" class="list-view-item-main-top" />
+                </StackLayout>
         </lv:RadListView.itemTemplate>
     </lv:RadListView>
     <ActivityIndicator busy="{{ isLoading }}" rowSpan="0" colSpan="1" />
 </GridLayout>
-
-    <!-- <GridLayout columns="*" rows="auto, auto, *">
-        <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
-        <GridLayout row="1" col="0" columns="*" rows="auto" class="list-view-item-form">
-            <ListPicker id="legislatorListPicker" row="0" col="0" items="{{ legislatorList.Items }}" selectedIndex="{{ legislatorIndex }}" 
-                horizontalAlignment="center" class="list-view-item-right"></ListPicker>
-            
-        </GridLayout>
-        <StackLayout row="2" col="0" height="100%" class="list-view-section-header"></StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="3" colSpan="1" />
-    </GridLayout> -->
 </Page>

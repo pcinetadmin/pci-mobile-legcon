@@ -143,6 +143,40 @@ function onStackLayoutFollowUpTap(args) {
     }
 }
 
+function onStackLayoutInitiativesTap(args) {
+    try
+    {
+        const navigationEntry = {
+            moduleName: "meetings/meeting/initiatives/initiatives-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
+function onStackLayoutSurveysTap(args) {
+    try
+    {
+        const navigationEntry = {
+            moduleName: "legislators/legislator/surveys/surveys-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 function onStackLayoutLegislatorTap(args) {
     try {
         const navigationEntry = {
@@ -191,6 +225,26 @@ function onStackLayoutMeetingLocationTap(args) {
     }
 }
 
+function onStackLayoutPciAttendeesTap(args) {
+    try
+    {
+        pageData.boundData.relationalType = "meeting";
+        pageData.boundData.relationalId = pageData.boundData.meetingId;    
+
+        const navigationEntry = {
+            moduleName: "profiles/profiles-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 function onSave(args) {
 
 }
@@ -215,7 +269,10 @@ exports.onLoaded = onLoaded;
 exports.onStackLayoutMeetingDateTap = onStackLayoutMeetingDateTap;
 exports.onStackLayoutVenueTypeTap = onStackLayoutVenueTypeTap;
 exports.onStackLayoutFollowUpTap = onStackLayoutFollowUpTap;
+exports.onStackLayoutInitiativesTap = onStackLayoutInitiativesTap;
+exports.onStackLayoutSurveysTap = onStackLayoutSurveysTap;
 exports.onStackLayoutLegislatorTap = onStackLayoutLegislatorTap;
 exports.onStackLayoutAttendeeTypeTap = onStackLayoutAttendeeTypeTap;
 exports.onStackLayoutMeetingLocationTap = onStackLayoutMeetingLocationTap;
+exports.onStackLayoutPciAttendeesTap = onStackLayoutPciAttendeesTap;
 exports.onSave = onSave;

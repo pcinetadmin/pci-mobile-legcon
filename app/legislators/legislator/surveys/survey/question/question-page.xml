@@ -25,11 +25,11 @@
                 <Label row="0" col="0" text="Follow Up Required?" class="list-view-item-left" />
                 <Switch row="0" col="1" checked="{{ boundData.followUpRequired }}" horizontalAlignment="right" class="switch" />
             </GridLayout>
-            <GridLayout columns="*" rows="auto" class="list-view-item-form">
+            <!-- <GridLayout columns="*" rows="auto" class="list-view-item-form">
                 <Label row="0" col="0" text="Comments/Observations" class="list-view-item-left" />
-            </GridLayout>
+            </GridLayout> -->
             <GridLayout columns="*" rows="*" class="list-view-item-form">
-                <TextView row="0" col="0" text="{{ boundData.comments }}" class="list-view-item-right" />
+                <TextView row="0" col="0" text="{{ boundData.comments }}" hint="Comments/Observations" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
         <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
