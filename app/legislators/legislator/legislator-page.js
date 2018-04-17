@@ -59,6 +59,7 @@ function onItemTap(args)
     var index = args.index;
     var item = legislatorList.getItem(index);
 
+    navigationContext.reference = "nav";
     navigationContext.relationalType = "legislator";
     navigationContext.relationalId = navigationContext.legislatorId;
 

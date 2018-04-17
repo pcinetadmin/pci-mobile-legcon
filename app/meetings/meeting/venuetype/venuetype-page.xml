@@ -1,4 +1,4 @@
-<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns:lv="nativescript-ui-listview" xmlns="http://schemas.nativescript.org/tns.xsd" >
+<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
 
     <GridLayout columns="*" rows="auto, auto, *">

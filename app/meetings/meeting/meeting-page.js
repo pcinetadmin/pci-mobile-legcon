@@ -147,13 +147,7 @@ function onStackLayoutFollowUpTap(args) {
 function onStackLayoutInitiativesTap(args) {
     try
     {
-        const navigationEntry = {
-            moduleName: "meetings/meeting/initiatives/initiatives-page",
-            context: pageData.boundData,
-            clearHistory: false
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
+        saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
     }
     catch(e)
     {
@@ -164,13 +158,7 @@ function onStackLayoutInitiativesTap(args) {
 function onStackLayoutSurveysTap(args) {
     try
     {
-        const navigationEntry = {
-            moduleName: "legislators/legislator/surveys/surveys-page",
-            context: pageData.boundData,
-            clearHistory: false
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
+        saveMeeting("legislators/legislator/surveys/surveys-page", false);
     }
     catch(e)
     {
@@ -229,16 +217,7 @@ function onStackLayoutMeetingLocationTap(args) {
 function onStackLayoutPciAttendeesTap(args) {
     try
     {
-        pageData.boundData.relationalType = "meeting";
-        pageData.boundData.relationalId = pageData.boundData.meetingId;    
-
-        const navigationEntry = {
-            moduleName: "profiles/profiles-page",
-            context: pageData.boundData,
-            clearHistory: false
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
+        saveMeeting("profiles/profiles-page", true);
     }
     catch(e)
     {
@@ -247,25 +226,48 @@ function onStackLayoutPciAttendeesTap(args) {
 }
 
 function onSave(args) {
-    // dialogs.alert(pageData.boundData.meetingId + ": " + pageData.boundData.fullName);
-    var result;
+    saveMeeting(null, false);
+}
 
+function saveMeeting(moduleName, isAttendees) {
     http.request({
         url: global.apiBaseServiceUrl + "insertupdatemeeting",
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": global.token },
         content: JSON.stringify(pageData.boundData)
     }).then(function (response) {
-        // result = response.content.toJSON();
-        // dialogs.alert(result);
+        var result = response.content.toString();
+        var data = JSON.parse(result);
         
-        // pageData.boundData.result = "Update";
+        if (data.MeetingId !== null)
+        {
+            if (moduleName === null) {
+                pageData.boundData.meetingId = data.MeetingId;
 
-        frameModule.topmost().goBack();
+                frameModule.topmost().goBack();
+            } else {
+                pageData.boundData.meetingId = data.MeetingId;
+                
+                if (isAttendees) {
+                    pageData.boundData.relationalType = "meeting";
+                    pageData.boundData.relationalId = pageData.boundData.meetingId; 
+                }
+                
+                const navigationEntry = {
+                    moduleName: moduleName,
+                    context: pageData.boundData,
+                    clearHistory: false
+                };
+
+                frameModule.topmost().navigate(navigationEntry);
+            }
+        } else {
+            dialogs.alert("There was an error saving the meeting.");
+        }
+        
     }, function (e) {
         dialogs.alert(e);
     });
-
 }
 
 function dateConverter(value, format) {

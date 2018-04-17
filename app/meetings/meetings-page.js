@@ -2,17 +2,21 @@ const MeetingsViewModel = require("./meetings-view-model");
 // const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
 const ObservableModule = require("data/observable");
 const appModule = require("application");
+var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
+
 var page;
 var navigationContext;
-var reference;
+var swipeOpen = false;
 
 var meetingsList = new MeetingsViewModel([]);
 // var legislatorList = new LegislatorViewModel([]);
 
 var pageData = new ObservableModule.fromObject({
     meetingsList: meetingsList,
+    reference: "tab",
+    recentMeetings: "Y",
     isLoading: false
 });
 
@@ -25,9 +29,25 @@ function onNavigatingTo(args) {
         navigationContext = page.navigationContext;
 
         if (navigationContext.reference === "tab") {
-            reference = "tab";
+            pageData.reference = "tab";
         } else {
-            reference = "nav";
+            pageData.reference = "nav";
+        }
+
+        if (args.isBackNavigation) {
+            meetingsList.empty();
+
+            pageData.set("isLoading", true);
+
+            meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
+                    pageData.set("isLoading", false);
+
+                    page.bindingContext = pageData;
+            });
+        } else {
+            // Since the Page contains a SegmentedBar,
+            // the selectedIndexChanged event will perform the initial load of the ListView.
+            // page.bindingContext = pageData;
         }
 
         const dateConverter = (value, format) => {
@@ -48,11 +68,6 @@ function onNavigatingTo(args) {
 
         appModule.getResources().dateConverter = dateConverter;
         appModule.getResources().dateFormat = "MM/DD/YYYY";
-    
-        // Since the Page contains a SegmentedBar,
-        // the selectedIndexChanged event will perform the initial load of the ListView.
-
-        page.bindingContext = pageData;
     }
     catch(e)
     {
@@ -62,20 +77,18 @@ function onNavigatingTo(args) {
 
 function onSelectedIndexChanged(args) {
     try {
-        var recentMeetings;
-
         if (args.newIndex === 0) {
-            recentMeetings = "Y";
+            pageData.recentMeetings = "Y";
         }
         else {
-            recentMeetings = "N";
+            pageData.recentMeetings = "N";
         }
 
         meetingsList.empty();
 
         pageData.set("isLoading", true);
 
-        meetingsList.load(reference, navigationContext.legislatorId, recentMeetings).then(function () {
+        meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
             // NEED THE FOLLOWING COMMENTED CODE ONCE WE ALLOW THE LEGISLATOR FIELD TO BE EDITABLE.
             // if (global.legislatorList === undefined) {
             //     legislatorList.load().then(function () {
@@ -101,17 +114,25 @@ function onSelectedIndexChanged(args) {
 function onItemTap(args) {
     try
     {
-        var view = args.view;
+        if (swipeOpen) {
+            var meetingsListView = page.getViewById("meetingsListView");
 
-        model = view.bindingContext;
+            meetingsListView.notifySwipeToExecuteFinished();
 
-        const navigationEntry = {
-            moduleName: "meetings/meeting/meeting-page",
-            context: model,
-            clearHistory: false
-        };
+            swipeOpen = false;
+        } else {
+            var view = args.view;
 
-        frameModule.topmost().navigate(navigationEntry);
+            model = view.bindingContext;
+
+            const navigationEntry = {
+                moduleName: "meetings/meeting/meeting-page",
+                context: model,
+                clearHistory: false
+            };
+
+            frameModule.topmost().navigate(navigationEntry);
+        }
     }
     catch(e)
     {
@@ -163,7 +184,62 @@ function onAddTap(args) {
     }
 }
 
+function onSwipeCellStarted(args) {
+    var swipeLimits = args.data.swipeLimits;
+    var swipeView = args.object;
+    // var leftItem = swipeView.getViewById("leftIcons");
+    var rightItem = swipeView.getViewById("rightIcons");
+
+    swipeLimits.left = 0; //leftItem.getMeasuredWidth();
+    swipeLimits.right = rightItem.getMeasuredWidth();
+    swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
+
+    swipeOpen = true;
+}
+
+function onRightSwipeClick(args) {
+    if (args.object.id === "deleteIcon") {
+        dialogs.action({
+            message: "Would you like to delete this meeting?",
+            cancelButtonText: "Cancel",
+            actions: ["Delete"]
+        }).then(function (result) {
+            if (result === "Delete") {
+                var view = args.object;
+
+                http.request({
+                    url: global.apiBaseServiceUrl + "deletemeeting",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    content: JSON.stringify(view.bindingContext)
+                }).then(function (response) {
+                    meetingsList.empty();
+        
+                    pageData.set("isLoading", true);
+        
+                    meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
+                            pageData.set("isLoading", false);
+        
+                            page.bindingContext = pageData;
+                    });
+                    
+                }, function (e) {
+                    dialogs.alert(e);
+                });
+            }
+        });
+    }
+
+    var meetingsListView = page.getViewById("meetingsListView");
+
+    meetingsListView.notifySwipeToExecuteFinished();
+
+    swipeOpen = false;
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
 exports.onItemTap = onItemTap;
 exports.onAddTap = onAddTap;
+exports.onSwipeCellStarted = onSwipeCellStarted;
+exports.onRightSwipeClick = onRightSwipeClick;

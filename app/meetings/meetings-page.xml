@@ -1,6 +1,7 @@
-<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+<Page navigatingTo="onNavigatingTo" class="page" xmlns:lv="nativescript-ui-listview" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
-        <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" />
+        <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" 
+            visibility="{{ reference === 'tab' ? 'collapse' : 'visible' }}" />
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
@@ -13,9 +14,25 @@
             </SegmentedBar>
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">
-            <ListView items="{{ meetingsList }}" itemTap="onItemTap" height="100%">
-                <ListView.itemTemplate>
-                    <GridLayout columns="*, auto" rows="*" class="list-view-item">
+            <lv:RadListView id="meetingsListView" items="{{ meetingsList }}" itemTap="onItemTap" 
+                swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" height="100%">
+                <lv:RadListView.itemSwipeTemplate>
+                    <GridLayout columns="auto, *, auto" rows="*" backgroundColor="White" height="100%">
+                        <!-- <StackLayout id="leftIcons" col="0" style="background-color: blue;" tap="onLeftSwipeClick" paddingLeft="16" paddingRight="16" orientation="horizontal">
+                            <Label text="Delete" verticalAlignment="center" horizontalAlignment="center" class="tab-label" />
+                        </StackLayout> -->
+                        <StackLayout id="rightIcons" col="2" orientation="horizontal">
+                            <GridLayout id="deleteIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons-extra red">
+                                <Label row="0" col="0" text="" />
+                                <Label row="1" col="0" text="&#xf1f8;" class="tab-icon" />
+                                <Label row="2" col="0" text="Delete" class="tab-label" />
+                                <Label row="3" col="0" text="" />
+                            </GridLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </lv:RadListView.itemSwipeTemplate>
+                <lv:RadListView.itemTemplate>
+                    <GridLayout columns="*, auto" rows="*" class="rad-list-view-item">
                         <StackLayout row="0" col="0">
                             <Label text="{{ name }}" class="list-view-item-main-top" />
                             <Label text="{{ meetingDate | dateConverter(dateFormat) }}" class="list-view-item-main" />
@@ -24,8 +41,8 @@
                         </StackLayout>
                         <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
                     </GridLayout>
-                </ListView.itemTemplate>
-            </ListView>
+                </lv:RadListView.itemTemplate>
+            </lv:RadListView>
         </StackLayout>
         <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
     </GridLayout>

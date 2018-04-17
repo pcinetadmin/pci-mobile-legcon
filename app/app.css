@@ -199,6 +199,30 @@ Page {
     selected-background-color: #0a6fb0; /* NEEDED */
 }
 
+.swipe-icons {
+    color: #fff;
+    padding-left: 10;
+    padding-right: 10;
+}
+
+.swipe-icons-extra {
+    color: #fff;
+    padding-left: 20;
+    padding-right: 20;
+}
+
+.blue {
+    background-color: #0075be;
+}
+
+.orange {
+    background-color: #f68320;
+}
+
+.red {
+    background-color: #cc2d30;
+}
+
 .switch {
     background-color: #cc2d30; /*#0a6fb0;*/
 }
