@@ -1,7 +1,6 @@
 const MeetingsViewModel = require("./meetings-view-model");
 // const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
 const ObservableModule = require("data/observable");
-const appModule = require("application");
 var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
@@ -49,25 +48,6 @@ function onNavigatingTo(args) {
             // the selectedIndexChanged event will perform the initial load of the ListView.
             // page.bindingContext = pageData;
         }
-
-        const dateConverter = (value, format) => {
-            let result = format;
-
-            if (value === null) {
-                //result = "";
-            } else {
-                const day = value.getDate();
-                result = result.replace("DD", day < 10 ? `0${day}` : day);
-                const month = value.getMonth() + 1;
-                result = result.replace("MM", month < 10 ? `0${month}` : month);
-                result = result.replace("YYYY", value.getFullYear());
-            }
-
-            return result;
-        };
-
-        appModule.getResources().dateConverter = dateConverter;
-        appModule.getResources().dateFormat = "MM/DD/YYYY";
     }
     catch(e)
     {

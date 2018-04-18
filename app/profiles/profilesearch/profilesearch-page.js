@@ -118,10 +118,6 @@ function onSwitchLoaded(args) {
                 headers: { "Content-Type": "application/json", "Authorization": global.token },
                 content: JSON.stringify(model)
             }).then(function (response) {
-                // var result = response.content.toJSON();
-
-                // dialogs.alert(result);
-
                 switchTap = false;
             }, function (e) {
                 dialogs.alert(e);

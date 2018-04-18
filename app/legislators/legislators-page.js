@@ -184,7 +184,8 @@ function onSwipeCellStarted(args) {
 
 function onRightSwipeClick(args) {
     var swipeIconId = args.object.id;
-
+    var view = args.object;
+    
     if (swipeIconId === "addIcon") {
         var model = {
             meetingId: 0,
@@ -195,8 +196,8 @@ function onRightSwipeClick(args) {
             attendeeType: "Staff Only",
             lobbyistId: global.personId,
             lobbyist: null,
-            legislatorId: navigationContext.legislatorId,
-            fullName: navigationContext.fullName,
+            legislatorId: view.bindingContext.legislatorId,
+            fullName: view.bindingContext.fullName,
             name: null,
             pciInitiatives: null,
             primaryOfficeContact: null,
@@ -222,7 +223,6 @@ function onRightSwipeClick(args) {
         frameModule.topmost().navigate(navigationEntry);
 
     } else if (swipeIconId === "viewIcon") {
-        var view = args.object;
         var model = view.bindingContext;
 
         model.reference = "nav";

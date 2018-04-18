@@ -1,5 +1,6 @@
 const RelationshipTypeViewModel = require("./shared/relationshiptype-view-model");
 const FamiliarityLevelViewModel = require("./shared/familiaritylevel-view-model");
+const appModule = require("application");
 var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
 var stackLayout = require("ui/layouts/stack-layout")
@@ -90,6 +91,25 @@ function onNavigatingTo(args) {
     page.content = newGrid;
 
     // page.navFrame.navigate(page.tabItems[0].path);
+
+    const dateConverter = (value, format) => {
+        let result = format;
+
+        if (value === null) {
+            //result = "";
+        } else {
+            const day = value.getDate();
+            result = result.replace("DD", day < 10 ? `0${day}` : day);
+            const month = value.getMonth() + 1;
+            result = result.replace("MM", month < 10 ? `0${month}` : month);
+            result = result.replace("YYYY", value.getFullYear());
+        }
+
+        return result;
+    };
+
+    appModule.getResources().dateConverter = dateConverter;
+    appModule.getResources().dateFormat = "MM/DD/YYYY";
 
     relationshipList.load().then(function () {
         global.relationshipList = relationshipList;

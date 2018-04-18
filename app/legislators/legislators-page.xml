@@ -25,7 +25,7 @@
                             <GridLayout id="viewIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons blue">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf2b5;" class="tab-icon" />
-                                <Label row="2" col="0" text="View Meetings" class="tab-label" />
+                                <Label row="2" col="0" text="Meetings" class="tab-label" />
                                 <Label row="3" col="0" text="" />
                             </GridLayout>
                         </StackLayout>
