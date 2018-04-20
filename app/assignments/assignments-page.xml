@@ -20,7 +20,7 @@
                         <!-- BACKGROUND: Swipe Actions -->
                         <GridLayout columns="*, 80" rows="75" width="100%">
                             <Label col="0" />
-                            <GridLayout id="addIcon" col="1" columns="*" rows="*, auto, auto, *" tap="onAddClick" class="swipe-icons orange" 
+                            <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onAddClick" class="swipe-icons orange" 
                                 visibility="{{ meetingCreated === 'Y' ? 'collapse' : 'visible' }}">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf073;" class="tab-icon" />

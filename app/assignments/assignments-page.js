@@ -1,5 +1,5 @@
 const AssignmentsViewModel = require("./assignments-view-model");
-const observableModule = require("data/observable");
+const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
@@ -20,7 +20,7 @@ var assignmentsSearchSubmitted = false;
 
 var assignmentsList = new AssignmentsViewModel([]);
 
-var pageData = new observableModule.fromObject({
+var pageData = new ObservableModule.fromObject({
     assignmentsList: assignmentsList,
     isLoading: false
 });
@@ -84,6 +84,7 @@ function onSearchBarLoaded(args) {
     // iOS Styling
     searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
     searchBar.ios.showsCancelButton = true;
+    // searchbar.ios.setShowsCancelButtonAnimated(true, true);
 }
 
 function onSubmit(args) {
@@ -130,8 +131,7 @@ function onItemLoading(args) {
 }
 
 function onItemTap(args) {
-    try
-    {
+    try {
         if (swipeOpen) {
             swipedItem.animate({
                 translate: { x: 0, y: 0 },

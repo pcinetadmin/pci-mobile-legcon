@@ -1,13 +1,20 @@
 const MeetingsViewModel = require("./meetings-view-model");
 // const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
 const ObservableModule = require("data/observable");
-var http = require("http");
+var gestures = require("ui/gestures");
 var frameModule = require("ui/frame");
+var http = require("http");
 var dialogs = require("ui/dialogs");
+
+const MIN_X = -80;
+const MAX_X = 0;
+const THRESHOLD = 0.5;
+
+var swipeOpen = false;
+var swipedItem;
 
 var page;
 var navigationContext;
-var swipeOpen = false;
 
 var meetingsList = new MeetingsViewModel([]);
 // var legislatorList = new LegislatorViewModel([]);
@@ -91,13 +98,19 @@ function onSelectedIndexChanged(args) {
     }
 }
 
-function onItemTap(args) {
-    try
-    {
-        if (swipeOpen) {
-            var meetingsListView = page.getViewById("meetingsListView");
+function onItemLoading(args) {
+    var cell = args.ios;
 
-            meetingsListView.notifySwipeToExecuteFinished();
+    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+}
+
+function onItemTap(args) {
+    try {
+        if (swipeOpen) {
+            swipedItem.animate({
+                translate: { x: 0, y: 0 },
+                duration: 200
+            });
 
             swipeOpen = false;
         } else {
@@ -164,62 +177,97 @@ function onAddTap(args) {
     }
 }
 
-function onSwipeCellStarted(args) {
-    var swipeLimits = args.data.swipeLimits;
-    var swipeView = args.object;
-    // var leftItem = swipeView.getViewById("leftIcons");
-    var rightItem = swipeView.getViewById("rightIcons");
+function onDeleteClick(args) {
+    dialogs.action({
+        message: "Would you like to delete this meeting?",
+        cancelButtonText: "Cancel",
+        actions: ["Delete"]
+    }).then(function (result) {
+        if (result === "Delete") {
+            var view = args.object;
 
-    swipeLimits.left = 0; //leftItem.getMeasuredWidth();
-    swipeLimits.right = rightItem.getMeasuredWidth();
-    swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
+            http.request({
+                url: global.apiBaseServiceUrl + "deletemeeting",
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": global.token },
+                content: JSON.stringify(view.bindingContext)
+            }).then(function (response) {
+                meetingsList.empty();
+    
+                pageData.set("isLoading", true);
+    
+                meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
+                        pageData.set("isLoading", false);
+    
+                        page.bindingContext = pageData;
+                });
+                
+            }, function (e) {
+                dialogs.alert(e);
+            });
+        }
+    });
 
-    swipeOpen = true;
+    if (swipeOpen) {
+        swipedItem.animate({
+            translate: { x: 0, y: 0 },
+            duration: 200
+        });
+
+        swipeOpen = false;
+    }
 }
 
-function onRightSwipeClick(args) {
-    if (args.object.id === "deleteIcon") {
-        dialogs.action({
-            message: "Would you like to delete this meeting?",
-            cancelButtonText: "Cancel",
-            actions: ["Delete"]
-        }).then(function (result) {
-            if (result === "Delete") {
-                var view = args.object;
+function onLayoutLoaded(args) {
+    var layout = args.object;
 
-                http.request({
-                    url: global.apiBaseServiceUrl + "deletemeeting",
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
-                    content: JSON.stringify(view.bindingContext)
-                }).then(function (response) {
-                    meetingsList.empty();
-        
-                    pageData.set("isLoading", true);
-        
-                    meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
-                            pageData.set("isLoading", false);
-        
-                            page.bindingContext = pageData;
-                    });
-                    
-                }, function (e) {
-                    dialogs.alert(e);
+    layout.on(gestures.GestureTypes.pan, function(args) {
+        try {
+            var layout = args.object;
+            var view = args.view;
+
+            if (swipeOpen && swipedItem !== undefined && swipedItem != layout) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 50
                 });
             }
-        });
-    }
 
-    var meetingsListView = page.getViewById("meetingsListView");
+            swipeOpen = true;
+            swipedItem = layout;
 
-    meetingsListView.notifySwipeToExecuteFinished();
+            var newX = layout.translateX + args.deltaX;
 
-    swipeOpen = false;
+            if (newX >= MIN_X && newX <= MAX_X) {
+                layout.translateX = newX;
+            }
+            
+            if (args.state === gestures.GestureStateTypes.ended && !(newX === MIN_X || newX === MAX_X)) {
+                // init our destination X coordinate to 0, in case neither THRESHOLD has been hit
+                let destX = 0;
+                
+                // if user hit or crossed the THESHOLD either way, let's finish in that direction
+                if (newX <= MIN_X * THRESHOLD) {
+                    destX = MIN_X;
+                } else if (newX >= MAX_X * THRESHOLD) {
+                    destX = MAX_X;
+                }
+                
+                layout.animate({
+                    translate: { x: destX, y: 0 },
+                    duration: 200
+                });
+            }
+        } catch(e) {
+            dialogs.alert(e);
+        }
+    });
 }
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
+exports.onItemLoading = onItemLoading;
 exports.onItemTap = onItemTap;
 exports.onAddTap = onAddTap;
-exports.onSwipeCellStarted = onSwipeCellStarted;
-exports.onRightSwipeClick = onRightSwipeClick;
+exports.onLayoutLoaded = onLayoutLoaded;
+exports.onDeleteClick = onDeleteClick;

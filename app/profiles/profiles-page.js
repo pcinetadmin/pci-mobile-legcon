@@ -1,13 +1,20 @@
 const ProfilesViewModel = require("./profiles-view-model");
 const ObservableModule = require("data/observable");
+var gestures = require("ui/gestures");
 var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
+const MIN_X = -80;
+const MAX_X = 0;
+const THRESHOLD = 0.5;
+
+var swipeOpen = false;
+var swipedItem;
+
 var page;
 var model;
 var navigationContext;
-var swipeOpen = false;
 
 var profilesList = new ProfilesViewModel([]);
 
@@ -66,20 +73,25 @@ function onNavigatingTo(args) {
     }
 }
 
-function onItemTap(args) {
-    try
-    {
-        if (swipeOpen) {
-            var profilesListView = page.getViewById("profilesListView");
+function onItemLoading(args) {
+    var cell = args.ios;
 
-            profilesListView.notifySwipeToExecuteFinished();
+    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+}
+
+function onItemTap(args) {
+    try {
+        if (swipeOpen) {
+            swipedItem.animate({
+                translate: { x: 0, y: 0 },
+                duration: 200
+            });
 
             swipeOpen = false;
         } else {
             var view = args.view;
 
             model = view.bindingContext;
-            // dialogs.alert(view.bindingContext.fullName);
 
             const navigationEntry = {
                 moduleName: "profiles/profile/profile-page",
@@ -121,74 +133,109 @@ function onAddTap(args) {
     }
 }
 
-function onSwipeCellStarted(args) {
-    var swipeLimits = args.data.swipeLimits;
-    var swipeView = args.object;
-    // var leftItem = swipeView.getViewById("leftIcons");
-    var rightItem = swipeView.getViewById("rightIcons");
+function onDeleteClick(args) {
+    var profileType;
 
-    swipeLimits.left = 0; //leftItem.getMeasuredWidth();
-    swipeLimits.right = rightItem.getMeasuredWidth();
-    swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
+    if (navigationContext.relationalType === "legislator") {
+        profileType = "relationship";
+    } else {
+        profileType = "attendee";
+    }
+    
+    dialogs.action({
+        message: "Would you like to delete this " + profileType + "?",
+        cancelButtonText: "Cancel",
+        actions: ["Delete"]
+    }).then(function (result) {
+        if (result === "Delete") {
+            var view = args.object;
+            
+            view.bindingContext.checked = false;
 
-    swipeOpen = true;
+            http.request({
+                url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": global.token },
+                content: JSON.stringify(view.bindingContext)
+            }).then(function (response) {
+                // result = response.content.toJSON();
+                // dialogs.alert(result);
+
+                profilesList.empty();
+    
+                pageData.set("isLoading", true);
+    
+                profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
+                        pageData.set("isLoading", false);
+    
+                        page.bindingContext = pageData;
+                });
+                
+            }, function (e) {
+                dialogs.alert(e);
+            });
+        }
+    });
+
+    if (swipeOpen) {
+        swipedItem.animate({
+            translate: { x: 0, y: 0 },
+            duration: 200
+        });
+
+        swipeOpen = false;
+    }
 }
 
-function onRightSwipeClick(args) {
-    if (args.object.id === "deleteIcon") {
-        var profileType;
+function onLayoutLoaded(args) {
+    var layout = args.object;
 
-        if (navigationContext.relationalType === "legislator") {
-            profileType = "relationship";
-        } else {
-            profileType = "attendee";
-        }
-        
-        dialogs.action({
-            message: "Would you like to delete this " + profileType + "?",
-            cancelButtonText: "Cancel",
-            actions: ["Delete"]
-        }).then(function (result) {
-            if (result === "Delete") {
-                var view = args.object;
-                
-                view.bindingContext.checked = false;
+    layout.on(gestures.GestureTypes.pan, function(args) {
+        try {
+            var layout = args.object;
+            var view = args.view;
 
-                http.request({
-                    url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
-                    content: JSON.stringify(view.bindingContext)
-                }).then(function (response) {
-                    // result = response.content.toJSON();
-                    // dialogs.alert(result);
-
-                    profilesList.empty();
-        
-                    pageData.set("isLoading", true);
-        
-                    profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
-                            pageData.set("isLoading", false);
-        
-                            page.bindingContext = pageData;
-                    });
-                    
-                }, function (e) {
-                    dialogs.alert(e);
+            if (swipeOpen && swipedItem !== undefined && swipedItem != layout) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 50
                 });
             }
-        });
-    }
 
-    var profilesListView = page.getViewById("profilesListView");
+            swipeOpen = true;
+            swipedItem = layout;
 
-    profilesListView.notifySwipeToExecuteFinished();
+            var newX = layout.translateX + args.deltaX;
 
-    swipeOpen = false;
+            if (newX >= MIN_X && newX <= MAX_X) {
+                layout.translateX = newX;
+            }
+            
+            if (args.state === gestures.GestureStateTypes.ended && !(newX === MIN_X || newX === MAX_X)) {
+                // init our destination X coordinate to 0, in case neither THRESHOLD has been hit
+                let destX = 0;
+                
+                // if user hit or crossed the THESHOLD either way, let's finish in that direction
+                if (newX <= MIN_X * THRESHOLD) {
+                    destX = MIN_X;
+                } else if (newX >= MAX_X * THRESHOLD) {
+                    destX = MAX_X;
+                }
+                
+                layout.animate({
+                    translate: { x: destX, y: 0 },
+                    duration: 200
+                });
+            }
+        } catch(e) {
+            dialogs.alert(e);
+        }
+    });
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onItemLoading = onItemLoading;
 exports.onItemTap = onItemTap;
 exports.onAddTap = onAddTap;
-exports.onSwipeCellStarted = onSwipeCellStarted;
-exports.onRightSwipeClick = onRightSwipeClick;
+exports.onLayoutLoaded = onLayoutLoaded;
+exports.onDeleteClick = onDeleteClick;

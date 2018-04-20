@@ -1,4 +1,4 @@
-<Page navigatingTo="onNavigatingTo" class="page" xmlns:lv="nativescript-ui-listview" xmlns="http://schemas.nativescript.org/tns.xsd" >
+<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar" />
     
 <!-- <StackLayout loaded="onViewLoaded" unloaded="onViewUnloaded"> -->
@@ -8,36 +8,35 @@
             <!-- <Button tap="onButtonTap" text="Toggle Cancel" /> -->
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">
-            <lv:RadListView id="legislatorsListView" items="{{ legislatorsList }}" itemTap="onItemTap" loadMoreItems="onLoadMoreItems" 
-                swipeActions="true" itemSwipeProgressStarted="onSwipeCellStarted" height="100%">
-                <lv:RadListView.itemSwipeTemplate>
-                    <GridLayout columns="auto, *, auto" rows="*" backgroundColor="White" height="100%">
-                        <!-- <StackLayout id="leftIcons" col="0" style="background-color: blue;" tap="onLeftSwipeClick" paddingLeft="16" paddingRight="16" orientation="horizontal">
-                            <Label text="Delete" verticalAlignment="center" horizontalAlignment="center" class="tab-label" />
-                        </StackLayout> -->
-                        <StackLayout id="rightIcons" col="2" orientation="horizontal">
-                            <GridLayout id="addIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons orange">
+            <ListView id="legislatorsListView" items="{{ legislatorsList }}" itemLoading="onItemLoading" itemTap="onItemTap" loadMoreItems="onLoadMoreItems" height="100%">
+                <ListView.itemTemplate>
+                    <AbsoluteLayout>
+                        <!-- BACKGROUND: Swipe Actions -->
+                        <GridLayout columns="*, 80, 80" rows="54" width="100%">
+                            <Label col="0" />
+                            <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onAddClick" class="swipe-icons orange">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf073;" class="tab-icon" />
                                 <Label row="2" col="0" text="Add Meeting" class="tab-label" />
                                 <Label row="3" col="0" text="" />
                             </GridLayout>
-                            <GridLayout id="viewIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons blue">
+                            <GridLayout col="2" columns="*" rows="*, auto, auto, *" tap="onViewClick" class="swipe-icons blue">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf2b5;" class="tab-icon" />
                                 <Label row="2" col="0" text="Meetings" class="tab-label" />
                                 <Label row="3" col="0" text="" />
                             </GridLayout>
+                        </GridLayout>
+                        <!-- FOREGROUND: List View Item Details -->
+                        <StackLayout loaded="onLayoutLoaded" backgroundColor="white" width="100%">
+                            <GridLayout columns="*, auto" rows="*" class="list-view-item" verticalAlignment="middle" height="54">
+                                <Label row="0" col="0" text="{{ combinedName }}" class="list-view-item-main-top" />
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                            </GridLayout>
                         </StackLayout>
-                    </GridLayout>
-                </lv:RadListView.itemSwipeTemplate>
-                <lv:RadListView.itemTemplate>
-                    <GridLayout columns="*, auto" rows="*" class="rad-list-view-item" verticalAlignment="middle" height="54">
-                        <Label row="0" col="0" text="{{ combinedName }}" class="list-view-item-main-top" />
-                        <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
-                    </GridLayout>
-                </lv:RadListView.itemTemplate>
-            </lv:RadListView>
+                    </AbsoluteLayout>
+                </ListView.itemTemplate>
+            </ListView>
         </StackLayout>
         <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
     </GridLayout>

@@ -1,8 +1,16 @@
 const LegislatorsViewModel = require("./legislators-view-model");
-const observableModule = require("data/observable");
-var frameModule = require("ui/frame");
+const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
+
+const MIN_X = -160;
+const MAX_X = 0;
+const THRESHOLD = 0.25;
+
+var swipeOpen = false;
+var swipedItem;
+
 var page;
 // var view;
 var searchBar;
@@ -10,11 +18,9 @@ var legislatorsPageSize = 25;
 var legislatorsSearchText = "";
 var legislatorsSearchSubmitted = false;
 
-var swipeOpen = false;
-
 var legislatorsList = new LegislatorsViewModel([]);
 
-var pageData = new observableModule.fromObject({
+var pageData = new ObservableModule.fromObject({
     legislatorsList: legislatorsList,
     isLoading: false
 });
@@ -70,8 +76,7 @@ function onNavigatingTo(args) {
 
 // }
 
-function onSearchBarLoaded(args)
-{
+function onSearchBarLoaded(args) {
     searchBar = args.object;
 
     // iOS Styling
@@ -80,8 +85,7 @@ function onSearchBarLoaded(args)
     // searchbar.ios.setShowsCancelButtonAnimated(true, true);
 }
 
-function onSubmit(args)
-{
+function onSubmit(args) {
     searchBar = args.object;
 
     legislatorsSearchText = searchBar.text.trim();
@@ -99,8 +103,7 @@ function onSubmit(args)
     });
 }
 
-function onClear(args)
-{
+function onClear(args) {
     searchBar.text = "";
     legislatorsSearchText = "";
 
@@ -119,17 +122,23 @@ function onClear(args)
     }
 }
 
+function onItemLoading(args) {
+    var cell = args.ios;
+
+    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+}
+
 function onButtonTap(args) {
     searchBar.ios.showsCancelButton = !searchBar.ios.showsCancelButton;
 }
 
 function onItemTap(args) {
-    try
-    {
+    try {
         if (swipeOpen) {
-            var legislatorsListView = page.getViewById("legislatorsListView");
-
-            legislatorsListView.notifySwipeToExecuteFinished();
+            swipedItem.animate({
+                translate: { x: 0, y: 0 },
+                duration: 200
+            });
 
             swipeOpen = false;
         } else {
@@ -151,122 +160,145 @@ function onItemTap(args) {
     }
 }
 
-function onLoadMoreItems(args)
-{
-    var legislatorsListCount = legislatorsList.length;
-    var legislatorsPageNumber = Math.ceil(legislatorsListCount / legislatorsPageSize) + 1;
-    var legislatorsRemainder = legislatorsListCount % legislatorsPageSize;
+function onLoadMoreItems(args) {
+    try {
+        var legislatorsListCount = legislatorsList.length;
+        var legislatorsPageNumber = Math.ceil(legislatorsListCount / legislatorsPageSize) + 1;
+        var legislatorsRemainder = legislatorsListCount % legislatorsPageSize;
 
-    if (legislatorsRemainder !== 0 && legislatorsRemainder < legislatorsPageSize)
-    {
-        return;
-    }
-
-    pageData.set("isLoading", true);
-
-    legislatorsList.load(legislatorsSearchText, legislatorsPageNumber, legislatorsPageSize).then(function (){
-        pageData.set("isLoading", false);
-    });
-}
-
-function onLoadMoreDataRequested(args) {
-    var listView = args.object;
-
-    var legislatorsListCount = legislatorsList.length;
-    var legislatorsPageNumber = Math.ceil(legislatorsListCount / legislatorsPageSize) + 1;
-    var legislatorsRemainder = legislatorsListCount % legislatorsPageSize;
-    dialogs.alert("Page: " + legislatorsPageNumber + ", Count: " + legislatorsListCount + ", Remainder: " + legislatorsRemainder);
-    if (legislatorsRemainder !== 0 && legislatorsRemainder < legislatorsPageSize)
-    {
-        // return;
-    }
-
-    pageData.set("isLoading", true);
-
-    legislatorsList.load(legislatorsSearchText, legislatorsPageNumber, legislatorsPageSize).then(function (){
-        pageData.set("isLoading", false);
-
-        listView.notifyLoadOnDemandFinished();
-    });
-
-    //args.returnValue = true;
-}
-
-function onSwipeCellStarted(args) {
-    var swipeLimits = args.data.swipeLimits;
-    var swipeView = args.object;
-    // var leftItem = swipeView.getViewById("leftIcons");
-    var rightItem = swipeView.getViewById("rightIcons");
-
-    swipeLimits.left = 0; //leftItem.getMeasuredWidth();
-    swipeLimits.right = rightItem.getMeasuredWidth();
-    swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
-
-    swipeOpen = true;
-}
-
-function onRightSwipeClick(args) {
-    var swipeIconId = args.object.id;
-    var view = args.object;
-    
-    if (swipeIconId === "addIcon") {
-        var model = {
-            meetingId: 0,
-            meetingDate: new Date(),
-            venueTypeId: 1,
-            venueType: "In Person",
-            attendeeTypeId: 1,
-            attendeeType: "Staff Only",
-            lobbyistId: global.personId,
-            lobbyist: null,
-            legislatorId: view.bindingContext.legislatorId,
-            fullName: view.bindingContext.fullName,
-            name: null,
-            pciInitiatives: null,
-            primaryOfficeContact: null,
-            meetingLocationId: 1,
-            location: "Meeting in District",
-            legislatorStaffAttendees: null,
-            followUpNeeded: false,
-            followUpDate: null,
-            followUpNotes: null,
-            creatorId: global.personId,
-            notes: null,
-            initiativeId: null,
-            surveyId: null,
-            assignmentId: null
+        if (legislatorsRemainder !== 0 && legislatorsRemainder < legislatorsPageSize)
+        {
+            return;
         }
 
-        const navigationEntry = {
-            moduleName: "meetings/meeting/meeting-page",
-            context: model,
-            clearHistory: false
-        };
+        pageData.set("isLoading", true);
 
-        frameModule.topmost().navigate(navigationEntry);
+        legislatorsList.load(legislatorsSearchText, legislatorsPageNumber, legislatorsPageSize).then(function (){
+            pageData.set("isLoading", false);
+        });
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
 
-    } else if (swipeIconId === "viewIcon") {
-        var model = view.bindingContext;
+function onAddClick(args) {
+    var view = args.object;
 
-        model.reference = "nav";
-        model.relationalType = "legislator";
-        model.relationalId = view.bindingContext.legislatorId;
-
-        const navigationEntry = {
-            moduleName: "meetings/meetings-page",
-            context: model,
-            clearHistory: false
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
-
+    var model = {
+        meetingId: 0,
+        meetingDate: new Date(),
+        venueTypeId: 1,
+        venueType: "In Person",
+        attendeeTypeId: 1,
+        attendeeType: "Staff Only",
+        lobbyistId: global.personId,
+        lobbyist: null,
+        legislatorId: view.bindingContext.legislatorId,
+        fullName: view.bindingContext.fullName,
+        name: null,
+        pciInitiatives: null,
+        primaryOfficeContact: null,
+        meetingLocationId: 1,
+        location: "Meeting in District",
+        legislatorStaffAttendees: null,
+        followUpNeeded: false,
+        followUpDate: null,
+        followUpNotes: null,
+        creatorId: global.personId,
+        notes: null,
+        initiativeId: null,
+        surveyId: null,
+        assignmentId: null
     }
 
-    var legislatorsListView = page.getViewById("legislatorsListView");
+    const navigationEntry = {
+        moduleName: "meetings/meeting/meeting-page",
+        context: model,
+        clearHistory: false
+    };
 
-    legislatorsListView.notifySwipeToExecuteFinished();
+    frameModule.topmost().navigate(navigationEntry);
 
-    swipeOpen = false;
+    if (swipeOpen) {
+        swipedItem.animate({
+            translate: { x: 0, y: 0 },
+            duration: 200
+        });
+
+        swipeOpen = false;
+    }
+}
+
+function onViewClick(args) {
+    var view = args.object;
+    var model = view.bindingContext;
+
+    model.reference = "nav";
+    model.relationalType = "legislator";
+    model.relationalId = view.bindingContext.legislatorId;
+
+    const navigationEntry = {
+        moduleName: "meetings/meetings-page",
+        context: model,
+        clearHistory: false
+    };
+
+    frameModule.topmost().navigate(navigationEntry);
+
+    if (swipeOpen) {
+        swipedItem.animate({
+            translate: { x: 0, y: 0 },
+            duration: 200
+        });
+
+        swipeOpen = false;
+    }
+}
+
+function onLayoutLoaded(args) {
+    var layout = args.object;
+
+    layout.on(gestures.GestureTypes.pan, function(args) {
+        try {
+            var layout = args.object;
+            var view = args.view;
+
+            if (swipeOpen && swipedItem !== undefined && swipedItem != layout) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 50
+                });
+            }
+
+            swipeOpen = true;
+            swipedItem = layout;
+
+            var newX = layout.translateX + args.deltaX;
+
+            if (newX >= MIN_X && newX <= MAX_X) {
+                layout.translateX = newX;
+            }
+            
+            if (args.state === gestures.GestureStateTypes.ended && !(newX === MIN_X || newX === MAX_X)) {
+                // init our destination X coordinate to 0, in case neither THRESHOLD has been hit
+                let destX = 0;
+                
+                // if user hit or crossed the THESHOLD either way, let's finish in that direction
+                if (newX <= MIN_X * THRESHOLD) {
+                    destX = MIN_X;
+                } else if (newX >= MAX_X * THRESHOLD) {
+                    destX = MAX_X;
+                }
+                
+                layout.animate({
+                    translate: { x: destX, y: 0 },
+                    duration: 200
+                });
+            }
+        } catch(e) {
+            dialogs.alert(e);
+        }
+    });
 }
 
 exports.onNavigatingTo = onNavigatingTo;
@@ -275,8 +307,10 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onSearchBarLoaded = onSearchBarLoaded;
 exports.onSubmit = onSubmit;
 exports.onClear = onClear;
-exports.onButtonTap = onButtonTap;
+// exports.onButtonTap = onButtonTap;
+exports.onItemLoading = onItemLoading;
 exports.onItemTap = onItemTap;
 exports.onLoadMoreItems = onLoadMoreItems;
-exports.onSwipeCellStarted = onSwipeCellStarted;
-exports.onRightSwipeClick = onRightSwipeClick;
+exports.onLayoutLoaded = onLayoutLoaded;
+exports.onAddClick = onAddClick;
+exports.onViewClick = onViewClick;
