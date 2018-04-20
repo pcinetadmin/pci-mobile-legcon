@@ -230,6 +230,12 @@ function onSave(args) {
 }
 
 function saveMeeting(moduleName, isAttendees) {
+    var isAdd = false;
+
+    if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+        isAdd = true;
+    }
+
     http.request({
         url: global.apiBaseServiceUrl + "insertupdatemeeting",
         method: "POST",
@@ -241,13 +247,19 @@ function saveMeeting(moduleName, isAttendees) {
         
         if (data.MeetingId !== null)
         {
+            if (isAdd) {
+                if (pageData.boundData.assignmentId !== null && pageData.boundData.assignmentId !== 0) {
+                    global.refreshAssignments = true;
+                }
+            }
+
             if (moduleName === null) {
                 pageData.boundData.meetingId = data.MeetingId;
 
                 frameModule.topmost().goBack();
             } else {
                 pageData.boundData.meetingId = data.MeetingId;
-                
+
                 if (isAttendees) {
                     pageData.boundData.relationalType = "meeting";
                     pageData.boundData.relationalId = pageData.boundData.meetingId; 

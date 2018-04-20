@@ -169,6 +169,29 @@ function onLoadMoreItems(args)
     });
 }
 
+function onLoadMoreDataRequested(args) {
+    var listView = args.object;
+
+    var legislatorsListCount = legislatorsList.length;
+    var legislatorsPageNumber = Math.ceil(legislatorsListCount / legislatorsPageSize) + 1;
+    var legislatorsRemainder = legislatorsListCount % legislatorsPageSize;
+    dialogs.alert("Page: " + legislatorsPageNumber + ", Count: " + legislatorsListCount + ", Remainder: " + legislatorsRemainder);
+    if (legislatorsRemainder !== 0 && legislatorsRemainder < legislatorsPageSize)
+    {
+        // return;
+    }
+
+    pageData.set("isLoading", true);
+
+    legislatorsList.load(legislatorsSearchText, legislatorsPageNumber, legislatorsPageSize).then(function (){
+        pageData.set("isLoading", false);
+
+        listView.notifyLoadOnDemandFinished();
+    });
+
+    //args.returnValue = true;
+}
+
 function onSwipeCellStarted(args) {
     var swipeLimits = args.data.swipeLimits;
     var swipeView = args.object;

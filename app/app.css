@@ -201,16 +201,9 @@ Page {
 
 .swipe-icons {
     color: #fff;
-    padding-left: 10;
-    padding-right: 10;
-    width: 75;
-}
-
-.swipe-icons-extra {
-    color: #fff;
-    padding-left: 20;
-    padding-right: 20;
-    width: 75;
+    /* padding-left: 10;
+    padding-right: 10; */
+    width: 80;
 }
 
 .blue {

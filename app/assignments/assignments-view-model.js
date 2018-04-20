@@ -8,7 +8,7 @@ function AssignmentsViewModel(items) {
     
     viewModel.load = function(meetingCreated, filter, page, pageSize) {
         return http.request({
-            url: global.apiBaseServiceUrl + "assignmentsfilter?meetingCreated=" + meetingCreated + "&filter=" + filter + "&page=" + page + "&pageSize=" + pageSize,
+            url: global.apiBaseServiceUrl + "assignmentsfilter?meetingCreated=" + meetingCreated + "&filter=" + filter + "&page=" + page + "&pageSize=" + pageSize + "&companyId=" + global.companyId,
             method: "GET",
             headers: { "Content-Type": "application/json", "Authorization": global.token } //,
             //content: JSON.stringify({ filter: "", page: "1", pageSize: "20" })

@@ -22,7 +22,7 @@
                             <Label text="Delete" verticalAlignment="center" horizontalAlignment="center" class="tab-label" />
                         </StackLayout> -->
                         <StackLayout id="rightIcons" col="2" orientation="horizontal">
-                            <GridLayout id="deleteIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons-extra red">
+                            <GridLayout id="deleteIcon" columns="*" rows="*, auto, auto, *" tap="onRightSwipeClick" class="swipe-icons red">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf1f8;" class="tab-icon" />
                                 <Label row="2" col="0" text="Delete" class="tab-label" />
