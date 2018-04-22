@@ -1,5 +1,3 @@
-const RelationshipTypeViewModel = require("./shared/relationshiptype-view-model");
-const FamiliarityLevelViewModel = require("./shared/familiaritylevel-view-model");
 const appModule = require("application");
 var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
@@ -8,8 +6,6 @@ var Label = require("ui/label").Label;
 var dialogs = require("ui/dialogs");
 
 var page;
-var relationshipList = new RelationshipTypeViewModel([]);
-var familiarityList = new FamiliarityLevelViewModel([]);
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -111,16 +107,7 @@ function onNavigatingTo(args) {
     appModule.getResources().dateConverter = dateConverter;
     appModule.getResources().dateFormat = "MM/DD/YYYY";
 
-    relationshipList.load().then(function () {
-        global.relationshipList = relationshipList;
-
-        familiarityList.load().then(function () {
-            global.familiarityList = familiarityList;
-
-            page.navFrame.navigate(page.tabItems[0].path);
-        });
-    });
-
+    page.navFrame.navigate(page.tabItems[0].path);
 }
 
 function onTabSelected(args) {

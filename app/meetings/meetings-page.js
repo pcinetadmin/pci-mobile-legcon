@@ -13,6 +13,9 @@ const THRESHOLD = 0.5;
 var swipeOpen = false;
 var swipedItem;
 
+var isScrolling = false;
+var isSwiping = false;
+
 var page;
 var navigationContext;
 
@@ -233,30 +236,60 @@ function onLayoutLoaded(args) {
                 });
             }
 
-            swipeOpen = true;
-            swipedItem = layout;
-
-            var newX = layout.translateX + args.deltaX;
-
-            if (newX >= MIN_X && newX <= MAX_X) {
-                layout.translateX = newX;
+            if (!isScrolling && !isSwiping) {
+                if (Math.abs(args.deltaY) > Math.abs(args.deltaX)) {
+                    isScrolling = true;
+                    isSwiping = false;
+                } else if (Math.abs(args.deltaX) > Math.abs(args.deltaY)) {
+                    isScrolling = false;
+                    isSwiping = true;
+                }
             }
-            
-            if (args.state === gestures.GestureStateTypes.ended && !(newX === MIN_X || newX === MAX_X)) {
-                // init our destination X coordinate to 0, in case neither THRESHOLD has been hit
-                let destX = 0;
-                
-                // if user hit or crossed the THESHOLD either way, let's finish in that direction
-                if (newX <= MIN_X * THRESHOLD) {
-                    destX = MIN_X;
-                } else if (newX >= MAX_X * THRESHOLD) {
-                    destX = MAX_X;
+
+            if (isScrolling) {
+                if (swipeOpen && swipedItem !== undefined) {
+                    swipedItem.animate({
+                        translate: { x: 0, y: 0 },
+                        duration: 50
+                    });
+                }
+
+                if (args.state === gestures.GestureStateTypes.ended) {
+                    isScrolling = false;
+                }
+            } else if (isSwiping) {
+                var meetingsListView = page.getViewById("meetingsListView");
+
+                meetingsListView.ios.scrollEnabled = false;
+
+                swipeOpen = true;
+                swipedItem = layout;
+
+                var newX = layout.translateX + args.deltaX;
+
+                if (newX >= MIN_X && newX <= MAX_X) {
+                    layout.translateX = newX;
                 }
                 
-                layout.animate({
-                    translate: { x: destX, y: 0 },
-                    duration: 200
-                });
+                if (args.state === gestures.GestureStateTypes.ended && !(newX === MIN_X || newX === MAX_X)) {
+                    // init our destination X coordinate to 0, in case neither THRESHOLD has been hit
+                    let destX = 0;
+                    
+                    // if user hit or crossed the THESHOLD either way, let's finish in that direction
+                    if (newX <= MIN_X * THRESHOLD) {
+                        destX = MIN_X;
+                    } else if (newX >= MAX_X * THRESHOLD) {
+                        destX = MAX_X;
+                    }
+                    
+                    layout.animate({
+                        translate: { x: destX, y: 0 },
+                        duration: 200
+                    });
+
+                    meetingsListView.ios.scrollEnabled = true;
+                    isSwiping = false;
+                }
             }
         } catch(e) {
             dialogs.alert(e);
