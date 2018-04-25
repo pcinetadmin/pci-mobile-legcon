@@ -30,7 +30,6 @@ function onNavigatingTo(args) {
         dialogs.alert(e);
     }
     
-
 }
 
 function onAddTap(args) {

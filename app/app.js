@@ -33,7 +33,6 @@ global.isCongressUser = false;
 global.isCongressExternalUser = false;
 
 application.start({ moduleName: "login/login-page" });
-//application.start({ moduleName: "main-page" });
 
 /*
 Do not place any code after the application has been started as it will not

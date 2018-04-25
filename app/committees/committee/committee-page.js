@@ -11,9 +11,6 @@ var pageData = new observableModule.fromObject({
     isLoading: false
 });
 
-/* ***********************************************************
-* Use the "onNavigatingTo" handler to initialize the page binding context.
-*************************************************************/
 function onNavigatingTo(args) {
     try {
         page = args.object;

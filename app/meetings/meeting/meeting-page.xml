@@ -24,9 +24,16 @@
                     <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
             </StackLayout>
-            <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
+            <StackLayout tap="onStackLayoutNotesTap">
+                <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form-bottom">
+                    <Label row="0" col="0" text="Notes" class="list-view-item-left" />
+                    <Label id="notesLabel" row="0" col="1" text="{{ boundData.notes | limitText(30) }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <!-- <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
                 <TextView row="0" col="0" text="{{ boundData.notes }}" hint="Notes" class="list-view-item-right" />
-            </GridLayout>
+            </GridLayout> -->
             <StackLayout verticalAlignment="bottom" class="list-view-section-header">
                 <Label text="FOLLOW UP INFORMATION" verticalAlignment="bottom" />
             </StackLayout>
@@ -88,9 +95,16 @@
                     <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
             </StackLayout>
-            <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
+            <StackLayout tap="onStackLayoutStaffAttendeesTap">
+                <GridLayout columns="*, auto, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Cong. Staff Attendees" class="list-view-item-left" />
+                    <Label id="staffAttendeesLabel" row="0" col="1" text="{{ boundData.legislatorStaffAttendees | limitText(20) }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <!-- <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
                 <TextView row="0" col="0" text="{{ boundData.legislatorStaffAttendees }}" hint="Congressional Staff Attendees" class="list-view-item-right" />
-            </GridLayout>
+            </GridLayout> -->
         </StackLayout>
     </ScrollView>
 </Page>

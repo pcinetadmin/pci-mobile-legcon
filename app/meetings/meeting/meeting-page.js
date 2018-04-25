@@ -1,5 +1,6 @@
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
+const appModule = require("application");
 var http = require("http");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
@@ -18,16 +19,40 @@ function onNavigatingTo(args) {
         var followUpTitle = page.getViewById("followUpTitle");
         var followUpLabel = page.getViewById("followUpLabel");
 
+        const limitText = (text, limit) => {
+            let result = text;
+
+            if (result.length > limit) {
+                for (var i = limit; i > 0; i--) {
+                    var position = result.indexOf(" ", i);
+
+                    if (position > -1 && position <= limit) {
+                        result = result.substr(0, position) + "..."
+
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        };
+
+        appModule.getResources().limitText = limitText;
+
         if (args.isBackNavigation) {
             var venueTypeLabel = page.getViewById("venueTypeLabel");
+            var notesLabel = page.getViewById("notesLabel");
             var legislatorLabel = page.getViewById("legislatorLabel");
             var attendeeTypeLabel = page.getViewById("attendeeTypeLabel");
             var meetingLocationLabel = page.getViewById("meetingLocationLabel");
+            var staffAttendeesLabel = page.getViewById("staffAttendeesLabel");
 
             venueTypeLabel.text = pageData.boundData.venueType;
+            notesLabel.text = limitText(pageData.boundData.notes, 30);
             legislatorLabel.text = pageData.boundData.fullName;
             attendeeTypeLabel.text = pageData.boundData.attendeeType;
             meetingLocationLabel.text = pageData.boundData.location;
+            staffAttendeesLabel.text = limitText(pageData.boundData.legislatorStaffAttendees, 20);
 
             if (pageData.boundData.followUpNeeded === true || pageData.boundData.followUpNeeded === "true") {
                 if (pageData.boundData.followUpDate === null) {
@@ -116,6 +141,22 @@ function onStackLayoutVenueTypeTap(args) {
     try {
         const navigationEntry = {
             moduleName: "meetings/meeting/venuetype/venuetype-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
+function onStackLayoutNotesTap(args) {
+    try {
+        const navigationEntry = {
+            moduleName: "meetings/meeting/notes/notes-page",
             context: pageData.boundData,
             clearHistory: false
         };
@@ -225,6 +266,22 @@ function onStackLayoutPciAttendeesTap(args) {
     }
 }
 
+function onStackLayoutStaffAttendeesTap(args) {
+    try {
+        const navigationEntry = {
+            moduleName: "meetings/meeting/staffattendees/staffattendees-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 function onSave(args) {
     saveMeeting(null, false);
 }
@@ -301,6 +358,7 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onStackLayoutMeetingDateTap = onStackLayoutMeetingDateTap;
 exports.onStackLayoutVenueTypeTap = onStackLayoutVenueTypeTap;
+exports.onStackLayoutNotesTap = onStackLayoutNotesTap;
 exports.onStackLayoutFollowUpTap = onStackLayoutFollowUpTap;
 exports.onStackLayoutInitiativesTap = onStackLayoutInitiativesTap;
 exports.onStackLayoutSurveysTap = onStackLayoutSurveysTap;
@@ -308,4 +366,5 @@ exports.onStackLayoutLegislatorTap = onStackLayoutLegislatorTap;
 exports.onStackLayoutAttendeeTypeTap = onStackLayoutAttendeeTypeTap;
 exports.onStackLayoutMeetingLocationTap = onStackLayoutMeetingLocationTap;
 exports.onStackLayoutPciAttendeesTap = onStackLayoutPciAttendeesTap;
+exports.onStackLayoutStaffAttendeesTap = onStackLayoutStaffAttendeesTap;
 exports.onSave = onSave;

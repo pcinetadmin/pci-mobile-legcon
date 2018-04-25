@@ -1,0 +1,7 @@
+<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar" />
+
+    <GridLayout columns="*" rows="*" class="list-view-item-form">
+        <TextView row="0" col="0" text="{{ notes }}" hint="Notes" class="list-view-item-right" height="100%" />
+    </GridLayout>
+</Page>
