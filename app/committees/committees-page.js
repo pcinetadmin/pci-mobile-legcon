@@ -22,6 +22,12 @@ function onNavigatingTo(args) {
         
         page.actionBar.title = "Committees";
     
+        if (committeesSearchText !== "") {
+            var searchBar = page.getViewById("searchBar");
+
+            searchBar.text = committeesSearchText;
+        }
+        
         // Since the Page contains a SegmentedBar,
         // the selectedIndexChanged event will perform the initial load of the ListView.
     }

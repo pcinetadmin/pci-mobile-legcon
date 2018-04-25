@@ -34,6 +34,12 @@ function onNavigatingTo(args) {
         
         page.actionBar.title = "Legislators";
 
+        if (legislatorsSearchText !== "") {
+            var searchBar = page.getViewById("searchBar");
+
+            searchBar.text = legislatorsSearchText;
+        }
+        
         if (legislatorsList.length === 0) {
             pageData.set("isLoading", true);
 

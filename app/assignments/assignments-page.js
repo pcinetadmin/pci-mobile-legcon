@@ -47,6 +47,12 @@ function onNavigatingTo(args) {
                 });
             }
         } else {
+            if (assignmentsSearchText !== "") {
+                var searchBar = page.getViewById("searchBar");
+
+                searchBar.text = assignmentsSearchText;
+            }
+        
             // Since the Page contains a SegmentedBar,
             // the selectedIndexChanged event will perform the initial load of the ListView.
         }

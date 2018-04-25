@@ -30,6 +30,12 @@ function onNavigatingTo(args) {
             page.actionBar.title = "PCI Attendee Search";
         }
 
+        if (profileSearchSearchText !== "") {
+            var searchBar = page.getViewById("searchBar");
+
+            searchBar.text = profileSearchSearchText;
+        }
+        
         if (profileSearchList.length === 0) {
             pageData.set("isLoading", true);
 

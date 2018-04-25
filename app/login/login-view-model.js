@@ -27,8 +27,8 @@ function LoginViewModel() {
             }).then(function (response) {
                 var result = response.content.toString();
                 var data = JSON.parse(result);
-                
-                if (data.AccessToken !== null)
+
+                if (data.AccessToken !== undefined && data.AccessToken !== null)
                 {
                     global.token = data.AccessToken;
                     
@@ -73,12 +73,6 @@ function LoginViewModel() {
 
                         global.companyId = token.slice(companyIdPosition, deptIdPosition);
 
-                        //legislatorsOptionsDataSource.read();
-                        //attendeeTypesOptionsDataSource.read();
-                        //meetingLocationsOptionsDataSource.read();
-                        //relationshipTypesOptionsDataSource.read();
-                        //familiarityLevelsOptionsDataSource.read();
-                        
                         const navigationEntry = {
                             moduleName: "main-page", // "home/home-page",
                             clearHistory: true
@@ -144,7 +138,10 @@ function LoginViewModel() {
                 }
                 else
                 {
-                    dialogs.alert("Null access token returned.");
+                    // undefined or null data.AccessToken returned.  
+                    // Usually the result of invalid user name and password.
+                    //dialogs.alert("Null access token returned.");
+                    dialogs.alert("Invalid email address or password.")
                 }
             }, function (e) {
                 dialogs.alert(e);
