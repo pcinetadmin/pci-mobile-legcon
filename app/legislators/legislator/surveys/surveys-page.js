@@ -9,6 +9,7 @@ var navigationContext;
 var surveysList = new SurveysViewModel([]);
 
 var pageData = new observableModule.fromObject({
+    boundData: null,
     surveysList: surveysList,
     isLoading: false
 });
@@ -23,6 +24,9 @@ function onNavigatingTo(args) {
         page.actionBar.title = "Surveys";
 
         navigationContext = page.navigationContext;
+
+        pageData.boundData = navigationContext;
+
         var legislatorId = page.getViewById("legislatorId");
         var legislatorName = page.getViewById("legislatorName");
 
@@ -78,7 +82,9 @@ function onItemTap(args) {
         context: { 
             surveyId: item.surveyId,
             legislatorId: legislatorId.text,
-            fullName: legislatorName.text
+            fullName: legislatorName.text,
+            relationalType: navigationContext.relationalType,
+            relationalId: navigationContext.relationalId
         },
         clearHistory: false
     };

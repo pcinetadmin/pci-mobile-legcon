@@ -206,6 +206,23 @@ function onStackLayoutFamiliarityTap(args) {
     }
 }
 
+function onTextViewFocus(args) {
+    try {
+        var relationshipListPickerGridLayout = page.getViewById("relationshipListPickerGridLayout");
+        var familiarityListPickerGridLayout = page.getViewById("familiarityListPickerGridLayout");
+
+        relationshipListPickerGridLayout.visibility = "collapse";
+        familiarityListPickerGridLayout.visibility = "collapse";
+
+        page.addCss("#relationshipLabel {color: #666;}");
+        page.addCss("#familiarityLabel {color: #666;}");
+    }
+    catch(e)
+    {
+        dialogs.alert(e);
+    }
+}
+
 function onSave(args) {
     var relationshipListPicker = page.getViewById("relationshipListPicker");
 
@@ -245,4 +262,5 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onStackLayoutRelationshipTap = onStackLayoutRelationshipTap;
 exports.onStackLayoutFamiliarityTap = onStackLayoutFamiliarityTap;
+exports.onTextViewFocus = onTextViewFocus;
 exports.onSave = onSave;

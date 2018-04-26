@@ -22,6 +22,7 @@ var navigationContext;
 var profilesList = new ProfilesViewModel([]);
 
 var pageData = new ObservableModule.fromObject({
+    boundData: null,
     profilesList: profilesList,
     isLoading: false
 });
@@ -46,6 +47,8 @@ function onNavigatingTo(args) {
             }
         } else {
             navigationContext = page.navigationContext;
+
+            pageData.boundData = navigationContext;
 
             var legislatorId = page.getViewById("legislatorId");
             var legislatorName = page.getViewById("legislatorName");

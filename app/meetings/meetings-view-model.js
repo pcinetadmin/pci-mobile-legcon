@@ -30,16 +30,16 @@ function MeetingsViewModel(items) {
 
             data.forEach(function(meeting) {
                 var meetingDate;
-                var legislatorStaffAttendees = meeting.LegislatorStaffAttendees;
+                // var legislatorStaffAttendees = meeting.LegislatorStaffAttendees;
                 var pciInitiatives = meeting.PciInitiatives;
                 var followUpDate;
                 
                 meetingDate = new Date(parseInt(meeting.MeetingDate.substring(meeting.MeetingDate.indexOf("/Date(") + 6, meeting.MeetingDate.indexOf(")/"))));
 
-                if (legislatorStaffAttendees.length > 0)
-                {
-                    legislatorStaffAttendees = "with " + legislatorStaffAttendees;
-                }
+                // if (legislatorStaffAttendees.length > 0)
+                // {
+                //     legislatorStaffAttendees = "with " + legislatorStaffAttendees;
+                // }
 
                 if (pciInitiatives.length > 0)
                 {
@@ -68,7 +68,7 @@ function MeetingsViewModel(items) {
                     primaryOfficeContact: meeting.PrimaryOfficeContact,
                     meetingLocationId: meeting.MeetingLocationId,
                     location: meeting.Location,
-                    legislatorStaffAttendees: legislatorStaffAttendees,
+                    legislatorStaffAttendees: meeting.LegislatorStaffAttendees,
                     followUpNeeded: meeting.FollowUpNeeded,
                     followUpDate: followUpDate,
                     followUpNotes: meeting.FollowUpNotes,

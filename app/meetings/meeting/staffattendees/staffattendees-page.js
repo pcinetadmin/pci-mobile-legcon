@@ -6,7 +6,7 @@ var navigationContext;
 function onNavigatingTo(args) {
     try {
         page = args.object;
-        page.actionBar.title = "Congressional Staff Attendees";
+        page.actionBar.title = "Cong. Staff Attendees";
 
         page.bindingContext = page.navigationContext;
 

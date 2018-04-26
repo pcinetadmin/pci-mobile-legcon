@@ -10,6 +10,7 @@ var navigationContext;
 var surveyList = new SurveyViewModel([]);
 
 var pageData = new ObservableModule.fromObject({
+    boundData: null,
     surveyList: surveyList,
     isLoading: false
 });
@@ -19,6 +20,10 @@ function onNavigatingTo(args) {
         page = args.object;
 
         page.actionBar.title = "Survey";
+
+        navigationContext = page.navigationContext;
+
+        pageData.boundData = navigationContext;
 
         const boolTextConverter = (value) => {
             var result = "No";
@@ -48,6 +53,7 @@ function onNavigatingTo(args) {
             }
         } else {
             navigationContext = page.navigationContext;
+
             var legislatorId = page.getViewById("legislatorId");
             var legislatorName = page.getViewById("legislatorName");
 
@@ -79,6 +85,8 @@ function onItemTap(args) {
         var view = args.view;
 
         model = view.bindingContext;
+        model.relationalType = navigationContext.relationalType;
+        model.relationalId = navigationContext.relationalId;
         //dialogs.alert(view.bindingContext.surveyQuestion);
 
         const navigationEntry = {

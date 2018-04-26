@@ -2,7 +2,7 @@
     <ActionBar class="action-bar" />
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
             <Label id="legislatorId" text="" visibility="collapsed" />
             <Label id="legislatorName" text="" horizontalAlignment="center" />
         </StackLayout>

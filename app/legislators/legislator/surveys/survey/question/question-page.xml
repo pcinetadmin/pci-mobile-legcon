@@ -4,7 +4,7 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
             <Label id="legislatorId" text="" visibility="collapsed" />
             <Label id="legislatorName" text="" horizontalAlignment="center" />
         </StackLayout>
@@ -32,6 +32,6 @@
                 <TextView row="0" col="0" text="{{ boundData.comments }}" hint="Comments/Observations" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>

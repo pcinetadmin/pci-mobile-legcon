@@ -22,14 +22,16 @@ function onNavigatingTo(args) {
         const limitText = (text, limit) => {
             let result = text;
 
-            if (result.length > limit) {
-                for (var i = limit; i > 0; i--) {
-                    var position = result.indexOf(" ", i);
+            if (result !== null) {
+                if (result.length > limit) {
+                    for (var i = limit; i > 0; i--) {
+                        var position = result.indexOf(" ", i);
 
-                    if (position > -1 && position <= limit) {
-                        result = result.substr(0, position) + "..."
+                        if (position > -1 && position <= limit) {
+                            result = result.substr(0, position) + "..."
 
-                        break;
+                            break;
+                        }
                     }
                 }
             }
@@ -139,6 +141,8 @@ function onStackLayoutMeetingDateTap(args) {
 
 function onStackLayoutVenueTypeTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/venuetype/venuetype-page",
             context: pageData.boundData,
@@ -155,6 +159,8 @@ function onStackLayoutVenueTypeTap(args) {
 
 function onStackLayoutNotesTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/notes/notes-page",
             context: pageData.boundData,
@@ -171,6 +177,8 @@ function onStackLayoutNotesTap(args) {
 
 function onStackLayoutFollowUpTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/followup/followup-page",
             context: pageData.boundData,
@@ -188,6 +196,8 @@ function onStackLayoutFollowUpTap(args) {
 function onStackLayoutInitiativesTap(args) {
     try
     {
+        collapseMeetingDate();
+
         saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
     }
     catch(e)
@@ -199,7 +209,9 @@ function onStackLayoutInitiativesTap(args) {
 function onStackLayoutSurveysTap(args) {
     try
     {
-        saveMeeting("legislators/legislator/surveys/surveys-page", false);
+        collapseMeetingDate();
+
+        saveMeeting("legislators/legislator/surveys/surveys-page", true);
     }
     catch(e)
     {
@@ -209,6 +221,8 @@ function onStackLayoutSurveysTap(args) {
 
 function onStackLayoutLegislatorTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/legislator/legislator-page",
             context: pageData.boundData,
@@ -225,6 +239,8 @@ function onStackLayoutLegislatorTap(args) {
 
 function onStackLayoutAttendeeTypeTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/attendeetype/attendeetype-page",
             context: pageData.boundData,
@@ -241,6 +257,8 @@ function onStackLayoutAttendeeTypeTap(args) {
 
 function onStackLayoutMeetingLocationTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/meetinglocation/meetinglocation-page",
             context: pageData.boundData,
@@ -258,6 +276,8 @@ function onStackLayoutMeetingLocationTap(args) {
 function onStackLayoutPciAttendeesTap(args) {
     try
     {
+        collapseMeetingDate();
+
         saveMeeting("profiles/profiles-page", true);
     }
     catch(e)
@@ -268,6 +288,8 @@ function onStackLayoutPciAttendeesTap(args) {
 
 function onStackLayoutStaffAttendeesTap(args) {
     try {
+        collapseMeetingDate();
+
         const navigationEntry = {
             moduleName: "meetings/meeting/staffattendees/staffattendees-page",
             context: pageData.boundData,
@@ -283,7 +305,13 @@ function onStackLayoutStaffAttendeesTap(args) {
 }
 
 function onSave(args) {
-    saveMeeting(null, false);
+    try {
+        collapseMeetingDate();
+
+        saveMeeting(null, false);
+    } catch(e) {
+        dialogs.alert(e);
+    }
 }
 
 function saveMeeting(moduleName, isAttendees) {
@@ -317,10 +345,10 @@ function saveMeeting(moduleName, isAttendees) {
             } else {
                 pageData.boundData.meetingId = data.MeetingId;
 
-                if (isAttendees) {
+                //if (isAttendees) {
                     pageData.boundData.relationalType = "meeting";
                     pageData.boundData.relationalId = pageData.boundData.meetingId; 
-                }
+                //}
                 
                 const navigationEntry = {
                     moduleName: moduleName,
@@ -353,6 +381,14 @@ function dateConverter(value, format) {
 
     return result;
 };
+
+function collapseMeetingDate() {
+    var meetingDateGridLayout = page.getViewById("meetingDateGridLayout");
+
+    meetingDateGridLayout.visibility = "collapse";
+
+    page.addCss("#meetingDateLabel {color: #666;}");
+}
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;

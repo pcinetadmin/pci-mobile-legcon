@@ -39,15 +39,35 @@ function onSwitchLoaded(args) {
     checkedSwitch.on("checkedChange", function(args) {
         var detailsLabelStackLayout = page.getViewById("detailsLabelStackLayout");
         var detailsStackLayout = page.getViewById("detailsStackLayout");
+        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
+        var bottomStackLayout = page.getViewById("bottomStackLayout");
 
         if (args.value) {
             detailsLabelStackLayout.visibility = "visible";
             detailsStackLayout.visibility = "visible";
+            bottomStackLayout.visibility = "collapse";
         } else {
             detailsLabelStackLayout.visibility = "collapse";
             detailsStackLayout.visibility = "collapse";
+            bottomStackLayout.visibility = "visible";
         }
+
+        followUpDateDatePickerGridLayout.visibility = "collapse";
+
+        page.addCss("#followUpDateLabel {color: #666;}");
     });
+}
+
+function onTextViewFocus(args) {
+    try {
+        var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
+
+        followUpDateDatePickerGridLayout.visibility = "collapse";
+
+        page.addCss("#followUpDateLabel {color: #666;}");
+    } catch(e) {
+        dialogs.alert(e);
+    }
 }
 
 function onStackLayoutFollowUpDateTap(args) {
@@ -88,4 +108,5 @@ function dateConverter(value, format) {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onSwitchLoaded = onSwitchLoaded;
+exports.onTextViewFocus = onTextViewFocus;
 exports.onStackLayoutFollowUpDateTap = onStackLayoutFollowUpDateTap;

@@ -23,9 +23,9 @@
                 <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
             </GridLayout>
             <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
-                <TextView row="0" col="0" text="{{ followUpNotes }}" hint="Follow up notes" class="list-view-item-right" />
+                <TextView row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-right" height="100%" />
             </GridLayout>
         </StackLayout>
-        <StackLayout row="4" col="0" height="100%" class="list-view-section-header"></StackLayout>
+        <StackLayout id="bottomStackLayout" row="4" col="0" height="100%" class="list-view-section-header" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'collapse' : 'visible' }}"></StackLayout>
     </GridLayout>
 </Page>
