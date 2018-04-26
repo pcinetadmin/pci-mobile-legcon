@@ -56,26 +56,30 @@ function onNavigatingTo(args) {
 
 function onItemTap(args)
 {
-    var index = args.index;
-    var item = legislatorList.getItem(index);
-
-    navigationContext.reference = "nav";
-    navigationContext.relationalType = "legislator";
-    navigationContext.relationalId = navigationContext.legislatorId;
-
-    const navigationEntry = {
-        moduleName: item.navigateTo,
-        context: navigationContext,
-        clearHistory: false
-    };
-
     try
     {
+        var index = args.index;
+        var item = legislatorList.getItem(index);
+
+        navigationContext.reference = "nav";
+        navigationContext.relationalType = "legislator";
+        navigationContext.relationalId = navigationContext.legislatorId;
+
+        const navigationEntry = {
+            moduleName: item.navigateTo,
+            context: navigationContext,
+            clearHistory: false
+        };
+
         frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 

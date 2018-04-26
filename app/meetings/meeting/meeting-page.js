@@ -99,7 +99,11 @@ function onNavigatingTo(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -115,7 +119,11 @@ function onLoaded(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -135,7 +143,11 @@ function onStackLayoutMeetingDateTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -153,7 +165,11 @@ function onStackLayoutVenueTypeTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -171,7 +187,11 @@ function onStackLayoutNotesTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -189,7 +209,11 @@ function onStackLayoutFollowUpTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -202,7 +226,11 @@ function onStackLayoutInitiativesTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -215,7 +243,11 @@ function onStackLayoutSurveysTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -233,7 +265,11 @@ function onStackLayoutLegislatorTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -251,7 +287,11 @@ function onStackLayoutAttendeeTypeTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -269,7 +309,11 @@ function onStackLayoutMeetingLocationTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -282,7 +326,11 @@ function onStackLayoutPciAttendeesTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -300,7 +348,11 @@ function onStackLayoutStaffAttendeesTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -310,7 +362,11 @@ function onSave(args) {
 
         saveMeeting(null, false);
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -363,7 +419,11 @@ function saveMeeting(moduleName, isAttendees) {
         }
         
     }, function (e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     });
 }
 

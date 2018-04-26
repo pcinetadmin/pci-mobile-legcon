@@ -80,7 +80,11 @@ function onNavigatingTo(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -96,7 +100,11 @@ function onLoaded(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -118,7 +126,11 @@ function onStackLayoutTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -144,7 +156,11 @@ function onSave(args) {
 
         frameModule.topmost().goBack();
     }, function (e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     });
 }
 

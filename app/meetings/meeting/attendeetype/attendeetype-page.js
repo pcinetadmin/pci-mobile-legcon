@@ -66,7 +66,11 @@ function onNavigatingTo(args) {
             page.bindingContext = pageData;
         }
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -82,7 +86,11 @@ function onLoaded(args) {
         });
 
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 

@@ -48,7 +48,11 @@ function onNavigatingTo(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -126,7 +130,11 @@ function onSwitchLoaded(args) {
             }).then(function (response) {
                 switchTap = false;
             }, function (e) {
-                dialogs.alert(e);
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });

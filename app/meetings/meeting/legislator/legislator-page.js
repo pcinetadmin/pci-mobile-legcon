@@ -86,7 +86,11 @@ function onNavigatingTo(args) {
             page.bindingContext = pageData;
         // }
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -94,7 +98,11 @@ function onLoaded(args) {
     try {
         
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -108,7 +116,11 @@ function onNavigatedTo(args) {
             });
         }
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -136,7 +148,11 @@ function onItemSelected(args) {
         });
 
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }  
 }
 
@@ -146,7 +162,11 @@ function onItemDeselected(args) {
         // var legislatorItem = pageData.legislatorList.getItem(args.index);
 
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }  
 }
 

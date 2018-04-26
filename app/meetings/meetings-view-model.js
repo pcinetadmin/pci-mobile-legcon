@@ -1,5 +1,6 @@
 const observableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
+var frameModule = require("ui/frame");
 var http = require("http");
 var dialogs = require("ui/dialogs");
 
@@ -80,7 +81,11 @@ function MeetingsViewModel(items) {
                 });
             });
         }, function (e) {
-            dialogs.alert(e);
+            dialogs.alert({
+                title: "Error",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
         });
     };
 

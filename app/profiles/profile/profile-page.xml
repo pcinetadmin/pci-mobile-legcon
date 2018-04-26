@@ -4,7 +4,7 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="*" height="100%" width="100%">
-        <StackLayout row="1" col="0" verticalAlignment="top">
+        <StackLayout row="0" col="0" verticalAlignment="top">
             <StackLayout class="list-view-item-form">
                 <Label row="0" col="0" text="{{ boundData.fullName }}" class="list-view-item-main-top" />
                 <Label row="0" col="0" text="{{ boundData.company }}" class="list-view-item-sub" />

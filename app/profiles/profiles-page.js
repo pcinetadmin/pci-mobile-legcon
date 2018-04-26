@@ -75,7 +75,11 @@ function onNavigatingTo(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -113,7 +117,11 @@ function onItemTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -135,7 +143,11 @@ function onAddTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -178,7 +190,11 @@ function onDeleteClick(args) {
                 });
                 
             }, function (e) {
-                dialogs.alert(e);
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });
@@ -264,7 +280,11 @@ function onLayoutLoaded(args) {
                 }
             }
         } catch(e) {
-            dialogs.alert(e);
+            dialogs.alert({
+                title: "Error",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
         }
     });
 }

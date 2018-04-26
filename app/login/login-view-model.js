@@ -101,7 +101,11 @@ function LoginViewModel() {
                                     }
                                     catch(e)
                                     {
-                                        dialogs.alert(e);
+                                        dialogs.alert({
+                                            title: "Error",
+                                            message: e.toString(),
+                                            okButtonText: "OK"
+                                        });
                                     }
                                 }
                                 else
@@ -114,7 +118,11 @@ function LoginViewModel() {
                                     }
                                     catch(e)
                                     {
-                                        dialogs.alert(e);
+                                        dialogs.alert({
+                                            title: "Error",
+                                            message: e.toString(),
+                                            okButtonText: "OK"
+                                        });
                                     }
                                 }
                             });
@@ -127,7 +135,11 @@ function LoginViewModel() {
                             }
                             catch(e)
                             {
-                                dialogs.alert(e);
+                                dialogs.alert({
+                                    title: "Error",
+                                    message: e.toString(),
+                                    okButtonText: "OK"
+                                });
                             }
                         }
                     }
@@ -144,7 +156,11 @@ function LoginViewModel() {
                     dialogs.alert("Invalid email address or password.")
                 }
             }, function (e) {
-                dialogs.alert(e);
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });

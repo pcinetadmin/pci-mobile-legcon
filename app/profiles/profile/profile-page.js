@@ -1,9 +1,9 @@
-const RelationshipTypeViewModel = require("~/shared/relationshiptype-view-model");
-const FamiliarityLevelViewModel = require("~/shared/familiaritylevel-view-model");
+const RelationshipTypeViewModel = require("./relationshiptype-view-model");
+const FamiliarityLevelViewModel = require("./familiaritylevel-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
-var http = require("http");
 var frameModule = require("ui/frame");
+var http = require("http");
 var dialogs = require("ui/dialogs");
 
 var page;
@@ -54,6 +54,7 @@ function onNavigatingTo(args) {
                     }
                 }
 
+                pageData.relationshipIndex = relationshipIndex;
                 pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
                 pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
 
@@ -75,6 +76,7 @@ function onNavigatingTo(args) {
                             }
                         }
 
+                        pageData.familiarityIndex = familiarityIndex;
                         pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
                         pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
         
@@ -83,7 +85,27 @@ function onNavigatingTo(args) {
                         page.bindingContext = pageData;
                     });
                 } else {
+                    pageData.familiarityList = global.familiarityList;
+        
+                    familiarityIndex = 0;
+    
+                    if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
+                        var j;
+    
+                        for (j = 0; j < pageData.familiarityList.List.length; j++) {
+                            if (pageData.familiarityList.List.getItem(j).familiarityLevelId === pageData.boundData.familiarityLevelId) {
+                                familiarityIndex = j;
+                            }
+                        }
+                    }
 
+                    pageData.familiarityIndex = familiarityIndex;
+                    pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
+                    pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
+    
+                    pageData.set("isLoading", false);
+    
+                    page.bindingContext = pageData;
                 }
             });
         } else {
@@ -101,6 +123,7 @@ function onNavigatingTo(args) {
                 }
             }
 
+            pageData.relationshipIndex = relationshipIndex;
             pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
             pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
 
@@ -118,6 +141,7 @@ function onNavigatingTo(args) {
                 }
             }
 
+            pageData.familiarityIndex = familiarityIndex;
             pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
             pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
 
@@ -126,7 +150,11 @@ function onNavigatingTo(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -135,28 +163,36 @@ function onLoaded(args) {
         var relationshipListPicker = page.getViewById("relationshipListPicker");
         
         relationshipListPicker.on("selectedIndexChange", function(args) {
+            var relationshipLabel = page.getViewById("relationshipLabel");
             var relationshipItem = pageData.relationshipList.List.getItem(args.object.selectedIndex);
             
             pageData.boundData.relationshipTypeId = relationshipItem.relationshipTypeId;
             pageData.boundData.relationshipType = relationshipItem.relationshipType;
 
-            //dialogs.alert(relationshipItem.relationshipTypeId + ": " + relationshipItem.relationshipType);
+            relationshipLabel.text = pageData.boundData.relationshipType;
+            // dialogs.alert(relationshipItem.relationshipTypeId + ": " + relationshipItem.relationshipType);
         });
 
         var familiarityListPicker = page.getViewById("familiarityListPicker");
         
         familiarityListPicker.on("selectedIndexChange", function(args) {
+            var familiarityLabel = page.getViewById("familiarityLabel");
             var familiarityItem = pageData.familiarityList.List.getItem(args.object.selectedIndex);
             
             pageData.boundData.familiarityLevelId = familiarityItem.familiarityLevelId;
             pageData.boundData.familiarityLevel = familiarityItem.familiarityLevel;
 
-            //dialogs.alert(familiarityItem.familiarityLevelId + ": " + familiarityItem.familiarityLevel);
+            familiarityLabel.text = pageData.boundData.familiarityLevel;
+            // dialogs.alert(familiarityItem.familiarityLevelId + ": " + familiarityItem.familiarityLevel);
         });
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -179,7 +215,11 @@ function onStackLayoutRelationshipTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        diadialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -202,7 +242,11 @@ function onStackLayoutFamiliarityTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -219,7 +263,11 @@ function onTextViewFocus(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -254,7 +302,11 @@ function onSave(args) {
 
         frameModule.topmost().goBack();
     }, function (e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     });
 }
 

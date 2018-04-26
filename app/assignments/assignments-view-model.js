@@ -45,7 +45,11 @@ function AssignmentsViewModel(items) {
                 }
             });
         }, function (e) {
-            dialogs.alert(e);
+            dialogs.alert({
+                title: "Error",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
         });
     };
 

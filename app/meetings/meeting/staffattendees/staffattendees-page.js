@@ -11,7 +11,11 @@ function onNavigatingTo(args) {
         page.bindingContext = page.navigationContext;
 
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 

@@ -13,7 +13,11 @@ function onNavigatingTo(args) {
         page.bindingContext = navigationContext;
 
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -29,7 +33,11 @@ function onLoaded(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -66,7 +74,11 @@ function onTextViewFocus(args) {
 
         page.addCss("#followUpDateLabel {color: #666;}");
     } catch(e) {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
@@ -86,7 +98,11 @@ function onStackLayoutFollowUpDateTap(args) {
     }
     catch(e)
     {
-        dialogs.alert(e);
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     }
 }
 
