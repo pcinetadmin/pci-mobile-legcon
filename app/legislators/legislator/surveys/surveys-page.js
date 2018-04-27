@@ -6,6 +6,8 @@ var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
 
+var surveysActive;
+
 var surveysList = new SurveysViewModel([]);
 
 var pageData = new observableModule.fromObject({
@@ -30,10 +32,20 @@ function onNavigatingTo(args) {
         legislatorId.text = navigationContext.legislatorId;
         legislatorName.text = navigationContext.fullName;
 
-        // Since the Page contains a SegmentedBar,
-        // the selectedIndexChanged event will perform the initial load of the ListView.
-    
-        page.bindingContext = pageData;
+        if (args.isBackNavigation) {
+            surveysList.empty();
+
+            pageData.set("isLoading", true);
+
+            surveysList.load(navigationContext.legislatorId, navigationContext.meetingId, surveysActive).then(function () {
+                pageData.set("isLoading", false);
+            });
+        } else {
+            // Since the Page contains a SegmentedBar,
+            // the selectedIndexChanged event will perform the initial load of the ListView.
+
+            page.bindingContext = pageData;
+        }
     }
     catch(e)
     {
@@ -47,8 +59,6 @@ function onNavigatingTo(args) {
 
 function onSelectedIndexChanged(args) {
     try {
-        var surveysActive;
-
         if (args.newIndex === 0) {
             surveysActive = "Y";
         }
@@ -76,26 +86,49 @@ function onSelectedIndexChanged(args) {
     }
 }
 
+function onAddTap(args) {
+    try {
+        pageData.boundData.relationalType = "meeting";
+        pageData.boundData.relationalId = pageData.boundData.meetingId;
+        
+        const navigationEntry = {
+            moduleName: "legislators/legislator/surveys/select/select-page",
+            context: pageData.boundData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
 function onItemTap(args) {
-    var legislatorId = page.getViewById("legislatorId");
-    var legislatorName = page.getViewById("legislatorName");
-    var index = args.index;
-    var item = surveysList.getItem(index);
-
-    const navigationEntry = {
-        moduleName: "legislators/legislator/surveys/survey/survey-page",
-        context: { 
-            surveyId: item.surveyId,
-            legislatorId: legislatorId.text,
-            fullName: legislatorName.text,
-            relationalType: navigationContext.relationalType,
-            relationalId: navigationContext.relationalId
-        },
-        clearHistory: false
-    };
-
     try
     {
+        var legislatorId = page.getViewById("legislatorId");
+        var legislatorName = page.getViewById("legislatorName");
+        var index = args.index;
+        var item = surveysList.getItem(index);
+
+        const navigationEntry = {
+            moduleName: "legislators/legislator/surveys/survey/survey-page",
+            context: { 
+                surveyId: item.surveyId,
+                legislatorId: legislatorId.text,
+                fullName: legislatorName.text,
+                relationalType: navigationContext.relationalType,
+                relationalId: navigationContext.relationalId
+            },
+            clearHistory: false
+        };
+
         frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
@@ -110,4 +143,5 @@ function onItemTap(args) {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
+exports.onAddTap = onAddTap;
 exports.onItemTap = onItemTap;

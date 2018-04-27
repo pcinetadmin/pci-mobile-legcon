@@ -86,7 +86,7 @@ function onNavigatingTo(args) {
                     followUpTitle.text = "Follow Up Needed?";
                     followUpLabel.text = "Yes";
                 } else {
-                    followUpTitle.text = "Follow Up Date";
+                    followUpTitle.text = "Follow Up Completed";
                     followUpLabel.text = dateConverter(pageData.boundData.followUpDate, "MM/DD/YYYY");
                 }
             } else {

@@ -15,7 +15,7 @@
         <StackLayout id="detailsStackLayout" row="3" col="0" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
             <StackLayout tap="onStackLayoutFollowUpDateTap">
                 <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Follow Up Date" class="list-view-item-left" />
+                    <Label row="0" col="0" text="Follow Up Completed" class="list-view-item-left" />
                     <Label id="followUpDateLabel" row="0" col="1" text="{{ followUpDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
                 </GridLayout>
             </StackLayout>

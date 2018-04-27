@@ -95,6 +95,7 @@ function onSearchBarLoaded(args) {
     // iOS Styling
     searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
     searchBar.ios.showsCancelButton = true;
+    //searchBar.ios.animated = true;
     // searchbar.ios.setShowsCancelButtonAnimated(true, true);
 }
 
