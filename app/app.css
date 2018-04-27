@@ -13,6 +13,10 @@ Page {
     margin-top: -20; /* fix nested frame spacing */
 }
 
+ActivityIndicator {
+    color: #0a6fb0;
+}
+
 .navigation-frame Page {
     margin-top: 20; /* fix nested frame spacing */
     background-color: white;
