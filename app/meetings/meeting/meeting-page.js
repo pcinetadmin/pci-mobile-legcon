@@ -8,9 +8,11 @@ var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
 
-var pageData = new ObservableModule.fromObject({
-    boundData: null
-});
+// var pageData = new ObservableModule.fromObject({
+//     boundData: null
+// });
+
+var pageData = new ObservableModule.Observable();
 
 function onNavigatingTo(args) {
     try {
@@ -49,20 +51,20 @@ function onNavigatingTo(args) {
             var meetingLocationLabel = page.getViewById("meetingLocationLabel");
             var staffAttendeesLabel = page.getViewById("staffAttendeesLabel");
 
-            venueTypeLabel.text = pageData.boundData.venueType;
-            notesLabel.text = limitText(pageData.boundData.notes, 30);
-            legislatorLabel.text = pageData.boundData.fullName;
-            attendeeTypeLabel.text = pageData.boundData.attendeeType;
-            meetingLocationLabel.text = pageData.boundData.location;
-            staffAttendeesLabel.text = limitText(pageData.boundData.legislatorStaffAttendees, 20);
+            venueTypeLabel.text = pageData.venueType;
+            notesLabel.text = limitText(pageData.notes, 30);
+            legislatorLabel.text = pageData.fullName;
+            attendeeTypeLabel.text = pageData.attendeeType;
+            meetingLocationLabel.text = pageData.location;
+            staffAttendeesLabel.text = limitText(pageData.legislatorStaffAttendees, 20);
 
-            if (pageData.boundData.followUpNeeded === true || pageData.boundData.followUpNeeded === "true") {
-                if (pageData.boundData.followUpDate === null) {
+            if (pageData.followUpNeeded === true || pageData.followUpNeeded === "true") {
+                if (pageData.followUpDate === null) {
                     followUpTitle.text = "Follow Up Needed?";
                     followUpLabel.text = "Yes";
                 } else {
                     followUpTitle.text = "Follow Up Date";
-                    followUpLabel.text = dateConverter(pageData.boundData.followUpDate, "MM/DD/YYYY");
+                    followUpLabel.text = dateConverter(pageData.followUpDate, "MM/DD/YYYY");
                 }
             } else {
                 followUpTitle.text = "Follow Up Needed?";
@@ -72,22 +74,22 @@ function onNavigatingTo(args) {
         } else {
             navigationContext = page.navigationContext;
             
-            pageData.boundData = navigationContext;
-            pageData.boundData.result = "";
+            pageData = navigationContext;
+            pageData.result = "";
 
-            if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+            if (pageData.meetingId === null || pageData.meetingId === 0) {
                 page.actionBar.title = "Add Meeting";
             } else {
                 page.actionBar.title = "Edit Meeting";
             }
 
-            if (pageData.boundData.followUpNeeded === true || pageData.boundData.followUpNeeded === "true") {
-                if (pageData.boundData.followUpDate === null) {
+            if (pageData.followUpNeeded === true || pageData.followUpNeeded === "true") {
+                if (pageData.followUpDate === null) {
                     followUpTitle.text = "Follow Up Needed?";
                     followUpLabel.text = "Yes";
                 } else {
                     followUpTitle.text = "Follow Up Completed";
-                    followUpLabel.text = dateConverter(pageData.boundData.followUpDate, "MM/DD/YYYY");
+                    followUpLabel.text = dateConverter(pageData.followUpDate, "MM/DD/YYYY");
                 }
             } else {
                 followUpTitle.text = "Follow Up Needed?";
@@ -157,7 +159,7 @@ function onStackLayoutVenueTypeTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/venuetype/venuetype-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -179,7 +181,7 @@ function onStackLayoutNotesTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/notes/notes-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -201,7 +203,7 @@ function onStackLayoutFollowUpTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/followup/followup-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -222,7 +224,7 @@ function onStackLayoutInitiativesTap(args) {
     {
         collapseMeetingDate();
 
-        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+        if (pageData.meetingId === null || pageData.meetingId === 0) {
             dialogs.action({
                 message: "A new meeting must be saved prior to adding an initiative. Would you like to save this meeting?",
                 cancelButtonText: "Cancel",
@@ -233,12 +235,12 @@ function onStackLayoutInitiativesTap(args) {
                 }
             });
         } else {
-            pageData.boundData.relationalType = "meeting";
-            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            pageData.relationalType = "meeting";
+            pageData.relationalId = pageData.meetingId;
             
             const navigationEntry = {
                 moduleName: "meetings/meeting/initiatives/initiatives-page",
-                context: pageData.boundData,
+                context: pageData,
                 clearHistory: false
             };
 
@@ -260,7 +262,7 @@ function onStackLayoutSurveysTap(args) {
     {
         collapseMeetingDate();
 
-        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+        if (pageData.meetingId === null || pageData.meetingId === 0) {
             dialogs.action({
                 message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
                 cancelButtonText: "Cancel",
@@ -271,12 +273,12 @@ function onStackLayoutSurveysTap(args) {
                 }
             });
         } else {
-            pageData.boundData.relationalType = "meeting";
-            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            pageData.relationalType = "meeting";
+            pageData.relationalId = pageData.meetingId;
             
             const navigationEntry = {
                 moduleName: "legislators/legislator/surveys/surveys-page",
-                context: pageData.boundData,
+                context: pageData,
                 clearHistory: false
             };
 
@@ -299,7 +301,7 @@ function onStackLayoutLegislatorTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/legislator/legislator-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -321,7 +323,7 @@ function onStackLayoutAttendeeTypeTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/attendeetype/attendeetype-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -343,7 +345,7 @@ function onStackLayoutMeetingLocationTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/meetinglocation/meetinglocation-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -364,7 +366,7 @@ function onStackLayoutPciAttendeesTap(args) {
     {
         collapseMeetingDate();
 
-        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+        if (pageData.meetingId === null || pageData.meetingId === 0) {
             dialogs.action({
                 message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
                 cancelButtonText: "Cancel",
@@ -375,12 +377,12 @@ function onStackLayoutPciAttendeesTap(args) {
                 }
             });
         } else {
-            pageData.boundData.relationalType = "meeting";
-            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            pageData.relationalType = "meeting";
+            pageData.relationalId = pageData.meetingId;
             
             const navigationEntry = {
                 moduleName: "profiles/profiles-page",
-                context: pageData.boundData,
+                context: pageData,
                 clearHistory: false
             };
 
@@ -403,7 +405,7 @@ function onStackLayoutStaffAttendeesTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/staffattendees/staffattendees-page",
-            context: pageData.boundData,
+            context: pageData,
             clearHistory: false
         };
 
@@ -436,7 +438,7 @@ function onSave(args) {
 function saveMeeting(moduleName, isAttendees) {
     var isAdd = false;
 
-    if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+    if (pageData.meetingId === null || pageData.meetingId === 0) {
         isAdd = true;
     }
 
@@ -444,7 +446,7 @@ function saveMeeting(moduleName, isAttendees) {
         url: global.apiBaseServiceUrl + "insertupdatemeeting",
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": global.token },
-        content: JSON.stringify(pageData.boundData)
+        content: JSON.stringify(pageData)
     }).then(function (response) {
         var result = response.content.toString();
         var data = JSON.parse(result);
@@ -452,26 +454,26 @@ function saveMeeting(moduleName, isAttendees) {
         if (data.MeetingId !== null)
         {
             if (isAdd) {
-                if (pageData.boundData.assignmentId !== null && pageData.boundData.assignmentId !== 0) {
+                if (pageData.assignmentId !== null && pageData.assignmentId !== 0) {
                     global.refreshAssignments = true;
                 }
             }
 
             if (moduleName === null) {
-                pageData.boundData.meetingId = data.MeetingId;
+                pageData.meetingId = data.MeetingId;
 
                 frameModule.topmost().goBack();
             } else {
-                pageData.boundData.meetingId = data.MeetingId;
+                pageData.meetingId = data.MeetingId;
 
                 //if (isAttendees) {
-                    pageData.boundData.relationalType = "meeting";
-                    pageData.boundData.relationalId = pageData.boundData.meetingId; 
+                    pageData.relationalType = "meeting";
+                    pageData.relationalId = pageData.meetingId; 
                 //}
                 
                 const navigationEntry = {
                     moduleName: moduleName,
-                    context: pageData.boundData,
+                    context: pageData,
                     clearHistory: false
                 };
 
