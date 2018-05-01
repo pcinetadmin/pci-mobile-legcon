@@ -44,6 +44,8 @@ function onNavigatingTo(args) {
                     }
                 }
 
+                pageData.venueTypeIndex = venueTypeIndex;
+
                 pageData.set("isLoading", false);
 
                 page.bindingContext = pageData;
@@ -62,6 +64,8 @@ function onNavigatingTo(args) {
                     }
                 }
             }
+
+            pageData.venueTypeIndex = venueTypeIndex;
 
             page.bindingContext = pageData;
         }

@@ -44,6 +44,8 @@ function onNavigatingTo(args) {
                     }
                 }
 
+                pageData.meetingLocationIndex = meetingLocationIndex;
+
                 pageData.set("isLoading", false);
 
                 page.bindingContext = pageData;
@@ -62,6 +64,8 @@ function onNavigatingTo(args) {
                     }
                 }
             }
+
+            pageData.meetingLocationIndex = meetingLocationIndex;
 
             page.bindingContext = pageData;
         }

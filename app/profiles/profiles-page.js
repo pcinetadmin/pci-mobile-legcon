@@ -32,19 +32,17 @@ function onNavigatingTo(args) {
         page = args.object;
         
         if (args.isBackNavigation) {
-            if (model === null || model.result === "Update") {
-                profilesList.empty();
-            
-                if (profilesList.length === 0) {
-                    pageData.set("isLoading", true);
-            
-                    profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
-                        pageData.set("isLoading", false);
-                    });
-                }
-            
+            //if (model === null || model.result === "Update") {
+            profilesList.empty();
+
+            pageData.set("isLoading", true);
+    
+            profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
+                pageData.set("isLoading", false);
+    
                 page.bindingContext = pageData;
-            }
+            });
+            //}
         } else {
             navigationContext = page.navigationContext;
 

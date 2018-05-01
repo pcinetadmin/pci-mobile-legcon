@@ -26,6 +26,6 @@
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="1" colSpan="1" />
     </GridLayout>
 </Page>

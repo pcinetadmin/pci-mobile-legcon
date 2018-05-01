@@ -49,14 +49,14 @@ function onNavigatingTo(args) {
             pageData.set("isLoading", true);
 
             meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
-                    pageData.set("isLoading", false);
+                pageData.set("isLoading", false);
 
-                    page.bindingContext = pageData;
+                page.bindingContext = pageData;
             });
         } else {
             // Since the Page contains a SegmentedBar,
             // the selectedIndexChanged event will perform the initial load of the ListView.
-            // page.bindingContext = pageData;
+            page.bindingContext = pageData;
         }
     }
     catch(e)

@@ -44,6 +44,8 @@ function onNavigatingTo(args) {
                     }
                 }
 
+                pageData.attendeeTypeIndex = attendeeTypeIndex;
+
                 pageData.set("isLoading", false);
 
                 page.bindingContext = pageData;
@@ -62,6 +64,8 @@ function onNavigatingTo(args) {
                     }
                 }
             }
+
+            pageData.attendeeTypeIndex = attendeeTypeIndex;
 
             page.bindingContext = pageData;
         }

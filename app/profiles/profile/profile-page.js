@@ -4,6 +4,8 @@ const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var http = require("http");
+var email = require("nativescript-email");
+var phone = require("nativescript-phone");
 var dialogs = require("ui/dialogs");
 
 var page;
@@ -196,6 +198,22 @@ function onLoaded(args) {
     }
 }
 
+function onEmailTap(args) {
+    var emailButton = args.object;
+    var emailAddress = emailButton.text;
+
+    email.compose({
+        to: [emailAddress]
+    })
+}
+
+function onPhoneTap(args) {
+    var phoneButton = args.object;
+    var phoneNumber = phoneButton.text;
+
+    phone.dial(phoneNumber, false);
+}
+
 function onStackLayoutRelationshipTap(args) {
     try {
         var relationshipListPickerGridLayout = page.getViewById("relationshipListPickerGridLayout");
@@ -312,6 +330,8 @@ function onSave(args) {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onEmailTap = onEmailTap;
+exports.onPhoneTap = onPhoneTap;
 exports.onStackLayoutRelationshipTap = onStackLayoutRelationshipTap;
 exports.onStackLayoutFamiliarityTap = onStackLayoutFamiliarityTap;
 exports.onTextViewFocus = onTextViewFocus;

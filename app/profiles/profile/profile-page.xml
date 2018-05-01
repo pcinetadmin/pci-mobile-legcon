@@ -9,10 +9,12 @@
                 <Label row="0" col="0" text="{{ boundData.fullName }}" class="list-view-item-main-top" />
                 <Label row="0" col="0" text="{{ boundData.company }}" class="list-view-item-sub" />
                 <Label row="0" col="0" text="{{ boundData.title }}" class="list-view-item-sub" />
-                <Label row="0" col="0" text="{{ boundData.emailAddress }}" class="list-view-item-sub" />
-                <Label row="0" col="0" text="{{ boundData.workPhone }}" class="list-view-item-sub" />
+                <Button row="0" col="0" text="{{ boundData.emailAddress }}" tap="onEmailTap" horizontalAlignment="left" class="list-view-item-sub-email" 
+                    visibility="{{ boundData.emailAddress !== null && boundData.emailAddress.length > 0 ? 'visible' : 'collapse' }}" />
+                <Button row="0" col="0" text="{{ boundData.workPhone }}" tap="onPhoneTap" horizontalAlignment="left" class="list-view-item-sub-phone" 
+                     visibility="{{ boundData.workPhone !== null && boundData.workPhone.length > 0 ? 'visible' : 'collapse' }}"/>
             </StackLayout>
-            <StackLayout tap="onStackLayoutRelationshipTap">
+            <StackLayout tap="onStackLayoutRelationshipTap" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
                 <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                     <Label row="0" col="0" text="Relationship" class="list-view-item-left" />
                     <Label id="relationshipLabel" row="0" col="1" text="{{ boundData.relationshipType }}" class="list-view-item-right" />
@@ -21,7 +23,7 @@
             <GridLayout id="relationshipListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
                 <ListPicker id="relationshipListPicker" row="0" col="0" items="{{ relationshipList.Items }}" selectedIndex="{{ relationshipIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
             </GridLayout>
-            <StackLayout tap="onStackLayoutFamiliarityTap">
+            <StackLayout tap="onStackLayoutFamiliarityTap" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
                 <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                     <Label row="0" col="0" text="Knows How Well?" class="list-view-item-left" />
                     <Label id="familiarityLabel" row="0" col="1" text="{{ boundData.familiarityLevel }}" class="list-view-item-right" />
@@ -37,6 +39,6 @@
                 <TextView row="0" col="0" text="{{ boundData.notes }}" focus="onTextViewFocus" hint="Notes" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="1" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="1" colSpan="1" />
     </GridLayout>
 </Page>

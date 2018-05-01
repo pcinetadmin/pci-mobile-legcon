@@ -222,7 +222,28 @@ function onStackLayoutInitiativesTap(args) {
     {
         collapseMeetingDate();
 
-        saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
+        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+            dialogs.action({
+                message: "A new meeting must be saved prior to adding an initiative. Would you like to save this meeting?",
+                cancelButtonText: "Cancel",
+                actions: ["Save"]
+            }).then(function (result) {
+                if (result === "Save") {
+                    saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
+                }
+            });
+        } else {
+            pageData.boundData.relationalType = "meeting";
+            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            
+            const navigationEntry = {
+                moduleName: "meetings/meeting/initiatives/initiatives-page",
+                context: pageData.boundData,
+                clearHistory: false
+            };
+
+            frameModule.topmost().navigate(navigationEntry);
+        }
     }
     catch(e)
     {
@@ -239,7 +260,28 @@ function onStackLayoutSurveysTap(args) {
     {
         collapseMeetingDate();
 
-        saveMeeting("legislators/legislator/surveys/surveys-page", true);
+        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+            dialogs.action({
+                message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
+                cancelButtonText: "Cancel",
+                actions: ["Save"]
+            }).then(function (result) {
+                if (result === "Save") {
+                    saveMeeting("legislators/legislator/surveys/surveys-page", true);
+                }
+            });
+        } else {
+            pageData.boundData.relationalType = "meeting";
+            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            
+            const navigationEntry = {
+                moduleName: "legislators/legislator/surveys/surveys-page",
+                context: pageData.boundData,
+                clearHistory: false
+            };
+
+            frameModule.topmost().navigate(navigationEntry);
+        }
     }
     catch(e)
     {
@@ -322,7 +364,28 @@ function onStackLayoutPciAttendeesTap(args) {
     {
         collapseMeetingDate();
 
-        saveMeeting("profiles/profiles-page", true);
+        if (pageData.boundData.meetingId === null || pageData.boundData.meetingId === 0) {
+            dialogs.action({
+                message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
+                cancelButtonText: "Cancel",
+                actions: ["Save"]
+            }).then(function (result) {
+                if (result === "Save") {
+                    saveMeeting("profiles/profiles-page", true);
+                }
+            });
+        } else {
+            pageData.boundData.relationalType = "meeting";
+            pageData.boundData.relationalId = pageData.boundData.meetingId;
+            
+            const navigationEntry = {
+                moduleName: "profiles/profiles-page",
+                context: pageData.boundData,
+                clearHistory: false
+            };
+
+            frameModule.topmost().navigate(navigationEntry);
+        }
     }
     catch(e)
     {

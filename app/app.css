@@ -153,6 +153,21 @@ ActivityIndicator {
     font-size: 16;
 }
 
+.list-view-item-sub-email {
+    color: #0a6fb0;
+    font-size: 14;
+    /* margin-top: 3; */
+    padding: 0;
+    text-decoration: underline;
+}
+
+.list-view-item-sub-phone {
+    color: #0a6fb0;
+    font-size: 14;
+    /* margin-top: 3; */
+    padding: 0;
+}
+
 .list-view-item-sub-title {
     color: #666;
     font-size: 14;

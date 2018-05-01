@@ -30,19 +30,23 @@ function onNavigatingTo(args) {
             page.actionBar.title = "PCI Attendee Search";
         }
 
-        if (profileSearchSearchText !== "") {
-            var searchBar = page.getViewById("searchBar");
+        // if (profileSearchSearchText !== "") {
+        //     var searchBar = page.getViewById("searchBar");
 
-            searchBar.text = profileSearchSearchText;
-        }
+        //     searchBar.text = profileSearchSearchText;
+        // }
         
-        if (profileSearchList.length === 0) {
-            pageData.set("isLoading", true);
+        // if (profileSearchList.length === 0) {
+        profileSearchSearchText = "";
+        
+        profileSearchList.empty();
 
-            profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, 1, profileSearchPageSize).then(function () {
-                pageData.set("isLoading", false);
-            });
-        }
+        pageData.set("isLoading", true);
+
+        profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, 1, profileSearchPageSize).then(function () {
+            pageData.set("isLoading", false);
+        });
+        // }
 
         page.bindingContext = pageData;
     }

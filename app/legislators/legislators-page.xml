@@ -38,7 +38,7 @@
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 <!-- </StackLayout> -->
 </Page>

@@ -32,6 +32,6 @@
                 <TextView row="0" col="0" text="{{ boundData.comments }}" hint="Comments/Observations" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>
