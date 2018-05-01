@@ -37,9 +37,9 @@
         </StackLayout>
         <StackLayout row="2" col="0">
             <GridLayout columns="*" rows="*">
-                <ScrollView row="0" col="0">
+                <!-- <ScrollView row="0" col="0"> -->
                     <TextView text="{{ bio }}" editable="false" class="scroll-view-item" />
-                </ScrollView>
+                <!-- </ScrollView> -->
             </GridLayout>
         </StackLayout>
     </GridLayout>
