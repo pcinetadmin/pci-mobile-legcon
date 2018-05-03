@@ -1,4 +1,4 @@
-<Page navigatingTo="onNavigatingTo" navigatingFrom="onNavigatingFrom" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
         <ActionItem tap="onSave" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
     </ActionBar>
