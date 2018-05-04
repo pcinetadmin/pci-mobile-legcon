@@ -1,3 +1,4 @@
+const platform = require("platform");
 const AssignmentsViewModel = require("./assignments-view-model");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
@@ -98,10 +99,11 @@ function onSelectedIndexChanged(args) {
 function onSearchBarLoaded(args) {
     searchBar = args.object;
 
-    // iOS Styling
-    searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
-    searchBar.ios.showsCancelButton = true;
-    // searchbar.ios.setShowsCancelButtonAnimated(true, true);
+    if (platform.isIOS) {
+        // iOS Styling
+        searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
+        searchBar.ios.showsCancelButton = true;
+    }
 }
 
 function onSubmit(args) {

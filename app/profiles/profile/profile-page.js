@@ -33,39 +33,91 @@ function onNavigatingTo(args) {
         
         page.actionBar.title = "Profile";
 
-        pageData.boundData = navigationContext.boundData;
-        pageData.boundData.result = "";
+        if (args.isBackNavigation) {
+            var personDetails = page.getViewById("personDetails");
+            var fullNameLabel = page.getViewById("fullNameLabel");
+            var companyLabel = page.getViewById("companyLabel");
+            var titleLabel = page.getViewById("titleLabel");
+            var emailAddressButton = page.getViewById("emailAddressButton");
+            var workPhoneButton = page.getViewById("workPhoneButton");
+            var selectPerson = page.getViewById("selectPerson");
+            var rightArrow = page.getViewById("rightArrow");
 
-        if (global.relationshipList === undefined) {
-            pageData.set("isLoading", true);
+            fullNameLabel.text = pageData.boundData.fullName;
+            companyLabel.text = pageData.boundData.company;
+            titleLabel.text = pageData.boundData.title;
+            emailAddressButton.text = pageData.boundData.emailAddress;
+            workPhoneButton.text = pageData.boundData.workPhone;
 
-            relationshipList.load().then(function () {
-                global.relationshipList = relationshipList;
+            personDetails.visibility = "visible";
+            selectPerson.visibility = "collapse";
+            rightArrow.visibility = "collapse";
 
-                pageData.relationshipList = global.relationshipList;
+            if (pageData.boundData.emailAddress !== null && pageData.boundData.emailAddress.length > 0) {
+                emailAddressButton.visibility = "visible";
+            }
 
-                relationshipIndex = 0;
+            if (pageData.boundData.workPhone !== null && pageData.boundData.workPhone.length > 0) {
+                workPhoneButton.visibility = "visible";
+            }
 
-                if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
-                    var i;
+        } else {
+            pageData.boundData = navigationContext.boundData;
+            pageData.boundData.result = "";
 
-                    for (i = 0; i < pageData.relationshipList.List.length; i++) {
-                        if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
-                            relationshipIndex = i;
+            if (global.relationshipList === undefined) {
+                pageData.set("isLoading", true);
+
+                relationshipList.load().then(function () {
+                    global.relationshipList = relationshipList;
+
+                    pageData.relationshipList = global.relationshipList;
+
+                    relationshipIndex = 0;
+
+                    if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
+                        var i;
+
+                        for (i = 0; i < pageData.relationshipList.List.length; i++) {
+                            if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
+                                relationshipIndex = i;
+                            }
                         }
                     }
-                }
 
-                pageData.relationshipIndex = relationshipIndex;
-                pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
-                pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
+                    pageData.relationshipIndex = relationshipIndex;
+                    pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
+                    pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
 
-                if (global.familiarityList === undefined) {
-                    familiarityList.load().then(function () {
-                        global.familiarityList = familiarityList;
-        
+                    if (global.familiarityList === undefined) {
+                        familiarityList.load().then(function () {
+                            global.familiarityList = familiarityList;
+            
+                            pageData.familiarityList = global.familiarityList;
+            
+                            familiarityIndex = 0;
+            
+                            if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
+                                var j;
+            
+                                for (j = 0; j < pageData.familiarityList.List.length; j++) {
+                                    if (pageData.familiarityList.List.getItem(j).familiarityLevelId === pageData.boundData.familiarityLevelId) {
+                                        familiarityIndex = j;
+                                    }
+                                }
+                            }
+
+                            pageData.familiarityIndex = familiarityIndex;
+                            pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
+                            pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
+            
+                            pageData.set("isLoading", false);
+            
+                            page.bindingContext = pageData;
+                        });
+                    } else {
                         pageData.familiarityList = global.familiarityList;
-        
+            
                         familiarityIndex = 0;
         
                         if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
@@ -85,69 +137,47 @@ function onNavigatingTo(args) {
                         pageData.set("isLoading", false);
         
                         page.bindingContext = pageData;
-                    });
-                } else {
-                    pageData.familiarityList = global.familiarityList;
-        
-                    familiarityIndex = 0;
-    
-                    if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
-                        var j;
-    
-                        for (j = 0; j < pageData.familiarityList.List.length; j++) {
-                            if (pageData.familiarityList.List.getItem(j).familiarityLevelId === pageData.boundData.familiarityLevelId) {
-                                familiarityIndex = j;
-                            }
+                    }
+                });
+            } else {
+                pageData.relationshipList = global.relationshipList;
+
+                relationshipIndex = 0;
+
+                if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
+                    var i;
+
+                    for (i = 0; i < pageData.relationshipList.List.length; i++) {
+                        if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
+                            relationshipIndex = i;
                         }
                     }
-
-                    pageData.familiarityIndex = familiarityIndex;
-                    pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
-                    pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
-    
-                    pageData.set("isLoading", false);
-    
-                    page.bindingContext = pageData;
                 }
-            });
-        } else {
-            pageData.relationshipList = global.relationshipList;
 
-            relationshipIndex = 0;
+                pageData.relationshipIndex = relationshipIndex;
+                pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
+                pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
 
-            if (pageData.boundData.relationshipTypeId !== null && pageData.boundData.relationshipTypeId.toString().length > 0) {
-                var i;
+                pageData.familiarityList = global.familiarityList;
 
-                for (i = 0; i < pageData.relationshipList.List.length; i++) {
-                    if (pageData.relationshipList.List.getItem(i).relationshipTypeId === pageData.boundData.relationshipTypeId) {
-                        relationshipIndex = i;
+                familiarityIndex = 0;
+
+                if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
+                    var j;
+
+                    for (j = 0; j < pageData.familiarityList.List.length; j++) {
+                        if (pageData.familiarityList.List.getItem(j).familiarityLevelId === pageData.boundData.familiarityLevelId) {
+                            familiarityIndex = j;
+                        }
                     }
                 }
+
+                pageData.familiarityIndex = familiarityIndex;
+                pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
+                pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
+
+                page.bindingContext = pageData;
             }
-
-            pageData.relationshipIndex = relationshipIndex;
-            pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipIndex).relationshipTypeId;
-            pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipIndex).relationshipType;
-
-            pageData.familiarityList = global.familiarityList;
-
-            familiarityIndex = 0;
-
-            if (pageData.boundData.familiarityLevelId !== null && pageData.boundData.familiarityLevelId.toString().length > 0) {
-                var j;
-
-                for (j = 0; j < pageData.familiarityList.List.length; j++) {
-                    if (pageData.familiarityList.List.getItem(j).familiarityLevelId === pageData.boundData.familiarityLevelId) {
-                        familiarityIndex = j;
-                    }
-                }
-            }
-
-            pageData.familiarityIndex = familiarityIndex;
-            pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevelId;
-            pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityIndex).familiarityLevel;
-
-            page.bindingContext = pageData;
         }
     }
     catch(e)
@@ -187,6 +217,30 @@ function onLoaded(args) {
             familiarityLabel.text = pageData.boundData.familiarityLevel;
             // dialogs.alert(familiarityItem.familiarityLevelId + ": " + familiarityItem.familiarityLevel);
         });
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onTap(args) {
+    try
+    {
+        // Only navigate if this is a new relationship.
+        if (pageData.boundData.personId === null || pageData.boundData.personId === 0) {
+            const navigationEntry = {
+                moduleName: "profiles/profilesearch/profilesearch-page",
+                context: pageData.boundData,
+                clearHistory: false
+            };
+
+            frameModule.topmost().navigate(navigationEntry); 
+        }
     }
     catch(e)
     {
@@ -330,6 +384,7 @@ function onSave(args) {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onTap = onTap;
 exports.onEmailTap = onEmailTap;
 exports.onPhoneTap = onPhoneTap;
 exports.onStackLayoutRelationshipTap = onStackLayoutRelationshipTap;

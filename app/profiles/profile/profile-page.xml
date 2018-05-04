@@ -6,13 +6,21 @@
     <GridLayout columns="*" rows="*" height="100%" width="100%">
         <StackLayout row="0" col="0" verticalAlignment="top">
             <StackLayout class="list-view-item-form">
-                <Label row="0" col="0" text="{{ boundData.fullName }}" class="list-view-item-main-top" />
-                <Label row="0" col="0" text="{{ boundData.company }}" class="list-view-item-sub" />
-                <Label row="0" col="0" text="{{ boundData.title }}" class="list-view-item-sub" />
-                <Button row="0" col="0" text="{{ boundData.emailAddress }}" tap="onEmailTap" horizontalAlignment="left" class="list-view-item-sub-email" 
-                    visibility="{{ boundData.emailAddress !== null && boundData.emailAddress.length > 0 ? 'visible' : 'collapse' }}" />
-                <Button row="0" col="0" text="{{ boundData.workPhone }}" tap="onPhoneTap" horizontalAlignment="left" class="list-view-item-sub-phone" 
-                     visibility="{{ boundData.workPhone !== null && boundData.workPhone.length > 0 ? 'visible' : 'collapse' }}"/>
+                <GridLayout columns="*, auto" rows="auto" tap="onTap" verticalAlignment="middle">
+                    <StackLayout id="personDetails" row="0" col="0" visibility="{{ boundData.personId === null || boundData.personId === 0 ? 'collapse' : 'visible' }}">
+                        <Label id="fullNameLabel" text="{{ boundData.fullName }}" class="list-view-item-main-top" />
+                        <Label id="companyLabel" text="{{ boundData.company }}" class="list-view-item-sub" />
+                        <Label id="titleLabel" text="{{ boundData.title }}" class="list-view-item-sub" />
+                        <Button id="emailAddressButton" text="{{ boundData.emailAddress }}" tap="onEmailTap" horizontalAlignment="left" class="list-view-item-sub-email" 
+                            visibility="{{ boundData.emailAddress !== null && boundData.emailAddress.length > 0 ? 'visible' : 'collapse' }}" />
+                        <Button id="workPhoneButton" text="{{ boundData.workPhone }}" tap="onPhoneTap" horizontalAlignment="left" class="list-view-item-sub-phone" 
+                            visibility="{{ boundData.workPhone !== null && boundData.workPhone.length > 0 ? 'visible' : 'collapse' }}"/>
+                    </StackLayout>
+                    <StackLayout id="selectPerson" row="0" col="0" visibility="{{ boundData.personId !== null && boundData.personId !== 0 ? 'collapse' : 'visible' }}">
+                        <Label text="Select Person" class="list-view-item-left" style="color: #999; font-style: italic;" />
+                    </StackLayout>
+                    <Label id="rightArrow" row="0" col="1" text="&#xf105;" class="fn-list-view-item" visibility="{{ boundData.personId !== null && boundData.personId !== 0 ? 'collapse' : 'visible' }}" />
+                </GridLayout>
             </StackLayout>
             <StackLayout tap="onStackLayoutRelationshipTap" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
                 <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">

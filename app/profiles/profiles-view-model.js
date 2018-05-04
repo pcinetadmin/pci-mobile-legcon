@@ -25,7 +25,6 @@ function ProfilesViewModel(items) {
                     title: profile.Title,
                     workPhone: profile.WorkPhone,
                     emailAddress: profile.EmailAddress,
-                    mailTo: profile.MailTo,
                     relationshipTypeId: profile.RelationshipTypeId,
                     relationshipType: profile.RelationshipType,
                     familiarityLevelId: profile.FamiliarityLevelId,

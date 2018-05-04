@@ -105,6 +105,7 @@ function onItemTap(args) {
                 moduleName: "profiles/profile/profile-page",
                 context: { 
                     relationalType: navigationContext.relationalType,
+                    relationalId: navigationContext.relationalId,
                     boundData: model
                 },
                 clearHistory: false
@@ -126,13 +127,30 @@ function onItemTap(args) {
 function onAddTap(args) {
     try
     {
-        model = null;
+        var model = {
+            relationalType: navigationContext.relationalType,
+            relationalId: navigationContext.relationalId,
+            personId: 0,
+            fullName: null,
+            company: null,
+            title: null,
+            workPhone: null,
+            emailAddress: null,
+            relationshipTypeId: null,
+            relationshipType: null,
+            familiarityLevelId: null,
+            familiarityLevel: null,
+            notes: null,
+            modifiedDate: new Date(),
+            checked: false
+        }
 
         const navigationEntry = {
-            moduleName: "profiles/profilesearch/profilesearch-page",
+            moduleName: "profiles/profile/profile-page",
             context: { 
                 relationalType: navigationContext.relationalType,
-                relationalId: navigationContext.relationalId
+                relationalId: navigationContext.relationalId,
+                boundData: model
             },
             clearHistory: false
         };

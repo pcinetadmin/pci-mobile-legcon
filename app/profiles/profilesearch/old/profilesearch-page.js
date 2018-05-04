@@ -11,12 +11,11 @@ var profileSearchPageSize = 25;
 var profileSearchSearchText = "";
 var profileSearchSearchSubmitted = false;
 
-var previousSelected = null;
-
 var profileSearchList = new ProfileSearchViewModel([]);
 
+var switchTap = false;
+
 var pageData = new ObservableModule.fromObject({
-    boundData: null,
     profileSearchList: profileSearchList,
     isLoading: false
 });
@@ -31,8 +30,6 @@ function onNavigatingTo(args) {
         } else {
             page.actionBar.title = "PCI Attendee Search";
         }
-
-        pageData.boundData = navigationContext;
 
         // if (profileSearchSearchText !== "") {
         //     var searchBar = page.getViewById("searchBar");
@@ -49,11 +46,10 @@ function onNavigatingTo(args) {
 
         profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, 1, profileSearchPageSize).then(function () {
             pageData.set("isLoading", false);
-
-            page.bindingContext = pageData;
         });
         // }
 
+        page.bindingContext = pageData;
     }
     catch(e)
     {
@@ -86,8 +82,6 @@ function onSubmit(args)
     
     pageData.set("isLoading", true);
 
-    dialogs.alert(navigationContext.relationalType + ": " + navigationContext.relationalId);
-
     profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, 1, profileSearchPageSize).then(function () {
         pageData.set("isLoading", false);
 
@@ -117,70 +111,61 @@ function onClear(args)
     }
 }
 
-function onLoadMoreItems(args) {
-    try {
-        var profileSearchListCount = profileSearchList.length;
-        var profileSearchPageNumber = Math.ceil(profileSearchListCount / profileSearchPageSize) + 1;
-        var profileSearchRemainder = profileSearchListCount % profileSearchPageSize;
+function onSwitchLoaded(args) {
+    var checkedSwitch = args.object;
 
-        if (profileSearchRemainder !== 0 && profileSearchRemainder < profileSearchPageSize)
-        {
-            return;
+    checkedSwitch.on("tap", function(args) {
+        // Necessary to prevent the checkedChange event from firing on the switch when user scrolls.
+        switchTap = true;
+    });
+
+    checkedSwitch.on("checkedChange", function(args) {
+        if (switchTap) {
+            var stackLayout = args.object.parent;
+            var indexLabel = stackLayout.getViewById("indexLabel");
+
+            var model = profileSearchList.getItem(indexLabel.text);
+
+            model.checked = args.value;
+            
+            http.request({
+                url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": global.token },
+                content: JSON.stringify(model)
+            }).then(function (response) {
+                switchTap = false;
+            }, function (e) {
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            });
         }
-
-        pageData.set("isLoading", true);
-
-        profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, profileSearchPageNumber, profileSearchPageSize).then(function (){
-            pageData.set("isLoading", false);
-        });
-    } catch(e) {
-        dialogs.alert({
-            title: "Error",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    }
+    });
 }
 
-function onItemTap(args) {
-    try {
-        var selected = pageData.profileSearchList.getItem(args.index); //.set("checked", true);
+function onLoadMoreItems(args) {
+    var profileSearchListCount = profileSearchList.length;
+    var profileSearchPageNumber = Math.ceil(profileSearchListCount / profileSearchPageSize) + 1;
+    var profileSearchRemainder = profileSearchListCount % profileSearchPageSize;
 
-        selected.checked = !selected.checked;
-
-        if (previousSelected !== null & previousSelected !== selected) {
-            previousSelected.checked = false;
-        }
-        
-        page.getViewById("profileSearch").refresh();
-
-        if (selected.checked) {
-            previousSelected = selected;
-
-            pageData.boundData.personId = selected.personId;
-            pageData.boundData.fullName = selected.fullName;
-            pageData.boundData.company = selected.company;
-            pageData.boundData.title = selected.title;
-            pageData.boundData.emailAddress = selected.emailAddress;
-            pageData.boundData.workPhone = selected.workPhone;
-        } else {
-            previousSelected = null;
-
-            pageData.boundData.personId = null;
-            pageData.boundData.fullName = null;
-            pageData.boundData.company = null;
-            pageData.boundData.title = null;
-            pageData.boundData.emailAddress = null;
-            pageData.boundData.workPhone = null;
-        }
-    } catch(e) {
-        dialogs.alert(e);
+    if (profileSearchRemainder !== 0 && profileSearchRemainder < profileSearchPageSize)
+    {
+        return;
     }
+
+    pageData.set("isLoading", true);
+
+    profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, profileSearchPageNumber, profileSearchPageSize).then(function (){
+        pageData.set("isLoading", false);
+    });
 }
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSearchBarLoaded = onSearchBarLoaded;
 exports.onSubmit = onSubmit;
 exports.onClear = onClear;
+exports.onSwitchLoaded = onSwitchLoaded;
 exports.onLoadMoreItems = onLoadMoreItems;
-exports.onItemTap = onItemTap;

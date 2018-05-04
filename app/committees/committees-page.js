@@ -1,3 +1,4 @@
+const platform = require("platform");
 const CommitteesViewModel = require("./committees-view-model");
 const observableModule = require("data/observable");
 var frameModule = require("ui/frame");
@@ -69,9 +70,11 @@ function onSearchBarLoaded(args)
 {
     searchBar = args.object;
 
-    // iOS Styling
-    searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
-    searchBar.ios.showsCancelButton = true;
+    if (platform.isIOS) {
+        // iOS Styling
+        searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
+        searchBar.ios.showsCancelButton = true;
+    }
 }
 
 function onSubmit(args)

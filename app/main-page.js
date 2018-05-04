@@ -1,4 +1,4 @@
-const appModule = require("application");
+const application = require("application");
 var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
 var stackLayout = require("ui/layouts/stack-layout")
@@ -104,8 +104,8 @@ function onNavigatingTo(args) {
         return result;
     };
 
-    appModule.getResources().dateConverter = dateConverter;
-    appModule.getResources().dateFormat = "MM/DD/YYYY";
+    application.getResources().dateConverter = dateConverter;
+    application.getResources().dateFormat = "MM/DD/YYYY";
 
     page.navFrame.navigate(page.tabItems[0].path);
 }

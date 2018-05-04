@@ -6,7 +6,7 @@
             <SearchBar row="0" col="0" id="searchBar" hint="Search" text="" loaded="onSearchBarLoaded" submit="onSubmit" clear="onClear" />
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">
-            <ListView id="profileSearch" items="{{ profileSearchList }}" itemTap="onItemTap" loadMoreItems="onLoadMoreItems" height="100%">
+            <ListView items="{{ profileSearchList }}" loadMoreItems="onLoadMoreItems" itemTemplateSelector="$index" height="100%">
                 <ListView.itemTemplate>
                     <GridLayout columns="*, auto" rows="*" class="list-view-item">
                         <StackLayout row="0" col="0" verticalAlignment="middle">
@@ -15,7 +15,9 @@
                             <Label text="{{ title }}" textWrap="true" class="list-view-item-sub" />
                         </StackLayout>
                         <StackLayout row="0" col="1" verticalAlignment="middle">
-                            <Label row="0" col="1" text="&#xf00c;" class="fn-list-view-item-small" visibility="{{ checked ? 'visible' : 'collapse' }}" />
+                            <Switch id="checkedSwitch" row="0" col="1" checked="{{ checked }}" 
+                                loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
+                            <Label id="indexLabel" text="{{ $index }}" visibility="collapse" />
                         </StackLayout>
                     </GridLayout>
                 </ListView.itemTemplate>

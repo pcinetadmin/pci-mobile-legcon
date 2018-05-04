@@ -1,3 +1,4 @@
+const platform = require("platform");
 const LegislatorsViewModel = require("./legislators-view-model");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
@@ -92,11 +93,13 @@ function onNavigatingTo(args) {
 function onSearchBarLoaded(args) {
     searchBar = args.object;
 
-    // iOS Styling
-    searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
-    searchBar.ios.showsCancelButton = true;
-    //searchBar.ios.animated = true;
-    // searchbar.ios.setShowsCancelButtonAnimated(true, true);
+    if (platform.isIOS) {
+        // iOS Styling
+        searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
+        searchBar.ios.showsCancelButton = true;
+        //searchBar.ios.animated = true;
+        // searchbar.ios.setShowsCancelButtonAnimated(true, true);
+    }
 }
 
 function onSubmit(args) {

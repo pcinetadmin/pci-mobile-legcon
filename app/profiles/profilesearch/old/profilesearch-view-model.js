@@ -23,20 +23,16 @@ function ProfileSearchViewModel(items) {
                         checked = true;
                     }
 
-                    if (!checked) {
-                        viewModel.push({
-                            relationalType: profile.RelationalType,
-                            relationalId: profile.RelationalId,
-                            personId: profile.PersonId,
-                            fullName: profile.FullName,
-                            company: profile.Company,
-                            title: profile.Title,
-                            emailAddress: profile.EmailAddress,
-                            workPhone: profile.WorkPhone,
-                            checked: checked,
-                            total: profile.Total
-                        });
-                    }
+                    viewModel.push({
+                        relationalType: profile.RelationalType,
+                        relationalId: profile.RelationalId,
+                        personId: profile.PersonId,
+                        fullName: profile.FullName,
+                        company: profile.Company,
+                        title: profile.Title,
+                        checked: checked,
+                        total: profile.Total
+                    });
                 }
             });
         }, function (e) {
