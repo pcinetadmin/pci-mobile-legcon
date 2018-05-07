@@ -86,8 +86,6 @@ function onSubmit(args)
     
     pageData.set("isLoading", true);
 
-    dialogs.alert(navigationContext.relationalType + ": " + navigationContext.relationalId);
-
     profileSearchList.load(navigationContext.relationalType, navigationContext.relationalId, profileSearchSearchText, 1, profileSearchPageSize).then(function () {
         pageData.set("isLoading", false);
 

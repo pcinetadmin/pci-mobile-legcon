@@ -10,6 +10,7 @@ var dialogs = require("ui/dialogs");
 
 var page;
 var navigationContext;
+
 var relationshipList = new RelationshipTypeViewModel([]);
 var familiarityList = new FamiliarityLevelViewModel([]);
 
@@ -30,7 +31,7 @@ function onNavigatingTo(args) {
         page = args.object;
 
         navigationContext = page.navigationContext;
-        
+
         page.actionBar.title = "Profile";
 
         if (args.isBackNavigation) {
@@ -43,22 +44,24 @@ function onNavigatingTo(args) {
             var selectPerson = page.getViewById("selectPerson");
             var rightArrow = page.getViewById("rightArrow");
 
-            fullNameLabel.text = pageData.boundData.fullName;
-            companyLabel.text = pageData.boundData.company;
-            titleLabel.text = pageData.boundData.title;
-            emailAddressButton.text = pageData.boundData.emailAddress;
-            workPhoneButton.text = pageData.boundData.workPhone;
+            if (pageData.boundData.personId !== null && pageData.boundData.personId !== 0) {
+                fullNameLabel.text = pageData.boundData.fullName;
+                companyLabel.text = pageData.boundData.company;
+                titleLabel.text = pageData.boundData.title;
+                emailAddressButton.text = pageData.boundData.emailAddress;
+                workPhoneButton.text = pageData.boundData.workPhone;
 
-            personDetails.visibility = "visible";
-            selectPerson.visibility = "collapse";
-            rightArrow.visibility = "collapse";
+                personDetails.visibility = "visible";
+                selectPerson.visibility = "collapse";
+                rightArrow.visibility = "collapse";
 
-            if (pageData.boundData.emailAddress !== null && pageData.boundData.emailAddress.length > 0) {
-                emailAddressButton.visibility = "visible";
-            }
+                if (pageData.boundData.emailAddress !== null && pageData.boundData.emailAddress.length > 0) {
+                    emailAddressButton.visibility = "visible";
+                }
 
-            if (pageData.boundData.workPhone !== null && pageData.boundData.workPhone.length > 0) {
-                workPhoneButton.visibility = "visible";
+                if (pageData.boundData.workPhone !== null && pageData.boundData.workPhone.length > 0) {
+                    workPhoneButton.visibility = "visible";
+                }
             }
 
         } else {
@@ -344,42 +347,58 @@ function onTextViewFocus(args) {
 }
 
 function onSave(args) {
-    var relationshipListPicker = page.getViewById("relationshipListPicker");
+    if (pageData.boundData.personId === null || pageData.boundData.personId === 0) {
+        var label;
 
-    pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipListPicker.selectedIndex).relationshipTypeId;
-    pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipListPicker.selectedIndex).relationshipType;
+        if (navigationContext.relationalType === "legislator") {
+            label = "relationship";
+        } else {
+            label = "attendee";
+        }
 
-    var familiarityListPicker = page.getViewById("familiarityListPicker");
-
-    pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityListPicker.selectedIndex).familiarityLevelId;
-    pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityListPicker.selectedIndex).familiarityLevel;
-    
-    var result;
-
-    pageData.set("isLoading", true);
-
-    http.request({
-        url: global.apiBaseServiceUrl + "updateprofilerelationship",
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": global.token },
-        content: JSON.stringify(pageData.boundData)
-    }).then(function (response) {
-        // result = response.content.toJSON();
-        // dialogs.alert(result);
-        // dialogs.alert(pageData.boundData.responseId + ": " + pageData.boundData.response);
-
-        pageData.boundData.result = "Update";
-
-        pageData.set("isLoading", false);
-
-        frameModule.topmost().goBack();
-    }, function (e) {
         dialogs.alert({
-            title: "Error",
-            message: e.toString(),
+            title: "Input Validation",
+            message: "A person must be selected prior to saving this " + label + ".",
             okButtonText: "OK"
         });
-    });
+    } else {
+        var relationshipListPicker = page.getViewById("relationshipListPicker");
+
+        pageData.boundData.relationshipTypeId = pageData.relationshipList.List.getItem(relationshipListPicker.selectedIndex).relationshipTypeId;
+        pageData.boundData.relationshipType = pageData.relationshipList.List.getItem(relationshipListPicker.selectedIndex).relationshipType;
+
+        var familiarityListPicker = page.getViewById("familiarityListPicker");
+
+        pageData.boundData.familiarityLevelId = pageData.familiarityList.List.getItem(familiarityListPicker.selectedIndex).familiarityLevelId;
+        pageData.boundData.familiarityLevel = pageData.familiarityList.List.getItem(familiarityListPicker.selectedIndex).familiarityLevel;
+        
+        var result;
+
+        pageData.set("isLoading", true);
+
+        http.request({
+            url: global.apiBaseServiceUrl + "updateprofilerelationship",
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Authorization": global.token },
+            content: JSON.stringify(pageData.boundData)
+        }).then(function (response) {
+            // result = response.content.toJSON();
+            // dialogs.alert(result);
+            // dialogs.alert(pageData.boundData.responseId + ": " + pageData.boundData.response);
+
+            pageData.boundData.result = "Update";
+
+            pageData.set("isLoading", false);
+
+            frameModule.topmost().goBack();
+        }, function (e) {
+            dialogs.alert({
+                title: "Error",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
+        });
+    }
 }
 
 exports.onNavigatingTo = onNavigatingTo;
