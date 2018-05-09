@@ -1,3 +1,4 @@
+const MeetingViewModel = require("./meeting-view-model");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 const appModule = require("application");
@@ -69,6 +70,26 @@ function onNavigatingTo(args) {
             } else {
                 followUpTitle.text = "Follow Up Needed?";
                 followUpLabel.text = "No";
+            }
+
+            if (pageData.updated) {
+                var currentMeeting = new MeetingViewModel();
+
+                currentMeeting.load(pageData.meetingId).then(function () {
+                    var initiativesLabel = page.getViewById("initiativesLabel");
+                    var surveysLabel = page.getViewById("surveysLabel");
+                    var pciAttendeesLabel = page.getViewById("pciAttendeesLabel");
+
+                    pageData.pciInitiatives = currentMeeting.pciInitiatives;
+                    pageData.surveys = currentMeeting.surveys;
+                    pageData.pciAttendees = currentMeeting.pciAttendees;
+                    
+                    initiativesLabel.text = limitText(pageData.pciInitiatives, 25);
+                    surveysLabel.text = limitText(pageData.surveys, 25);
+                    pciAttendeesLabel.text = limitText(pageData.pciAttendees, 25);
+
+                    pageData.updated = false;
+                });
             }
 
         } else {

@@ -32,7 +32,6 @@ function onNavigatingTo(args) {
         page = args.object;
         
         if (args.isBackNavigation) {
-            //if (model === null || model.result === "Update") {
             profilesList.empty();
 
             pageData.set("isLoading", true);
@@ -42,12 +41,12 @@ function onNavigatingTo(args) {
     
                 page.bindingContext = pageData;
             });
-            //}
         } else {
             navigationContext = page.navigationContext;
 
             pageData.boundData = navigationContext;
-
+            pageData.boundData.updated = false;
+            
             var legislatorId = page.getViewById("legislatorId");
             var legislatorName = page.getViewById("legislatorName");
         
@@ -127,6 +126,8 @@ function onItemTap(args) {
 function onAddTap(args) {
     try
     {
+        pageData.boundData.updated = true;
+
         var model = {
             relationalType: navigationContext.relationalType,
             relationalId: navigationContext.relationalId,
@@ -194,6 +195,8 @@ function onDeleteClick(args) {
             }).then(function (response) {
                 // result = response.content.toJSON();
                 // dialogs.alert(result);
+
+                pageData.boundData.updated = true;
 
                 profilesList.empty();
     

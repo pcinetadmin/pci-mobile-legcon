@@ -35,7 +35,7 @@
                                     <Label text="{{ name }}" class="list-view-item-main-top" />
                                     <Label text="{{ meetingDate | dateConverter(dateFormat) }}" class="list-view-item-main" />
                                     <Label text="{{ 'with ' + legislatorStaffAttendees }}" visibility="{{ legislatorStaffAttendees.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
-                                    <Label text="{{ pciInitiatives }}" visibility="{{ pciInitiatives.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
+                                    <Label text="{{ 'on ' + pciInitiatives }}" visibility="{{ pciInitiatives.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
                                 </StackLayout>
                                 <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
                             </GridLayout>

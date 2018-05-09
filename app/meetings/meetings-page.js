@@ -164,6 +164,8 @@ function onAddTap(args) {
             fullName: navigationContext.fullName,
             name: null,
             pciInitiatives: null,
+            surveys: null,
+            pciAttendees: null,
             primaryOfficeContact: null,
             meetingLocationId: 1,
             location: "Meeting in District",

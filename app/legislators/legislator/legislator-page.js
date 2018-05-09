@@ -47,7 +47,7 @@ function onNavigatingTo(args) {
     legislatorName.text = navigationContext.fullName;
 
     legislatorList.empty();
-    legislatorList.load();
+    legislatorList.load(navigationContext.bioguideId);
 
     //dialogs.alert(legislatorList.getItem(legislatorList.length - 1).title);
     

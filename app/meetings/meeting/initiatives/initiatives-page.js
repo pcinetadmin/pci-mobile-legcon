@@ -10,6 +10,7 @@ var initiativesList = new InitiativesViewModel([]);
 var switchTap = false;
 
 var pageData = new ObservableModule.fromObject({
+    boundData: null,
     initiativesList: initiativesList,
     isLoading: false
 });
@@ -18,6 +19,9 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
         navigationContext = page.navigationContext;
+
+        pageData.boundData = navigationContext;
+        pageData.boundData.updated = false;
         
         page.actionBar.title = "Select Initiative(s)";
 
@@ -67,6 +71,7 @@ function onSwitchLoaded(args) {
                 // var result = response.content.toJSON();
 
                 // dialogs.alert(result);
+                pageData.boundData.updated = true;
 
                 switchTap = false;
             }, function (e) {
