@@ -1,3 +1,4 @@
+const platformModule = require("platform");
 const observableModule = require("data/observable");
 var frameModule = require("ui/frame");
 var appSettings = require("application-settings");
@@ -81,7 +82,7 @@ function LoginViewModel() {
                         var useTouchId = appSettings.getBoolean("useTouchId", false);
                         var rememberMe = appSettings.getBoolean("rememberMe", false);
 
-                        if ((useTouchId === undefined || useTouchId === null || useTouchId === false) && rememberMe)
+                        if ((useTouchId === undefined || useTouchId === null || useTouchId === false) && rememberMe && platformModule.isIOS)
                         {
                             dialogs.confirm(
                                 {

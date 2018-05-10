@@ -1,4 +1,5 @@
 const LoginViewModel = require("./login-view-model");
+const platformModule = require("platform");
 const observableModule = require("data/observable");
 const appSettings = require("application-settings");
 const dialogs = require("ui/dialogs");
@@ -34,23 +35,25 @@ function onLoaded(args)
 function onNavigatedTo(args)
 {
     try {
-        if (loginViewModel.useTouchId)
-        {
-            fingerprintAuth.available().then(
-                fingerprintAuth.verifyFingerprint({
-                    message: 'Log on to view legislator information' // optional, shown in the fingerprint dialog (default: 'Scan your finger').
-                }).then(
-                    () => {
-                        const bindingContext = page.bindingContext;
+        if (platformModule.isIOS) {
+            if (loginViewModel.useTouchId)
+            {
+                fingerprintAuth.available().then(
+                    fingerprintAuth.verifyFingerprint({
+                        message: 'Log on to view legislator information' // optional, shown in the fingerprint dialog (default: 'Scan your finger').
+                    }).then(
+                        () => {
+                            const bindingContext = page.bindingContext;
 
-                        bindingContext.signIn();
-                    },
-                    error => {
-                        // when error.code === -3, the user pressed the button labeled with your fallbackMessage
-                        dialogs.alert("Fingerprint NOT OK. Error code: " + error.code + ". Error message: " + error.message);
-                    }
-                )
-            );
+                            bindingContext.signIn();
+                        },
+                        error => {
+                            // when error.code === -3, the user pressed the button labeled with your fallbackMessage
+                            dialogs.alert("Fingerprint NOT OK. Error code: " + error.code + ". Error message: " + error.message);
+                        }
+                    )
+                );
+            }
         }
     } catch(e) {
         dialogs.alert({

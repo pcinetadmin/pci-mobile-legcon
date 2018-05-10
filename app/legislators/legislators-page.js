@@ -1,5 +1,5 @@
-const platform = require("platform");
 const LegislatorsViewModel = require("./legislators-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
 var frameModule = require("ui/frame");
@@ -93,7 +93,9 @@ function onNavigatingTo(args) {
 function onSearchBarLoaded(args) {
     searchBar = args.object;
 
-    if (platform.isIOS) {
+    if (platform.isAndroid) {
+        searchBar.android.clearFocus();
+    } else if (platform.isIOS) {
         // iOS Styling
         searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
         searchBar.ios.showsCancelButton = true;
@@ -140,35 +142,39 @@ function onClear(args) {
 }
 
 function onItemLoading(args) {
-    var cell = args.ios;
+    if (platform.isIOS) {
+        var cell = args.ios;
 
-    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+    }
 }
 
-function onButtonTap(args) {
-    searchBar.ios.showsCancelButton = !searchBar.ios.showsCancelButton;
-}
+// function onButtonTap(args) {
+//     searchBar.ios.showsCancelButton = !searchBar.ios.showsCancelButton;
+// }
 
 function onItemTap(args) {
     try {
-        if (swipeOpen) {
-            swipedItem.animate({
-                translate: { x: 0, y: 0 },
-                duration: 200
-            });
+        if (platform.isIOS) {
+            if (swipeOpen) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 200
+                });
 
-            swipeOpen = false;
-        } else {
-            var view = args.view;
-            var model = view.bindingContext;
+                swipeOpen = false;
+            } else {
+                var view = args.view;
+                var model = view.bindingContext;
 
-            const navigationEntry = {
-                moduleName: "legislators/legislator/legislator-page",
-                context: model,
-                clearHistory: false
-            };
+                const navigationEntry = {
+                    moduleName: "legislators/legislator/legislator-page",
+                    context: model,
+                    clearHistory: false
+                };
 
-            frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost().navigate(navigationEntry);
+            }
         }
     }
     catch(e)
@@ -222,6 +228,8 @@ function onAddClick(args) {
         fullName: view.bindingContext.fullName,
         name: null,
         pciInitiatives: null,
+        surveys: null,
+        pciAttendees: null,
         primaryOfficeContact: null,
         meetingLocationId: 1,
         location: "Meeting in District",
@@ -283,6 +291,40 @@ function onViewClick(args) {
 function onLayoutLoaded(args) {
     var layout = args.object;
 
+    if (platform.isAndroid) {
+        layout.on(gestures.GestureTypes.tap, function(args) {
+            try {
+                if (swipeOpen) {
+                    swipedItem.animate({
+                        translate: { x: 0, y: 0 },
+                        duration: 200
+                    });
+        
+                    swipeOpen = false;
+                } else {
+                    var view = args.view;
+                    var model = view.bindingContext;
+        
+                    const navigationEntry = {
+                        moduleName: "legislators/legislator/legislator-page",
+                        context: model,
+                        clearHistory: false
+                    };
+        
+                    frameModule.topmost().navigate(navigationEntry);
+                }
+            }
+            catch(e)
+            {
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            }
+        });
+    }
+
     layout.on(gestures.GestureTypes.pan, function(args) {
         try {
             var layout = args.object;
@@ -319,7 +361,11 @@ function onLayoutLoaded(args) {
             } else if (isSwiping) {
                 var legislatorsListView = page.getViewById("legislatorsListView");
 
-                legislatorsListView.ios.scrollEnabled = false;
+                if (platform.isAndroid) {
+                    legislatorsListView.nativeView.requestDisallowInterceptTouchEvent(true);
+                } else if (platform.isIOS) {
+                    legislatorsListView.ios.scrollEnabled = false;
+                }
 
                 swipeOpen = true;
                 swipedItem = layout;
@@ -346,7 +392,12 @@ function onLayoutLoaded(args) {
                         duration: 200
                     });
 
-                    legislatorsListView.ios.scrollEnabled = true;
+                    if (platform.isAndroid) {
+                        legislatorsListView.nativeView.requestDisallowInterceptTouchEvent(false);
+                    } else if (platform.isIOS) {
+                        legislatorsListView.ios.scrollEnabled = true;
+                    }
+
                     isSwiping = false;
                 }
             }

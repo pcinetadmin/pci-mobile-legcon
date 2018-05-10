@@ -1,5 +1,6 @@
 const MeetingsViewModel = require("./meetings-view-model");
 // const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
 var frameModule = require("ui/frame");
@@ -110,9 +111,11 @@ function onSelectedIndexChanged(args) {
 }
 
 function onItemLoading(args) {
-    var cell = args.ios;
+    if (platform.isIOS) {
+        var cell = args.ios;
 
-    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+    }
 }
 
 function onItemTap(args) {

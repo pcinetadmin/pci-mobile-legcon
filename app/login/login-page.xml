@@ -1,11 +1,11 @@
-<Page class="page" navigatingTo="onNavigatingTo" loaded="onLoaded" navigatedTo="onNavigatedTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+<Page class="page" navigatingTo="onNavigatingTo" loaded="onLoaded" navigatedTo="onNavigatedTo" xmlns="http://schemas.nativescript.org/tns.xsd" style="margin-top: 0;">
     <ScrollView class="login-background">
         <GridLayout columns="*" rows="*, auto" height="100%" width="100%">
             <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center">
-                <Image src="res://login" stretch="none"></Image>
+                <Image src="res://login" android:stretch="aspectFit" ios:stretch="none"></Image>
             </StackLayout>
-            <StackLayout row="1" col="0" orientation="vertical" backgroundColor="white" margin="10" verticalAlignment="bottom" borderRadius="5">
-                <StackLayout orientation="horizontal" marginBottom="10" marginLeft="10" marginRight="15" marginTop="10">
+            <StackLayout row="1" col="0" orientation="vertical" backgroundColor="white" verticalAlignment="bottom" margin="10" borderRadius="5">
+                <StackLayout orientation="horizontal" class="login-field">
                     <StackLayout width="40%" verticalAlignment="center">
                         <Label text="Email" horizontalAlignment="left" />
                     </StackLayout>
@@ -15,7 +15,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout class="hr-light"></StackLayout>
-                <StackLayout orientation="horizontal" marginBottom="10" marginLeft="10" marginRight="15" marginTop="10">
+                <StackLayout orientation="horizontal" class="login-field">
                     <StackLayout width="40%" verticalAlignment="center">
                         <Label text="Password" horizontalAlignment="left" />
                     </StackLayout>
@@ -25,7 +25,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout class="hr-light"></StackLayout>
-                <StackLayout orientation="horizontal" marginBottom="5" marginLeft="10" marginRight="10" marginTop="5">
+                <StackLayout orientation="horizontal" class="login-field-switch">
                     <StackLayout width="40%" verticalAlignment="center">
                         <Label text="Remember Me" horizontalAlignment="left" />
                     </StackLayout>

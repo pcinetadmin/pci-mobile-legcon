@@ -5,6 +5,7 @@ purpose of the file is to pass control to the app’s first module.
 */
 
 require("./bundle-config");
+require("nativescript-platform-css");
 const application = require("application");
 
 // Dev, test, prod urls

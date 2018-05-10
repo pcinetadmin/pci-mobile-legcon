@@ -8,13 +8,84 @@ selectors and properties you can use to style UI components.
 For example, the following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
+ActivityIndicator {
+    color: #0a6fb0;
+}
+
 Page {
     /* background-color: #34495e; */
     margin-top: -20; /* fix nested frame spacing */
 }
 
-ActivityIndicator {
-    color: #0a6fb0;
+.android TextField {
+    font: 14;
+}
+
+.android .login-field {
+    margin-bottom: 0;
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: 0;
+}
+
+.ios .login-field {
+    margin-bottom: 10;
+    margin-left: 10;
+    margin-right: 15;
+    margin-top: 10;
+}
+
+.android .login-field-switch {
+    margin-bottom: 5;
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: 5;
+}
+
+.ios .login-field-switch {
+    margin-bottom: 5;
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: 5;
+}
+
+.hr-light {
+    background-color: #e0e0e0;
+    height: 1;
+    width: 100%;
+}
+
+.hr-dark {
+    height: 1;
+    background-color: #303030;
+    width: 100%;
+}
+
+.android .button {
+    background: #eee;
+    border-color: #ccc;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: black;
+    font-size: 12;
+    height: 30;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 0;
+}
+
+.ios .button {
+    background: #eee;
+    border-color: #ccc;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: black;
+    font-size: 18;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 5;
 }
 
 .navigation-frame Page {
@@ -34,10 +105,18 @@ ActivityIndicator {
     color: #0a6fb0;
 }
 
-.tab-icon {
+.android .tab-icon {
     text-align: center;
     font-size: 22;
-    font-family: "FontAwesome";
+    font-family: fontawesome;
+    margin-bottom: 5;
+    margin-top: 5;
+}
+
+.ios .tab-icon {
+    text-align: center;
+    font-size: 22;
+    font-family: 'FontAwesome';
     margin-bottom: 5;
     margin-top: 5;
 }
@@ -52,32 +131,17 @@ ActivityIndicator {
     font-weight: bold;
 }
 
-.button {
-    background: #eee;
-    border-color: #ccc;
-    border-radius: 3;
-    border-style: solid;
-    border-width: 1;
-    color: black;
-    font-size: 18;
-    margin-bottom: 10;
-    margin-top: 10;
-    padding: 5;
+.android .list-view-item {
+    /* color: #212121; */
+    font-size: 16;
+    margin-left: 20;
+    margin-right: 20;
+    min-height: 35;
+    padding-bottom: 8;
+    padding-top: 8;
 }
 
-.hr-light {
-    height: 1;
-    background-color: #e0e0e0;
-    width: 100%;
-}
-
-.hr-dark {
-    height: 1;
-    background-color: #303030;
-    width: 100%;
-}
-
-.list-view-item {
+.ios .list-view-item {
     /* color: #212121; */
     font-size: 16;
     margin-left: 20;
@@ -181,14 +245,28 @@ ActivityIndicator {
     margin-top: 3;
 }
 
-.fn-list-view-item {
+.android .fn-list-view-item {
+    color: #ccc;
+    font-family: fontawesome;
+    font-size: 26;
+    margin-left: 10;
+}
+
+.ios .fn-list-view-item {
     color: #ccc;
     font-family: 'FontAwesome';
     font-size: 26;
     margin-left: 10;
 }
 
-.fn-list-view-item-small {
+.android .fn-list-view-item-small {
+    color: #0a6fb0;
+    font-family: fontawesome;
+    font-size: 16;
+    margin-left: 10;
+}
+
+.ios .fn-list-view-item-small {
     color: #0a6fb0;
     font-family: 'FontAwesome';
     font-size: 16;
@@ -234,8 +312,12 @@ ActivityIndicator {
     background-color: #cc2d30;
 }
 
-.switch {
-    background-color: #cc2d30; /*#0a6fb0;*/
+/* .android .switch {
+    color: #cc2d30;
+} */
+
+.ios .switch {
+    background-color: #cc2d30;
 }
 
 /* Switch[checked=true] {
