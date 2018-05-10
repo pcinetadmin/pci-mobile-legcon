@@ -19,9 +19,9 @@ const scopeTest = "http://test.pciaa.net/";
 const scopeProd = "http://www.pciaa.net/";
 
 // Define all global variables used throughout the entire solution.
-global.apiLoginUrl = apiLoginUrlDev;
-global.apiBaseServiceUrl = apiBaseServiceUrlDev;
-global.scope = scopeDev;
+global.apiLoginUrl = apiLoginUrlProd;
+global.apiBaseServiceUrl = apiBaseServiceUrlProd;
+global.scope = scopeProd;
 global.token = null;
 global.isIos = false;
 global.personId = null;
