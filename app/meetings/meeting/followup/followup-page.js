@@ -41,6 +41,14 @@ function onLoaded(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onSwitchLoaded(args) {
     var checkedSwitch = args.object;
 
@@ -119,10 +127,11 @@ function dateConverter(value, format) {
     result = result.replace("YYYY", value.getFullYear());
 
     return result;
-};
+}
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onBackTap = onBackTap;
 exports.onSwitchLoaded = onSwitchLoaded;
 exports.onTextViewFocus = onTextViewFocus;
 exports.onStackLayoutFollowUpDateTap = onStackLayoutFollowUpDateTap;

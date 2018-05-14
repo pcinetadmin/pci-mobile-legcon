@@ -1,5 +1,5 @@
-const platform = require("platform");
 const AssignmentsViewModel = require("./assignments-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
 var frameModule = require("ui/frame");
@@ -99,7 +99,9 @@ function onSelectedIndexChanged(args) {
 function onSearchBarLoaded(args) {
     searchBar = args.object;
 
-    if (platform.isIOS) {
+    if (platform.isAndroid) {
+        searchBar.android.clearFocus();
+    } else if (platform.isIOS) {
         // iOS Styling
         searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
         searchBar.ios.showsCancelButton = true;
@@ -144,31 +146,35 @@ function onClear(args) {
 }
 
 function onItemLoading(args) {
-    var cell = args.ios;
+    if (platform.isIOS) {
+        var cell = args.ios;
 
-    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+    }
 }
 
 function onItemTap(args) {
     try {
-        if (swipeOpen) {
-            swipedItem.animate({
-                translate: { x: 0, y: 0 },
-                duration: 200
-            });
+        if (platform.isIOS) {
+            if (swipeOpen) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 200
+                });
 
-            swipeOpen = false;
-        } else {
-            var view = args.view;
-            var model = view.bindingContext;
+                swipeOpen = false;
+            } else {
+                var view = args.view;
+                var model = view.bindingContext;
 
-            const navigationEntry = {
-                moduleName: "assignments/assignment/assignment-page",
-                context: model,
-                clearHistory: false
-            };
+                const navigationEntry = {
+                    moduleName: "assignments/assignment/assignment-page",
+                    context: model,
+                    clearHistory: false
+                };
 
-            frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost().navigate(navigationEntry);
+            }
         }
     }
     catch(e)
@@ -222,6 +228,8 @@ function onAddClick(args) {
         fullName: view.bindingContext.legislator,
         name: null,
         pciInitiatives: null,
+        surveys: null,
+        pciAttendees: null,
         primaryOfficeContact: null,
         meetingLocationId: 1,
         location: "Meeting in District",
@@ -256,6 +264,40 @@ function onAddClick(args) {
 
 function onLayoutLoaded(args) {
     var layout = args.object;
+
+    if (platform.isAndroid) {
+        layout.on(gestures.GestureTypes.tap, function(args) {
+            try {
+                if (swipeOpen) {
+                    swipedItem.animate({
+                        translate: { x: 0, y: 0 },
+                        duration: 200
+                    });
+    
+                    swipeOpen = false;
+                } else {
+                    var view = args.view;
+                    var model = view.bindingContext;
+    
+                    const navigationEntry = {
+                        moduleName: "assignments/assignment/assignment-page",
+                        context: model,
+                        clearHistory: false
+                    };
+    
+                    frameModule.topmost().navigate(navigationEntry);
+                }
+            }
+            catch(e)
+            {
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            }
+        });
+    }
 
     layout.on(gestures.GestureTypes.pan, function(args) {
         try {
@@ -294,7 +336,11 @@ function onLayoutLoaded(args) {
                 if (view.bindingContext.meetingCreated === "N") {
                     var assignmentsListView = page.getViewById("assignmentsListView");
     
-                    assignmentsListView.ios.scrollEnabled = false;
+                    if (platform.isAndroid) {
+                        assignmentsListView.nativeView.requestDisallowInterceptTouchEvent(true);
+                    } else if (platform.isIOS) {
+                        assignmentsListView.ios.scrollEnabled = false;
+                    }
     
                     swipeOpen = true;
                     swipedItem = layout;
@@ -322,7 +368,12 @@ function onLayoutLoaded(args) {
                         });
                     }
 
-                    assignmentsListView.ios.scrollEnabled = true;
+                    if (platform.isAndroid) {
+                        assignmentsListView.nativeView.requestDisallowInterceptTouchEvent(false);
+                    } else if (platform.isIOS) {
+                        assignmentsListView.ios.scrollEnabled = true;
+                    }
+
                     isSwiping = false;
                 } else {
                     isSwiping = false;

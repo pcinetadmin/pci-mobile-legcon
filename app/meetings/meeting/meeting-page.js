@@ -442,7 +442,15 @@ function onStackLayoutStaffAttendeesTap(args) {
     }
 }
 
-function onSave(args) {
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onSaveTap(args) {
     try {
         collapseMeetingDate();
 
@@ -549,4 +557,5 @@ exports.onStackLayoutAttendeeTypeTap = onStackLayoutAttendeeTypeTap;
 exports.onStackLayoutMeetingLocationTap = onStackLayoutMeetingLocationTap;
 exports.onStackLayoutPciAttendeesTap = onStackLayoutPciAttendeesTap;
 exports.onStackLayoutStaffAttendeesTap = onStackLayoutStaffAttendeesTap;
-exports.onSave = onSave;
+exports.onBackTap = onBackTap;
+exports.onSaveTap = onSaveTap;

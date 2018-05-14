@@ -1,5 +1,8 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
         <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" 
             visibility="{{ meetingCreated === 'Y' ? 'collapse' : 'visible' }}" />
     </ActionBar>
@@ -11,24 +14,24 @@
         </StackLayout>
         <StackLayout row="1" col="0" width="100%">
             <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
-                <Label row="0" col="0" text="Company" class="list-view-item-left" />
-                <Label row="0" col="1" text="{{ company }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+                <Label row="0" col="0" text="Company" verticalAlignment="middle" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ company }}" horizontalAlignment="right" verticalAlignment="middle" textWrap="true" class="list-view-item-right" />
             </GridLayout>
             <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
-                <Label row="0" col="0" text="Initiative" class="list-view-item-left" />
-                <Label row="0" col="1" text="{{ initiative }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+                <Label row="0" col="0" text="Initiative" verticalAlignment="middle" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ initiative }}" horizontalAlignment="right" verticalAlignment="middle" textWrap="true" class="list-view-item-right" />
             </GridLayout>
             <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
-                <Label row="0" col="0" text="Survey" class="list-view-item-left" />
-                <Label row="0" col="1" text="{{ survey }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+                <Label row="0" col="0" text="Survey" verticalAlignment="middle" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ survey }}" horizontalAlignment="right" verticalAlignment="middle" textWrap="true" class="list-view-item-right" />
             </GridLayout>
             <GridLayout columns="auto, *" rows="auto" class="list-view-item-form">
-                <Label row="0" col="0" text="Meeting Created?" class="list-view-item-left" />
-                <Label row="0" col="1" text="{{ meetingCreated === 'Y' ? 'Yes' : 'No' }}" horizontalAlignment="right" class="list-view-item-right" />
+                <Label row="0" col="0" text="Meeting Created?" verticalAlignment="middle" class="list-view-item-left" />
+                <Label row="0" col="1" text="{{ meetingCreated === 'Y' ? 'Yes' : 'No' }}" horizontalAlignment="right" verticalAlignment="middle" class="list-view-item-right" />
             </GridLayout>
-            <GridLayout columns="auto, *" rows="auto" class="list-view-item-form" visibility="{{ meetingCreated === 'Y' ? 'visible' : 'collapse' }}">
-                <Label row="0" col="0" text="Lobbyist" class="list-view-item-left" />
-                <Label row="0" col="1" text="{{ lobbyist }}" horizontalAlignment="right" textWrap="true" class="list-view-item-right" />
+            <GridLayout id="lobbyistGridLayout" columns="auto, *" rows="auto" class="list-view-item-form" visibility="{{ meetingCreated === 'Y' ? 'visible' : 'collapse' }}">
+                <Label row="0" col="0" text="Lobbyist" verticalAlignment="middle" class="list-view-item-left" />
+                <Label id="lobbyistLabel" row="0" col="1" text="{{ lobbyist }}" horizontalAlignment="right" verticalAlignment="middle" textWrap="true" class="list-view-item-right" />
             </GridLayout>
         </StackLayout>
     </GridLayout>

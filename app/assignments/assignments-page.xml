@@ -18,7 +18,7 @@
                 <ListView.itemTemplate>
                     <AbsoluteLayout>
                         <!-- BACKGROUND: Swipe Actions -->
-                        <GridLayout columns="*, 80" rows="75" width="100%">
+                        <GridLayout columns="*, 80" android:rows="67" ios:rows="75" width="100%">
                             <Label col="0" />
                             <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onAddClick" class="swipe-icons orange" 
                                 visibility="{{ meetingCreated === 'Y' ? 'collapse' : 'visible' }}">
@@ -42,13 +42,13 @@
                                         <Label row="0" col="1" text="{{ survey }}" class="list-view-item-sub" />
                                     </GridLayout>
                                 </StackLayout>
-                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
                             </GridLayout>
                         </StackLayout>
                     </AbsoluteLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="3" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="3" colSpan="1" />
     </GridLayout>
 </Page>

@@ -120,25 +120,27 @@ function onItemLoading(args) {
 
 function onItemTap(args) {
     try {
-        if (swipeOpen) {
-            swipedItem.animate({
-                translate: { x: 0, y: 0 },
-                duration: 200
-            });
+        if (platform.isIOS) {
+            if (swipeOpen) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 200
+                });
 
-            swipeOpen = false;
-        } else {
-            var view = args.view;
+                swipeOpen = false;
+            } else {
+                var view = args.view;
 
-            model = view.bindingContext;
+                model = view.bindingContext;
 
-            const navigationEntry = {
-                moduleName: "meetings/meeting/meeting-page",
-                context: model,
-                clearHistory: false
-            };
+                const navigationEntry = {
+                    moduleName: "meetings/meeting/meeting-page",
+                    context: model,
+                    clearHistory: false
+                };
 
-            frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost().navigate(navigationEntry);
+            }
         }
     }
     catch(e)
@@ -202,39 +204,76 @@ function onAddTap(args) {
 }
 
 function onDeleteClick(args) {
-    dialogs.action({
-        message: "Would you like to delete this meeting?",
-        cancelButtonText: "Cancel",
-        actions: ["Delete"]
-    }).then(function (result) {
-        if (result === "Delete") {
-            var view = args.object;
+    if (platform.isAndroid) {
+        dialogs.confirm({
+            title: "Delete",
+            message: "Meeting will be deleted. Delete?",
+            okButtonText: "Yes",
+            cancelButtonText: "No"
+        }).then(function (result) {
+            if (result) {
+                var view = args.object;
 
-            http.request({
-                url: global.apiBaseServiceUrl + "deletemeeting",
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": global.token },
-                content: JSON.stringify(view.bindingContext)
-            }).then(function (response) {
-                meetingsList.empty();
-    
-                pageData.set("isLoading", true);
-    
-                meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
-                        pageData.set("isLoading", false);
-    
-                        page.bindingContext = pageData;
+                http.request({
+                    url: global.apiBaseServiceUrl + "deletemeeting",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    content: JSON.stringify(view.bindingContext)
+                }).then(function (response) {
+                    meetingsList.empty();
+        
+                    pageData.set("isLoading", true);
+        
+                    meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
+                            pageData.set("isLoading", false);
+        
+                            page.bindingContext = pageData;
+                    });
+                    
+                }, function (e) {
+                    dialogs.alert({
+                        title: "Error",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
                 });
-                
-            }, function (e) {
-                dialogs.alert({
-                    title: "Error",
-                    message: e.toString(),
-                    okButtonText: "OK"
+            }
+        });
+    } else if (platform.isIOS) {
+        dialogs.action({
+            message: "Would you like to delete this meeting?",
+            cancelButtonText: "Cancel",
+            actions: ["Delete"]
+        }).then(function (result) {
+            if (result === "Delete") {
+                var view = args.object;
+
+                http.request({
+                    url: global.apiBaseServiceUrl + "deletemeeting",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    content: JSON.stringify(view.bindingContext)
+                }).then(function (response) {
+                    meetingsList.empty();
+        
+                    pageData.set("isLoading", true);
+        
+                    meetingsList.load(pageData.reference, navigationContext.legislatorId, pageData.recentMeetings).then(function () {
+                            pageData.set("isLoading", false);
+        
+                            page.bindingContext = pageData;
+                    });
+                    
+                }, function (e) {
+                    dialogs.alert({
+                        title: "Error",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
                 });
-            });
-        }
-    });
+            }
+        });
+    }
 
     if (swipeOpen) {
         swipedItem.animate({
@@ -248,6 +287,41 @@ function onDeleteClick(args) {
 
 function onLayoutLoaded(args) {
     var layout = args.object;
+
+    if (platform.isAndroid) {
+        layout.on(gestures.GestureTypes.tap, function(args) {
+            try {
+                if (swipeOpen) {
+                    swipedItem.animate({
+                        translate: { x: 0, y: 0 },
+                        duration: 200
+                    });
+    
+                    swipeOpen = false;
+                } else {
+                    var view = args.view;
+    
+                    model = view.bindingContext;
+    
+                    const navigationEntry = {
+                        moduleName: "meetings/meeting/meeting-page",
+                        context: model,
+                        clearHistory: false
+                    };
+    
+                    frameModule.topmost().navigate(navigationEntry);
+                }
+            }
+            catch(e)
+            {
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            }
+        });
+    }
 
     layout.on(gestures.GestureTypes.pan, function(args) {
         try {
@@ -285,7 +359,11 @@ function onLayoutLoaded(args) {
             } else if (isSwiping) {
                 var meetingsListView = page.getViewById("meetingsListView");
 
-                meetingsListView.ios.scrollEnabled = false;
+                if (platform.isAndroid) {
+                    meetingsListView.nativeView.requestDisallowInterceptTouchEvent(true);
+                } else if (platform.isIOS) {
+                    meetingsListView.ios.scrollEnabled = false;
+                }
 
                 swipeOpen = true;
                 swipedItem = layout;
@@ -312,7 +390,12 @@ function onLayoutLoaded(args) {
                         duration: 200
                     });
 
-                    meetingsListView.ios.scrollEnabled = true;
+                    if (platform.isAndroid) {
+                        meetingsListView.nativeView.requestDisallowInterceptTouchEvent(false);
+                    } else if (platform.isIOS) {
+                        meetingsListView.ios.scrollEnabled = true;
+                    }
+
                     isSwiping = false;
                 }
             }

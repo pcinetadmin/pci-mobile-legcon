@@ -17,9 +17,18 @@ function onNavigatingTo(args) {
 
         if (args.isBackNavigation) {
             if (global.refreshAssignments !== undefined && global.refreshAssignments === true) {
-                page.bindingContext.set("meetingCreated", "Y");
-                page.bindingContext.set("lobbyistId", global.personId);
-                page.bindingContext.set("lobbyist", global.currentUser);
+                // page.bindingContext.set("meetingCreated", "Y");
+                // page.bindingContext.set("lobbyistId", global.personId);
+                // page.bindingContext.set("lobbyist", global.currentUser);
+                page.bindingContext.meetingCreated = "Y";
+                page.bindingContext.lobbyistId = global.personId;
+                page.bindingContext.lobbyist = global.currentUser;
+
+                var lobbyistGridLayout = page.getViewById("lobbyistGridLayout");
+                var lobbyistLabel = page.getViewById("lobbyistLabel");
+
+                lobbyistGridLayout.visibility = "visible";
+                lobbyistLabel.text = global.currentUser;
             }
         } else {
             global.refreshAssignments = false;
@@ -30,6 +39,14 @@ function onNavigatingTo(args) {
         dialogs.alert(e);
     }
     
+}
+
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
 }
 
 function onAddTap(args) {
@@ -48,6 +65,8 @@ function onAddTap(args) {
             fullName: navigationContext.legislator,
             name: null,
             pciInitiatives: null,
+            surveys: null,
+            pciAttendees: null,
             primaryOfficeContact: null,
             meetingLocationId: 1,
             location: "Meeting in District",
@@ -77,4 +96,5 @@ function onAddTap(args) {
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;
 exports.onAddTap = onAddTap;

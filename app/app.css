@@ -132,17 +132,15 @@ Page {
 }
 
 .android .list-view-item {
-    /* color: #212121; */
-    font-size: 16;
+    font-size: 14;
     margin-left: 20;
     margin-right: 20;
-    min-height: 35;
-    padding-bottom: 8;
-    padding-top: 8;
+    min-height: 38;
+    padding-bottom: 5;
+    padding-top: 5;
 }
 
 .ios .list-view-item {
-    /* color: #212121; */
     font-size: 16;
     margin-left: 20;
     margin-right: 20;
@@ -163,7 +161,19 @@ Page {
     padding-top: 8;
 }
 
-.list-view-item-form {
+.android .list-view-item-form {
+    border-bottom-color: #ddd;
+    border-bottom-width: 0.5;
+    font-size: 16;
+    margin-left: 20;
+    /* margin-right: 20; */
+    min-height: 44;
+    padding-bottom: 8;
+    padding-right: 20;
+    padding-top: 8;
+}
+
+.ios .list-view-item-form {
     border-bottom-color: #ddd;
     border-bottom-width: 0.5;
     font-size: 16;
@@ -199,25 +209,77 @@ Page {
     padding-top: 0;
 }
 
-.list-view-item-main-top {
+.android .list-view-item-main-top {
+    color: black;
+    font-size: 14;
+}
+
+.ios .list-view-item-main-top {
     font-size: 16;
 }
 
-.list-view-item-main {
+.android .list-view-item-main {
+    font-size: 14;
+    margin-top: 3;
+}
+
+.ios .list-view-item-main {
     font-size: 16;
     margin-top: 3;
 }
 
-.list-view-item-left {
+.android .list-view-item-picker {
+    color: black;
+    font-size: 14;
+}
+
+.ios .list-view-item-picker {
+    color: black;
     font-size: 16;
 }
 
-.list-view-item-right {
+.android .list-view-item-textview {
+    color: #666;
+    font-size: 14;
+}
+
+.ios .list-view-item-textview {
     color: #666;
     font-size: 16;
 }
 
-.list-view-item-sub-email {
+.android .list-view-item-left {
+    color: black;
+    font-size: 14;
+    text-align: left;
+}
+
+.ios .list-view-item-left {
+    font-size: 16;
+    text-align: left;
+}
+
+.android .list-view-item-right {
+    color: #666;
+    font-size: 14;
+    text-align: right;
+}
+
+.ios .list-view-item-right {
+    color: #666;
+    font-size: 16;
+    text-align: right;
+}
+
+.android .list-view-item-sub-email {
+    color: #0a6fb0;
+    font-size: 12;
+    /* margin-top: 3; */
+    padding: 0;
+    text-decoration: underline;
+}
+
+.ios .list-view-item-sub-email {
     color: #0a6fb0;
     font-size: 14;
     /* margin-top: 3; */
@@ -225,21 +287,41 @@ Page {
     text-decoration: underline;
 }
 
-.list-view-item-sub-phone {
+.android .list-view-item-sub-phone {
+    color: #0a6fb0;
+    font-size: 12;
+    /* margin-top: 3; */
+    padding: 0;
+}
+
+.ios .list-view-item-sub-phone {
     color: #0a6fb0;
     font-size: 14;
     /* margin-top: 3; */
     padding: 0;
 }
 
-.list-view-item-sub-title {
+.android .list-view-item-sub-title {
+    color: #666;
+    font-size: 12;
+    font-weight: bold;
+    margin-top: 3;
+}
+
+.ios .list-view-item-sub-title {
     color: #666;
     font-size: 14;
     font-weight: bold;
     margin-top: 3;
 }
 
-.list-view-item-sub {
+.android .list-view-item-sub {
+    color: #666;
+    font-size: 12;
+    margin-top: 3;
+}
+
+.ios .list-view-item-sub {
     color: #666;
     font-size: 14;
     margin-top: 3;
@@ -248,7 +330,7 @@ Page {
 .android .fn-list-view-item {
     color: #ccc;
     font-family: fontawesome;
-    font-size: 26;
+    font-size: 24;
     margin-left: 10;
 }
 
@@ -262,7 +344,7 @@ Page {
 .android .fn-list-view-item-small {
     color: #0a6fb0;
     font-family: fontawesome;
-    font-size: 16;
+    font-size: 14;
     margin-left: 10;
 }
 
@@ -284,7 +366,14 @@ Page {
     padding-right: 16;
 }
 
-.segmented-bar {
+.android .segmented-bar {
+    /* background-color: #ccc; */
+    color: #0a6fb0;
+    font-size: 10;
+    selected-background-color: #0a6fb0; /* NEEDED */
+}
+
+.ios .segmented-bar {
     /* background-color: #ccc; */
     color: #0a6fb0;
     font-size: 14;

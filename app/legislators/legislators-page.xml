@@ -29,16 +29,16 @@
                         </GridLayout>
                         <!-- FOREGROUND: List View Item Details -->
                         <StackLayout loaded="onLayoutLoaded" backgroundColor="white" width="100%">
-                            <GridLayout columns="*, auto" rows="*" class="list-view-item" verticalAlignment="middle" height="54">
-                                <Label row="0" col="0" text="{{ combinedName }}" class="list-view-item-main-top" />
-                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                            <GridLayout columns="*, auto" rows="*" class="list-view-item" height="54">
+                                <Label row="0" col="0" text="{{ combinedName }}" class="list-view-item-main-top" verticalAlignment="middle" />
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
                             </GridLayout>
                         </StackLayout>
                     </AbsoluteLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 <!-- </StackLayout> -->
 </Page>

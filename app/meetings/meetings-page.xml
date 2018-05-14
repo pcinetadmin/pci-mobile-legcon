@@ -19,7 +19,8 @@
                     <AbsoluteLayout>
                         <!-- BACKGROUND: Swipe Actions -->
                         <GridLayout columns="*, 80" width="100%"
-                            rows="{{ pciInitiatives.length > 0 && legislatorStaffAttendees.length > 0 ? '98' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '78' : '58' }}">
+                            android:rows="{{ pciInitiatives.length > 0 && legislatorStaffAttendees.length > 0 ? '89' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '70' : '51' }}"
+                            ios:rows="{{ pciInitiatives.length > 0 && legislatorStaffAttendees.length > 0 ? '98' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '78' : '58' }}">
                             <Label col="0" />
                             <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onDeleteClick" class="swipe-icons red">
                                 <Label row="0" col="0" text="" />
@@ -37,13 +38,13 @@
                                     <Label text="{{ 'with ' + legislatorStaffAttendees }}" visibility="{{ legislatorStaffAttendees.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
                                     <Label text="{{ 'on ' + pciInitiatives }}" visibility="{{ pciInitiatives.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
                                 </StackLayout>
-                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
                             </GridLayout>
                         </StackLayout>
                     </AbsoluteLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>

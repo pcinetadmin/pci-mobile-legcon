@@ -1,6 +1,6 @@
-const platform = require("platform");
 const CommitteesViewModel = require("./committees-view-model");
-const observableModule = require("data/observable");
+const platform = require("platform");
+const ObservableModule = require("data/observable");
 var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
@@ -12,7 +12,7 @@ var committeesSearchSubmitted = false;
 
 var committeesList = new CommitteesViewModel([]);
 
-var pageData = new observableModule.fromObject({
+var pageData = new ObservableModule.fromObject({
     committeesList: committeesList,
     isLoading: false
 });
@@ -70,7 +70,9 @@ function onSearchBarLoaded(args)
 {
     searchBar = args.object;
 
-    if (platform.isIOS) {
+    if (platform.isAndroid) {
+        searchBar.android.clearFocus();
+    } else if (platform.isIOS) {
         // iOS Styling
         searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
         searchBar.ios.showsCancelButton = true;

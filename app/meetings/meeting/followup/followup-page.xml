@@ -1,5 +1,9 @@
 <Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
-    <ActionBar class="action-bar" />
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+    </ActionBar>
 
     <GridLayout columns="*" rows="auto, auto, auto, auto, *">
         <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
@@ -23,7 +27,7 @@
                 <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
             </GridLayout>
             <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
-                <TextView row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-right" height="100%" />
+                <TextView row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-textview" height="100%" />
             </GridLayout>
         </StackLayout>
         <StackLayout id="bottomStackLayout" row="4" col="0" height="100%" class="list-view-section-header" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'collapse' : 'visible' }}"></StackLayout>
