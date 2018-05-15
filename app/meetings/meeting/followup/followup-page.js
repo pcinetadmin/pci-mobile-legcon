@@ -1,3 +1,5 @@
+const platform = require("platform");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
 var page;
@@ -43,7 +45,25 @@ function onLoaded(args) {
 
 function onBackTap(args) {
     try {
+        if (platform.isAndroid) {
+            var followUpNotes = page.getViewById("followUpNotes");
+
+            followUpNotes.dismissSoftInput();
+        }
+
         frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onGridLayoutTap(args) {
+    try {
+        if (platform.isAndroid) {
+            var followUpNotes = page.getViewById("followUpNotes");
+
+            followUpNotes.dismissSoftInput();
+        }
     } catch(e) {
         dialogs.alert(e);
     }
@@ -53,19 +73,22 @@ function onSwitchLoaded(args) {
     var checkedSwitch = args.object;
 
     checkedSwitch.on("checkedChange", function(args) {
-        var detailsLabelStackLayout = page.getViewById("detailsLabelStackLayout");
-        var detailsStackLayout = page.getViewById("detailsStackLayout");
+        if (platform.isAndroid) {
+            var followUpNotes = page.getViewById("followUpNotes");
+
+            followUpNotes.dismissSoftInput();
+        }
+
+        var detailsLabel = page.getViewById("detailsLabel");
+        var followUpDetailsStackLayout = page.getViewById("followUpDetailsStackLayout");
         var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
-        var bottomStackLayout = page.getViewById("bottomStackLayout");
 
         if (args.value) {
-            detailsLabelStackLayout.visibility = "visible";
-            detailsStackLayout.visibility = "visible";
-            bottomStackLayout.visibility = "collapse";
+            detailsLabel.visibility = "visible";
+            followUpDetailsStackLayout.visibility = "visible";
         } else {
-            detailsLabelStackLayout.visibility = "collapse";
-            detailsStackLayout.visibility = "collapse";
-            bottomStackLayout.visibility = "visible";
+            detailsLabel.visibility = "collapse";
+            followUpDetailsStackLayout.visibility = "collapse";
         }
 
         followUpDateDatePickerGridLayout.visibility = "collapse";
@@ -92,6 +115,12 @@ function onTextViewFocus(args) {
 
 function onStackLayoutFollowUpDateTap(args) {
     try {
+        if (platform.isAndroid) {
+            var followUpNotes = page.getViewById("followUpNotes");
+
+            followUpNotes.dismissSoftInput();
+        }
+
         var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
         
         if (followUpDateDatePickerGridLayout.visibility === "collapse") {
@@ -132,6 +161,7 @@ function dateConverter(value, format) {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onBackTap = onBackTap;
+exports.onGridLayoutTap = onGridLayoutTap;
 exports.onSwitchLoaded = onSwitchLoaded;
 exports.onTextViewFocus = onTextViewFocus;
 exports.onStackLayoutFollowUpDateTap = onStackLayoutFollowUpDateTap;

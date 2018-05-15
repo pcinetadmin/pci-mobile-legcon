@@ -1,11 +1,15 @@
 <Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
-    <ActionBar class="action-bar" />
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+    </ActionBar>
 
     <GridLayout columns="*" rows="auto, auto, *">
         <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
         <GridLayout row="1" col="0" columns="*" rows="auto" class="list-view-item-form">
             <ListPicker id="venueTypeListPicker" row="0" col="0" items="{{ venueTypeList.Items }}" selectedIndex="{{ venueTypeIndex }}" 
-                horizontalAlignment="center" class="list-view-item-right"></ListPicker>
+                horizontalAlignment="center" class="list-view-item-picker" width="100%"></ListPicker>
         </GridLayout>
         <StackLayout row="2" col="0" height="100%" class="list-view-section-header"></StackLayout>
         <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="3" colSpan="1" />

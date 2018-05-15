@@ -5,7 +5,7 @@
         </android>
     </ActionBar>
 
-    <GridLayout columns="*" rows="auto, auto, auto, auto, *">
+    <GridLayout columns="*" rows="auto, auto, *" tap="onGridLayoutTap">
         <StackLayout row="0" col="0" class="list-view-section-header"></StackLayout>
         <StackLayout row="1" col="0">
             <GridLayout columns="*, auto" rows="auto" class="list-view-item-form-bottom">
@@ -13,23 +13,24 @@
                 <Switch row="0" col="1" checked="{{ followUpNeeded }}" loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
             </GridLayout>
         </StackLayout>
-        <StackLayout id="detailsLabelStackLayout" row="2" col="0" verticalAlignment="bottom" class="list-view-section-header" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
-            <Label text="DETAILS" verticalAlignment="bottom" />
-        </StackLayout>
-        <StackLayout id="detailsStackLayout" row="3" col="0" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
-            <StackLayout tap="onStackLayoutFollowUpDateTap">
-                <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Follow Up Completed" class="list-view-item-left" />
-                    <Label id="followUpDateLabel" row="0" col="1" text="{{ followUpDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
+        <StackLayout row="2" col="0" style="background-color: #eee;">
+            <StackLayout verticalAlignment="bottom" class="list-view-section-header-no-border">
+                <Label id="detailsLabel" text="DETAILS" verticalAlignment="bottom" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}" />
+            </StackLayout>
+            <StackLayout id="followUpDetailsStackLayout" class="list-view-section-detail" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'visible' : 'collapse' }}">
+                <StackLayout tap="onStackLayoutFollowUpDateTap">
+                    <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                        <Label row="0" col="0" text="Follow Up Completed" class="list-view-item-left" />
+                        <Label id="followUpDateLabel" row="0" col="1" text="{{ followUpDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
+                    </GridLayout>
+                </StackLayout>
+                <GridLayout id="followUpDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                    <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
+                </GridLayout>
+                <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
+                    <TextView id="followUpNotes" row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-textview" height="100%" />
                 </GridLayout>
             </StackLayout>
-            <GridLayout id="followUpDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
-            </GridLayout>
-            <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
-                <TextView row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-textview" height="100%" />
-            </GridLayout>
         </StackLayout>
-        <StackLayout id="bottomStackLayout" row="4" col="0" height="100%" class="list-view-section-header" visibility="{{ followUpNeeded === 'true' || followUpNeeded === true ? 'collapse' : 'visible' }}"></StackLayout>
     </GridLayout>
 </Page>

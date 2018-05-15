@@ -1,6 +1,7 @@
 const InitiativesViewModel = require("./initiatives-view-model");
 const ObservableModule = require("data/observable");
 var http = require("http");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
@@ -85,5 +86,14 @@ function onSwitchLoaded(args) {
     });
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSwitchLoaded = onSwitchLoaded;
+exports.onBackTap = onBackTap;

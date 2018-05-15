@@ -1,9 +1,12 @@
 <Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
-        <ActionItem tap="onSave" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+        <ActionItem tap="onSaveTap" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
     </ActionBar>
 
-    <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
+    <GridLayout columns="*" rows="auto, *" height="100%" width="100%" tap="onGridLayoutTap">
         <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
             <Label id="legislatorId" text="" visibility="collapsed" />
             <Label id="legislatorName" text="" horizontalAlignment="center" />
@@ -19,7 +22,7 @@
                 </GridLayout>
             </StackLayout>
             <GridLayout id="responseListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                <ListPicker id="responseListPicker" row="0" col="0" items="{{ responseList.Items }}" selectedIndex="{{ responseIndex }}" horizontalAlignment="center" class="list-view-item-right"></ListPicker>
+                <ListPicker id="responseListPicker" row="0" col="0" items="{{ responseList.Items }}" selectedIndex="{{ responseIndex }}" horizontalAlignment="center" class="list-view-item-picker"></ListPicker>
             </GridLayout>
             <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                 <Label row="0" col="0" text="Follow Up Required?" class="list-view-item-left" />
@@ -29,9 +32,9 @@
                 <Label row="0" col="0" text="Comments/Observations" class="list-view-item-left" />
             </GridLayout> -->
             <GridLayout columns="*" rows="*" class="list-view-item-form">
-                <TextView row="0" col="0" text="{{ boundData.comments }}" hint="Comments/Observations" class="list-view-item-right" />
+                <TextView id="comments" row="0" col="0" text="{{ boundData.comments }}" hint="Comments/Observations" class="list-view-item-textview" />
             </GridLayout>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>

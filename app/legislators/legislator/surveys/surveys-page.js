@@ -109,6 +109,14 @@ function onAddTap(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onItemTap(args) {
     try
     {
@@ -121,6 +129,7 @@ function onItemTap(args) {
             moduleName: "legislators/legislator/surveys/survey/survey-page",
             context: { 
                 surveyId: item.surveyId,
+                survey: item.survey,
                 legislatorId: legislatorId.text,
                 fullName: legislatorName.text,
                 relationalType: navigationContext.relationalType,
@@ -144,4 +153,5 @@ function onItemTap(args) {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
 exports.onAddTap = onAddTap;
+exports.onBackTap = onBackTap;
 exports.onItemTap = onItemTap;

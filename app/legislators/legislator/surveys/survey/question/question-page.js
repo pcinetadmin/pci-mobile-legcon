@@ -1,4 +1,5 @@
 const ResponseViewModel = require("./response-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var http = require("http");
@@ -31,7 +32,7 @@ function onNavigatingTo(args) {
         legislatorName.text = navigationContext.fullName;
         
         var surveyTitle = navigationContext.boundData.survey;
-        var maxLength = 23;
+        var maxLength = 20;
 
         if (surveyTitle.length > maxLength) {
             for (var i = maxLength; i > 0; i--) {
@@ -108,12 +109,42 @@ function onLoaded(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        if (platform.isAndroid) {
+            var comments = page.getViewById("comments");
+
+            comments.dismissSoftInput();
+        }
+
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onGridLayoutTap(args) {
+    try {
+        if (platform.isAndroid) {
+            var comments = page.getViewById("comments");
+
+            comments.dismissSoftInput();
+        }
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onStackLayoutTap(args) {
     try {
+        if (platform.isAndroid) {
+            var comments = page.getViewById("comments");
+
+            comments.dismissSoftInput();
+        }
+
         var responseListPickerGridLayout = page.getViewById("responseListPickerGridLayout");
         
-        // dialogs.alert(pageData.responseList.List.getItem(0).responseId);
-
         if (responseListPickerGridLayout.visibility === "collapse") {
             responseListPickerGridLayout.visibility = "visible";
 
@@ -134,7 +165,13 @@ function onStackLayoutTap(args) {
     }
 }
 
-function onSave(args) {
+function onSaveTap(args) {
+    if (platform.isAndroid) {
+        var comments = page.getViewById("comments");
+
+        comments.dismissSoftInput();
+    }
+
     var responseListPicker = page.getViewById("responseListPicker");
 
     pageData.boundData.responseId = pageData.responseList.List.getItem(responseListPicker.selectedIndex).responseId;
@@ -148,10 +185,6 @@ function onSave(args) {
         headers: { "Content-Type": "application/json", "Authorization": global.token },
         content: JSON.stringify(pageData.boundData)
     }).then(function (response) {
-        // result = response.content.toJSON();
-        // dialogs.alert(result);
-        // dialogs.alert(pageData.boundData.responseId + ": " + pageData.boundData.response);
-
         pageData.boundData.result = "Update";
 
         frameModule.topmost().goBack();
@@ -166,5 +199,7 @@ function onSave(args) {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onBackTap = onBackTap;
+exports.onGridLayoutTap = onGridLayoutTap;
 exports.onStackLayoutTap = onStackLayoutTap;
-exports.onSave = onSave;
+exports.onSaveTap = onSaveTap;

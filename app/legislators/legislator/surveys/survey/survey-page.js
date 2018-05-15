@@ -19,9 +19,25 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
 
-        page.actionBar.title = "Survey";
-
         navigationContext = page.navigationContext;
+
+        var surveyTitle = navigationContext.survey;
+        var maxLength = 20;
+
+        if (surveyTitle.length > maxLength) {
+            for (var i = maxLength; i > 0; i--) {
+                var position = surveyTitle.indexOf(" ", i);
+
+                if (position > -1 && position <= maxLength) {
+                    surveyTitle = surveyTitle.substr(0, position) + "..."
+
+                    break;
+                }
+            }
+        }
+
+        //page.actionBar.title = "Survey";
+        page.actionBar.title = surveyTitle;
 
         pageData.boundData = navigationContext;
 
@@ -81,6 +97,14 @@ function onNavigatingTo(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onItemTap(args) {
     try
     {
@@ -116,4 +140,5 @@ function onItemTap(args) {
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;
 exports.onItemTap = onItemTap;

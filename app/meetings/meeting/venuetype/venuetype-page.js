@@ -1,5 +1,6 @@
 const VenueTypeViewModel = require("./venuetype-view-model");
 const ObservableModule = require("data/observable");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
 var page;
@@ -98,5 +99,14 @@ function onLoaded(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onBackTap = onBackTap;

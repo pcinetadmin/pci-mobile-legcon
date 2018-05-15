@@ -1,4 +1,5 @@
 const MeetingViewModel = require("./meeting-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
 const appModule = require("application");
@@ -246,15 +247,28 @@ function onStackLayoutInitiativesTap(args) {
         collapseMeetingDate();
 
         if (pageData.meetingId === null || pageData.meetingId === 0) {
-            dialogs.action({
-                message: "A new meeting must be saved prior to adding an initiative. Would you like to save this meeting?",
-                cancelButtonText: "Cancel",
-                actions: ["Save"]
-            }).then(function (result) {
-                if (result === "Save") {
-                    saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
-                }
-            });
+            if (platform.isAndroid) {
+                dialogs.confirm({
+                    title: "Save",
+                    message: "A new meeting must be saved prior to adding an initiative. Would you like to save this meeting?",
+                    okButtonText: "Yes",
+                    cancelButtonText: "No"
+                }).then(function (result) {
+                    if (result) {
+                        saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
+                    }
+                });
+            } else if (platform.isIOS) {
+                dialogs.action({
+                    message: "A new meeting must be saved prior to adding an initiative. Would you like to save this meeting?",
+                    cancelButtonText: "Cancel",
+                    actions: ["Save"]
+                }).then(function (result) {
+                    if (result === "Save") {
+                        saveMeeting("meetings/meeting/initiatives/initiatives-page", false);
+                    }
+                });
+            }
         } else {
             pageData.relationalType = "meeting";
             pageData.relationalId = pageData.meetingId;
@@ -284,15 +298,28 @@ function onStackLayoutSurveysTap(args) {
         collapseMeetingDate();
 
         if (pageData.meetingId === null || pageData.meetingId === 0) {
-            dialogs.action({
-                message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
-                cancelButtonText: "Cancel",
-                actions: ["Save"]
-            }).then(function (result) {
-                if (result === "Save") {
-                    saveMeeting("legislators/legislator/surveys/surveys-page", true);
-                }
-            });
+            if (platform.isAndroid) {
+                dialogs.confirm({
+                    title: "Save",
+                    message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
+                    okButtonText: "Yes",
+                    cancelButtonText: "No"
+                }).then(function (result) {
+                    if (result) {
+                        saveMeeting("legislators/legislator/surveys/surveys-page", false);
+                    }
+                });
+            } else if (platform.isIOS) {
+                dialogs.action({
+                    message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
+                    cancelButtonText: "Cancel",
+                    actions: ["Save"]
+                }).then(function (result) {
+                    if (result === "Save") {
+                        saveMeeting("legislators/legislator/surveys/surveys-page", true);
+                    }
+                });
+            }
         } else {
             pageData.relationalType = "meeting";
             pageData.relationalId = pageData.meetingId;
@@ -388,15 +415,28 @@ function onStackLayoutPciAttendeesTap(args) {
         collapseMeetingDate();
 
         if (pageData.meetingId === null || pageData.meetingId === 0) {
-            dialogs.action({
-                message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
-                cancelButtonText: "Cancel",
-                actions: ["Save"]
-            }).then(function (result) {
-                if (result === "Save") {
-                    saveMeeting("profiles/profiles-page", true);
-                }
-            });
+            if (platform.isAndroid) {
+                dialogs.confirm({
+                    title: "Save",
+                    message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
+                    okButtonText: "Yes",
+                    cancelButtonText: "No"
+                }).then(function (result) {
+                    if (result) {
+                        saveMeeting("profiles/profiles-page", false);
+                    }
+                });
+            } else if (platform.isIOS) {
+                dialogs.action({
+                    message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
+                    cancelButtonText: "Cancel",
+                    actions: ["Save"]
+                }).then(function (result) {
+                    if (result === "Save") {
+                        saveMeeting("profiles/profiles-page", true);
+                    }
+                });
+            }
         } else {
             pageData.relationalType = "meeting";
             pageData.relationalId = pageData.meetingId;

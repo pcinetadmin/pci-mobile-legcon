@@ -1,5 +1,9 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
-    <ActionBar class="action-bar" />
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+    </ActionBar>
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
         <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
@@ -9,28 +13,30 @@
         <StackLayout row="1" col="0" verticalAlignment="top">
             <ListView items="{{ surveyList }}" itemTap="onItemTap" height="100%">
                 <ListView.itemTemplate>
-                    <GridLayout columns="*, auto" rows="*" class="list-view-item">
-                        <StackLayout row="0" col="0">
-                            <Label text="{{ surveyQuestion }}" textWrap="true" class="list-view-item-main-top" />
-                            <Label text="Survey Question Response" class="list-view-item-sub" style="font-style: italic;" horizontalAlignment="center" />
-                            <GridLayout columns="auto, *" rows="*">
-                                <Label row="0" col="0" text="Response: " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ response }}" class="list-view-item-sub" />
-                            </GridLayout>
-                            <GridLayout columns="auto, *" rows="*">
-                                <Label row="0" col="0" text="Follow Up Required? " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ followUpRequired | boolTextConverter() }}" class="list-view-item-sub" />
-                            </GridLayout>
-                            <StackLayout direction="horizontal">
-                                <Label row="0" col="0" text="Comments/Observations: " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ comments }}" textWrap="true" class="list-view-item-sub" />
+                    <StackLayout>
+                        <GridLayout columns="*, auto" rows="*" class="list-view-item">
+                            <StackLayout row="0" col="0">
+                                <Label text="{{ surveyQuestion }}" textWrap="true" class="list-view-item-main-top" />
+                                <Label text="Survey Question Response" class="list-view-item-sub" style="font-style: italic;" horizontalAlignment="center" />
+                                <GridLayout columns="auto, *" rows="*">
+                                    <Label row="0" col="0" text="Response: " class="list-view-item-sub-title" />
+                                    <Label row="0" col="1" text="{{ response }}" class="list-view-item-sub" />
+                                </GridLayout>
+                                <GridLayout columns="auto, *" rows="*">
+                                    <Label row="0" col="0" text="Follow Up Required? " class="list-view-item-sub-title" />
+                                    <Label row="0" col="1" text="{{ followUpRequired | boolTextConverter() }}" class="list-view-item-sub" />
+                                </GridLayout>
+                                <StackLayout direction="horizontal">
+                                    <Label row="0" col="0" text="Comments/Observations: " class="list-view-item-sub-title" />
+                                    <Label row="0" col="1" text="{{ comments }}" textWrap="true" class="list-view-item-sub" visibility="{{ comments === null || comments.length === 0 ? 'collapse' : 'visible' }}" />
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                        <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
-                    </GridLayout>
+                            <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                        </GridLayout>
+                    </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>

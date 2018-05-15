@@ -1,31 +1,37 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
-    <ActionBar class="action-bar" />
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+    </ActionBar>
 
     <GridLayout columns="*" rows="*" height="100%" width="100%">
         <StackLayout row="1" col="0" verticalAlignment="top">
             <ListView items="{{ selectList }}" itemTemplateSelector="$index" height="100%">
                 <ListView.itemTemplate>
-                    <GridLayout columns="*, auto" rows="*" class="list-view-item">
-                        <StackLayout row="0" col="0" verticalAlignment="middle">
-                            <Label text="{{ survey }}" class="list-view-item-main-top" />
-                            <GridLayout columns="auto, *" rows="*">
-                                <Label row="0" col="0" text="Session Year: " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ year }}" class="list-view-item-sub" />
-                            </GridLayout>
-                            <GridLayout columns="auto, *" rows="*">
-                                <Label row="0" col="0" text="Chamber/Caucus: " class="list-view-item-sub-title" />
-                                <Label row="0" col="1" text="{{ chamber }}" class="list-view-item-sub" />
-                            </GridLayout>
-                        </StackLayout>
-                        <StackLayout row="0" col="1" verticalAlignment="middle">
-                            <Switch id="checkedSwitch" row="0" col="1" checked="{{ checked }}" 
-                                loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
-                            <Label id="indexLabel" text="{{ $index }}" visibility="collapse" />
-                        </StackLayout>
-                    </GridLayout>
+                    <StackLayout>
+                        <GridLayout columns="*, auto" rows="*" class="list-view-item">
+                            <StackLayout row="0" col="0" verticalAlignment="middle">
+                                <Label text="{{ survey }}" class="list-view-item-main-top" />
+                                <GridLayout columns="auto, *" rows="*">
+                                    <Label row="0" col="0" text="Session Year: " class="list-view-item-sub-title" />
+                                    <Label row="0" col="1" text="{{ year }}" class="list-view-item-sub" />
+                                </GridLayout>
+                                <GridLayout columns="auto, *" rows="*">
+                                    <Label row="0" col="0" text="Chamber/Caucus: " class="list-view-item-sub-title" />
+                                    <Label row="0" col="1" text="{{ chamber }}" class="list-view-item-sub" />
+                                </GridLayout>
+                            </StackLayout>
+                            <StackLayout row="0" col="1" verticalAlignment="middle">
+                                <Switch id="checkedSwitch" row="0" col="1" checked="{{ checked }}" 
+                                    loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
+                                <Label id="indexLabel" text="{{ $index }}" visibility="collapse" />
+                            </StackLayout>
+                        </GridLayout>
+                    </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="1" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="1" colSpan="1" />
     </GridLayout>
 </Page>
