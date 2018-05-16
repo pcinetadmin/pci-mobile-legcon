@@ -1,12 +1,13 @@
 const RelationshipTypeViewModel = require("./relationshiptype-view-model");
 const FamiliarityLevelViewModel = require("./familiaritylevel-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var ObservableArray = require("data/observable-array").ObservableArray;
-var frameModule = require("ui/frame");
 var http = require("http");
+var frameModule = require("ui/frame");
+var dialogs = require("ui/dialogs");
 var email = require("nativescript-email");
 var phone = require("nativescript-phone");
-var dialogs = require("ui/dialogs");
 
 var page;
 var navigationContext;
@@ -231,9 +232,29 @@ function onLoaded(args) {
     }
 }
 
-function onTap(args) {
+function onBackTap(args) {
+    try {
+        dismissKeyboard();
+
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onGridLayoutTap(args) {
+    try {
+        dismissKeyboard();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onSelectionTap(args) {
     try
     {
+        dismissKeyboard();
+
         // Only navigate if this is a new relationship.
         if (pageData.boundData.personId === null || pageData.boundData.personId === 0) {
             const navigationEntry = {
@@ -256,6 +277,8 @@ function onTap(args) {
 }
 
 function onEmailTap(args) {
+    dismissKeyboard();
+
     var emailButton = args.object;
     var emailAddress = emailButton.text;
 
@@ -265,6 +288,8 @@ function onEmailTap(args) {
 }
 
 function onPhoneTap(args) {
+    dismissKeyboard();
+
     var phoneButton = args.object;
     var phoneNumber = phoneButton.text;
 
@@ -273,6 +298,8 @@ function onPhoneTap(args) {
 
 function onStackLayoutRelationshipTap(args) {
     try {
+        dismissKeyboard();
+
         var relationshipListPickerGridLayout = page.getViewById("relationshipListPickerGridLayout");
         var familiarityListPickerGridLayout = page.getViewById("familiarityListPickerGridLayout");
         
@@ -300,6 +327,8 @@ function onStackLayoutRelationshipTap(args) {
 
 function onStackLayoutFamiliarityTap(args) {
     try {
+        dismissKeyboard();
+
         var relationshipListPickerGridLayout = page.getViewById("relationshipListPickerGridLayout");
         var familiarityListPickerGridLayout = page.getViewById("familiarityListPickerGridLayout");
         
@@ -346,7 +375,9 @@ function onTextViewFocus(args) {
     }
 }
 
-function onSave(args) {
+function onSaveTap(args) {
+    dismissKeyboard();
+
     if (pageData.boundData.personId === null || pageData.boundData.personId === 0) {
         var label;
 
@@ -401,12 +432,22 @@ function onSave(args) {
     }
 }
 
+function dismissKeyboard() {
+    if (platform.isAndroid) {
+        var notes = page.getViewById("notes");
+
+        notes.dismissSoftInput();
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
-exports.onTap = onTap;
+exports.onBackTap = onBackTap;
+exports.onGridLayoutTap = onGridLayoutTap;
+exports.onSelectionTap = onSelectionTap;
 exports.onEmailTap = onEmailTap;
 exports.onPhoneTap = onPhoneTap;
 exports.onStackLayoutRelationshipTap = onStackLayoutRelationshipTap;
 exports.onStackLayoutFamiliarityTap = onStackLayoutFamiliarityTap;
 exports.onTextViewFocus = onTextViewFocus;
-exports.onSave = onSave;
+exports.onSaveTap = onSaveTap;

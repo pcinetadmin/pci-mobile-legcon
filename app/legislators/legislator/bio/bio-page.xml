@@ -1,5 +1,9 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
-    <ActionBar class="action-bar" />
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+    </ActionBar>
 
     <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
         <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">

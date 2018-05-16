@@ -1,3 +1,5 @@
+const platform = require("platform");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 
 var page;
@@ -19,4 +21,32 @@ function onNavigatingTo(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        dismissKeyboard()
+
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function onGridLayoutTap(args) {
+    try {
+        dismissKeyboard()
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
+function dismissKeyboard() {
+    if (platform.isAndroid) {
+        var legislatorStaffAttendees = page.getViewById("legislatorStaffAttendees");
+
+        legislatorStaffAttendees.dismissSoftInput();
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;
+exports.onGridLayoutTap = onGridLayoutTap;

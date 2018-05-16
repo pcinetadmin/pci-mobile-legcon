@@ -1,5 +1,6 @@
 const InitiativetiersViewModel = require("./initiativetiers-view-model");
 const observableModule = require("data/observable");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 
@@ -43,4 +44,13 @@ function onNavigatingTo(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;

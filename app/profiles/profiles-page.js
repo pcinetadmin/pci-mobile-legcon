@@ -1,4 +1,5 @@
 const ProfilesViewModel = require("./profiles-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var gestures = require("ui/gestures");
 var http = require("http");
@@ -81,36 +82,40 @@ function onNavigatingTo(args) {
 }
 
 function onItemLoading(args) {
-    var cell = args.ios;
+    if (platform.isIOS) {
+        var cell = args.ios;
 
-    cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
+    }
 }
 
 function onItemTap(args) {
     try {
-        if (swipeOpen) {
-            swipedItem.animate({
-                translate: { x: 0, y: 0 },
-                duration: 200
-            });
+        if (platform.isIOS) {
+            if (swipeOpen) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 200
+                });
 
-            swipeOpen = false;
-        } else {
-            var view = args.view;
+                swipeOpen = false;
+            } else {
+                var view = args.view;
 
-            model = view.bindingContext;
+                model = view.bindingContext;
 
-            const navigationEntry = {
-                moduleName: "profiles/profile/profile-page",
-                context: { 
-                    relationalType: navigationContext.relationalType,
-                    relationalId: navigationContext.relationalId,
-                    boundData: model
-                },
-                clearHistory: false
-            };
+                const navigationEntry = {
+                    moduleName: "profiles/profile/profile-page",
+                    context: { 
+                        relationalType: navigationContext.relationalType,
+                        relationalId: navigationContext.relationalId,
+                        boundData: model
+                    },
+                    clearHistory: false
+                };
 
-            frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost().navigate(navigationEntry);
+            }
         }
     }
     catch(e)
@@ -168,55 +173,108 @@ function onAddTap(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onDeleteClick(args) {
     var profileType;
 
     if (navigationContext.relationalType === "legislator") {
-        profileType = "relationship";
+        profileType = "Relationship";
     } else {
-        profileType = "attendee";
+        profileType = "Attendee";
     }
     
-    dialogs.action({
-        message: "Would you like to delete this " + profileType + "?",
-        cancelButtonText: "Cancel",
-        actions: ["Delete"]
-    }).then(function (result) {
-        if (result === "Delete") {
-            var view = args.object;
-            
-            view.bindingContext.checked = false;
-
-            http.request({
-                url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": global.token },
-                content: JSON.stringify(view.bindingContext)
-            }).then(function (response) {
-                // result = response.content.toJSON();
-                // dialogs.alert(result);
-
-                pageData.boundData.updated = true;
-
-                profilesList.empty();
-    
-                pageData.set("isLoading", true);
-    
-                profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
-                        pageData.set("isLoading", false);
-    
-                        page.bindingContext = pageData;
-                });
+    if (platform.isAndroid) {
+        dialogs.confirm({
+            title: "Delete",
+            message: profileType + " will be deleted. Delete?",
+            okButtonText: "Yes",
+            cancelButtonText: "No"
+        }).then(function (result) {
+            if (result) {
+                var view = args.object;
                 
-            }, function (e) {
-                dialogs.alert({
-                    title: "Error",
-                    message: e.toString(),
-                    okButtonText: "OK"
+                view.bindingContext.checked = false;
+
+                http.request({
+                    url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    content: JSON.stringify(view.bindingContext)
+                }).then(function (response) {
+                    // result = response.content.toJSON();
+                    // dialogs.alert(result);
+
+                    pageData.boundData.updated = true;
+
+                    profilesList.empty();
+        
+                    pageData.set("isLoading", true);
+        
+                    profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
+                            pageData.set("isLoading", false);
+        
+                            page.bindingContext = pageData;
+                    });
+                    
+                }, function (e) {
+                    dialogs.alert({
+                        title: "Error",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
                 });
-            });
-        }
-    });
+            }
+        });
+    } else if (platform.isIOS) {
+        dialogs.confirm({
+            title: "Delete",
+            message: profileType + " will be deleted. Delete?",
+            okButtonText: "Yes",
+            cancelButtonText: "No"
+        }).then(function (result) {
+            if (result === "Delete") {
+                var view = args.object;
+                
+                view.bindingContext.checked = false;
+
+                http.request({
+                    url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    content: JSON.stringify(view.bindingContext)
+                }).then(function (response) {
+                    // result = response.content.toJSON();
+                    // dialogs.alert(result);
+
+                    pageData.boundData.updated = true;
+
+                    profilesList.empty();
+        
+                    pageData.set("isLoading", true);
+        
+                    profilesList.load(navigationContext.relationalType, navigationContext.relationalId).then(function () {
+                            pageData.set("isLoading", false);
+        
+                            page.bindingContext = pageData;
+                    });
+                    
+                }, function (e) {
+                    dialogs.alert({
+                        title: "Error",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
+                });
+            }
+        });
+    }
 
     if (swipeOpen) {
         swipedItem.animate({
@@ -230,6 +288,45 @@ function onDeleteClick(args) {
 
 function onLayoutLoaded(args) {
     var layout = args.object;
+
+    if (platform.isAndroid) {
+        layout.on(gestures.GestureTypes.tap, function(args) {
+            try {
+                if (swipeOpen) {
+                    swipedItem.animate({
+                        translate: { x: 0, y: 0 },
+                        duration: 200
+                    });
+    
+                    swipeOpen = false;
+                } else {
+                    var view = args.view;
+    
+                    model = view.bindingContext;
+    
+                    const navigationEntry = {
+                        moduleName: "profiles/profile/profile-page",
+                        context: { 
+                            relationalType: navigationContext.relationalType,
+                            relationalId: navigationContext.relationalId,
+                            boundData: model
+                        },
+                        clearHistory: false
+                    };
+    
+                    frameModule.topmost().navigate(navigationEntry);
+                }
+            }
+            catch(e)
+            {
+                dialogs.alert({
+                    title: "Error",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            }
+        });
+    }
 
     layout.on(gestures.GestureTypes.pan, function(args) {
         try {
@@ -267,7 +364,11 @@ function onLayoutLoaded(args) {
             } else if (isSwiping) {
                 var profilesListView = page.getViewById("profilesListView");
 
-                profilesListView.ios.scrollEnabled = false;
+                if (platform.isAndroid) {
+                    profilesListView.nativeView.requestDisallowInterceptTouchEvent(true);
+                } else if (platform.isIOS) {
+                    profilesListView.ios.scrollEnabled = false;
+                }
 
                 swipeOpen = true;
                 swipedItem = layout;
@@ -294,7 +395,12 @@ function onLayoutLoaded(args) {
                         duration: 200
                     });
 
-                    profilesListView.ios.scrollEnabled = true;
+                    if (platform.isAndroid) {
+                        profilesListView.nativeView.requestDisallowInterceptTouchEvent(false);
+                    } else if (platform.isIOS) {
+                        profilesListView.ios.scrollEnabled = true;
+                    }
+
                     isSwiping = false;
                 }
             }
@@ -312,5 +418,6 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onItemLoading = onItemLoading;
 exports.onItemTap = onItemTap;
 exports.onAddTap = onAddTap;
+exports.onBackTap = onBackTap;
 exports.onLayoutLoaded = onLayoutLoaded;
 exports.onDeleteClick = onDeleteClick;

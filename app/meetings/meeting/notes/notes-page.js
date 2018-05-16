@@ -25,11 +25,7 @@ function onNavigatingTo(args) {
 
 function onBackTap(args) {
     try {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("notes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
 
         frameModule.topmost().goBack();
     } catch(e) {
@@ -39,13 +35,17 @@ function onBackTap(args) {
 
 function onGridLayoutTap(args) {
     try {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("notes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
     } catch(e) {
         dialogs.alert(e);
+    }
+}
+
+function dismissKeyboard() {
+    if (platform.isAndroid) {
+        var notes = page.getViewById("notes");
+
+        notes.dismissSoftInput();
     }
 }
 

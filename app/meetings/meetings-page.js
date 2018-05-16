@@ -118,38 +118,11 @@ function onItemLoading(args) {
     }
 }
 
-function onItemTap(args) {
+function onBackTap(args) {
     try {
-        if (platform.isIOS) {
-            if (swipeOpen) {
-                swipedItem.animate({
-                    translate: { x: 0, y: 0 },
-                    duration: 200
-                });
-
-                swipeOpen = false;
-            } else {
-                var view = args.view;
-
-                model = view.bindingContext;
-
-                const navigationEntry = {
-                    moduleName: "meetings/meeting/meeting-page",
-                    context: model,
-                    clearHistory: false
-                };
-
-                frameModule.topmost().navigate(navigationEntry);
-            }
-        }
-    }
-    catch(e)
-    {
-        dialogs.alert({
-            title: "Error",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
     }
 }
 
@@ -192,6 +165,41 @@ function onAddTap(args) {
         };
 
         frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onItemTap(args) {
+    try {
+        if (platform.isIOS) {
+            if (swipeOpen) {
+                swipedItem.animate({
+                    translate: { x: 0, y: 0 },
+                    duration: 200
+                });
+
+                swipeOpen = false;
+            } else {
+                var view = args.view;
+
+                model = view.bindingContext;
+
+                const navigationEntry = {
+                    moduleName: "meetings/meeting/meeting-page",
+                    context: model,
+                    clearHistory: false
+                };
+
+                frameModule.topmost().navigate(navigationEntry);
+            }
+        }
     }
     catch(e)
     {
@@ -412,7 +420,8 @@ function onLayoutLoaded(args) {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;
 exports.onItemLoading = onItemLoading;
-exports.onItemTap = onItemTap;
+exports.onBackTap = onBackTap;
 exports.onAddTap = onAddTap;
+exports.onItemTap = onItemTap;
 exports.onLayoutLoaded = onLayoutLoaded;
 exports.onDeleteClick = onDeleteClick;

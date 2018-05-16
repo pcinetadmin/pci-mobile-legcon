@@ -1,5 +1,8 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
         <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" />
     </ActionBar>
 
@@ -13,7 +16,7 @@
                 <ListView.itemTemplate>
                     <AbsoluteLayout>
                         <!-- BACKGROUND: Swipe Actions -->
-                        <GridLayout columns="*, 80" rows="55" width="100%">
+                        <GridLayout columns="*, 80" android:rows="48" ios:rows="55" width="100%">
                             <Label col="0" />
                             <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onDeleteClick" class="swipe-icons red">
                                 <Label row="0" col="0" text="" />
@@ -29,13 +32,13 @@
                                     <Label text="{{ fullName }}" class="list-view-item-main-top" />
                                     <Label text="{{ company }}" textWrap="true" class="list-view-item-sub" />
                                 </StackLayout>
-                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" />
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
                             </GridLayout>
                         </StackLayout>
                     </AbsoluteLayout>
                 </ListView.itemTemplate>
             </ListView>
         </StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
     </GridLayout>
 </Page>

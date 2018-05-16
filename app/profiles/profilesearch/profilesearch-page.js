@@ -1,7 +1,8 @@
-const platform = require("platform");
 const ProfileSearchViewModel = require("./profilesearch-view-model");
+const platform = require("platform");
 const ObservableModule = require("data/observable");
 var http = require("http");
+var frameModule = require("ui/frame");
 var dialogs = require("ui/dialogs");
 var page;
 var navigationContext;
@@ -69,7 +70,9 @@ function onSearchBarLoaded(args)
 {
     searchBar = args.object;
 
-    if (platform.isIOS) {
+    if (platform.isAndroid) {
+        searchBar.android.clearFocus();
+    } else if (platform.isIOS) {
         // iOS Styling
         searchBar.ios.searchBarStyle = UISearchBarStyle.UISearchBarStyleMinimal;
         searchBar.ios.showsCancelButton = true;
@@ -140,6 +143,14 @@ function onLoadMoreItems(args) {
     }
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onItemTap(args) {
     try {
         var selected = pageData.profileSearchList.getItem(args.index); //.set("checked", true);
@@ -181,4 +192,5 @@ exports.onSearchBarLoaded = onSearchBarLoaded;
 exports.onSubmit = onSubmit;
 exports.onClear = onClear;
 exports.onLoadMoreItems = onLoadMoreItems;
+exports.onBackTap = onBackTap;
 exports.onItemTap = onItemTap;

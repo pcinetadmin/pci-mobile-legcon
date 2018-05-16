@@ -332,31 +332,27 @@ Page {
 .android .list-view-item-sub-email {
     color: #0a6fb0;
     font-size: 12;
-    /* margin-top: 3; */
-    padding: 0;
+    margin-top: 3;
     text-decoration: underline;
 }
 
 .ios .list-view-item-sub-email {
     color: #0a6fb0;
     font-size: 14;
-    /* margin-top: 3; */
-    padding: 0;
+    margin-top: 3;
     text-decoration: underline;
 }
 
 .android .list-view-item-sub-phone {
     color: #0a6fb0;
     font-size: 12;
-    /* margin-top: 3; */
-    padding: 0;
+    margin-top: 5;
 }
 
 .ios .list-view-item-sub-phone {
     color: #0a6fb0;
     font-size: 14;
-    /* margin-top: 3; */
-    padding: 0;
+    margin-top: 3;
 }
 
 .android .list-view-item-sub-title {
@@ -417,11 +413,18 @@ Page {
     background-color: #0a6fb0;
 }
 
-.scroll-view-item {
+.android .scroll-view-item {
+    color: #666;
+    font-size: 14;
+    padding-left: 10;
+    padding-right: 10;
+}
+
+.ios .scroll-view-item {
     color: #666;
     font-size: 16;
-    padding-left: 16;
-    padding-right: 16;
+    padding-left: 15;
+    padding-right: 15;
 }
 
 .android .segmented-bar {

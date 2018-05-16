@@ -18,11 +18,24 @@ function onNavigatingTo(args) {
         page.actionBar.title = "Committee";
 
         var navigationContext = page.navigationContext;
-        var committeeId = page.getViewById("committeeId");
-        var committeeName = page.getViewById("committeeName");
 
-        committeeId.text = navigationContext.committeeId;
-        committeeName.text = navigationContext.committeeName;
+        var committeeName = page.getViewById("committeeName");
+        var committee = navigationContext.committeeName;
+        var maxLength = 35;
+
+        if (committee.length > maxLength) {
+            for (var i = maxLength; i > 0; i--) {
+                var position = committee.indexOf(" ", i);
+
+                if (position > -1 && position <= maxLength) {
+                    committee = committee.substr(0, position) + "..."
+
+                    break;
+                }
+            }
+        }
+
+        committeeName.text = committee;
 
         committeeList.empty();
 
@@ -43,6 +56,14 @@ function onNavigatingTo(args) {
             message: e.toString(),
             okButtonText: "OK"
         });
+    }
+}
+
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
     }
 }
 
@@ -71,4 +92,5 @@ function onItemTap(args) {
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;
 exports.onItemTap = onItemTap;

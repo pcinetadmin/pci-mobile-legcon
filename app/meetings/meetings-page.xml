@@ -1,5 +1,8 @@
 <Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
     <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" visibility="{{ reference === 'tab' ? 'collapse' : 'visible' }}" />
+        </android>
         <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" 
             visibility="{{ reference === 'tab' ? 'collapse' : 'visible' }}" />
     </ActionBar>

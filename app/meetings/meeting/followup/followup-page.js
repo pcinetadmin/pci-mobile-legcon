@@ -45,11 +45,7 @@ function onLoaded(args) {
 
 function onBackTap(args) {
     try {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("followUpNotes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
 
         frameModule.topmost().goBack();
     } catch(e) {
@@ -59,11 +55,7 @@ function onBackTap(args) {
 
 function onGridLayoutTap(args) {
     try {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("followUpNotes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
     } catch(e) {
         dialogs.alert(e);
     }
@@ -73,11 +65,7 @@ function onSwitchLoaded(args) {
     var checkedSwitch = args.object;
 
     checkedSwitch.on("checkedChange", function(args) {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("followUpNotes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
 
         var detailsLabel = page.getViewById("detailsLabel");
         var followUpDetailsStackLayout = page.getViewById("followUpDetailsStackLayout");
@@ -115,11 +103,7 @@ function onTextViewFocus(args) {
 
 function onStackLayoutFollowUpDateTap(args) {
     try {
-        if (platform.isAndroid) {
-            var followUpNotes = page.getViewById("followUpNotes");
-
-            followUpNotes.dismissSoftInput();
-        }
+        dismissKeyboard()
 
         var followUpDateDatePickerGridLayout = page.getViewById("followUpDateDatePickerGridLayout");
         
@@ -156,6 +140,14 @@ function dateConverter(value, format) {
     result = result.replace("YYYY", value.getFullYear());
 
     return result;
+}
+
+function dismissKeyboard() {
+    if (platform.isAndroid) {
+        var followUpNotes = page.getViewById("followUpNotes");
+
+        followUpNotes.dismissSoftInput();
+    }
 }
 
 exports.onNavigatingTo = onNavigatingTo;

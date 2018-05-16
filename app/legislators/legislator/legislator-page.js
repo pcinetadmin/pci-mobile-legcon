@@ -54,6 +54,14 @@ function onNavigatingTo(args) {
     page.bindingContext = pageData;
 }
 
+function onBackTap(args) {
+    try {
+        frameModule.topmost().goBack();
+    } catch(e) {
+        dialogs.alert(e);
+    }
+}
+
 function onItemTap(args)
 {
     try
@@ -84,4 +92,5 @@ function onItemTap(args)
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onBackTap = onBackTap;
 exports.onItemTap = onItemTap;
