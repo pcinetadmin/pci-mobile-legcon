@@ -11,6 +11,6 @@
                 </StackLayout>
         </lv:RadListView.itemTemplate>
     </lv:RadListView>
-    <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="0" colSpan="1" />
+    <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="0" colSpan="1" />
 </GridLayout>
 </Page>

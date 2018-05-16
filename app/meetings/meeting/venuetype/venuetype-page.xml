@@ -12,6 +12,6 @@
                 horizontalAlignment="center" class="list-view-item-picker" width="100%"></ListPicker>
         </GridLayout>
         <StackLayout row="2" col="0" height="100%" class="list-view-section-header"></StackLayout>
-        <ActivityIndicator busy="{{ isLoading }}" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="3" colSpan="1" />
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="3" colSpan="1" />
     </GridLayout>
 </Page>

@@ -229,7 +229,7 @@ function onAddClick(args) {
         name: null,
         pciInitiatives: null,
         surveys: null,
-        pciAttendees: null,
+        pciAttendees: global.currentUser,
         primaryOfficeContact: null,
         meetingLocationId: 1,
         location: "Meeting in District",
