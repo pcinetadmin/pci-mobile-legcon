@@ -233,11 +233,10 @@ function onDeleteClick(args) {
             }
         });
     } else if (platform.isIOS) {
-        dialogs.confirm({
-            title: "Delete",
-            message: profileType + " will be deleted. Delete?",
-            okButtonText: "Yes",
-            cancelButtonText: "No"
+        dialogs.action({
+            message: "Would you like to delete this " + profileType.toLowerCase() + "?",
+            cancelButtonText: "Cancel",
+            actions: ["Delete"]
         }).then(function (result) {
             if (result === "Delete") {
                 var view = args.object;
