@@ -24,7 +24,6 @@ global.apiLoginUrl = apiLoginUrlProd;
 global.apiBaseServiceUrl = apiBaseServiceUrlProd;
 global.scope = scopeProd;
 global.token = null;
-global.isIos = false;
 global.personId = null;
 global.currentUser = null;
 global.companyId = null;
