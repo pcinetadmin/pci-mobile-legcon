@@ -1,1 +1,5 @@
-{"appId":"net.pciaa.fgr","minSdkVersion":null,"targetSdkVersion":null}
+{
+  "appId": "net.pciaa.fgr",
+  "minSdkVersion": 26,
+  "targetSdkVersion": 26
+}

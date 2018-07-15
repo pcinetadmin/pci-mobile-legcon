@@ -19,7 +19,6 @@ function CommitteesViewModel(items) {
                 if (committee.FullName !== null) {
                     var fullName = committee.FullName;
                     var title = committee.Title;
-                    var subcommitteeName = committee.SubcommitteeName + " Subcommittee";
 
                     if (fullName.length > 0) {
                         if (title.indexOf(";") > 0) {
@@ -35,7 +34,7 @@ function CommitteesViewModel(items) {
                         committeeName: committee.CommitteeName,
                         parentCommitteeId: committee.ParentCommitteeId,
                         subcommitteeId: committee.SubcommitteeId,
-                        subcommitteeName: subcommitteeName,
+                        subcommitteeName: committee.SubcommitteeName,
                         isSubcommittee: committee.IsSubcommittee,
                         chamberId: committee.ChamberId,
                         chamber: committee.Chamber,
