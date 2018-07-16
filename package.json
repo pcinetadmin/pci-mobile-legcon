@@ -22,7 +22,6 @@
     "nativescript-platform-css": "1.6.5",
     "nativescript-pro-ui": "3.4.1",
     "nativescript-theme-core": "~1.0.4",
-    "nativescript-ui-listview": "3.5.9",
     "tns-core-modules": "4.0.0"
   },
   "devDependencies": {
