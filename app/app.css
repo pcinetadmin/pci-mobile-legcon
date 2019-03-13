@@ -9,12 +9,16 @@ For example, the following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
 ActivityIndicator {
-    color: #0a6fb0;
+    color: #0075be;
 }
 
 Page {
-    /* background-color: #34495e; */
-    margin-top: -20; /* fix nested frame spacing */
+    background-color: #eee;
+    /* margin-top: -20; fix nested frame spacing */
+}
+
+.ios .page {
+    margin-top: 0;
 }
 
 .android TextField {
@@ -88,8 +92,35 @@ Page {
     padding: 5;
 }
 
+.android .login-button {
+    background: #ccc;
+    border-color: #999;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: black;
+    font-size: 12;
+    height: 30;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 5;
+}
+
+.ios .login-button {
+    background: #0075be;
+    border-color: #0075be;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: white;
+    font-size: 18;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 10;
+}
+
 .navigation-frame Page {
-    margin-top: 20; /* fix nested frame spacing */
+    /* margin-top: 20; fix nested frame spacing */
     background-color: white;
 }
 
@@ -102,7 +133,7 @@ Page {
 }
 
 .tab-selected {
-    color: #0a6fb0;
+    color: #0075be;
 }
 
 .android .tab-icon {
@@ -142,6 +173,24 @@ Page {
 
 .ios .list-view-item {
     font-size: 16;
+    margin-left: 20;
+    margin-right: 20;
+    min-height: 44;
+    padding-bottom: 8;
+    padding-top: 8;
+}
+
+.android .list-view-item-small {
+    font-size: 11;
+    margin-left: 10;
+    margin-right: 10;
+    min-height: 38;
+    padding-bottom: 5;
+    padding-top: 5;
+}
+
+.ios .list-view-item-small {
+    font-size: 13;
     margin-left: 20;
     margin-right: 20;
     min-height: 44;
@@ -330,27 +379,27 @@ Page {
 }
 
 .android .list-view-item-sub-email {
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 12;
     margin-top: 3;
     text-decoration: underline;
 }
 
 .ios .list-view-item-sub-email {
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 14;
     margin-top: 3;
     text-decoration: underline;
 }
 
 .android .list-view-item-sub-phone {
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 12;
     margin-top: 5;
 }
 
 .ios .list-view-item-sub-phone {
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 14;
     margin-top: 3;
 }
@@ -396,21 +445,22 @@ Page {
 }
 
 .android .fn-list-view-item-small {
-    color: #0a6fb0;
+    color: #0075be;
     font-family: fontawesome;
     font-size: 14;
     margin-left: 10;
 }
 
 .ios .fn-list-view-item-small {
-    color: #0a6fb0;
+    color: #0075be;
     font-family: 'FontAwesome';
     font-size: 16;
     margin-left: 10;
 }
 
 .login-background {
-    background-color: #0a6fb0;
+    /* background-color: #0075be; */
+    background-color: white;
 }
 
 .android .scroll-view-item {
@@ -429,18 +479,18 @@ Page {
 
 .android .segmented-bar {
     /* background-color: #ccc; */
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 10;
-    selected-background-color: #0a6fb0; /* NEEDED */
+    selected-background-color: #0075be; /* NEEDED */
 }
 
 .ios .segmented-bar {
     /* background-color: #ccc; */
-    color: #0a6fb0;
+    color: #0075be;
     font-size: 14;
     margin-bottom: 10;
     margin-top: 10;
-    selected-background-color: #0a6fb0; /* NEEDED */
+    selected-background-color: #0075be; /* NEEDED */
 }
 
 .swipe-icons {
@@ -454,25 +504,32 @@ Page {
     background-color: #0075be;
 }
 
+.green {
+    /* background-color: green; */
+    background-color: #35c4af; /* #0a573d; */
+}
+
 .orange {
-    background-color: #f68320;
+    /* background-color: #f68320; */
+    background-color: #e88011;
 }
 
 .red {
-    background-color: #cc2d30;
+    /* background-color: #cc2d30; */
+    background-color: #ea092a;
 }
-
 /* .android .switch {
     color: #cc2d30;
 } */
 
 .ios .switch {
-    background-color: #cc2d30;
+    /* background-color: #cc2d30; */
+    background-color: #ea092a;
 }
 
 /* Switch[checked=true] {
     color: white ;
-    background-color: #0a6fb0;
+    background-color: #0075be;
     transform: scale(1.25, 1.25);
     transform: translate(-5, 0);
   }
@@ -483,7 +540,7 @@ Page {
   } */
 
 .view-title {
-    background-color: #0a6fb0;
+    background-color: #0075be;
     color: white;
     font-size: 20;
     height: 44;

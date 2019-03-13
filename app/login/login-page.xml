@@ -1,30 +1,32 @@
 <Page class="page" navigatingTo="onNavigatingTo" loaded="onLoaded" navigatedTo="onNavigatedTo" xmlns="http://schemas.nativescript.org/tns.xsd" style="margin-top: 0;">
     <ScrollView class="login-background">
-        <GridLayout columns="*" rows="*, auto" height="100%" width="100%">
+        <GridLayout columns="*" rows="*, auto, auto, auto, auto" height="100%" width="100%">
             <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center">
                 <Image src="res://login" android:stretch="aspectFill" ios:stretch="none"></Image>
             </StackLayout>
-            <StackLayout row="1" col="0" orientation="vertical" backgroundColor="white" verticalAlignment="bottom" margin="10" borderRadius="5">
+            <StackLayout row="1" col="0" orientation="vertical" backgroundColor="#eee" verticalAlignment="bottom" margin="0 10 0 10" borderRadius="5">
                 <StackLayout orientation="horizontal" class="login-field">
-                    <StackLayout width="40%" verticalAlignment="center">
-                        <Label text="Email" horizontalAlignment="left" />
+                    <StackLayout width="10%" verticalAlignment="center">
+                        <Image src="res://email" android:stretch="aspectFill" ios:stretch="none"></Image>
                     </StackLayout>
-                    <StackLayout width="60%" verticalAlignment="center">
-                        <TextField id="email" hint="Enter your email address" keyboardType="email" autocorrect="false" autocapitalization="none"
-                            text="{{ email }}" width="100%" textAlignment="right"></TextField>
+                    <StackLayout width="90%" verticalAlignment="center">
+                        <TextField id="email" hint="Email" keyboardType="email" autocorrect="false" autocapitalization="none"
+                            text="{{ email }}" width="100%" textAlignment="left"></TextField>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+            <StackLayout row="2" col="0" orientation="vertical" backgroundColor="#eee" verticalAlignment="bottom" margin="5 10 0 10" borderRadius="5">
                 <StackLayout orientation="horizontal" class="login-field">
-                    <StackLayout width="40%" verticalAlignment="center">
-                        <Label text="Password" horizontalAlignment="left" />
+                    <StackLayout width="10%" verticalAlignment="center">
+                        <Image src="res://password" android:stretch="aspectFill" ios:stretch="none"></Image>
                     </StackLayout>
-                    <StackLayout width="60%" verticalAlignment="center">
-                        <TextField id="password" hint="Enter your password" secure="true" autocorrect="false" autocapitalization="none"
-                            text="{{ password }}" width="100%" textAlignment="right"></TextField>
+                    <StackLayout width="90%" verticalAlignment="center">
+                        <TextField id="password" hint="Password" secure="true" autocorrect="false" autocapitalization="none"
+                            text="{{ password }}" width="100%" textAlignment="left"></TextField>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+            <StackLayout row="3" col="0" orientation="vertical" backgroundColor="#eee" verticalAlignment="bottom" margin="5 10 0 10" borderRadius="5">
                 <StackLayout orientation="horizontal" class="login-field-switch">
                     <StackLayout width="40%" verticalAlignment="center">
                         <Label text="Remember Me" horizontalAlignment="left" />
@@ -33,10 +35,10 @@
                         <Switch id="rememberMe" checked="{{ rememberMe }}" horizontalAlignment="right" class="switch" />
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="hr-light"></StackLayout>
-                <Button class="button" text="Sign In" tap="onSigninButtonTap" width="25%"></Button>
             </StackLayout>
-
+            <StackLayout row="4" col="0" orientation="vertical" verticalAlignment="top" margin="0 10 50 10">
+                <Button class="login-button" text="Sign In" tap="onSigninButtonTap"></Button>
+            </StackLayout>
             <!-- <Label class="m-t-10 m-b-10 m-l-15 m-r-15" text="Forgot password?" tap="onForgotPasswordTap"></Label> -->
         </GridLayout>
     </ScrollView>

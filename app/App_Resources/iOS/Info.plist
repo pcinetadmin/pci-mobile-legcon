@@ -43,5 +43,7 @@
 			<string>UIInterfaceOrientationPortrait</string>
 			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		</array>
+		<key>NSFaceIDUsageDescription</key>
+  		<string>For easier authentication when using LegCon.</string>
 	</dict>
 </plist>

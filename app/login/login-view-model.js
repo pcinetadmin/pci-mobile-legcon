@@ -12,7 +12,7 @@ function LoginViewModel() {
         rememberMe: false,
         useTouchId: false,
 
-        signIn: function() {
+        signIn: function(scanType) {
             const email = this.email;
             const password = this.password;
 
@@ -82,11 +82,11 @@ function LoginViewModel() {
                         var useTouchId = appSettings.getBoolean("useTouchId", false);
                         var rememberMe = appSettings.getBoolean("rememberMe", false);
 
-                        if ((useTouchId === undefined || useTouchId === null || useTouchId === false) && rememberMe && platformModule.isIOS)
+                        if ((useTouchId === undefined || useTouchId === null || useTouchId === false) && scanType === "touch" && rememberMe && platformModule.isIOS)
                         {
                             dialogs.confirm(
                                 {
-                                    title: "Touch ID for \"PCI LegCon\"",
+                                    title: "Touch ID for \"LegCon\"",
                                     message: "Would you like to use the fingerprint scanner to log on in the future?",
                                     okButtonText: "Yes",
                                     cancelButtonText: "No"
@@ -127,6 +127,10 @@ function LoginViewModel() {
                                     }
                                 }
                             });
+                        }
+                        else if ((useTouchId === undefined || useTouchId === null || useTouchId === false) && scanType === "face" && rememberMe && platformModule.isIOS)
+                        {
+                            appSettings.setBoolean("useTouchId", true);
                         }
                         else
                         {

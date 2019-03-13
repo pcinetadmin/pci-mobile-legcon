@@ -11,9 +11,6 @@ var email;
 var password;
 var rememberMe;
 
-/* ***********************************************************
-* Use the "onNavigatingTo" handler to initialize the page binding context.
-*************************************************************/
 function onNavigatingTo(args) {
     page = args.object;
 
@@ -45,7 +42,7 @@ function onNavigatedTo(args)
                         () => {
                             const bindingContext = page.bindingContext;
 
-                            bindingContext.signIn();
+                            bindingContext.signIn(null);
                         },
                         error => {
                             // when error.code === -3, the user pressed the button labeled with your fallbackMessage
@@ -87,7 +84,25 @@ function onSigninButtonTap(args) {
         const button = args.object;
         const bindingContext = button.bindingContext;
         
-        bindingContext.signIn();
+        var scanType;
+
+        fingerprintAuth.available().then((result) => 
+        {
+            if (result.touch) {
+                scanType = "touch";
+            }
+            else
+            {
+                scanType = "face"
+            }
+
+            bindingContext.signIn(scanType);
+        }).catch((e) =>
+        {
+            scanType = null;
+
+            bindingContext.signIn(scanType);
+        });
     } catch(e) {
         dialogs.alert({
             title: "Error",
