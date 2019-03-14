@@ -113,9 +113,7 @@ function onSigninButtonTap(args) {
 }
 
 function onForgotPasswordTap() {
-    /* ***********************************************************
-    * Call your Forgot Password logic here.
-    *************************************************************/
+    utilsModule.openUrl("https://www.pciaa.net/pciwebsite/Accounts/forgotpassword.aspx")
 }
 
 exports.onNavigatingTo = onNavigatingTo;

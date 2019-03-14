@@ -1,6 +1,6 @@
 <Page class="page" navigatingTo="onNavigatingTo" loaded="onLoaded" navigatedTo="onNavigatedTo" xmlns="http://schemas.nativescript.org/tns.xsd" style="margin-top: 0;">
     <ScrollView class="login-background">
-        <GridLayout columns="*" rows="*, auto, auto, auto, auto" height="100%" width="100%">
+        <GridLayout columns="*" rows="*, auto, auto, auto, auto, auto" height="100%" width="100%">
             <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center">
                 <Image src="res://login" android:stretch="aspectFill" ios:stretch="none"></Image>
             </StackLayout>
@@ -36,8 +36,11 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-            <StackLayout row="4" col="0" orientation="vertical" verticalAlignment="top" margin="0 10 50 10">
+            <StackLayout row="4" col="0" orientation="vertical" verticalAlignment="top" margin="0 10 0 10">
                 <Button class="login-button" text="Sign In" tap="onSigninButtonTap"></Button>
+            </StackLayout>
+            <StackLayout row="5" col="0" orientation="vertical" verticalAlignment="top" margin="5 10 30 10">
+                <Button class="forgot-button" text="Forgot Password?" tap="onForgotPasswordTap"></Button>
             </StackLayout>
             <!-- <Label class="m-t-10 m-b-10 m-l-15 m-r-15" text="Forgot password?" tap="onForgotPasswordTap"></Label> -->
         </GridLayout>
