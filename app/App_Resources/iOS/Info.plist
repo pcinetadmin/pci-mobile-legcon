@@ -15,11 +15,11 @@
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
-		<string>2.0.5</string>
+		<string>3.0.0</string>
 		<key>CFBundleSignature</key>
 		<string>????</string>
 		<key>CFBundleVersion</key>
-		<string>2.0</string>
+		<string>3.0</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>NSCalendarsUsageDescription</key>
@@ -38,12 +38,9 @@
 		</array>
 		<key>UISupportedInterfaceOrientations~ipad</key>
 		<array>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
 			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		</array>
 		<key>NSFaceIDUsageDescription</key>
-  		<string>For easier authentication when using LegCon.</string>
+		<string>For easier authentication when using LegCon.</string>
 	</dict>
 </plist>

@@ -11,17 +11,17 @@ function LegislatorViewModel(items) {
         if (bioguideId === null || bioguideId === "") {
             data = [
                 {"title": "Meetings", "navigateTo": "meetings/meetings-page"},
-                {"title": "PCI Initiative Tiers", "navigateTo": "legislators/legislator/initiativetiers/initiativetiers-page"},
+                {"title": "Initiative Tiers", "navigateTo": "legislators/legislator/initiativetiers/initiativetiers-page"},
                 {"title": "Surveys", "navigateTo": "legislators/legislator/surveys/surveys-page"},
-                {"title": "PCI Relationships", "navigateTo": "profiles/profiles-page"},
+                {"title": "Relationships", "navigateTo": "profiles/profiles-page"},
                 {"title": "Committees", "navigateTo": "legislators/legislator/committees/committees-page"}
             ];
         } else {
             data = [
                 {"title": "Meetings", "navigateTo": "meetings/meetings-page"},
-                {"title": "PCI Initiative Tiers", "navigateTo": "legislators/legislator/initiativetiers/initiativetiers-page"},
+                {"title": "Initiative Tiers", "navigateTo": "legislators/legislator/initiativetiers/initiativetiers-page"},
                 {"title": "Surveys", "navigateTo": "legislators/legislator/surveys/surveys-page"},
-                {"title": "PCI Relationships", "navigateTo": "profiles/profiles-page"},
+                {"title": "Relationships", "navigateTo": "profiles/profiles-page"},
                 {"title": "Bio", "navigateTo": "legislators/legislator/bio/bio-page"},
                 {"title": "Committees", "navigateTo": "legislators/legislator/committees/committees-page"}
             ];

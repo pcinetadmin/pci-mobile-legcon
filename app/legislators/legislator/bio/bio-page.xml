@@ -36,7 +36,7 @@
                 <Label row="0" col="1" text="{{ partyName }}" horizontalAlignment="right"  class="list-view-item-right" />
             </GridLayout>
             <GridLayout columns="*" rows="auto" class="list-view-item-form">
-                <Label row="0" col="0" text="PCI Bio" class="list-view-item-left" />
+                <Label row="0" col="0" text="Bio" class="list-view-item-left" />
             </GridLayout>
         </StackLayout>
         <StackLayout row="2" col="0">

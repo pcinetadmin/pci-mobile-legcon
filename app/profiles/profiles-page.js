@@ -55,9 +55,9 @@ function onNavigatingTo(args) {
             legislatorName.text = navigationContext.fullName;
         
             if (navigationContext.relationalType === "legislator") {
-                page.actionBar.title = "PCI Relationships";
+                page.actionBar.title = "Relationships";
             } else {
-                page.actionBar.title = "PCI Attendees";
+                page.actionBar.title = "APCIA Attendees";
             }
             
             profilesList.empty();

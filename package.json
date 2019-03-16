@@ -1,6 +1,6 @@
 {
   "name": "legcon",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript Application",
@@ -8,7 +8,7 @@
   "nativescript": {
     "id": "net.pciaa.fgr",
     "tns-ios": {
-      "version": "3.4.1"
+      "version": "5.2.0"
     },
     "tns-android": {
       "version": "3.4.0"
@@ -38,5 +38,5 @@
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-sources": "~1.1.0"
   },
-  "author": "PCIAA"
+  "author": "APCIA"
 }
