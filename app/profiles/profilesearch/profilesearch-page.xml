@@ -6,7 +6,7 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" direction="horizontal">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" direction="horizontal">
             <SearchBar row="0" col="0" id="searchBar" hint="Search" text="" loaded="onSearchBarLoaded" submit="onSubmit" clear="onClear" />
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">

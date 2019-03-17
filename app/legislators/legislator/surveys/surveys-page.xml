@@ -8,11 +8,11 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-title" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
             <Label id="legislatorId" text="" visibility="collapsed" />
             <Label id="legislatorName" text="" horizontalAlignment="center" />
         </StackLayout>
-        <StackLayout row="1" col="0" verticalAlignment="center" horizontalAlignment="center">
+        <StackLayout row="1" col="0" verticalAlignment="top" horizontalAlignment="center">
             <SegmentedBar class="segmented-bar" selectedIndexChanged="onSelectedIndexChanged">
                 <SegmentedBar.items>
                     <SegmentedBarItem title="Current Surveys" />

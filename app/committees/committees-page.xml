@@ -2,10 +2,10 @@
     <ActionBar class="action-bar" />
 
     <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center">
             <SearchBar id="searchBar" hint="Search" text="" loaded="onSearchBarLoaded" submit="onSubmit" clear="onClear" />
         </StackLayout>
-        <StackLayout row="1" col="0" verticalAlignment="center" horizontalAlignment="center">
+        <StackLayout row="1" col="0" verticalAlignment="top" horizontalAlignment="center">
             <SegmentedBar class="segmented-bar" selectedIndexChanged="onSelectedIndexChanged">
                 <SegmentedBar.items>
                     <SegmentedBarItem title="All" />

@@ -3,6 +3,7 @@ const platformModule = require("platform");
 const observableModule = require("data/observable");
 const appSettings = require("application-settings");
 const dialogs = require("ui/dialogs");
+var utilsModule = require("tns-core-modules/utils/utils");
 const fingerprintAuthPlugin = require("nativescript-fingerprint-auth");
 var fingerprintAuth = new fingerprintAuthPlugin.FingerprintAuth();
 var page;

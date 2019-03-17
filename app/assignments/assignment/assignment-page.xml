@@ -8,7 +8,7 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-title">
             <Label id="assignmentId" text="{{ assignmentId }}" visibility="collapsed" />
             <Label id="legislatorName" text="{{ legislator }}" horizontalAlignment="center" />
         </StackLayout>

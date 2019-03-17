@@ -8,6 +8,9 @@
 
     <ScrollView>
         <StackLayout verticalAlignment="top">
+            <StackLayout verticalAlignment="top" class="list-view-section-blank">
+                <Label text="" verticalAlignment="bottom" />
+            </StackLayout>
             <StackLayout verticalAlignment="bottom" class="list-view-section-header">
                 <Label text="MEETING INFORMATION" verticalAlignment="bottom" />
             </StackLayout>

@@ -266,6 +266,11 @@ Page {
     padding-top: 8;
 }
 
+.list-view-section-blank {
+    background-color: #ddd;
+    height: 1;
+}
+
 .android .list-view-section-header {
     background-color: #eee;
     border-bottom-color: #ddd;
@@ -274,11 +279,11 @@ Page {
     border-top-width: 0.5;
     color: #666;
     font-size: 10;
-    height: 30;
+    /* height: 30; */
     padding-bottom: 2;
     padding-left: 10;
     padding-right: 10;
-    padding-top: 0;
+    padding-top: 10;
 }
 
 .ios .list-view-section-header {
@@ -557,7 +562,9 @@ Page {
     background-color: #0075be;
     color: white;
     font-size: 20;
-    height: 44;
+    /* height: 44; */
+    padding-bottom: 10;
+    padding-top: 10;
     width: 100%;
 }
 

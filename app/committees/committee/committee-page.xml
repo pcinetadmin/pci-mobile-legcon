@@ -6,7 +6,7 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="auto, *" height="100%" width="100%">
-        <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center" class="view-title">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-title">
             <Label id="committeeName" text="" horizontalAlignment="center" />
         </StackLayout>
         <StackLayout row="1" col="0" verticalAlignment="top">
