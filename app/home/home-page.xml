@@ -1,6 +1,10 @@
 <Page class="page" navigatingTo="onNavigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
     <ActionBar class="action-bar" />
-    <TabView id="mainTabs" loaded="onTabViewLoaded" selectedIndexChanged="onTabViewSelectedIndexChanged">
+
+    <GridLayout>
+        <!-- Add your page content here -->
+    </GridLayout>
+    <!--<TabView id="mainTabs" loaded="onTabViewLoaded" selectedIndexChanged="onTabViewSelectedIndexChanged">
         <TabView.items>
             <TabViewItem title="Legislators" iconSource="res://legislator-icon" xmlns:Legislators="home/legislators">
                 <TabViewItem.view>
@@ -23,5 +27,5 @@
                 </TabViewItem.view>
             </TabViewItem>
         </TabView.items>
-    </TabView>
+    </TabView>-->
 </Page>

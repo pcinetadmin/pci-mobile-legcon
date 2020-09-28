@@ -20,6 +20,7 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
 
+        var offeredToMembersLabel = page.getViewById("offeredToMembersLabel");
         var followUpTitle = page.getViewById("followUpTitle");
         var followUpLabel = page.getViewById("followUpLabel");
 
@@ -54,6 +55,13 @@ function onNavigatingTo(args) {
             var staffAttendeesLabel = page.getViewById("staffAttendeesLabel");
 
             venueTypeLabel.text = pageData.venueType;
+
+            if (pageData.offeredToMembers === true || pageData.offeredToMembers === "true") {
+                offeredToMembersLabel.text = "Yes";
+            } else {
+                offeredToMembersLabel.text = "No";
+            }
+
             notesLabel.text = limitText(pageData.notes, 30);
             legislatorLabel.text = pageData.fullName;
             attendeeTypeLabel.text = pageData.attendeeType;
@@ -103,6 +111,12 @@ function onNavigatingTo(args) {
                 page.actionBar.title = "Add Meeting";
             } else {
                 page.actionBar.title = "Edit Meeting";
+            }
+
+            if (pageData.offeredToMembers === true || pageData.offeredToMembers === "true") {
+                offeredToMembersLabel.text = "Yes";
+            } else {
+                offeredToMembersLabel.text = "No";
             }
 
             if (pageData.followUpNeeded === true || pageData.followUpNeeded === "true") {
@@ -181,6 +195,28 @@ function onStackLayoutVenueTypeTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/venuetype/venuetype-page",
+            context: pageData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onStackLayoutOfferedToMembersTap(args) {
+    try {
+        collapseMeetingDate();
+
+        const navigationEntry = {
+            moduleName: "meetings/meeting/offeredtomembers/offeredtomembers-page",
             context: pageData,
             clearHistory: false
         };
@@ -588,6 +624,7 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
 exports.onStackLayoutMeetingDateTap = onStackLayoutMeetingDateTap;
 exports.onStackLayoutVenueTypeTap = onStackLayoutVenueTypeTap;
+exports.onStackLayoutOfferedToMembersTap = onStackLayoutOfferedToMembersTap;
 exports.onStackLayoutNotesTap = onStackLayoutNotesTap;
 exports.onStackLayoutFollowUpTap = onStackLayoutFollowUpTap;
 exports.onStackLayoutInitiativesTap = onStackLayoutInitiativesTap;

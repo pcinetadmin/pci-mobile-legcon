@@ -497,15 +497,15 @@ Page {
 }
 
 .android .segmented-bar {
-    /* background-color: #ccc; */
-    color: #0075be;
+    background-color: #33a8f1;
+    color: white;
     font-size: 10;
     selected-background-color: #0075be; /* NEEDED */
 }
 
 .ios .segmented-bar {
-    /* background-color: #ccc; */
-    color: #0075be;
+    background-color: #33a8f1;
+    color: white;
     font-size: 14;
     margin-bottom: 10;
     margin-top: 10;

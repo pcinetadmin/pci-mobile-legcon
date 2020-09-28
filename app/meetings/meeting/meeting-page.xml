@@ -30,6 +30,13 @@
                     <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
             </StackLayout>
+            <StackLayout tap="onStackLayoutOfferedToMembersTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Offered to APCIA Members?" class="list-view-item-left" />
+                    <Label id="offeredToMembersLabel" row="0" col="1" text="" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
             <StackLayout tap="onStackLayoutNotesTap">
                 <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form-bottom">
                     <Label row="0" col="0" text="Notes" class="list-view-item-left" />

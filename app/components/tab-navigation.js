@@ -1,10 +1,10 @@
 var gridLayout = require("ui/layouts/grid-layout")
 var stackLayout = require("ui/layouts/stack-layout")
 var Label = require("ui/label").Label
-var dependencyObservableModule = require("ui/core/dependency-observable")
-var View = require("ui/core/view").View
+//var dependencyObservableModule = require("ui/core/dependency-observable")
+//var View = require("ui/core/view").View
 var frame = require("ui/frame")
-var platform = require("platform")
+//var platform = require("platform")
 var color = require("color")
 
 var TabNavigation = (function (_super) {

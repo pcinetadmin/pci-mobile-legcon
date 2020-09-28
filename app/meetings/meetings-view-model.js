@@ -58,6 +58,7 @@ function MeetingsViewModel(items) {
                     meetingDate: meetingDate,
                     venueTypeId: meeting.VenueTypeId,
                     venueType: meeting.VenueType,
+                    offeredToMembers: meeting.OfferedToMembers,
                     attendeeTypeId: meeting.AttendeeTypeId,
                     attendeeType: meeting.AttendeeType,
                     lobbyistId: meeting.LobbyistId,

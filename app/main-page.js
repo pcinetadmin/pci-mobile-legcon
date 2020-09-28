@@ -3,11 +3,12 @@ var frame = require("ui/frame");
 var gridLayout = require("ui/layouts/grid-layout");
 var stackLayout = require("ui/layouts/stack-layout")
 var Label = require("ui/label").Label;
-var dialogs = require("ui/dialogs");
+var orientation = require('nativescript-orientation');
 
 var page;
 
 function onNavigatingTo(args) {
+    orientation.enableRotation();
     page = args.object;
     page._tabs = [];
 
@@ -24,9 +25,6 @@ function onNavigatingTo(args) {
 
     newGrid.id = "tab-navigation";
 
-    var star = new gridLayout.ItemSpec(1, "star");
-    var auto = new gridLayout.ItemSpec(1, "auto");
-
     newGrid.addRow(new gridLayout.ItemSpec(1, "star"));
     newGrid.addRow(new gridLayout.ItemSpec(1, "auto"));
     
@@ -34,16 +32,20 @@ function onNavigatingTo(args) {
         newGrid.addColumn(new gridLayout.ItemSpec(1, "star"));
     }
     
+    var frameHolder = new stackLayout.StackLayout();
+    
     page.navFrame = new frame.Frame();
 
     page.navFrame.id = "navigation-frame";
     page.navFrame.className = "navigation-frame";
 
-    newGrid.addChild(page.navFrame);
+    frameHolder.addChild(page.navFrame);
 
-    gridLayout.GridLayout.setColumn(page.navFrame, 0);
-    gridLayout.GridLayout.setRow(page.navFrame, 0);
-    gridLayout.GridLayout.setColumnSpan(page.navFrame, numItems);
+    newGrid.addChild(frameHolder);
+
+    gridLayout.GridLayout.setColumn(frameHolder, 0);
+    gridLayout.GridLayout.setRow(frameHolder, 0);
+    gridLayout.GridLayout.setColumnSpan(frameHolder, numItems);
 
     for (var i = 0; i < numItems; i++) {
         var currentItem = page.tabItems[i];
@@ -86,8 +88,6 @@ function onNavigatingTo(args) {
 
     page.content = newGrid;
 
-    // page.navFrame.navigate(page.tabItems[0].path);
-
     const dateConverter = (value, format) => {
         let result = format;
 
@@ -107,7 +107,16 @@ function onNavigatingTo(args) {
     application.getResources().dateConverter = dateConverter;
     application.getResources().dateFormat = "MM/DD/YYYY";
 
-    page.navFrame.navigate(page.tabItems[0].path);
+    var navigationEntry = {
+        moduleName: page.tabItems[0].path,
+        context: {
+            reference: "tab"
+        },
+        clearHistory: true
+    }
+
+    page.navFrame.navigate(navigationEntry);
+    //page.navFrame.navigate(page.tabItems[0].path);
 }
 
 function onTabSelected(args) {
@@ -116,7 +125,7 @@ function onTabSelected(args) {
 
     if (selectedTab.className.indexOf("tab-selected") > -1) {
         var currentFrame = page.getViewById("navigation-frame");
-        //dialogs.alert(currentFrame.currentPage.actionBar.title);
+        
         if (page.tabItems[index].label === currentFrame.currentPage.actionBar.title) {
             return;
         }

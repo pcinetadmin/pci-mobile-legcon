@@ -8,7 +8,7 @@
         <StackLayout row="1" col="0" verticalAlignment="top" horizontalAlignment="center">
             <SegmentedBar class="segmented-bar" selectedIndexChanged="onSelectedIndexChanged">
                 <SegmentedBar.items>
-                    <SegmentedBarItem title="All" />
+                    <SegmentedBarItem class="selectedSegment" title="All" />
                     <SegmentedBarItem title="House" />
                     <SegmentedBarItem title="Senate" />
                     <SegmentedBarItem title="Joint" />

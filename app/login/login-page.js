@@ -6,6 +6,8 @@ const dialogs = require("ui/dialogs");
 var utilsModule = require("tns-core-modules/utils/utils");
 const fingerprintAuthPlugin = require("nativescript-fingerprint-auth");
 var fingerprintAuth = new fingerprintAuthPlugin.FingerprintAuth();
+var view = require("ui/core/view");
+var orientation = require('nativescript-orientation');
 var page;
 var loginViewModel;
 var email;
@@ -13,7 +15,26 @@ var password;
 var rememberMe;
 
 function onNavigatingTo(args) {
+    orientation.disableRotation();
+    // page = args.object;
+
+    // loginViewModel = new LoginViewModel();
+
+    // loginViewModel.email = appSettings.getString("email", "");
+    // loginViewModel.password = appSettings.getString("password", "");
+    // loginViewModel.rememberMe = appSettings.getBoolean("rememberMe", false);
+    // loginViewModel.useTouchId = appSettings.getBoolean("useTouchId", false);
+
+    // page.bindingContext = loginViewModel;
+}
+
+function onLoaded(args)
+{
     page = args.object;
+
+    email = view.getViewById(page, "email");
+    password = view.getViewById(page, "password");
+    rememberMe = view.getViewById(page, "rememberMe");
 
     loginViewModel = new LoginViewModel();
 
@@ -23,11 +44,6 @@ function onNavigatingTo(args) {
     loginViewModel.useTouchId = appSettings.getBoolean("useTouchId", false);
 
     page.bindingContext = loginViewModel;
-}
-
-function onLoaded(args)
-{
-    
 }
 
 function onNavigatedTo(args)
@@ -64,10 +80,6 @@ function onNavigatedTo(args)
 
 function onSigninButtonTap(args) {
     try {
-        rememberMe = page.getViewById("rememberMe");
-        email = page.getViewById("email");
-        password = page.getViewById("password");
-
         appSettings.setBoolean("rememberMe", rememberMe.checked);
 
         if (rememberMe.checked)
@@ -82,9 +94,6 @@ function onSigninButtonTap(args) {
             appSettings.setString("password", "");
         }
 
-        const button = args.object;
-        const bindingContext = button.bindingContext;
-        
         var scanType;
 
         fingerprintAuth.available().then((result) => 
@@ -97,12 +106,12 @@ function onSigninButtonTap(args) {
                 scanType = "face"
             }
 
-            bindingContext.signIn(scanType);
+            loginViewModel.signIn(scanType);
         }).catch((e) =>
         {
             scanType = null;
 
-            bindingContext.signIn(scanType);
+            loginViewModel.signIn(scanType);
         });
     } catch(e) {
         dialogs.alert({

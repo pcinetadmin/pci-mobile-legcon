@@ -10,7 +10,7 @@ JavaScript modules. The CommonJS require() function is how you import
 JavaScript modules defined in other files.
 */
 const HomeViewModel = require("./home-view-model");
-var dialogs = require("ui/dialogs");
+//var dialogs = require("ui/dialogs");
 
 const homeViewModel = new HomeViewModel();
 var page;
@@ -37,7 +37,7 @@ function onNavigatingTo(args) {
     page.bindingContext = homeViewModel;
 }
 
-function onTabViewLoaded(args) {
+/* function onTabViewLoaded(args) {
     const tabView = args.object;
 
     tabView.eachChild((child) => {
@@ -48,9 +48,9 @@ function onTabViewLoaded(args) {
     });
 
     page.actionBar.title = "Legislators";
-}
+} */
 
-function onTabViewSelectedIndexChanged(args) {
+/* function onTabViewSelectedIndexChanged(args) {
     var tabView = args.object;
     var selectedIndex = tabView.selectedIndex;
         
@@ -63,7 +63,7 @@ function onTabViewSelectedIndexChanged(args) {
     } else { // Assignments
         page.actionBar.title = "Assignments";
     }
-}
+} */
 
 /*
 Exporting a function in a NativeScript code-behind file makes it accessible
@@ -73,4 +73,4 @@ file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
 exports.onTabViewLoaded = onTabViewLoaded;
-exports.onTabViewSelectedIndexChanged = onTabViewSelectedIndexChanged;
+// exports.onTabViewSelectedIndexChanged = onTabViewSelectedIndexChanged;

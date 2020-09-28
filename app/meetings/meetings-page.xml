@@ -22,8 +22,8 @@
                     <AbsoluteLayout>
                         <!-- BACKGROUND: Swipe Actions -->
                         <GridLayout columns="*, 80" width="100%"
-                            android:rows="{{ pciInitiatives.length > 0 && legislatorStaffAttendees.length > 0 ? '89' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '70' : '51' }}"
-                            ios:rows="{{ pciInitiatives.length > 0 && legislatorStaffAttendees.length > 0 ? '98' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '78' : '58' }}">
+                            android:rows="{{ pciInitiatives.length > 0 &amp;&amp; legislatorStaffAttendees.length > 0 ? '89' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '70' : '51' }}"
+                            ios:rows="{{ pciInitiatives.length > 0 &amp;&amp; legislatorStaffAttendees.length > 0 ? '98' : pciInitiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '78' : '58' }}">
                             <Label col="0" />
                             <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onDeleteClick" class="swipe-icons red">
                                 <Label row="0" col="0" text="" />

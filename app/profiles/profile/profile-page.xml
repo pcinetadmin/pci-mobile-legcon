@@ -15,14 +15,14 @@
                         <Label id="companyLabel" text="{{ boundData.company }}" class="list-view-item-sub" />
                         <Label id="titleLabel" text="{{ boundData.title }}" class="list-view-item-sub" />
                         <Label id="emailAddressButton" text="{{ boundData.emailAddress }}" tap="onEmailTap" horizontalAlignment="left" class="list-view-item-sub-email" 
-                            visibility="{{ boundData.emailAddress !== null && boundData.emailAddress.length > 0 ? 'visible' : 'collapse' }}" />
+                            visibility="{{ boundData.emailAddress !== null &amp;&amp; boundData.emailAddress.length > 0 ? 'visible' : 'collapse' }}" />
                         <Label id="workPhoneButton" text="{{ boundData.workPhone }}" tap="onPhoneTap" horizontalAlignment="left" class="list-view-item-sub-phone" 
-                            visibility="{{ boundData.workPhone !== null && boundData.workPhone.length > 0 ? 'visible' : 'collapse' }}"/>
+                            visibility="{{ boundData.workPhone !== null &amp;&amp; boundData.workPhone.length > 0 ? 'visible' : 'collapse' }}"/>
                     </StackLayout>
-                    <StackLayout id="selectPerson" row="0" col="0" visibility="{{ boundData.personId !== null && boundData.personId !== 0 ? 'collapse' : 'visible' }}">
+                    <StackLayout id="selectPerson" row="0" col="0" visibility="{{ boundData.personId !== null &amp;&amp; boundData.personId !== 0 ? 'collapse' : 'visible' }}">
                         <Label text="Select Person" class="list-view-item-left" style="color: #999; font-style: italic;" />
                     </StackLayout>
-                    <Label id="rightArrow" row="0" col="1" text="&#xf105;" class="fn-list-view-item" visibility="{{ boundData.personId !== null && boundData.personId !== 0 ? 'collapse' : 'visible' }}" />
+                    <Label id="rightArrow" row="0" col="1" text="&#xf105;" class="fn-list-view-item" visibility="{{ boundData.personId !== null &amp;&amp; boundData.personId !== 0 ? 'collapse' : 'visible' }}" />
                 </GridLayout>
             </StackLayout>
             <StackLayout tap="onStackLayoutRelationshipTap" visibility="{{ boundData.relationalType === 'legislator' ? 'visible' : 'collapse' }}">
