@@ -1,5 +1,9 @@
 {
     "circleci": {
         "httpsRepositoryURL": "https://github.com/pcinetadmin/pci-mobile-legcon"
+    },
+    "local": {
+        "CIRCLE_CI_API_ACCESS_TOKEN": "cf7a22ea22a951887f379f1bcb42850cef23e018",
+        "GITHUB_ACCESS_TOKEN": "6895320739af9af763e30f338ed75a0b76447fc4"
     }
 }
