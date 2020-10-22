@@ -1,42 +1,42 @@
 {
   "name": "legcon",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "net.pciaa.fgr",
-    "tns-ios": {
-      "version": "5.2.0"
-    },
     "tns-android": {
-      "version": "3.4.0"
+      "version": "6.4.1"
+    },
+    "tns-ios": {
+      "version": "6.4.2"
     }
   },
   "dependencies": {
-    "nativescript-email": "1.5.3",
-    "nativescript-fingerprint-auth": "6.2.0",
-    "nativescript-iqkeyboardmanager": "1.4.0",
-    "nativescript-phone": "1.4.0",
-    "nativescript-platform-css": "1.6.6",
-    "nativescript-pro-ui": "3.4.1",
-    "nativescript-theme-core": "~1.0.4",
-    "tns-core-modules": "5.2.2"
+    "nativescript-email": "1.6.0",
+    "nativescript-fingerprint-auth": "7.0.2",
+    "nativescript-iqkeyboardmanager": "1.5.1",
+    "nativescript-orientation": "2.2.4",
+    "nativescript-phone": "1.4.1",
+    "nativescript-platform-css": "1.6.10",
+    "nativescript-theme-core": "2.0.24",
+    "tns-core-modules": "6.5.1"
   },
   "devDependencies": {
-    "clean-webpack-plugin": "~0.1.19",
-    "copy-webpack-plugin": "~4.3.0",
-    "css-loader": "~0.28.7",
-    "extract-text-webpack-plugin": "~3.0.2",
-    "nativescript-dev-webpack": "~0.9.1",
-    "nativescript-worker-loader": "~0.8.1",
-    "raw-loader": "~0.5.1",
-    "resolve-url-loader": "~2.2.1",
-    "uglifyjs-webpack-plugin": "~1.1.6",
-    "webpack": "~3.10.0",
-    "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-sources": "~1.1.0"
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "5.1.1",
+    "css-loader": "3.5.1",
+    "nativescript-dev-webpack": "1.5.1",
+    "nativescript-worker-loader": "0.11.0",
+    "raw-loader": "4.0.0",
+    "resolve-url-loader": "3.1.1",
+    "terser-webpack-plugin": "2.3.5",
+    "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack": "4.42.1",
+    "webpack-bundle-analyzer": "3.7.0",
+    "webpack-sources": "1.4.3"
   },
   "author": "APCIA"
 }

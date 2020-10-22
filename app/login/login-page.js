@@ -7,7 +7,7 @@ var utilsModule = require("tns-core-modules/utils/utils");
 const fingerprintAuthPlugin = require("nativescript-fingerprint-auth");
 var fingerprintAuth = new fingerprintAuthPlugin.FingerprintAuth();
 var view = require("ui/core/view");
-var orientation = require('nativescript-orientation');
+var orientation = require('@proplugins/nativescript-orientation');
 var page;
 var loginViewModel;
 var email;
@@ -32,9 +32,9 @@ function onLoaded(args)
 {
     page = args.object;
 
-    email = view.getViewById(page, "email");
-    password = view.getViewById(page, "password");
-    rememberMe = view.getViewById(page, "rememberMe");
+    // email = view.getViewById(page, "email");
+    // password = view.getViewById(page, "password");
+    // rememberMe = view.getViewById(page, "rememberMe");
 
     loginViewModel = new LoginViewModel();
 
@@ -80,6 +80,12 @@ function onNavigatedTo(args)
 
 function onSigninButtonTap(args) {
     try {
+        let button = args.object;
+
+        email = button.page.getViewById("email");
+        password = button.page.getViewById("password");
+        rememberMe = button.page.getViewById("rememberMe");
+
         appSettings.setBoolean("rememberMe", rememberMe.checked);
 
         if (rememberMe.checked)

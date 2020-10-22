@@ -72,5 +72,5 @@ function here makes the navigatingTo="onNavigatingTo" binding in this page’s X
 file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
-exports.onTabViewLoaded = onTabViewLoaded;
+// exports.onTabViewLoaded = onTabViewLoaded;
 // exports.onTabViewSelectedIndexChanged = onTabViewSelectedIndexChanged;
