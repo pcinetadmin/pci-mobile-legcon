@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager</key>
 		<data>
-		wuXIZeEPfApEynlfhzyGLj+MvNU=
+		3vYxrS+En+i7i2BeIxdoAWOF8IA=
 		</data>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Frameworks/MDFInternationalization.framework/MDFInternationalization</key>
 		<data>
-		CPEQ0vJRq+3MX5kHH2jDZ/oITTU=
+		Wl61w7EwVybSvmrw3FwkhQEgpGk=
 		</data>
 		<key>Frameworks/MDFInternationalization.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -126,7 +126,7 @@
 		</data>
 		<key>Frameworks/MaterialComponents.framework/MaterialComponents</key>
 		<data>
-		76eETv2JD8Ih1ySwsmJZ2Nvy8Qk=
+		dCqwdeILyks3/rGC2+LkEOmegLg=
 		</data>
 		<key>Frameworks/MaterialComponents.framework/MaterialTabs.bundle/Resources/ar.lproj/MaterialTabs.strings</key>
 		<dict>
@@ -642,7 +642,7 @@
 		</data>
 		<key>Frameworks/NativeScript.framework/NativeScript</key>
 		<data>
-		BNpqU/2orQxSxsUQOE+VyEPreqw=
+		a0vZDuHij+geMSiTorlTu2Vb2yg=
 		</data>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -654,7 +654,7 @@
 		</data>
 		<key>Frameworks/TKLiveSync.framework/TKLiveSync</key>
 		<data>
-		aQY1kQeAA++kohf3WwdhT9xs+/Q=
+		24+dkCkOXN6j7Eug42J8qtXj+wc=
 		</data>
 		<key>Frameworks/TKLiveSync.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -698,7 +698,7 @@
 		</data>
 		<key>Frameworks/TNSWidgets.framework/TNSWidgets</key>
 		<data>
-		c5p7N8dXVtEOB3Eyst4rsDnvhzg=
+		pK9ORvwbT4HUHSQpIsFKyCLrP1Q=
 		</data>
 		<key>Frameworks/TNSWidgets.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -774,7 +774,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		LKjzuWvCkhaMgn9NR/YvyaM/B1E=
+		2692aTi4JkDfyrJlfHuJ3PhrIVA=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -782,7 +782,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		i75VaV7MEZ0u94c9KM70q0zhrqY=
+		9N9crGF7N2/PvI9TJAyH8WRumBg=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -1046,7 +1046,7 @@
 		</data>
 		<key>app/runtime.js</key>
 		<data>
-		Lf+qCfOPvGqGw14hOfyb00WaFf4=
+		2VpHBkVYJ2kcOobBNmbfIA+K3go=
 		</data>
 		<key>app/tns_modules/@nativescript/core/inspector_modules.js</key>
 		<data>
@@ -1066,7 +1066,7 @@
 		</data>
 		<key>app/vendor.js</key>
 		<data>
-		9ATS8Y9fSX1VEh2gSAkdndjD1yo=
+		kUK4bTjTvC4IC23ZmLOJIzx4Nbw=
 		</data>
 		<key>build.xcconfig</key>
 		<data>
@@ -1293,11 +1293,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wuXIZeEPfApEynlfhzyGLj+MvNU=
+			3vYxrS+En+i7i2BeIxdoAWOF8IA=
 			</data>
 			<key>hash2</key>
 			<data>
-			xDfcdUxS0HYMISSgvu2znfUFVIoziXOkXRWdAAdYRQY=
+			JWE3M+hqf+QUKct9aqA1jLMG0FNFfUUgZ/sTWGOe2as=
 			</data>
 		</dict>
 		<key>Frameworks/IQKeyboardManager.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png</key>
@@ -1425,11 +1425,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CPEQ0vJRq+3MX5kHH2jDZ/oITTU=
+			Wl61w7EwVybSvmrw3FwkhQEgpGk=
 			</data>
 			<key>hash2</key>
 			<data>
-			u3Z+Nq3rytErBHOCS8TrXB+guq4BtIOF4Usn/0wypgw=
+			yaEj8eT15eh7gBKNvCs4uReHJFUm6hsAVK1Cc9vCr/E=
 			</data>
 		</dict>
 		<key>Frameworks/MDFInternationalization.framework/_CodeSignature/CodeResources</key>
@@ -1458,11 +1458,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			76eETv2JD8Ih1ySwsmJZ2Nvy8Qk=
+			dCqwdeILyks3/rGC2+LkEOmegLg=
 			</data>
 			<key>hash2</key>
 			<data>
-			V2i3k3mm6i0bjpBuCAY7wFnwjYV2gDN0TTCBPYwFKQ0=
+			PYQL1baYscg/cbrLSfp8cp+QVxLxs/3ZqNcq0EKlyhM=
 			</data>
 		</dict>
 		<key>Frameworks/MaterialComponents.framework/MaterialTabs.bundle/Resources/ar.lproj/MaterialTabs.strings</key>
@@ -2219,11 +2219,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			BNpqU/2orQxSxsUQOE+VyEPreqw=
+			a0vZDuHij+geMSiTorlTu2Vb2yg=
 			</data>
 			<key>hash2</key>
 			<data>
-			R9a2gceQxV+INp7HdazMQ79FXbTfT6JdJFjejybOmds=
+			fOksAWzSB0G447a0xLyEKpDukDGyfW6dD0Q0RJZIEa8=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/_CodeSignature/CodeResources</key>
@@ -2252,11 +2252,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aQY1kQeAA++kohf3WwdhT9xs+/Q=
+			24+dkCkOXN6j7Eug42J8qtXj+wc=
 			</data>
 			<key>hash2</key>
 			<data>
-			5CROUydrH7Yrza7rg2bBgERDHt9o2F8WPQak7ZQfFU4=
+			BIUio3jOrSYzjY9a5T8M1BaneVUAxoBE94kgkh2Ozyc=
 			</data>
 		</dict>
 		<key>Frameworks/TKLiveSync.framework/_CodeSignature/CodeResources</key>
@@ -2373,11 +2373,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			c5p7N8dXVtEOB3Eyst4rsDnvhzg=
+			pK9ORvwbT4HUHSQpIsFKyCLrP1Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			d6TsArVt+QY/MiI7WzsJiPbfrkve7mYrB02FHf8V0vY=
+			hj3xX/VhkoC8f+7RZOGdyrc1TTl0A25gbSGY9g3TfGk=
 			</data>
 		</dict>
 		<key>Frameworks/TNSWidgets.framework/_CodeSignature/CodeResources</key>
@@ -2571,11 +2571,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LKjzuWvCkhaMgn9NR/YvyaM/B1E=
+			2692aTi4JkDfyrJlfHuJ3PhrIVA=
 			</data>
 			<key>hash2</key>
 			<data>
-			OwASZ9emyWqJBRAW0XA19VKohXMyLlenaAxF5zv+Ao0=
+			huJvXTBgufXXuTE7uWbAsOBsrFmupZG7MTB0DezZVww=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -2593,11 +2593,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			i75VaV7MEZ0u94c9KM70q0zhrqY=
+			9N9crGF7N2/PvI9TJAyH8WRumBg=
 			</data>
 			<key>hash2</key>
 			<data>
-			hodXbIW4pzI+gqs7svvNhCcIQaRrMMj+Ex4UepGPJ64=
+			PvQmBfKZXvsljAiU5YfJ321gkpHof7TiBEb244lyET8=
 			</data>
 		</dict>
 		<key>app/App_Resources/Android/drawable-hdpi/background.png</key>
@@ -3308,11 +3308,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Lf+qCfOPvGqGw14hOfyb00WaFf4=
+			2VpHBkVYJ2kcOobBNmbfIA+K3go=
 			</data>
 			<key>hash2</key>
 			<data>
-			o0goa8gJhQDfP9A1QUi1U3j7WIxiaJ6IiTvuxc9dQlU=
+			/m1qVVww2hayFVxVcB/euQ0p9GizADMvqIVhl1q/A2s=
 			</data>
 		</dict>
 		<key>app/tns_modules/@nativescript/core/inspector_modules.js</key>
@@ -3363,11 +3363,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9ATS8Y9fSX1VEh2gSAkdndjD1yo=
+			kUK4bTjTvC4IC23ZmLOJIzx4Nbw=
 			</data>
 			<key>hash2</key>
 			<data>
-			anTaQNjclCSgJ2UKVPlq0AatdzBJxbwebo3U0nG9mGc=
+			ZgAR5ZXAixA8JdhaAY9tubuMz/6mstWHJEknDsGwVZg=
 			</data>
 		</dict>
 		<key>build.xcconfig</key>

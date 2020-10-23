@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22E4037C7A584DAE9ADF15A5 /* TNSWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1592FABDF75543E0820F4003 /* TNSWidgets.framework */; };
-		2CB89D675A9E41139BA3F7B3 /* NativeScriptEmbedder.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA5D3C84C214DFDBC59971E /* NativeScriptEmbedder.m */; };
-		308DDE3F83064053953AC943 /* build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E44B5C27DE34CD588C6E08C /* build.xcconfig */; };
-		377EDE4A719248E99A331E9D /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DECCAB0CA47A5B2EA0901 /* password@2x.png */; };
 		39940D9122C4EF600050DDE1 /* NativeScript.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39940D8C22C4EAAA0050DDE1 /* NativeScript.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		39940E1C22C5DFFF0050DDE1 /* TKLiveSync.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39940E1B22C5DFFF0050DDE1 /* TKLiveSync.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		55CDCCBE85384F9DB80536E3 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55B82E0A1049378334EAB8 /* login.png */; };
-		73F9DBFB22AB4A38A43964D0 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B53389CEECC41D78259F08D /* email.png */; };
-		77B60FBB2D33477E958B4805 /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7959FDCDFA744B17BCA6D984 /* email@3x.png */; };
-		813E05601F3949D3B518C42F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7E13FD6D7D486696CE2BCD /* Assets.xcassets */; };
-		856CB1C18DF24C4E9E69FDBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3120445222404A0D877F8945 /* LaunchScreen.storyboard */; };
+		4F52079C36BC4CA09BE0D878 /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB4D31B3B2B4F56A15B091F /* email@3x.png */; };
+		57EE4F4FBA7A4E52841D11C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E00F1E07A8A445DD82AF4B52 /* LaunchScreen.storyboard */; };
+		71358AABEE43484A86B9EB62 /* password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE02BFCF94E4503B974289E /* password@3x.png */; };
+		7B5236B7CF5445109505E355 /* NativeScriptEmbedder.m in Sources */ = {isa = PBXBuildFile; fileRef = C71E8391959A452BA2F1274E /* NativeScriptEmbedder.m */; };
 		858B842D18CA22B800AB12DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 858B833A18CA111C00AB12DE /* InfoPlist.strings */; };
-		8C4B2FC8F50A44B09C2243A2 /* TNSWidgets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1592FABDF75543E0820F4003 /* TNSWidgets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8C9986CCA3BC2884B2001DAA /* Pods_pcimobilelegcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846E843EE868D019C959C263 /* Pods_pcimobilelegcon.framework */; };
-		9A94577A395244D3981FD2CB /* login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 823147500B9D43E0927FF564 /* login@2x.png */; };
-		A5E67EAFC0674B2D8DEED06C /* password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6532A072610F4588925EB616 /* password@3x.png */; };
-		C59F6BA77B034AAA91535172 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A894FB0E7CD45F88B7CFC0D /* email@2x.png */; };
-		CA48AAB3EE844C3C92C7CFE8 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = B6ABADEA655E4F968AC333C7 /* password.png */; };
+		8E3152ADEA7C4769BC3C0350 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFD4481B448E09E048ECF /* login.png */; };
+		907EB40453AB48D9865019CB /* TNSWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B32A660F2E440983A59DBB /* TNSWidgets.framework */; };
+		9278731818B4411DB2EEE000 /* login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 093134471E6048A3AAE38B88 /* login@2x.png */; };
+		A3C7C2D3C8914319AD1E94C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4722116EBA7418BAE09F478 /* Assets.xcassets */; };
+		ACDFF5332C6F4C9CA689DD46 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D62F03133B14D43B28930AA /* email@2x.png */; };
+		B5A9A2B473474B989DA1E9A6 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A741548FB1F43DCBB5063A0 /* password.png */; };
+		BC4A5CE3E66A38DBCD0426AE /* Pods_pcimobilelegcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C2A9EF404FC75D070F1A50 /* Pods_pcimobilelegcon.framework */; };
+		C5C0F5D3850B4BB9BD4FEFAC /* login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C547C0654CC345C2B3F4CFBB /* login@3x.png */; };
+		C824E872DAF948889276582F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = A00BC88D0CCA4AA5976D19D0 /* email.png */; };
+		CAD36FA83B6C48DD9BDACEB4 /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2721318AFB9497F984B51E4 /* password@2x.png */; };
 		CD45EE7C18DC2D5800FB50C0 /* app in Resources */ = {isa = PBXBuildFile; fileRef = CD45EE7A18DC2D5800FB50C0 /* app */; };
 		CD62955D1BB2678900AE3A93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD62955C1BB2678900AE3A93 /* main.m */; };
-		F5CCC8D0EE954A01963FE7C1 /* login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891BDDB5FBD6441C9C55C844 /* login@3x.png */; };
+		E63DC874B54D4A7CB2FF6114 /* TNSWidgets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25B32A660F2E440983A59DBB /* TNSWidgets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F5DE81118B4A491B98422831 /* build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A437776B6B1E46A39C5B6383 /* build.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +39,7 @@
 			files = (
 				39940D9122C4EF600050DDE1 /* NativeScript.xcframework in Embed Frameworks */,
 				39940E1C22C5DFFF0050DDE1 /* TKLiveSync.xcframework in Embed Frameworks */,
-				8C4B2FC8F50A44B09C2243A2 /* TNSWidgets.framework in Embed Frameworks */,
+				E63DC874B54D4A7CB2FF6114 /* TNSWidgets.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,47 +47,47 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0E44B5C27DE34CD588C6E08C /* build.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = pcimobilelegcon/Resources/build.xcconfig; sourceTree = "<group>"; };
-		1592FABDF75543E0820F4003 /* TNSWidgets.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TNSWidgets.framework; path = "$(SRCROOT)/../../node_modules/@nativescript/core/platforms/ios/TNSWidgets.framework"; sourceTree = "<group>"; };
-		22F95388C32048599EAD505C /* module.modulemap */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "../../node_modules/@nativescript/core/platforms/ios/src/module.modulemap"; sourceTree = "<group>"; };
-		3120445222404A0D877F8945 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = LaunchScreen.storyboard; path = pcimobilelegcon/Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		055198E24630E7C27063E94B /* Pods-pcimobilelegcon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pcimobilelegcon.release.xcconfig"; path = "Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon.release.xcconfig"; sourceTree = "<group>"; };
+		093134471E6048A3AAE38B88 /* login@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "login@2x.png"; path = "pcimobilelegcon/Resources/login@2x.png"; sourceTree = "<group>"; };
+		1D303DE6932740D087507F25 /* NativeScriptEmbedder.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = NativeScriptEmbedder.h; path = "../../node_modules/@nativescript/core/platforms/ios/src/NativeScriptEmbedder.h"; sourceTree = "<group>"; };
+		1D62F03133B14D43B28930AA /* email@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "email@2x.png"; path = "pcimobilelegcon/Resources/email@2x.png"; sourceTree = "<group>"; };
+		1E8C0E29F599908433DAEFA5 /* Pods-pcimobilelegcon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pcimobilelegcon.debug.xcconfig"; path = "Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon.debug.xcconfig"; sourceTree = "<group>"; };
+		25B32A660F2E440983A59DBB /* TNSWidgets.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TNSWidgets.framework; path = "$(SRCROOT)/../../node_modules/@nativescript/core/platforms/ios/TNSWidgets.framework"; sourceTree = "<group>"; };
 		391174B521F1D7BF00BA2583 /* nativescript-build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "nativescript-build.xcconfig"; path = "internal/nativescript-build.xcconfig"; sourceTree = SOURCE_ROOT; };
 		391174B721F1D99900BA2583 /* plugins-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "plugins-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		391174B821F1D99900BA2583 /* plugins-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "plugins-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		39940D8122C4E84C0050DDE1 /* pcimobilelegcon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pcimobilelegcon.entitlements; sourceTree = "<group>"; };
 		39940D8C22C4EAAA0050DDE1 /* NativeScript.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = NativeScript.xcframework; path = internal/NativeScript.xcframework; sourceTree = "<group>"; };
 		39940E1B22C5DFFF0050DDE1 /* TKLiveSync.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TKLiveSync.xcframework; path = internal/TKLiveSync.xcframework; sourceTree = "<group>"; };
-		3B53389CEECC41D78259F08D /* email.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = email.png; path = pcimobilelegcon/Resources/email.png; sourceTree = "<group>"; };
+		41BDFD4481B448E09E048ECF /* login.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = login.png; path = pcimobilelegcon/Resources/login.png; sourceTree = "<group>"; };
 		42C751E2232B769100186695 /* nativescript-pre-link */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "nativescript-pre-link"; path = "internal/nativescript-pre-link"; sourceTree = SOURCE_ROOT; };
 		42C751E3232B769100186695 /* strip-dynamic-framework-architectures.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "strip-dynamic-framework-architectures.sh"; path = "internal/strip-dynamic-framework-architectures.sh"; sourceTree = SOURCE_ROOT; };
 		42C751E4232B769100186695 /* nsld.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = nsld.sh; path = internal/nsld.sh; sourceTree = SOURCE_ROOT; };
 		42C751E5232B769100186695 /* nativescript-post-build */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "nativescript-post-build"; path = "internal/nativescript-post-build"; sourceTree = SOURCE_ROOT; };
 		42C751E6232B769100186695 /* nativescript-pre-build */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "nativescript-pre-build"; path = "internal/nativescript-pre-build"; sourceTree = SOURCE_ROOT; };
-		5A894FB0E7CD45F88B7CFC0D /* email@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "email@2x.png"; path = "pcimobilelegcon/Resources/email@2x.png"; sourceTree = "<group>"; };
-		6532A072610F4588925EB616 /* password@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "password@3x.png"; path = "pcimobilelegcon/Resources/password@3x.png"; sourceTree = "<group>"; };
-		7959FDCDFA744B17BCA6D984 /* email@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "email@3x.png"; path = "pcimobilelegcon/Resources/email@3x.png"; sourceTree = "<group>"; };
-		7B55B82E0A1049378334EAB8 /* login.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = login.png; path = pcimobilelegcon/Resources/login.png; sourceTree = "<group>"; };
-		7F0669BB0D8810B48606DEE2 /* Pods-pcimobilelegcon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pcimobilelegcon.debug.xcconfig"; path = "Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon.debug.xcconfig"; sourceTree = "<group>"; };
-		823147500B9D43E0927FF564 /* login@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "login@2x.png"; path = "pcimobilelegcon/Resources/login@2x.png"; sourceTree = "<group>"; };
-		846E843EE868D019C959C263 /* Pods_pcimobilelegcon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pcimobilelegcon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE02BFCF94E4503B974289E /* password@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "password@3x.png"; path = "pcimobilelegcon/Resources/password@3x.png"; sourceTree = "<group>"; };
 		858B832E18CA111C00AB12DE /* pcimobilelegcon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pcimobilelegcon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		858B833918CA111C00AB12DE /* pcimobilelegcon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pcimobilelegcon-Info.plist"; sourceTree = "<group>"; };
 		858B833B18CA111C00AB12DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		858B833F18CA111C00AB12DE /* pcimobilelegcon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pcimobilelegcon-Prefix.pch"; sourceTree = "<group>"; };
 		858B843318CA22B800AB12DE /* pcimobilelegcon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pcimobilelegcon.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		891BDDB5FBD6441C9C55C844 /* login@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "login@3x.png"; path = "pcimobilelegcon/Resources/login@3x.png"; sourceTree = "<group>"; };
-		8A1DECCAB0CA47A5B2EA0901 /* password@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "password@2x.png"; path = "pcimobilelegcon/Resources/password@2x.png"; sourceTree = "<group>"; };
+		8A741548FB1F43DCBB5063A0 /* password.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = password.png; path = pcimobilelegcon/Resources/password.png; sourceTree = "<group>"; };
 		930F05DB22671AE300D269DC /* Swift-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Swift-ObjC-Bridging-Header.h"; path = "internal/Swift-ObjC-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		B6ABADEA655E4F968AC333C7 /* password.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = password.png; path = pcimobilelegcon/Resources/password.png; sourceTree = "<group>"; };
+		A00BC88D0CCA4AA5976D19D0 /* email.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = email.png; path = pcimobilelegcon/Resources/email.png; sourceTree = "<group>"; };
+		A437776B6B1E46A39C5B6383 /* build.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = pcimobilelegcon/Resources/build.xcconfig; sourceTree = "<group>"; };
+		A9C2A9EF404FC75D070F1A50 /* Pods_pcimobilelegcon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pcimobilelegcon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDB4D31B3B2B4F56A15B091F /* email@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "email@3x.png"; path = "pcimobilelegcon/Resources/email@3x.png"; sourceTree = "<group>"; };
+		C2721318AFB9497F984B51E4 /* password@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "password@2x.png"; path = "pcimobilelegcon/Resources/password@2x.png"; sourceTree = "<group>"; };
+		C392877A75C843A5BFBB21DD /* module.modulemap */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "../../node_modules/@nativescript/core/platforms/ios/src/module.modulemap"; sourceTree = "<group>"; };
+		C4722116EBA7418BAE09F478 /* Assets.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = pcimobilelegcon/Resources/Assets.xcassets; sourceTree = "<group>"; };
+		C547C0654CC345C2B3F4CFBB /* login@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = image.png; name = "login@3x.png"; path = "pcimobilelegcon/Resources/login@3x.png"; sourceTree = "<group>"; };
+		C71E8391959A452BA2F1274E /* NativeScriptEmbedder.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = NativeScriptEmbedder.m; path = "../../node_modules/@nativescript/core/platforms/ios/src/NativeScriptEmbedder.m"; sourceTree = "<group>"; };
 		CD45EE7A18DC2D5800FB50C0 /* app */ = {isa = PBXFileReference; lastKnownFileType = folder; path = app; sourceTree = "<group>"; };
 		CD62955C1BB2678900AE3A93 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = internal/main.m; sourceTree = SOURCE_ROOT; };
 		CDD59A261BB43B5D00EC2671 /* build-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "build-debug.xcconfig"; sourceTree = "<group>"; };
 		CDD59A271BB43B5D00EC2671 /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "build-release.xcconfig"; sourceTree = "<group>"; };
 		CDF4743E1BA4855C0087EA85 /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = build.xcconfig; sourceTree = "<group>"; };
-		DA7E13FD6D7D486696CE2BCD /* Assets.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = pcimobilelegcon/Resources/Assets.xcassets; sourceTree = "<group>"; };
-		EB9D7CAD2B7D4E3EA345ED5A /* NativeScriptEmbedder.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = NativeScriptEmbedder.h; path = "../../node_modules/@nativescript/core/platforms/ios/src/NativeScriptEmbedder.h"; sourceTree = "<group>"; };
-		EEA5D3C84C214DFDBC59971E /* NativeScriptEmbedder.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = NativeScriptEmbedder.m; path = "../../node_modules/@nativescript/core/platforms/ios/src/NativeScriptEmbedder.m"; sourceTree = "<group>"; };
-		F890E79B2A83F44C90D1C40E /* Pods-pcimobilelegcon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pcimobilelegcon.release.xcconfig"; path = "Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon.release.xcconfig"; sourceTree = "<group>"; };
+		E00F1E07A8A445DD82AF4B52 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = LaunchScreen.storyboard; path = pcimobilelegcon/Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,19 +95,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22E4037C7A584DAE9ADF15A5 /* TNSWidgets.framework in Frameworks */,
-				8C9986CCA3BC2884B2001DAA /* Pods_pcimobilelegcon.framework in Frameworks */,
+				907EB40453AB48D9865019CB /* TNSWidgets.framework in Frameworks */,
+				BC4A5CE3E66A38DBCD0426AE /* Pods_pcimobilelegcon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		145D9823B4B5458DA3F4F6D9 /* TNSNativeSource */ = {
+		179161F7585524B90B3C9CA7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				1E8C0E29F599908433DAEFA5 /* Pods-pcimobilelegcon.debug.xcconfig */,
+				055198E24630E7C27063E94B /* Pods-pcimobilelegcon.release.xcconfig */,
 			);
-			name = TNSNativeSource;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		39940D8E22C4EBCC0050DDE1 /* Sources */ = {
@@ -131,21 +134,25 @@
 			name = "Build Scripts";
 			sourceTree = "<group>";
 		};
-		55759E513C481F49EF6F1EB4 /* Pods */ = {
+		57F836E776774BF08EAD0459 /* @proplugins/nativescript-dom */ = {
 			isa = PBXGroup;
 			children = (
-				7F0669BB0D8810B48606DEE2 /* Pods-pcimobilelegcon.debug.xcconfig */,
-				F890E79B2A83F44C90D1C40E /* Pods-pcimobilelegcon.release.xcconfig */,
 			);
-			name = Pods;
-			path = Pods;
+			name = "@proplugins/nativescript-dom";
 			sourceTree = "<group>";
 		};
-		7532B6067DFB4E0A84085ECE /* nativescript-iqkeyboardmanager */ = {
+		6FB5FA47E2394B31929AA485 /* nativescript-iqkeyboardmanager */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = "nativescript-iqkeyboardmanager";
+			sourceTree = "<group>";
+		};
+		7EBFEE0526E84AA9A6537142 /* nativescript-fingerprint-auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "nativescript-fingerprint-auth";
 			sourceTree = "<group>";
 		};
 		858B832518CA111C00AB12DE = {
@@ -155,12 +162,12 @@
 				858B833718CA111C00AB12DE /* pcimobilelegcon */,
 				858B833018CA111C00AB12DE /* Frameworks */,
 				858B832F18CA111C00AB12DE /* Products */,
-				145D9823B4B5458DA3F4F6D9 /* TNSNativeSource */,
-				FE8235A64C7E4B3B9838D510 /* @nativescript/core */,
-				FA4854D6DD544E829A3D23E0 /* nativescript-fingerprint-auth */,
-				7532B6067DFB4E0A84085ECE /* nativescript-iqkeyboardmanager */,
-				911A4B1854D044D297F7AD77 /* @proplugins/nativescript-dom */,
-				55759E513C481F49EF6F1EB4 /* Pods */,
+				E2DE274761C2439D87F44760 /* TNSNativeSource */,
+				ED0DD78E51B24305A3CFA0D8 /* @nativescript/core */,
+				7EBFEE0526E84AA9A6537142 /* nativescript-fingerprint-auth */,
+				6FB5FA47E2394B31929AA485 /* nativescript-iqkeyboardmanager */,
+				57F836E776774BF08EAD0459 /* @proplugins/nativescript-dom */,
+				179161F7585524B90B3C9CA7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,8 +185,8 @@
 			children = (
 				39940E1B22C5DFFF0050DDE1 /* TKLiveSync.xcframework */,
 				39940D8C22C4EAAA0050DDE1 /* NativeScript.xcframework */,
-				1592FABDF75543E0820F4003 /* TNSWidgets.framework */,
-				846E843EE868D019C959C263 /* Pods_pcimobilelegcon.framework */,
+				25B32A660F2E440983A59DBB /* TNSWidgets.framework */,
+				A9C2A9EF404FC75D070F1A50 /* Pods_pcimobilelegcon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -212,45 +219,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		911A4B1854D044D297F7AD77 /* @proplugins/nativescript-dom */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "@proplugins/nativescript-dom";
-			sourceTree = "<group>";
-		};
 		E070579D1B39A9D000214BF1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DA7E13FD6D7D486696CE2BCD /* Assets.xcassets */,
-				3120445222404A0D877F8945 /* LaunchScreen.storyboard */,
-				0E44B5C27DE34CD588C6E08C /* build.xcconfig */,
-				3B53389CEECC41D78259F08D /* email.png */,
-				5A894FB0E7CD45F88B7CFC0D /* email@2x.png */,
-				7959FDCDFA744B17BCA6D984 /* email@3x.png */,
-				7B55B82E0A1049378334EAB8 /* login.png */,
-				823147500B9D43E0927FF564 /* login@2x.png */,
-				891BDDB5FBD6441C9C55C844 /* login@3x.png */,
-				B6ABADEA655E4F968AC333C7 /* password.png */,
-				8A1DECCAB0CA47A5B2EA0901 /* password@2x.png */,
-				6532A072610F4588925EB616 /* password@3x.png */,
+				C4722116EBA7418BAE09F478 /* Assets.xcassets */,
+				E00F1E07A8A445DD82AF4B52 /* LaunchScreen.storyboard */,
+				A437776B6B1E46A39C5B6383 /* build.xcconfig */,
+				A00BC88D0CCA4AA5976D19D0 /* email.png */,
+				1D62F03133B14D43B28930AA /* email@2x.png */,
+				BDB4D31B3B2B4F56A15B091F /* email@3x.png */,
+				41BDFD4481B448E09E048ECF /* login.png */,
+				093134471E6048A3AAE38B88 /* login@2x.png */,
+				C547C0654CC345C2B3F4CFBB /* login@3x.png */,
+				8A741548FB1F43DCBB5063A0 /* password.png */,
+				C2721318AFB9497F984B51E4 /* password@2x.png */,
+				6CE02BFCF94E4503B974289E /* password@3x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		FA4854D6DD544E829A3D23E0 /* nativescript-fingerprint-auth */ = {
+		E2DE274761C2439D87F44760 /* TNSNativeSource */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "nativescript-fingerprint-auth";
+			name = TNSNativeSource;
 			sourceTree = "<group>";
 		};
-		FE8235A64C7E4B3B9838D510 /* @nativescript/core */ = {
+		ED0DD78E51B24305A3CFA0D8 /* @nativescript/core */ = {
 			isa = PBXGroup;
 			children = (
-				EB9D7CAD2B7D4E3EA345ED5A /* NativeScriptEmbedder.h */,
-				EEA5D3C84C214DFDBC59971E /* NativeScriptEmbedder.m */,
-				22F95388C32048599EAD505C /* module.modulemap */,
+				1D303DE6932740D087507F25 /* NativeScriptEmbedder.h */,
+				C71E8391959A452BA2F1274E /* NativeScriptEmbedder.m */,
+				C392877A75C843A5BFBB21DD /* module.modulemap */,
 			);
 			name = "@nativescript/core";
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 858B843018CA22B800AB12DE /* Build configuration list for PBXNativeTarget "pcimobilelegcon" */;
 			buildPhases = (
-				64711DCD5813BC7A8393D2DF /* [CP] Check Pods Manifest.lock */,
+				CD3369BA027EF7C5E3E1522A /* [CP] Check Pods Manifest.lock */,
 				C97FD7AC1ADE5369004DB2A4 /* NativeScript PreBuild */,
 				858B83F218CA22B800AB12DE /* Sources */,
 				CD62955B1BB2651D00AE3A93 /* NativeScript PreLink */,
@@ -270,7 +270,7 @@
 				858B842C18CA22B800AB12DE /* Resources */,
 				85F5BDFC1A9363BE006B9701 /* Embed Frameworks */,
 				CD3EAD351B05FF060042DBFC /* NativeScript PostBuild */,
-				B06ECF67F92B6D133FD56DCF /* [CP] Embed Pods Frameworks */,
+				EC3B8812E5EF09E1D0321C09 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -322,25 +322,40 @@
 			files = (
 				CD45EE7C18DC2D5800FB50C0 /* app in Resources */,
 				858B842D18CA22B800AB12DE /* InfoPlist.strings in Resources */,
-				813E05601F3949D3B518C42F /* Assets.xcassets in Resources */,
-				856CB1C18DF24C4E9E69FDBF /* LaunchScreen.storyboard in Resources */,
-				308DDE3F83064053953AC943 /* build.xcconfig in Resources */,
-				73F9DBFB22AB4A38A43964D0 /* email.png in Resources */,
-				C59F6BA77B034AAA91535172 /* email@2x.png in Resources */,
-				77B60FBB2D33477E958B4805 /* email@3x.png in Resources */,
-				55CDCCBE85384F9DB80536E3 /* login.png in Resources */,
-				9A94577A395244D3981FD2CB /* login@2x.png in Resources */,
-				F5CCC8D0EE954A01963FE7C1 /* login@3x.png in Resources */,
-				CA48AAB3EE844C3C92C7CFE8 /* password.png in Resources */,
-				377EDE4A719248E99A331E9D /* password@2x.png in Resources */,
-				A5E67EAFC0674B2D8DEED06C /* password@3x.png in Resources */,
+				A3C7C2D3C8914319AD1E94C6 /* Assets.xcassets in Resources */,
+				57EE4F4FBA7A4E52841D11C2 /* LaunchScreen.storyboard in Resources */,
+				F5DE81118B4A491B98422831 /* build.xcconfig in Resources */,
+				C824E872DAF948889276582F /* email.png in Resources */,
+				ACDFF5332C6F4C9CA689DD46 /* email@2x.png in Resources */,
+				4F52079C36BC4CA09BE0D878 /* email@3x.png in Resources */,
+				8E3152ADEA7C4769BC3C0350 /* login.png in Resources */,
+				9278731818B4411DB2EEE000 /* login@2x.png in Resources */,
+				C5C0F5D3850B4BB9BD4FEFAC /* login@3x.png in Resources */,
+				B5A9A2B473474B989DA1E9A6 /* password.png in Resources */,
+				CAD36FA83B6C48DD9BDACEB4 /* password@2x.png in Resources */,
+				71358AABEE43484A86B9EB62 /* password@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		64711DCD5813BC7A8393D2DF /* [CP] Check Pods Manifest.lock */ = {
+		C97FD7AC1ADE5369004DB2A4 /* NativeScript PreBuild */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "NativeScript PreBuild";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/internal/nativescript-pre-build\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD3369BA027EF7C5E3E1522A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,43 +375,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B06ECF67F92B6D133FD56DCF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
-				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C97FD7AC1ADE5369004DB2A4 /* NativeScript PreBuild */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "NativeScript PreBuild";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/internal/nativescript-pre-build\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD3EAD351B05FF060042DBFC /* NativeScript PostBuild */ = {
@@ -429,6 +407,28 @@
 			shellScript = "\"$SRCROOT/internal/nativescript-pre-link\"";
 			showEnvVarsInLog = 0;
 		};
+		EC3B8812E5EF09E1D0321C09 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pcimobilelegcon/Pods-pcimobilelegcon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -437,7 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD62955D1BB2678900AE3A93 /* main.m in Sources */,
-				2CB89D675A9E41139BA3F7B3 /* NativeScriptEmbedder.m in Sources */,
+				7B5236B7CF5445109505E355 /* NativeScriptEmbedder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +567,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/pcimobilelegcon/pcimobilelegcon-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.pciaa.fgr;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.pciaa.fgr";
 				PRODUCT_NAME = pcimobilelegcon;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -602,7 +602,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/pcimobilelegcon/pcimobilelegcon-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.pciaa.fgr;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.pciaa.fgr";
 				PRODUCT_NAME = pcimobilelegcon;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

@@ -1,6 +1,6 @@
 {
   "name": "legcon",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript Application",
@@ -10,11 +10,11 @@
     "@nativescript/webpack": "3.0.0",
     "@proplugins/nativescript-orientation": "^2.5.0",
     "@proplugins/nativescript-platform-css": "^2.0.0",
-    "nativescript-email": "1.6.0",
-    "nativescript-fingerprint-auth": "7.0.2",
-    "nativescript-iqkeyboardmanager": "1.5.1",
-    "nativescript-phone": "1.4.1",
-    "nativescript-theme-core": "2.0.24"
+    "nativescript-email": "^1.6.0",
+    "nativescript-fingerprint-auth": "^7.0.2",
+    "nativescript-iqkeyboardmanager": "^1.5.1",
+    "nativescript-phone": "^2.0.0",
+    "nativescript-theme-core": "^2.0.24"
   },
   "devDependencies": {
     "@nativescript/ios": "7.0.4",
