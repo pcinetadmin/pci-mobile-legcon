@@ -17,8 +17,7 @@
   },
   "devDependencies": {
     "@nativescript/ios": "7.0.4",
-    "@nativescript/webpack": "~3.0.0",
-    "uglifyjs-webpack-plugin": "2.2.0"
+    "@nativescript/webpack": "~3.0.0"
   },
   "author": "APCIA",
   "main": "app.js"

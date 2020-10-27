@@ -1,0 +1,1 @@
+/Users/pci/Library/Developer/Xcode/DerivedData/LegCon-glxgrpkdylxexnctfxuskwtnzrwu/Build/Intermediates.noindex/ArchiveIntermediates/LegCon/InstallationBuildProductsLocation/Applications/LegCon.app
