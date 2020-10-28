@@ -163,6 +163,7 @@ module.exports = env => {
                     },
                 }
             },
+            minimize: true,
             minimizer: [
                 new TerserPlugin({
                     parallel: true,
