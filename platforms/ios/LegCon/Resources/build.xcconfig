@@ -8,6 +8,8 @@ ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 TARGETED_DEVICE_FAMILY = 1,2;
 // Commit to git command:
 // git push -u origin master
+// Update webpack command:
+// ./node_modules/.bin/update-ns-webpack --configs
 // Build on connected device command:
 // ns run ios
 // Provision information command:

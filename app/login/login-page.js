@@ -6,7 +6,6 @@ const dialogs = require("ui/dialogs");
 var utilsModule = require("tns-core-modules/utils/utils");
 const fingerprintAuthPlugin = require("nativescript-fingerprint-auth");
 var fingerprintAuth = new fingerprintAuthPlugin.FingerprintAuth();
-var view = require("ui/core/view");
 var orientation = require('@proplugins/nativescript-orientation');
 var page;
 var loginViewModel;
@@ -16,25 +15,11 @@ var rememberMe;
 
 function onNavigatingTo(args) {
     orientation.disableRotation();
-    // page = args.object;
-
-    // loginViewModel = new LoginViewModel();
-
-    // loginViewModel.email = appSettings.getString("email", "");
-    // loginViewModel.password = appSettings.getString("password", "");
-    // loginViewModel.rememberMe = appSettings.getBoolean("rememberMe", false);
-    // loginViewModel.useTouchId = appSettings.getBoolean("useTouchId", false);
-
-    // page.bindingContext = loginViewModel;
 }
 
 function onLoaded(args)
 {
     page = args.object;
-
-    // email = view.getViewById(page, "email");
-    // password = view.getViewById(page, "password");
-    // rememberMe = view.getViewById(page, "rememberMe");
 
     loginViewModel = new LoginViewModel();
 
@@ -129,7 +114,7 @@ function onSigninButtonTap(args) {
 }
 
 function onForgotPasswordTap() {
-    utilsModule.openUrl("https://www.pciaa.net/pciwebsite/Accounts/forgotpassword.aspx")
+    utilsModule.openUrl("https://www.apci.org/forgotpassword")
 }
 
 exports.onNavigatingTo = onNavigatingTo;

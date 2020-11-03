@@ -157,7 +157,6 @@ function LoginViewModel() {
                 {
                     // undefined or null data.AccessToken returned.  
                     // Usually the result of invalid user name and password.
-                    //dialogs.alert("Null access token returned.");
                     dialogs.alert("Invalid email address or password.")
                 }
             }, function (e) {

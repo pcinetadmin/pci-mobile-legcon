@@ -42,7 +42,6 @@
             <StackLayout row="5" col="0" orientation="vertical" verticalAlignment="top" margin="5 10 30 10">
                 <Button class="forgot-button" text="Forgot Password?" tap="onForgotPasswordTap"></Button>
             </StackLayout>
-            <!-- <Label class="m-t-10 m-b-10 m-l-15 m-r-15" text="Forgot password?" tap="onForgotPasswordTap"></Label> -->
         </GridLayout>
     </ScrollView>
 </Page>

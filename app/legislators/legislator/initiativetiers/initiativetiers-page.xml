@@ -10,12 +10,11 @@
             <Label id="legislatorId" text="" visibility="collapsed" />
             <Label id="legislatorName" text="" horizontalAlignment="center" />
         </StackLayout>
-        <StackLayout row="1" col="0">
+        <StackLayout row="1" col="0" borderColor="#000" borderWidth="0 0 0.25 0">
             <GridLayout columns="*, auto" rows="*" class="list-view-item">
                 <Label row="0" col="0" text="Initiative" class="list-view-item-main-top" />
                 <Label row="0" col="1" text="Tier" class="list-view-item-main-top" />
             </GridLayout>
-            <Border borderWidth="0.25" borderColor="#000000" />
         </StackLayout>
         <StackLayout row="2" col="0" verticalAlignment="top" width="100%">
             <ListView items="{{ initiativeTiersList }}" height="100%">
