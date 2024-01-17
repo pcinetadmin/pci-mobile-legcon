@@ -1,0 +1,37 @@
+<Page navigatingTo="onNavigatingTo" loaded="onLoaded" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+        <ActionItem tap="onSaveTap" ios.systemIcon="3" android.systemIcon="ic_menu_save" ios.position="right" />
+    </ActionBar>
+
+    <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%" tap="onGridLayoutTap">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-title">
+            <Label id="assignmentId" text="{{ boundData.assignmentId }}" visibility="collapsed" />
+            <Label id="assignmentName" text="{{ boundData.assignmentName | limitText(30) }}" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-subtitle">
+            <Label id="legislatorId" text="{{ boundData.legislatorId }}" visibility="collapsed" />
+            <Label id="legislator" text="{{ boundData.fullName }}" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="2" col="0" verticalAlignment="top">
+            <GridLayout columns="*" rows="auto" class="list-view-item-form">
+                <Label row="0" col="0" text="{{ boundData.question }}" textWrap="true" class="list-view-item-left" />
+            </GridLayout>
+            <StackLayout tap="onStackLayoutTap">
+                <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Response" class="list-view-item-left" />
+                    <Label id="responseLabel" row="0" col="1" text="{{ boundData.response }}" class="list-view-item-right" />
+                </GridLayout>
+            </StackLayout>
+            <GridLayout id="responseListPickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
+                <ListPicker id="responseListPicker" row="0" col="0" items="{{ responseList.Items }}" selectedIndex="{{ responseIndex }}" horizontalAlignment="center" class="list-view-item-picker"></ListPicker>
+            </GridLayout>
+            <GridLayout columns="*" rows="*" class="list-view-item-form">
+                <TextView id="notes" row="0" col="0" text="{{ boundData.notes }}" hint="Notes" focus="onNotesFocus" class="list-view-item-textview" height="100%" />
+            </GridLayout>
+        </StackLayout>
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+    </GridLayout>
+</Page>

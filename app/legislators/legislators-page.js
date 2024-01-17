@@ -1,9 +1,9 @@
 const LegislatorsViewModel = require("./legislators-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var gestures = require("ui/gestures");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var gestures = require("@nativescript/core/ui/gestures");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 const MIN_X = -160;
 const MAX_X = 0;
@@ -227,8 +227,8 @@ function onAddClick(args) {
         legislatorId: view.bindingContext.legislatorId,
         fullName: view.bindingContext.fullName,
         name: null,
-        pciInitiatives: null,
-        surveys: null,
+        initiativeIds: null,
+        initiatives: null,
         pciAttendees: global.currentUser,
         primaryOfficeContact: null,
         meetingLocationId: 2,
@@ -239,8 +239,6 @@ function onAddClick(args) {
         followUpNotes: null,
         creatorId: global.personId,
         notes: null,
-        initiativeId: null,
-        surveyId: null,
         assignmentId: null
     }
 

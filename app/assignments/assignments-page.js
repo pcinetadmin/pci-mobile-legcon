@@ -1,9 +1,9 @@
 const AssignmentsViewModel = require("./assignments-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var gestures = require("ui/gestures");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var gestures = require("@nativescript/core/ui/gestures");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 const MIN_X = -80;
 const MAX_X = 0;
@@ -19,7 +19,8 @@ var page;
 var searchBar;
 var assignmentsPageSize = 25;
 var assignmentsSearchText = "";
-var meetingCreated = "N";
+// var meetingCreated = "N";
+var statusCode = "O";
 var assignmentsSearchSubmitted = false;
 
 var assignmentsList = new AssignmentsViewModel([]);
@@ -41,7 +42,8 @@ function onNavigatingTo(args) {
 
                 pageData.set("isLoading", true);
 
-                assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function () {
+                // assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function () {
+                assignmentsList.load(statusCode, assignmentsSearchText, 1, assignmentsPageSize).then(function () {
                     pageData.set("isLoading", false);
 
                     global.refreshAssignments = false;
@@ -71,16 +73,19 @@ function onNavigatingTo(args) {
 function onSelectedIndexChanged(args) {
     try {
         if (args.newIndex === 0) {
-            meetingCreated = "N";
+            // meetingCreated = "N";
+            statusCode = "O";
         } else {
-            meetingCreated = "Y";
+            // meetingCreated = "Y";
+            statusCode = "S";
         }
 
         assignmentsList.empty();
 
         pageData.set("isLoading", true);
 
-        assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function () {
+        // assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function () {
+        assignmentsList.load(statusCode, assignmentsSearchText, 1, assignmentsPageSize).then(function () {    
             pageData.set("isLoading", false);
         });
 
@@ -117,7 +122,8 @@ function onSubmit(args) {
     
     pageData.set("isLoading", true);
 
-    assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
+    // assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
+    assignmentsList.load(statusCode, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
         pageData.set("isLoading", false);
 
         assignmentsSearchSubmitted = true;
@@ -135,7 +141,8 @@ function onClear(args) {
         
         pageData.set("isLoading", true);
 
-        assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
+        // assignmentsList.load(meetingCreated, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
+        assignmentsList.load(statusCode, assignmentsSearchText, 1, assignmentsPageSize).then(function (){
             pageData.set("isLoading", false);
 
             assignmentsSearchSubmitted = false;
@@ -200,7 +207,8 @@ function onLoadMoreItems(args) {
 
         pageData.set("isLoading", true);
 
-        assignmentsList.load(meetingCreated, assignmentsSearchText, assignmentsPageNumber, assignmentsPageSize).then(function (){
+        // assignmentsList.load(meetingCreated, assignmentsSearchText, assignmentsPageNumber, assignmentsPageSize).then(function (){
+        assignmentsList.load(statusCode, assignmentsSearchText, assignmentsPageNumber, assignmentsPageSize).then(function (){    
             pageData.set("isLoading", false);
         });
     } catch(e) {
@@ -227,7 +235,8 @@ function onAddClick(args) {
         legislatorId: view.bindingContext.legislatorId,
         fullName: view.bindingContext.legislator,
         name: null,
-        pciInitiatives: view.bindingContext.initiative,
+        initiativeIds: view.bindingContext.initiativeIds,
+        initiatives: view.bindingContext.initiatives,
         surveys: view.bindingContext.survey,
         pciAttendees: global.currentUser,
         primaryOfficeContact: null,
@@ -239,8 +248,6 @@ function onAddClick(args) {
         followUpNotes: null,
         creatorId: global.personId,
         notes: null,
-        initiativeId: view.bindingContext.initiativeId,
-        surveyId: view.bindingContext.surveyId,
         assignmentId: view.bindingContext.assignmentId
     }
 
@@ -333,7 +340,8 @@ function onLayoutLoaded(args) {
                     isScrolling = false;
                 }
             } else if (isSwiping) {
-                if (view.bindingContext.meetingCreated === "N") {
+                // if (view.bindingContext.meetingCreated === "N") {
+                if (view.bindingContext.assignmentStatusCode !== "S") {    
                     var assignmentsListView = page.getViewById("assignmentsListView");
     
                     if (platform.isAndroid) {
@@ -388,6 +396,21 @@ function onLayoutLoaded(args) {
         }
     });
 }
+
+function dateConverter(value, format) {
+    let result = format;
+
+    const day = value.getDate();
+
+    result = result.replace("DD", day < 10 ? `0${day}` : day);
+
+    const month = value.getMonth() + 1;
+
+    result = result.replace("MM", month < 10 ? `0${month}` : month);
+    result = result.replace("YYYY", value.getFullYear());
+
+    return result;
+};
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onSelectedIndexChanged = onSelectedIndexChanged;

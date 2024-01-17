@@ -1,9 +1,9 @@
-const platformModule = require("platform");
-const observableModule = require("data/observable");
-var frameModule = require("ui/frame");
-var appSettings = require("application-settings");
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const platformModule = require("@nativescript/core/platform");
+const observableModule = require("@nativescript/core/data/observable");
+var frameModule = require("@nativescript/core/ui/frame");
+var appSettings = require("@nativescript/core/application-settings");
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 function LoginViewModel() {
     const viewModel = observableModule.fromObject({

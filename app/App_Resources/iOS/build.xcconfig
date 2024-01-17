@@ -1,20 +1,26 @@
 // You can add custom settings here
 // for example you can uncomment the following line to force distribution code signing
 // CODE_SIGN_IDENTITY = iPhone Distribution
-// PROVISIONING_PROFILE = 4e659089-d113-436f-9f56-f8971c10beb8;
+// PROVISIONING_PROFILE = 2313a292-ae21-4de9-abe6-e8662ffbca2c
+// bundle identifier: net.pciaa.fgr
 // To build for device with Xcode you need to specify your development team.
 // DEVELOPMENT_TEAM = G2SMTM65P8;
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 TARGETED_DEVICE_FAMILY = 1,2;
+// Phone used for development must have Developer Mode turned on under Privacy & Security
+// Log in to proplugins
+// npm login --registry=https://npm.proplugins.org --scope=@proplugins --auth-type=legacy
+// Username: netadmin_apci
+// Password: Property01!
 // Commit to git command:
 // git push -u origin master
 // Update webpack command:
 // ./node_modules/.bin/update-ns-webpack --configs
 // Build on connected device command:
-// ns run ios
+// ns run ios --provision
 // Provision information command:
 // ns prepare ios --provision
 // Build IPA file for release command:
-// ns build ios --release --for-device --provision 4e659089-d113-436f-9f56-f8971c10beb8
-// Publish to app store connect command:
+// ns build ios --release --for-device --provision b5c0715b-5fd2-42d2-b98c-47b767c5fa61
+// Publish to app store connect command:  USE TRANSPORTER APP INSTEAD
 // ns publish ios jonathonleslie@hotmail.com Master76! --appleApplicationSpecificPassword ucnc-hsqy-faud-csif --ipa /Users/pci/Documents/LegCon/platforms/ios/build/Release-iphoneos/LegCon.ipa

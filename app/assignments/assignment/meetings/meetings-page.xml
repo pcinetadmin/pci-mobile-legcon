@@ -1,0 +1,52 @@
+<Page navigatingTo="onNavigatingTo" class="page" xmlns="http://schemas.nativescript.org/tns.xsd" >
+    <ActionBar class="action-bar">
+        <android>
+            <NavigationButton android.systemIcon="ic_menu_back" tap="onBackTap" />
+        </android>
+        <ActionItem tap="onAddTap" ios.systemIcon="4" android.systemIcon="ic_menu_add" ios.position="right" />
+    </ActionBar>
+
+    <GridLayout columns="*" rows="auto, auto, *" height="100%" width="100%">
+        <StackLayout row="0" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-title">
+            <Label id="assignmentId" text="{{ assignmentId }}" visibility="collapsed" />
+            <Label id="assignmentName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="1" col="0" verticalAlignment="top" horizontalAlignment="center" class="view-subtitle">
+            <Label id="legislatorName" text="" horizontalAlignment="center" />
+        </StackLayout>
+        <StackLayout row="2" col="0" verticalAlignment="top">
+            <ListView id="meetingsListView" items="{{ meetingsList }}" itemLoading="onItemLoading" itemTap="onItemTap" height="100%">
+                <ListView.itemTemplate>
+                    <AbsoluteLayout>
+                        <!-- BACKGROUND: Swipe Actions -->
+                        <GridLayout columns="*, 80" width="100%"
+                            android:rows="{{ initiatives.length > 0 &amp;&amp; legislatorStaffAttendees.length > 0 ? '89' : initiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '70' : '51' }}"
+                            ios:rows="{{ initiatives.length > 0 &amp;&amp; legislatorStaffAttendees.length > 0 ? '98' : initiatives.length > 0 || legislatorStaffAttendees.length > 0 ? '78' : '58' }}">
+                            <Label col="0" />
+                            <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onDeleteClick" class="swipe-icons red">
+                                <Label row="0" col="0" text="" />
+                                <Label row="1" col="0" text="&#xf1f8;" class="tab-icon" />
+                                <Label row="2" col="0" text="Delete" class="tab-label" />
+                                <Label row="3" col="0" text="" />
+                            </GridLayout>
+                        </GridLayout>
+                        <!-- FOREGROUND: List View Item Details -->
+                        <StackLayout loaded="onLayoutLoaded" backgroundColor="white" width="100%">
+                            <GridLayout columns="*, auto" rows="*" class="list-view-item">
+                                <StackLayout row="0" col="0">
+                                    <!-- <Label text="{{ name }}" class="list-view-item-main-top" /> -->
+                                    <Label text="{{ meetingDate | dateConverter(dateFormat) }}" class="list-view-item-main" />
+                                    <Label text="{{ venueType }}" class="list-view-item-sub" />
+                                    <Label text="{{ 'with ' + legislatorStaffAttendees }}" visibility="{{ legislatorStaffAttendees.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
+                                    <Label text="{{ 'on ' + initiatives }}" visibility="{{ initiatives.length > 0 ? 'visible' : 'collapse' }}" class="list-view-item-sub" />
+                                </StackLayout>
+                                <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
+                            </GridLayout>
+                        </StackLayout>
+                    </AbsoluteLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+        <ActivityIndicator busy="{{ isLoading }}" android:height="25%" android:width="25%" ios.activityIndicatorViewStyle="whiteLarge" rowSpan="2" colSpan="1" />
+    </GridLayout>
+</Page>

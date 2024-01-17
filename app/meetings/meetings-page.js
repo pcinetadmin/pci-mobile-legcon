@@ -1,11 +1,11 @@
 const MeetingsViewModel = require("./meetings-view-model");
 // const LegislatorViewModel = require("./meeting/legislator/legislator-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var gestures = require("ui/gestures");
-var frameModule = require("ui/frame");
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var gestures = require("@nativescript/core/ui/gestures");
+var frameModule = require("@nativescript/core/ui/frame");
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 const MIN_X = -80;
 const MAX_X = 0;
@@ -134,6 +134,8 @@ function onAddTap(args) {
             meetingDate: new Date(),
             venueTypeId: 1,
             venueType: "In Person",
+            inPerson: true,
+            offeredToMembers: false,
             attendeeTypeId: 1,
             attendeeType: "Staff Only",
             lobbyistId: global.personId,
@@ -141,8 +143,8 @@ function onAddTap(args) {
             legislatorId: navigationContext.legislatorId,
             fullName: navigationContext.fullName,
             name: null,
-            pciInitiatives: null,
-            surveys: null,
+            initiativeIds: null,
+            initiatives: null,
             pciAttendees: global.currentUser,
             primaryOfficeContact: null,
             meetingLocationId: 2,
@@ -153,17 +155,15 @@ function onAddTap(args) {
             followUpNotes: null,
             creatorId: global.personId,
             notes: null,
-            initiativeId: null,
-            surveyId: null,
             assignmentId: null
         }
-
+        
         const navigationEntry = {
             moduleName: "meetings/meeting/meeting-page",
             context: model,
             clearHistory: false
         };
-
+        
         frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
@@ -225,7 +225,7 @@ function onDeleteClick(args) {
                 http.request({
                     url: global.apiBaseServiceUrl + "deletemeeting",
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                     content: JSON.stringify(view.bindingContext)
                 }).then(function (response) {
                     meetingsList.empty();
@@ -259,7 +259,7 @@ function onDeleteClick(args) {
                 http.request({
                     url: global.apiBaseServiceUrl + "deletemeeting",
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                     content: JSON.stringify(view.bindingContext)
                 }).then(function (response) {
                     meetingsList.empty();

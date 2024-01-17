@@ -24,7 +24,8 @@
                             </StackLayout>
                             <StackLayout row="0" col="1" verticalAlignment="middle">
                                 <Switch id="checkedSwitch" row="0" col="1" checked="{{ checked }}" 
-                                    loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
+                                    loaded="onSwitchLoaded" horizontalAlignment="right" 
+                                    color="white" backgroundColor="#ea092a" offBackgroundColor="#999" />
                                 <Label id="indexLabel" text="{{ $index }}" visibility="collapse" />
                             </StackLayout>
                         </GridLayout>

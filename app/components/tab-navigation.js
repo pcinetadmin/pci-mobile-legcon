@@ -1,11 +1,11 @@
-var gridLayout = require("ui/layouts/grid-layout")
-var stackLayout = require("ui/layouts/stack-layout")
-var Label = require("ui/label").Label
-//var dependencyObservableModule = require("ui/core/dependency-observable")
-//var View = require("ui/core/view").View
-var frame = require("ui/frame")
-//var platform = require("platform")
-var color = require("color")
+var gridLayout = require("@nativescript/core/ui/layouts/grid-layout")
+var stackLayout = require("@nativescript/core/ui/layouts/stack-layout")
+var Label = require("@nativescript/core/ui/label").Label
+//var dependencyObservableModule = require("@nativescript/core/ui/core/dependency-observable")
+//var View = require("@nativescript/core/ui/core/view").View
+var frame = require("@nativescript/core/ui/frame")
+//var platform = require("@nativescript/core/platform")
+var color = require("@nativescript/core/color")
 
 var TabNavigation = (function (_super) {
     __extends(TabNavigation, _super)

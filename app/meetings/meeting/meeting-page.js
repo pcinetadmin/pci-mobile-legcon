@@ -1,11 +1,11 @@
 const MeetingViewModel = require("./meeting-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var ObservableArray = require("data/observable-array").ObservableArray;
-const appModule = require("application");
-var http = require("http");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var ObservableArray = require("@nativescript/core/data/observable-array").ObservableArray;
+const appModule = require("@nativescript/core/application");
+var http = require("@nativescript/core/http");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 var page;
 var navigationContext;
@@ -20,6 +20,7 @@ function onNavigatingTo(args) {
     try {
         page = args.object;
 
+        var inPersonLabel = page.getViewById("inPersonLabel");
         var offeredToMembersLabel = page.getViewById("offeredToMembersLabel");
         var followUpTitle = page.getViewById("followUpTitle");
         var followUpLabel = page.getViewById("followUpLabel");
@@ -47,14 +48,21 @@ function onNavigatingTo(args) {
         appModule.getResources().limitText = limitText;
 
         if (args.isBackNavigation) {
-            var venueTypeLabel = page.getViewById("venueTypeLabel");
+            // var venueTypeLabel = page.getViewById("venueTypeLabel");
             var notesLabel = page.getViewById("notesLabel");
             var legislatorLabel = page.getViewById("legislatorLabel");
-            var attendeeTypeLabel = page.getViewById("attendeeTypeLabel");
+            // var attendeeTypeLabel = page.getViewById("attendeeTypeLabel");
             var meetingLocationLabel = page.getViewById("meetingLocationLabel");
+            var primaryContactLabel = page.getViewById("primaryContactLabel");
             var staffAttendeesLabel = page.getViewById("staffAttendeesLabel");
 
-            venueTypeLabel.text = pageData.venueType;
+            // venueTypeLabel.text = pageData.venueType;
+
+            if (pageData.inPerson === true || pageData.inPerson === "true") {
+                inPersonLabel.text = "Yes";
+            } else {
+                inPersonLabel.text = "No";
+            }
 
             if (pageData.offeredToMembers === true || pageData.offeredToMembers === "true") {
                 offeredToMembersLabel.text = "Yes";
@@ -64,8 +72,9 @@ function onNavigatingTo(args) {
 
             notesLabel.text = limitText(pageData.notes, 30);
             legislatorLabel.text = pageData.fullName;
-            attendeeTypeLabel.text = pageData.attendeeType;
+            // attendeeTypeLabel.text = pageData.attendeeType;
             meetingLocationLabel.text = pageData.location;
+            primaryContactLabel.text = limitText(pageData.primaryOfficeContact, 20);
             staffAttendeesLabel.text = limitText(pageData.legislatorStaffAttendees, 20);
 
             if (pageData.followUpNeeded === true || pageData.followUpNeeded === "true") {
@@ -86,15 +95,12 @@ function onNavigatingTo(args) {
 
                 currentMeeting.load(pageData.meetingId).then(function () {
                     var initiativesLabel = page.getViewById("initiativesLabel");
-                    var surveysLabel = page.getViewById("surveysLabel");
                     var pciAttendeesLabel = page.getViewById("pciAttendeesLabel");
 
-                    pageData.pciInitiatives = currentMeeting.pciInitiatives;
-                    pageData.surveys = currentMeeting.surveys;
+                    pageData.initiatives = currentMeeting.initiatives;
                     pageData.pciAttendees = currentMeeting.pciAttendees;
                     
-                    initiativesLabel.text = limitText(pageData.pciInitiatives, 25);
-                    surveysLabel.text = limitText(pageData.surveys, 25);
+                    initiativesLabel.text = limitText(pageData.initiatives, 25);
                     pciAttendeesLabel.text = limitText(pageData.pciAttendees, 25);
 
                     pageData.updated = false;
@@ -111,6 +117,12 @@ function onNavigatingTo(args) {
                 page.actionBar.title = "Add Meeting";
             } else {
                 page.actionBar.title = "Edit Meeting";
+            }
+
+            if (pageData.inPerson === true || pageData.inPerson === "true") {
+                inPersonLabel.text = "Yes";
+            } else {
+                inPersonLabel.text = "No";
             }
 
             if (pageData.offeredToMembers === true || pageData.offeredToMembers === "true") {
@@ -165,6 +177,22 @@ function onLoaded(args) {
     }
 }
 
+function onLoadedDatePicker(args) {
+    try {
+        if (platform.isIOS && platform.Device.osVersion >= '14.0') {
+            args.object.ios.preferredDatePickerStyle = 1; // 1 - wheel, 2 - compact, 3 - inline
+        }
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
 function onStackLayoutMeetingDateTap(args) {
     try {
         var meetingDateGridLayout = page.getViewById("meetingDateGridLayout");
@@ -195,6 +223,28 @@ function onStackLayoutVenueTypeTap(args) {
 
         const navigationEntry = {
             moduleName: "meetings/meeting/venuetype/venuetype-page",
+            context: pageData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onStackLayoutInPersonTap(args) {
+    try {
+        collapseMeetingDate();
+
+        const navigationEntry = {
+            moduleName: "meetings/meeting/inperson/inperson-page",
             context: pageData,
             clearHistory: false
         };
@@ -328,46 +378,17 @@ function onStackLayoutInitiativesTap(args) {
     }
 }
 
-function onStackLayoutSurveysTap(args) {
-    try
-    {
+function onStackLayoutRelatedAssignmentTap(args) {
+    try {
         collapseMeetingDate();
 
-        if (pageData.meetingId === null || pageData.meetingId === 0) {
-            if (platform.isAndroid) {
-                dialogs.confirm({
-                    title: "Save",
-                    message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
-                    okButtonText: "Yes",
-                    cancelButtonText: "No"
-                }).then(function (result) {
-                    if (result) {
-                        saveMeeting("legislators/legislator/surveys/surveys-page", false);
-                    }
-                });
-            } else if (platform.isIOS) {
-                dialogs.action({
-                    message: "A new meeting must be saved prior to adding a survey. Would you like to save this meeting?",
-                    cancelButtonText: "Cancel",
-                    actions: ["Save"]
-                }).then(function (result) {
-                    if (result === "Save") {
-                        saveMeeting("legislators/legislator/surveys/surveys-page", true);
-                    }
-                });
-            }
-        } else {
-            pageData.relationalType = "meeting";
-            pageData.relationalId = pageData.meetingId;
-            
-            const navigationEntry = {
-                moduleName: "legislators/legislator/surveys/surveys-page",
-                context: pageData,
-                clearHistory: false
-            };
+        const navigationEntry = {
+            moduleName: "assignments/assignment/assignment-page",
+            context: pageData,
+            clearHistory: false
+        };
 
-            frameModule.topmost().navigate(navigationEntry);
-        }
+        frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
@@ -454,7 +475,7 @@ function onStackLayoutPciAttendeesTap(args) {
             if (platform.isAndroid) {
                 dialogs.confirm({
                     title: "Save",
-                    message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
+                    message: "A new meeting must be saved prior to adding APCIA attendees. Would you like to save this meeting?",
                     okButtonText: "Yes",
                     cancelButtonText: "No"
                 }).then(function (result) {
@@ -464,7 +485,7 @@ function onStackLayoutPciAttendeesTap(args) {
                 });
             } else if (platform.isIOS) {
                 dialogs.action({
-                    message: "A new meeting must be saved prior to adding PCI attendees. Would you like to save this meeting?",
+                    message: "A new meeting must be saved prior to adding APCIA attendees. Would you like to save this meeting?",
                     cancelButtonText: "Cancel",
                     actions: ["Save"]
                 }).then(function (result) {
@@ -485,6 +506,28 @@ function onStackLayoutPciAttendeesTap(args) {
 
             frameModule.topmost().navigate(navigationEntry);
         }
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onStackLayoutPrimaryContactTap(args) {
+    try {
+        collapseMeetingDate();
+
+        const navigationEntry = {
+            moduleName: "meetings/meeting/primarycontact/primarycontact-page",
+            context: pageData,
+            clearHistory: false
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
     }
     catch(e)
     {
@@ -531,6 +574,18 @@ function onSaveTap(args) {
         collapseMeetingDate();
 
         saveMeeting(null, false);
+
+        /* if (pageData.initiatives === null || pageData.initiatives.length === 0) {
+            dialogs.alert({
+                title: "Add Initiative",
+                message: "Your meeting has been saved.  Please add at least one initiative.",
+                okButtonText: "OK"
+            });
+
+            saveMeeting("meetings/meeting/initiatives/initiatives-page", true);
+        } else {
+            saveMeeting(null, false);
+        } */
     } catch(e) {
         dialogs.alert({
             title: "Error",
@@ -543,14 +598,16 @@ function onSaveTap(args) {
 function saveMeeting(moduleName, isAttendees) {
     var isAdd = false;
 
+    // dialogs.alert(JSON.stringify(pageData));
+
     if (pageData.meetingId === null || pageData.meetingId === 0) {
         isAdd = true;
     }
 
     http.request({
-        url: global.apiBaseServiceUrl + "insertupdatemeeting",
+        url: global.apiBaseServiceUrl + "insertupdatemeetingv2",
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": global.token },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
         content: JSON.stringify(pageData)
     }).then(function (response) {
         var result = response.content.toString();
@@ -622,17 +679,20 @@ function collapseMeetingDate() {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onLoadedDatePicker = onLoadedDatePicker;
 exports.onStackLayoutMeetingDateTap = onStackLayoutMeetingDateTap;
 exports.onStackLayoutVenueTypeTap = onStackLayoutVenueTypeTap;
+exports.onStackLayoutInPersonTap = onStackLayoutInPersonTap;
 exports.onStackLayoutOfferedToMembersTap = onStackLayoutOfferedToMembersTap;
 exports.onStackLayoutNotesTap = onStackLayoutNotesTap;
 exports.onStackLayoutFollowUpTap = onStackLayoutFollowUpTap;
 exports.onStackLayoutInitiativesTap = onStackLayoutInitiativesTap;
-exports.onStackLayoutSurveysTap = onStackLayoutSurveysTap;
+exports.onStackLayoutRelatedAssignmentTap = onStackLayoutRelatedAssignmentTap;
 exports.onStackLayoutLegislatorTap = onStackLayoutLegislatorTap;
 exports.onStackLayoutAttendeeTypeTap = onStackLayoutAttendeeTypeTap;
 exports.onStackLayoutMeetingLocationTap = onStackLayoutMeetingLocationTap;
 exports.onStackLayoutPciAttendeesTap = onStackLayoutPciAttendeesTap;
+exports.onStackLayoutPrimaryContactTap = onStackLayoutPrimaryContactTap;
 exports.onStackLayoutStaffAttendeesTap = onStackLayoutStaffAttendeesTap;
 exports.onBackTap = onBackTap;
 exports.onSaveTap = onSaveTap;

@@ -1,6 +1,6 @@
-const platform = require("platform");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 var page;
 var navigationContext;
@@ -32,6 +32,22 @@ function onLoaded(args) {
 
             followUpDateLabel.text = dateConverter(args.value, "MM/DD/YYYY");
         });
+    }
+    catch(e)
+    {
+        dialogs.alert({
+            title: "Error",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    }
+}
+
+function onLoadedDatePicker(args) {
+    try {
+        if (platform.isIOS && platform.Device.osVersion >= '14.0') {
+            args.object.ios.preferredDatePickerStyle = 1; // 1 - wheel, 2 - compact, 3 - inline
+        }
     }
     catch(e)
     {
@@ -152,6 +168,7 @@ function dismissKeyboard() {
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onLoaded = onLoaded;
+exports.onLoadedDatePicker = onLoadedDatePicker;
 exports.onBackTap = onBackTap;
 exports.onGridLayoutTap = onGridLayoutTap;
 exports.onSwitchLoaded = onSwitchLoaded;

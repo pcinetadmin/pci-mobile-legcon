@@ -1,10 +1,10 @@
 const ResponseViewModel = require("./response-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var ObservableArray = require("data/observable-array").ObservableArray;
-var http = require("http");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var ObservableArray = require("@nativescript/core/data/observable-array").ObservableArray;
+var http = require("@nativescript/core/http");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 var page;
 var navigationContext;
@@ -182,7 +182,7 @@ function onSaveTap(args) {
     http.request({
         url: global.apiBaseServiceUrl + "updatelegislatorsurvey",
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": global.token },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
         content: JSON.stringify(pageData.boundData)
     }).then(function (response) {
         pageData.boundData.result = "Update";

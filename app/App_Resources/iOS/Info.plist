@@ -15,11 +15,13 @@
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
-		<string>3.2.4</string>
+		<string>3.6.0</string>
 		<key>CFBundleSignature</key>
 		<string>????</string>
 		<key>CFBundleVersion</key>
-		<string>3.2</string>
+		<string>3.6</string>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>NSCalendarsUsageDescription</key>
@@ -48,5 +50,18 @@
 		</array>
 		<key>NSFaceIDUsageDescription</key>
 		<string>For easier authentication when using LegCon.</string>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>None</string>
+				<key>CFBundleURLName</key>
+				<string>auth0</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>net.pciaa.fgr</string>
+				</array>
+			</dict>
+		</array>
 	</dict>
 </plist>

@@ -119,6 +119,33 @@ Page {
     padding: 10;
 }
 
+.android .logout-button {
+    background: #ccc;
+    border-color: #999;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: black;
+    font-size: 12;
+    height: 30;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 5;
+}
+
+.ios .logout-button {
+    background: #ccc;
+    border-color: #ccc;
+    border-radius: 3;
+    border-style: solid;
+    border-width: 1;
+    color: white;
+    font-size: 18;
+    margin-bottom: 10;
+    margin-top: 10;
+    padding: 10;
+}
+
 .android .forgot-button {
     background: transparent;
     border: none;
@@ -449,6 +476,17 @@ Page {
     margin-top: 3;
 }
 
+.android .fa {
+    font-family: fontawesome;
+}
+
+.ios .fa {
+    border: 1;
+    color: #0a84ff;
+    font-family: 'FontAwesome';
+    font-size: 26;
+}
+
 .android .fn-list-view-item {
     color: #ccc;
     font-family: fontawesome;
@@ -561,6 +599,18 @@ Page {
 .view-title {
     background-color: #0075be;
     color: white;
+    font-size: 20;
+    /* height: 44; */
+    padding-bottom: 10;
+    padding-top: 10;
+    width: 100%;
+}
+
+.view-subtitle {
+    background-color: #eee;
+    border-bottom-color: #ddd;
+    border-bottom-width: 0.5;
+    color: #666;
     font-size: 20;
     /* height: 44; */
     padding-bottom: 10;

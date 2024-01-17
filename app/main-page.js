@@ -1,14 +1,14 @@
-const application = require("application");
-var frame = require("ui/frame");
-var gridLayout = require("ui/layouts/grid-layout");
-var stackLayout = require("ui/layouts/stack-layout")
-var Label = require("ui/label").Label;
-var orientation = require('@proplugins/nativescript-orientation');
+const application = require("@nativescript/core/application");
+var frame = require("@nativescript/core/ui/frame");
+var gridLayout = require("@nativescript/core/ui/layouts/grid-layout");
+var stackLayout = require("@nativescript/core/ui/layouts/stack-layout")
+var Label = require("@nativescript/core/ui/label").Label;
+// var orientation = require('@proplugins/nativescript-orientation');
 
 var page;
 
 function onNavigatingTo(args) {
-    orientation.enableRotation();
+    // orientation.enableRotation();
     page = args.object;
     page._tabs = [];
 

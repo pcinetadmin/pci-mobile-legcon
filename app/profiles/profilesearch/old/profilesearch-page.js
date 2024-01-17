@@ -1,8 +1,8 @@
-const platform = require("platform");
+const platform = require("@nativescript/core/platform");
 const ProfileSearchViewModel = require("./profilesearch-view-model");
-const ObservableModule = require("data/observable");
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const ObservableModule = require("@nativescript/core/data/observable");
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 var page;
 var navigationContext;
 
@@ -28,7 +28,7 @@ function onNavigatingTo(args) {
         if (navigationContext.relationalType === "legislator") {
             page.actionBar.title = "Profile Search";
         } else {
-            page.actionBar.title = "PCI Attendee Search";
+            page.actionBar.title = "APCIA Attendee Search";
         }
 
         // if (profileSearchSearchText !== "") {
@@ -131,7 +131,7 @@ function onSwitchLoaded(args) {
             http.request({
                 url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": global.token },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                 content: JSON.stringify(model)
             }).then(function (response) {
                 switchTap = false;

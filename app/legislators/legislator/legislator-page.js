@@ -1,8 +1,8 @@
 const LegislatorViewModel = require("./legislator-view-model");
-const observableModule = require("data/observable");
+const observableModule = require("@nativescript/core/data/observable");
 // const Color = require("color").Color;
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 var page;
 var navigationContext;
 

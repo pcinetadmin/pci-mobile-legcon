@@ -17,7 +17,7 @@
                         <GridLayout columns="*, auto" rows="*" class="list-view-item">
                             <StackLayout row="0" col="0">
                                 <Label text="{{ surveyQuestion }}" textWrap="true" class="list-view-item-main-top" />
-                                <Label text="Survey Question Response" class="list-view-item-sub" style="font-style: italic;" horizontalAlignment="center" />
+                                <!-- <Label text="Survey Question Response" class="list-view-item-sub" style="font-style: italic;" horizontalAlignment="center" /> -->
                                 <GridLayout columns="auto, *" rows="*">
                                     <Label row="0" col="0" text="Response: " class="list-view-item-sub-title" />
                                     <Label row="0" col="1" text="{{ response }}" class="list-view-item-sub" />

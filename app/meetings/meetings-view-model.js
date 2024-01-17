@@ -1,8 +1,8 @@
-const observableModule = require("data/observable");
-var ObservableArray = require("data/observable-array").ObservableArray;
-var frameModule = require("ui/frame");
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const observableModule = require("@nativescript/core/data/observable");
+var ObservableArray = require("@nativescript/core/data/observable-array").ObservableArray;
+var frameModule = require("@nativescript/core/ui/frame");
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 function MeetingsViewModel(items) {
     const viewModel = new ObservableArray(items);
@@ -23,7 +23,7 @@ function MeetingsViewModel(items) {
         return http.request({
             url: requestUrl,
             method: "GET",
-            headers: { "Content-Type": "application/json", "Authorization": global.token } //,
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` } //,
             //content: JSON.stringify({ filter: "", page: "1", pageSize: "20" })
         }).then(function (response) {
             var result = response.content.toString();
@@ -31,20 +31,14 @@ function MeetingsViewModel(items) {
 
             data.forEach(function(meeting) {
                 var meetingDate;
-                // var legislatorStaffAttendees = meeting.LegislatorStaffAttendees;
-                var pciInitiatives = meeting.PciInitiatives;
+                var initiatives = meeting.Initiatives;
                 var followUpDate;
                 
                 meetingDate = new Date(parseInt(meeting.MeetingDate.substring(meeting.MeetingDate.indexOf("/Date(") + 6, meeting.MeetingDate.indexOf(")/"))));
 
-                // if (legislatorStaffAttendees.length > 0)
-                // {
-                //     legislatorStaffAttendees = "with " + legislatorStaffAttendees;
-                // }
-
-                if (pciInitiatives.length > 0)
+                if (initiatives.length > 0)
                 {
-                    pciInitiatives = "on " + pciInitiatives
+                    initiatives = "on " + initiatives
                 }
 
                 if (meeting.FollowUpDate === null || meeting.FollowUpDate.length === 0) {
@@ -58,6 +52,7 @@ function MeetingsViewModel(items) {
                     meetingDate: meetingDate,
                     venueTypeId: meeting.VenueTypeId,
                     venueType: meeting.VenueType,
+                    inPerson: meeting.InPerson,
                     offeredToMembers: meeting.OfferedToMembers,
                     attendeeTypeId: meeting.AttendeeTypeId,
                     attendeeType: meeting.AttendeeType,
@@ -66,8 +61,8 @@ function MeetingsViewModel(items) {
                     legislatorId: meeting.LegislatorId,
                     fullName: meeting.FullName,
                     name: meeting.Name,
-                    pciInitiatives: meeting.PciInitiatives,
-                    surveys: meeting.Surveys,
+                    initiativeIds: meeting.InitiativeIds,
+                    initiatives: meeting.Initiatives,
                     pciAttendees: meeting.PciAttendees,
                     primaryOfficeContact: meeting.PrimaryOfficeContact,
                     meetingLocationId: meeting.MeetingLocationId,
@@ -78,9 +73,8 @@ function MeetingsViewModel(items) {
                     followUpNotes: meeting.FollowUpNotes,
                     creatorId: meeting.CreatorId,
                     notes: meeting.Notes,
-                    initiativeId: meeting.InitiativeId,
-                    surveyId: meeting.SurveyId,
-                    assignmentId: meeting.AssignmentId
+                    assignmentId: meeting.AssignmentId,
+                    assignmentName: meeting.AssignmentName
                 });
             });
         }, function (e) {

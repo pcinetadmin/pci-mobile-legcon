@@ -9,7 +9,7 @@
             <SegmentedBar class="segmented-bar" selectedIndexChanged="onSelectedIndexChanged">
                 <SegmentedBar.items>
                     <SegmentedBarItem title="Open Assignments" />
-                    <SegmentedBarItem title="Closed Assignments" />
+                    <SegmentedBarItem title="Submitted Assignments" />
                 </SegmentedBar.items>
             </SegmentedBar>
         </StackLayout>
@@ -21,7 +21,7 @@
                         <GridLayout columns="*, 80" android:rows="67" ios:rows="75" width="100%">
                             <Label col="0" />
                             <GridLayout col="1" columns="*" rows="*, auto, auto, *" tap="onAddClick" class="swipe-icons orange" 
-                                visibility="{{ meetingCreated === 'Y' ? 'collapse' : 'visible' }}">
+                                visibility="{{ assignmentStatusCode === 'S' ? 'collapse' : 'visible' }}">
                                 <Label row="0" col="0" text="" />
                                 <Label row="1" col="0" text="&#xf073;" class="tab-icon" />
                                 <Label row="2" col="0" text="Add Meeting" class="tab-label" />
@@ -32,15 +32,20 @@
                         <StackLayout loaded="onLayoutLoaded" backgroundColor="white" width="100%">
                             <GridLayout columns="*, auto" rows="*" class="list-view-item">
                                 <StackLayout row="0" col="0" verticalAlignment="middle">
-                                    <Label text="{{ legislator }}" class="list-view-item-main-top" />
-                                    <GridLayout columns="auto, *" rows="*" visibility="{{ initiative.length > 0 ? 'visible' : 'collapse' }}">
-                                        <Label row="0" col="0" text="Initiative: " class="list-view-item-sub-title" />
-                                        <Label row="0" col="1" text="{{ initiative }}" class="list-view-item-sub" />
-                                    </GridLayout>
+                                    <Label text="{{ assignmentName }}" class="list-view-item-main-top" />
+                                    <!-- <Label text="{{ legislator }}" class="list-view-item-main-top" /> -->
                                     <GridLayout columns="auto, *" rows="*">
-                                        <Label row="0" col="0" text="Survey: " class="list-view-item-sub-title" />
-                                        <Label row="0" col="1" text="{{ survey }}" class="list-view-item-sub" />
+                                        <Label row="0" col="0" text="Legislator: " class="list-view-item-sub-title" />
+                                        <Label row="0" col="1" text="{{ legislator }}" class="list-view-item-sub" />
                                     </GridLayout>
+                                    <GridLayout columns="auto, *" rows="*">  <!--visibility="{{ initiatives.length > 0 ? 'visible' : 'collapse' }}"-->
+                                        <Label row="0" col="0" text="Initiative(s): " class="list-view-item-sub-title" />
+                                        <Label row="0" col="1" text="{{ initiatives.length > 0 ? initiatives : 'N/A' }}" class="list-view-item-sub" />
+                                    </GridLayout>
+                                    <!-- <GridLayout columns="auto, *" rows="*">
+                                        <Label row="0" col="0" text="Published: " class="list-view-item-sub-title" />
+                                        <Label row="0" col="1" text="{{ publishedDate | dateConverter(dateFormat) }}" class="list-view-item-sub" />
+                                    </GridLayout> -->
                                 </StackLayout>
                                 <Label row="0" col="1" text="&#xf105;" class="fn-list-view-item" verticalAlignment="middle" />
                             </GridLayout>

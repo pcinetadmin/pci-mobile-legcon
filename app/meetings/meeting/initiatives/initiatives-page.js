@@ -1,8 +1,8 @@
 const InitiativesViewModel = require("./initiatives-view-model");
-const ObservableModule = require("data/observable");
-var http = require("http");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const ObservableModule = require("@nativescript/core/data/observable");
+var http = require("@nativescript/core/http");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 var page;
 var navigationContext;
 
@@ -66,7 +66,7 @@ function onSwitchLoaded(args) {
             http.request({
                 url: global.apiBaseServiceUrl + "updatemeetinginitiative",
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": global.token },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                 content: JSON.stringify(model)
             }).then(function (response) {
                 // var result = response.content.toJSON();

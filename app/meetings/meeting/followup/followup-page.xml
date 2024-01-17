@@ -10,7 +10,8 @@
         <StackLayout row="1" col="0">
             <GridLayout columns="*, auto" rows="auto" class="list-view-item-form-bottom">
                 <Label row="0" col="0" text="Follow Up Needed?" class="list-view-item-left" />
-                <Switch row="0" col="1" checked="{{ followUpNeeded }}" loaded="onSwitchLoaded" horizontalAlignment="right" class="switch" />
+                <Switch row="0" col="1" checked="{{ followUpNeeded }}" loaded="onSwitchLoaded" horizontalAlignment="right"
+                    color="white" backgroundColor="#ea092a" offBackgroundColor="#999" />
             </GridLayout>
         </StackLayout>
         <StackLayout row="2" col="0" style="background-color: #eee;">
@@ -25,7 +26,7 @@
                     </GridLayout>
                 </StackLayout>
                 <GridLayout id="followUpDateDatePickerGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                    <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right"></DatePicker>
+                    <DatePicker id="followUpDateDatePicker" row="0" col="0" date="{{ followUpDate }}" horizontalAlignment="center" class="list-view-item-right" loaded="onLoadedDatePicker"></DatePicker>
                 </GridLayout>
                 <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
                     <TextView id="followUpNotes" row="0" col="0" text="{{ followUpNotes }}" focus="onTextViewFocus" hint="Follow Up Notes" class="list-view-item-textview" height="100%" />

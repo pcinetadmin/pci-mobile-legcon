@@ -1,12 +1,12 @@
 const LoginViewModel = require("./login-view-model");
-const platformModule = require("platform");
-const observableModule = require("data/observable");
-const appSettings = require("application-settings");
-const dialogs = require("ui/dialogs");
-var utilsModule = require("tns-core-modules/utils/utils");
-const fingerprintAuthPlugin = require("nativescript-fingerprint-auth");
+const platformModule = require("@nativescript/core/platform");
+const observableModule = require("@nativescript/core/data/observable");
+const appSettings = require("@nativescript/core/application-settings");
+const dialogs = require("@nativescript/core/ui/dialogs");
+var utilsModule = require("@nativescript/core/utils");
+const fingerprintAuthPlugin = require("@nativescript/fingerprint-auth");
 var fingerprintAuth = new fingerprintAuthPlugin.FingerprintAuth();
-var orientation = require('@proplugins/nativescript-orientation');
+// var orientation = require('@proplugins/nativescript-orientation');
 var page;
 var loginViewModel;
 var email;
@@ -14,7 +14,7 @@ var password;
 var rememberMe;
 
 function onNavigatingTo(args) {
-    orientation.disableRotation();
+    // orientation.disableRotation();
 }
 
 function onLoaded(args)

@@ -1,10 +1,10 @@
 const ProfilesViewModel = require("./profiles-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var gestures = require("ui/gestures");
-var http = require("http");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var gestures = require("@nativescript/core/ui/gestures");
+var http = require("@nativescript/core/http");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 const MIN_X = -80;
 const MAX_X = 0;
@@ -44,10 +44,10 @@ function onNavigatingTo(args) {
             });
         } else {
             navigationContext = page.navigationContext;
-
+                 
             pageData.boundData = navigationContext;
             pageData.boundData.updated = false;
-            
+
             var legislatorId = page.getViewById("legislatorId");
             var legislatorName = page.getViewById("legislatorName");
         
@@ -205,7 +205,7 @@ function onDeleteClick(args) {
                 http.request({
                     url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                     content: JSON.stringify(view.bindingContext)
                 }).then(function (response) {
                     // result = response.content.toJSON();
@@ -246,7 +246,7 @@ function onDeleteClick(args) {
                 http.request({
                     url: global.apiBaseServiceUrl + "insertdeleteprofilerelationship",
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` },
                     content: JSON.stringify(view.bindingContext)
                 }).then(function (response) {
                     // result = response.content.toJSON();

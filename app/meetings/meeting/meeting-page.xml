@@ -12,85 +12,24 @@
                 <Label text="" verticalAlignment="bottom" />
             </StackLayout>
             <StackLayout verticalAlignment="bottom" class="list-view-section-header">
-                <Label text="MEETING INFORMATION" verticalAlignment="bottom" />
+                <Label text="KEY INFORMATION" verticalAlignment="bottom" />
+            </StackLayout>
+            <StackLayout tap="onStackLayoutInPersonTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Was the Meeting in Person?" class="list-view-item-left" />
+                    <Label id="inPersonLabel" row="0" col="1" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
             </StackLayout>
             <StackLayout tap="onStackLayoutMeetingDateTap">
-                <GridLayout columns="*, auto" rows="*" class="list-view-item-form" verticalAlignment="middle">
+                <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
                     <Label row="0" col="0" text="Meeting Date" class="list-view-item-left" />
                     <Label id="meetingDateLabel" row="0" col="1" text="{{ meetingDate | dateConverter(dateFormat) }}" class="list-view-item-right" />
                 </GridLayout>
             </StackLayout>
             <GridLayout id="meetingDateGridLayout" columns="*" rows="auto" class="list-view-item-form" visibility="collapse">
-                <DatePicker id="meetingDateDatePicker" row="0" col="0" date="{{ meetingDate }}" horizontalAlignment="center" class="list-view-item-picker"></DatePicker>
+                <DatePicker id="meetingDateDatePicker" row="0" col="0" date="{{ meetingDate }}" horizontalAlignment="center" class="list-view-item-picker" loaded="onLoadedDatePicker" ></DatePicker>
             </GridLayout>
-            <StackLayout tap="onStackLayoutVenueTypeTap">
-                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Venue" class="list-view-item-left" />
-                    <Label id="venueTypeLabel" row="0" col="1" text="{{ venueType }}" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <StackLayout tap="onStackLayoutOfferedToMembersTap">
-                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Offered to APCIA Members?" class="list-view-item-left" />
-                    <Label id="offeredToMembersLabel" row="0" col="1" text="" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <StackLayout tap="onStackLayoutNotesTap">
-                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form-bottom">
-                    <Label row="0" col="0" text="Notes" class="list-view-item-left" />
-                    <Label id="notesLabel" row="0" col="1" text="{{ notes | limitText(30) }}" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <!-- <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
-                <TextView row="0" col="0" text="{{ notes }}" hint="Notes" class="list-view-item-right" />
-            </GridLayout> -->
-            <StackLayout verticalAlignment="bottom" class="list-view-section-header">
-                <Label text="FOLLOW UP INFORMATION" verticalAlignment="bottom" />
-            </StackLayout>
-            <StackLayout tap="onStackLayoutFollowUpTap">
-                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form-bottom">
-                    <Label id="followUpTitle" row="0" col="0" text="" class="list-view-item-left" />
-                    <Label id="followUpLabel" row="0" col="1" text="" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <StackLayout verticalAlignment="bottom" class="list-view-section-header">
-                <Label text="RELATED INFORMATION" verticalAlignment="bottom" />
-            </StackLayout>
-            <StackLayout tap="onStackLayoutInitiativesTap">
-                <GridLayout columns="auto, *, auto" rows="*" class="list-view-item-form">
-                    <Label row="0" col="0" text="Initiatives" class="list-view-item-left" />
-                    <Label id="initiativesLabel" row="0" col="1" text="{{ pciInitiatives | limitText(25) }}" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <StackLayout tap="onStackLayoutSurveysTap">
-                <GridLayout columns="auto, *, auto" rows="*" class="list-view-item-form-bottom">
-                    <Label row="0" col="0" text="Surveys" class="list-view-item-left" />
-                    <Label id="surveysLabel" row="0" col="1" text="{{ surveys | limitText(25) }}" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
-            <StackLayout verticalAlignment="bottom" class="list-view-section-header">
-                <Label text="ATTENDEE INFORMATION" verticalAlignment="bottom" />
-            </StackLayout>
-            <!-- <StackLayout tap="onStackLayoutLegislatorTap"> -->
-                <GridLayout columns="*, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Legislator" class="list-view-item-left" verticalAlignment="middle" />
-                    <Label id="legislatorLabel" row="0" col="1" text="{{ fullName }}" class="list-view-item-right" />
-                    <!-- <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" /> -->
-                </GridLayout>
-            <!-- </StackLayout> -->
-            <StackLayout tap="onStackLayoutAttendeeTypeTap">
-                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Cong. Office Attendees" class="list-view-item-left" />
-                    <Label id="attendeeTypeLabel" row="0" col="1" text="{{ attendeeType }}" class="list-view-item-right" />
-                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
-                </GridLayout>
-            </StackLayout>
             <StackLayout tap="onStackLayoutMeetingLocationTap">
                 <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
                     <Label row="0" col="0" text="Type" class="list-view-item-left" />
@@ -98,16 +37,62 @@
                     <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
             </StackLayout>
+            <!-- <StackLayout tap="onStackLayoutVenueTypeTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Venue" class="list-view-item-left" />
+                    <Label id="venueTypeLabel" row="0" col="1" text="{{ venueType }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout> -->
+            <StackLayout tap="onStackLayoutOfferedToMembersTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Offered to APCIA Members?" class="list-view-item-left" />
+                    <Label id="offeredToMembersLabel" row="0" col="1" text="" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
             <StackLayout tap="onStackLayoutPciAttendeesTap">
                 <GridLayout columns="auto, *, auto" rows="*" class="list-view-item-form">
-                    <Label row="0" col="0" text="APCIA Attendees" class="list-view-item-left" />
+                    <Label row="0" col="0" text="Attendees" class="list-view-item-left" />
                     <Label id="pciAttendeesLabel" row="0" col="1" text="{{ pciAttendees | limitText(25) }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <StackLayout tap="onStackLayoutInitiativesTap">
+                <GridLayout columns="auto, *, auto" rows="*" class="list-view-item-form">
+                    <Label row="0" col="0" text="Initiatives" class="list-view-item-left" />
+                    <Label id="initiativesLabel" row="0" col="1" text="{{ initiatives | limitText(25) }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <!-- <StackLayout tap="onStackLayoutLegislatorTap"> -->
+                <GridLayout columns="*, auto" rows="auto" class="{{ assignmentId === null || assignmentId.toString().length <= 0 ? 'list-view-item-form-bottom' : 'list-view-item-form' }}">
+                    <Label row="0" col="0" text="Legislator" class="list-view-item-left" />
+                    <Label id="legislatorLabel" row="0" col="1" text="{{ fullName }}" class="list-view-item-right" />
+                </GridLayout>
+            <!-- </StackLayout> -->
+            <StackLayout tap="onStackLayoutRelatedAssignmentTap">
+                <GridLayout columns="auto, *, auto" rows="*" class="list-view-item-form-bottom" visibility="{{ assignmentId === null || assignmentId.toString().length <= 0 ? 'collapse' : 'visible' }}">
+                    <Label row="0" col="0" text="Related Assignment" class="list-view-item-left" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <!-- <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
+                <TextView row="0" col="0" text="{{ notes }}" hint="Notes" class="list-view-item-right" />
+            </GridLayout> -->
+            <StackLayout verticalAlignment="bottom" class="list-view-section-header">
+                <Label text="CONGRESSIONAL OFFICE ATTENDEES" verticalAlignment="bottom" />
+            </StackLayout>
+            <StackLayout tap="onStackLayoutPrimaryContactTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Primary Contact" class="list-view-item-left" />
+                    <Label id="primaryContactLabel" row="0" col="1" text="{{ primaryOfficeContact | limitText(20) }}" class="list-view-item-right" />
                     <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
             </StackLayout>
             <StackLayout tap="onStackLayoutStaffAttendeesTap">
                 <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
-                    <Label row="0" col="0" text="Cong. Staff Attendees" class="list-view-item-left" />
+                    <Label row="0" col="0" text="Additional Attendees" class="list-view-item-left" />
                     <Label id="staffAttendeesLabel" row="0" col="1" text="{{ legislatorStaffAttendees | limitText(20) }}" class="list-view-item-right" />
                     <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
                 </GridLayout>
@@ -115,6 +100,23 @@
             <!-- <GridLayout columns="*" rows="*" class="list-view-item-form-bottom">
                 <TextView row="0" col="0" text="{{ legislatorStaffAttendees }}" hint="Congressional Staff Attendees" class="list-view-item-right" />
             </GridLayout> -->
+            <StackLayout verticalAlignment="bottom" class="list-view-section-header">
+                <Label text="SUMMARY" verticalAlignment="bottom" />
+            </StackLayout>
+            <StackLayout tap="onStackLayoutNotesTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label row="0" col="0" text="Notes" class="list-view-item-left" />
+                    <Label id="notesLabel" row="0" col="1" text="{{ notes | limitText(30) }}" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
+            <StackLayout tap="onStackLayoutFollowUpTap">
+                <GridLayout columns="auto, *, auto" rows="auto" class="list-view-item-form">
+                    <Label id="followUpTitle" row="0" col="0" text="" class="list-view-item-left" />
+                    <Label id="followUpLabel" row="0" col="1" text="" class="list-view-item-right" />
+                    <Label row="0" col="2" text="&#xf105;" class="fn-list-view-item" />
+                </GridLayout>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </Page>

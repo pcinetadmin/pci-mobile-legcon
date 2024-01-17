@@ -1,8 +1,8 @@
 const SurveyViewModel = require("./survey-view-model");
-const ObservableModule = require("data/observable");
-const appModule = require("application");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const ObservableModule = require("@nativescript/core/data/observable");
+const appModule = require("@nativescript/core/application");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 var page;
 var model;
 var navigationContext;

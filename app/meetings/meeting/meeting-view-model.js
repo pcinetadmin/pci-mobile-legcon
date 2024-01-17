@@ -1,6 +1,6 @@
-const ObservableModule = require("data/observable");
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const ObservableModule = require("@nativescript/core/data/observable");
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 function MeetingViewModel() {
     const viewModel = ObservableModule.fromObject({
@@ -8,6 +8,8 @@ function MeetingViewModel() {
         meetingDate: null,
         venueTypeId: null,
         venueType: null,
+        inPerson: null,
+        offeredToMembers: null,
         attendeeTypeId: null,
         attendeeType: null,
         lobbyistId: null,
@@ -15,8 +17,8 @@ function MeetingViewModel() {
         legislatorId: null,
         fullName: null,
         name: null,
-        pciInitiatives: null,
-        surveys: null,
+        initiativeIds: null,
+        initiatives: null,
         pciAttendees: null,
         primaryOfficeContact: null,
         meetingLocationId: null,
@@ -27,8 +29,6 @@ function MeetingViewModel() {
         followUpNotes: null,
         creatorId: null,
         notes: null,
-        initiativeId: null,
-        surveyId: null,
         assignmentId: null,
 
         load: function(meetingId) {
@@ -36,7 +36,7 @@ function MeetingViewModel() {
                 return http.request({
                     url: global.apiBaseServiceUrl + "meeting?meetingId=" + meetingId,
                     method: "GET",
-                    headers: { "Content-Type": "application/json", "Authorization": global.token }
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` }
                 }).then(function (response) {
                     var result = response.content.toString();
                     var data = JSON.parse(result);
@@ -55,6 +55,8 @@ function MeetingViewModel() {
                     viewModel.meetingDate = meetingDate,
                     viewModel.venueTypeId = data.VenueTypeId,
                     viewModel.venueType = data.VenueType,
+                    viewModel.inPerson = data.InPerson,
+                    viewModel.inPerson = data.OfferedToMembers,
                     viewModel.attendeeTypeId = data.AttendeeTypeId,
                     viewModel.attendeeType = data.AttendeeType,
                     viewModel.lobbyistId = data.LobbyistId,
@@ -62,8 +64,8 @@ function MeetingViewModel() {
                     viewModel.legislatorId = data.LegislatorId,
                     viewModel.fullName = data.FullName,
                     viewModel.name = data.Name,
-                    viewModel.pciInitiatives = data.PciInitiatives,
-                    viewModel.surveys = data.Surveys,
+                    viewModel.initiativeIds = data.InitiativeIds,
+                    viewModel.initiatives = data.Initiatives,
                     viewModel.pciAttendees = data.PciAttendees,
                     viewModel.primaryOfficeContact = data.PrimaryOfficeContact,
                     viewModel.meetingLocationId = data.MeetingLocationId,
@@ -74,8 +76,6 @@ function MeetingViewModel() {
                     viewModel.followUpNotes = data.FollowUpNotes,
                     viewModel.creatorId = data.CreatorId,
                     viewModel.notes = data.Notes,
-                    viewModel.initiativeId = data.InitiativeId,
-                    viewModel.surveyId = data.SurveyId,
                     viewModel.assignmentId = data.AssignmentId;
 
                     resolve("SUCCESS");

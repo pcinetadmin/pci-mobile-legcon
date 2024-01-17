@@ -6,6 +6,6 @@
     </ActionBar>
 
     <GridLayout columns="*" rows="*" class="list-view-item-form" tap="onGridLayoutTap">
-        <TextView id="legislatorStaffAttendees" row="0" col="0" text="{{ legislatorStaffAttendees }}" hint="Congressional Staff Attendees" class="list-view-item-textview" height="100%" />
+        <TextView id="legislatorStaffAttendees" row="0" col="0" text="{{ legislatorStaffAttendees }}" hint="Additional Attendees" class="list-view-item-textview" height="100%" />
     </GridLayout>
 </Page>

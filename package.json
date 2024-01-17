@@ -1,24 +1,25 @@
 {
   "name": "legcon",
-  "version": "3.2.0",
+  "version": "3.6.0",
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
-    "@nativescript/core": "~7.0.0",
-    "@proplugins/nativescript-orientation": "^2.5.0",
-    "@proplugins/nativescript-platform-css": "^2.0.0",
-    "nativescript-email": "^1.6.0",
-    "nativescript-fingerprint-auth": "^7.0.2",
-    "nativescript-iqkeyboardmanager": "^1.5.1",
-    "nativescript-phone": "^2.0.0",
+    "@nativescript/core": "^8.6.2",
+    "@nativescript/email": "^2.1.0",
+    "@nativescript/fingerprint-auth": "^8.1.0",
+    "@nativescript/iqkeyboardmanager": "^2.1.1",
+    "@proplugins/nativescript-orientation": "^2.6.1",
+    "@proplugins/nativescript-platform-css": "^2.1.0",
+    "nativescript-auth0": "^4.1.0",
+    "nativescript-phone": "^3.0.3",
     "nativescript-theme-core": "^2.0.24"
   },
   "devDependencies": {
-    "@nativescript/ios": "7.0.4",
-    "@nativescript/webpack": "~3.0.0"
+    "@nativescript/types": "~8.6.1",
+    "@nativescript/webpack": "^5.0.18"
   },
   "author": "APCIA",
-  "main": "app.js"
+  "main": "./app/app.js"
 }

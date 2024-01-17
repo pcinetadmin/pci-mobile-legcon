@@ -1,0 +1,15 @@
+<Page class="page" navigatingTo="onNavigatingTo" loaded="onLoaded" navigatedTo="onNavigatedTo" xmlns="http://schemas.nativescript.org/tns.xsd" style="margin-top: 0;">
+    <ScrollView class="login-background">
+        <GridLayout columns="*" rows="*, auto, auto" height="100%" width="100%">
+            <StackLayout row="0" col="0" verticalAlignment="center" horizontalAlignment="center">
+                <Image src="res://login" android:stretch="aspectFill" ios:stretch="none"></Image>
+            </StackLayout>
+            <StackLayout row="1" col="0" orientation="vertical" verticalAlignment="top" margin="0 10 0 10">
+                <Button class="login-button" text="Log In" tap="onLoginButtonTap"></Button>
+            </StackLayout>
+            <StackLayout row="2" col="0" orientation="vertical" verticalAlignment="top" margin="0 10 0 10">
+                <Button class="logout-button" text="Log Out" tap="onLogoutButtonTap"></Button>
+            </StackLayout>
+        </GridLayout>
+    </ScrollView>
+</Page>

@@ -1,6 +1,6 @@
-const platform = require("platform");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 var page;
 var navigationContext;
@@ -8,7 +8,7 @@ var navigationContext;
 function onNavigatingTo(args) {
     try {
         page = args.object;
-        page.actionBar.title = "Cong. Staff Attendees";
+        page.actionBar.title = "Additional Attendees";
 
         page.bindingContext = page.navigationContext;
 

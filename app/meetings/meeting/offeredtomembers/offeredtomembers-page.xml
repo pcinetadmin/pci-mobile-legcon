@@ -10,7 +10,8 @@
         <StackLayout row="1" col="0">
             <GridLayout columns="*, auto" rows="auto" class="list-view-item-form-bottom">
                 <Label row="0" col="0" text="Offered to APCIA Members?" class="list-view-item-left" />
-                <Switch row="0" col="1" checked="{{ offeredToMembers }}" horizontalAlignment="right" class="switch" />
+                <Switch row="0" col="1" checked="{{ offeredToMembers }}" horizontalAlignment="right"
+                    color="white" backgroundColor="#ea092a" offBackgroundColor="#999" />
             </GridLayout>
         </StackLayout>
         <StackLayout row="2" col="0" style="background-color: #eee;"></StackLayout>

@@ -6,24 +6,28 @@ purpose of the file is to pass control to the app’s first module.
 
 require("./bundle-config");
 require("@proplugins/nativescript-platform-css");
-const { Page } = require("@nativescript/core");
-const application = require("application");
+// require("@nativescript/core");
+// const { Page } = require("@nativescript/core");
+// const application = require("@nativescript/core/application");
+import { Application } from "@nativescript/core";
 
 // Dev, test, prod urls
-const apiLoginUrlDev = "https://sts-dev.pciaa.net/api/pci/signin/issue";
-const apiLoginUrlTest = "https://sts-test.pciaa.net/api/pci/signin/issue";
-const apiLoginUrlProd = "https://sts.apci.org/api/pci/signin/issue";
-const apiBaseServiceUrlDev = "https://dev.pciaa.net/pciwebsite/congressapi/legislators/";
-const apiBaseServiceUrlTest = "https://test.pciaa.net/pciwebsite/congressapi/legislators/";
-const apiBaseServiceUrlProd = "https://www.apci.org/pciwebsite/congressapi/legislators/";
-const scopeDev = "http://dev.pciaa.net/";
-const scopeTest = "http://test.pciaa.net/";
-const scopeProd = "http://www.apci.org/";
+const auth0ClientIDDev = "QOlSmmDcgTcX6avB2xIq5rBE7MmC0aR6";
+const auth0ClientIDPreprod = "TPrMc2bWH45E2vxMlBkpSp5mD2x0y0uV";
+const auth0ClientIDProd = "daCV2GFeu7I5VUgifaepdraVSX4z9oEf";
+const auth0DomainDev = "https://dev-login.apci.org/";
+const auth0DomainPreprod = "https://preprod-login.apci.org/";
+const auth0DomainProd = "https://login.apci.org/";
+const apiBaseServiceUrlDev = "https://api-dev.apci.org/";
+const apiBaseServiceUrlPreprod = "https://api-preprod.apci.org/";
+const apiBaseServiceUrlProd = "https://api.apci.org/";
 
 // Define all global variables used throughout the entire solution.
-global.apiLoginUrl = apiLoginUrlProd;
-global.apiBaseServiceUrl = apiBaseServiceUrlProd;
-global.scope = scopeProd;
+global.auth0ClientID = auth0ClientIDProd;
+global.auth0Domain = auth0DomainProd;
+global.auth0RoleIdentifier = "https://apcia.org/roles";
+global.apiAudienceUrl = apiBaseServiceUrlProd;
+global.apiBaseServiceUrl = apiAudienceUrl + "api/legcon/";
 global.token = null;
 global.personId = null;
 global.currentUser = null;
@@ -35,7 +39,8 @@ global.isCongressExternalUser = false;
 
 //application.start({ moduleName: "login/login-page" });
 //application.run({ moduleName: "login/login-page" });
-application.run({ moduleName: "app-root" });
+//application.run({ moduleName: "app-root" });
+Application.run({ moduleName: "app-root" });
 
 /*
 Do not place any code after the application has been started as it will not

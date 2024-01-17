@@ -1,5 +1,5 @@
-const observableModule = require("data/observable");
-var frameModule = require("ui/frame");
+const observableModule = require("@nativescript/core/data/observable");
+var frameModule = require("@nativescript/core/ui/frame");
 
 function onNavigatingTo(args) {
     const page = args.object;

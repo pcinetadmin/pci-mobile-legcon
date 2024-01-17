@@ -1,9 +1,9 @@
 const ProfileSearchViewModel = require("./profilesearch-view-model");
-const platform = require("platform");
-const ObservableModule = require("data/observable");
-var http = require("http");
-var frameModule = require("ui/frame");
-var dialogs = require("ui/dialogs");
+const platform = require("@nativescript/core/platform");
+const ObservableModule = require("@nativescript/core/data/observable");
+var http = require("@nativescript/core/http");
+var frameModule = require("@nativescript/core/ui/frame");
+var dialogs = require("@nativescript/core/ui/dialogs");
 var page;
 var navigationContext;
 
@@ -30,7 +30,7 @@ function onNavigatingTo(args) {
         if (navigationContext.relationalType === "legislator") {
             page.actionBar.title = "Profile Search";
         } else {
-            page.actionBar.title = "PCI Attendee Search";
+            page.actionBar.title = "APCIA Attendee Search";
         }
 
         pageData.boundData = navigationContext;

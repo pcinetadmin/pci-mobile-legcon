@@ -10,7 +10,7 @@ JavaScript modules. The CommonJS require() function is how you import
 JavaScript modules defined in other files.
 */
 const HomeViewModel = require("./home-view-model");
-//var dialogs = require("ui/dialogs");
+//var dialogs = require("@nativescript/core/ui/dialogs");
 
 const homeViewModel = new HomeViewModel();
 var page;

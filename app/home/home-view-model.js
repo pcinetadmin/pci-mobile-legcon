@@ -1,4 +1,4 @@
-const Observable = require("data/observable").Observable;
+const Observable = require("@nativescript/core/data/observable").Observable;
 
 function HomeViewModel() {
     const viewModel = new Observable();

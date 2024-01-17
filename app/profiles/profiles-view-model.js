@@ -1,7 +1,7 @@
-const observableModule = require("data/observable");
-var ObservableArray = require("data/observable-array").ObservableArray;
-var http = require("http");
-var dialogs = require("ui/dialogs");
+const observableModule = require("@nativescript/core/data/observable");
+var ObservableArray = require("@nativescript/core/data/observable-array").ObservableArray;
+var http = require("@nativescript/core/http");
+var dialogs = require("@nativescript/core/ui/dialogs");
 
 function ProfilesViewModel(items) {
     const viewModel = new ObservableArray(items);
@@ -10,7 +10,7 @@ function ProfilesViewModel(items) {
         return http.request({
             url: global.apiBaseServiceUrl + "profilerelationships?relationalType=" + relationalType + "&relationalId=" + relationalId,
             method: "GET",
-            headers: { "Content-Type": "application/json", "Authorization": global.token }
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${global.token}` }
         }).then(function (response) {
             var result = response.content.toString();
             var data = JSON.parse(result);
